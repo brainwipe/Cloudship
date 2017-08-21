@@ -38,4 +38,14 @@ public class PlayerController : MonoBehaviour
             rigidBody.AddForce(transform.forward * (MaxVelocity - velocity));
         }
     }
+
+    Vector3 GetCycloneForce()
+    {
+        var cyclones = GameObject.FindGameObjectsWithTag("WeatherSystem");
+
+        var single = cyclones[0];
+        
+
+        return new Vector3();
+    }
 }
