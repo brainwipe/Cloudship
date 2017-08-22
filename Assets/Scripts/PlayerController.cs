@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidBody;
+    private float cycloneEffect = 0.05f;
     public float thrust;
     public float turn;
     public float velocity;
@@ -30,22 +31,18 @@ public class PlayerController : MonoBehaviour
         rigidBody.AddTorque(transform.up * yaw);
 
         float forward = thrust * Speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * forward);
+        rigidBody.AddForce(transform.forward * forward); // AddRelativeForce instead?
 
-        velocity = rigidBody.velocity.sqrMagnitude;
-        if (velocity > MaxVelocity)
-        {
-            rigidBody.AddForce(transform.forward * (MaxVelocity - velocity));
-        }
+        var cycloneForce = GetCycloneForce();
+        rigidBody.AddForce(cycloneForce * cycloneEffect);
     }
 
     Vector3 GetCycloneForce()
     {
         var cyclones = GameObject.FindGameObjectsWithTag("WeatherSystem");
 
-        var single = cyclones[0];
-        
-
-        return new Vector3();
+        // TODO ROLA - change this to sum for many when we have more than one
+        var single = cyclones[0].GetComponent<Anticyclone>();
+        return single.GetForceFor(transform.position);
     }
 }
