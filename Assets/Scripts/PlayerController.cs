@@ -41,8 +41,13 @@ public class PlayerController : MonoBehaviour
     {
         var cyclones = GameObject.FindGameObjectsWithTag("WeatherSystem");
 
-        // TODO ROLA - change this to sum for many when we have more than one
-        var single = cyclones[0].GetComponent<Anticyclone>();
-        return single.GetForceFor(transform.position);
+        Vector3 sum = new Vector3();
+
+        foreach(var cyclone in cyclones)
+        {
+            sum += cyclone.GetComponent<Anticyclone>().GetForceFor(transform.position);
+        }
+
+        return sum;
     }
 }
