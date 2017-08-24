@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class WeatherSystemManager : MonoBehaviour 
 {
+	public WeatherSystemFactory weatherSystemFactory;
 
-	public GameObject AnticyclonePrefab;
  	private List<Anticyclone> weatherSystems = new List<Anticyclone>();
-
 	private int playArea = 100;
+	private float playAreaRadius = 0;
 	private int maximumNumberOfWeatherSystems = 50;
 	private float perlinScale = 0.3f;
-	private float overlapAmount = 0.1f;
-	public int weatherSystemCount = 0;
+	private float perlinDenominator = 0;
+	private int weatherSystemCount = 0;
 
-	void Start () 
+	void Awake()
 	{
+		perlinDenominator = playArea * perlinScale;
+		playAreaRadius = playArea / 2;
 	}
 
 	public void GenerateWeatherSystems(Vector3 position)
@@ -26,73 +28,81 @@ public class WeatherSystemManager : MonoBehaviour
 			return;
 		}
 
-		var startX = position.x - (playArea / 2);
-		var startZ = position.z - (playArea / 2);
+		var startX = position.x - playAreaRadius;
+		var startZ = position.z - playAreaRadius;
 
-		var endX = position.x + (playArea / 2);
-		var endZ = position.z + (playArea / 2);
-
-		var perlinDenominator = playArea * perlinScale;
+		var endX = position.x + playAreaRadius;
+		var endZ = position.z + playAreaRadius;
 
         for (float x=startX; x < endX; x++)
 		{
 			for (float z=startZ; z < endZ; z++)
 			{
-				float perlinX = x / perlinDenominator;
-				float perlinZ = z / perlinDenominator;
-				int result = (int) (Mathf.PerlinNoise(perlinX,perlinZ) * 10);
-
-				var newWeatherSystemLocation = new Vector3(x, 0f, z);
-
-				int dia = 0; 
-				int speed = 0;
-				if (result < 6)
+				if (weatherSystemCount > maximumNumberOfWeatherSystems)
 				{
-					dia = 40;
-					speed = 10;
-				}
-				else
-				{
-					dia = 20;
-					speed = 20;
+					return;
 				}
 
-				if (!HasWeatherSystemThere(newWeatherSystemLocation, dia))
-				{
-					CreateWeatherSystem(newWeatherSystemLocation, dia, speed, true);
-				}
+				TryToCreateNewSystem(x, z);
 			}
 		}
-		// TODO ROLA - prune here
+		PruneDistantWeatherSystems(position);
     }
 
-	private void CreateWeatherSystem(Vector3 location, int size, int power, bool isClockwise)
+	private void PruneDistantWeatherSystems(Vector3 position)
 	{
-		var weatherSystem = Instantiate(AnticyclonePrefab, location, Quaternion.identity);
-		weatherSystem.tag = "WeatherSystem";
-		var cyclone = weatherSystem.GetComponent<Anticyclone>();
-		cyclone.Setup(size, power, isClockwise, overlapAmount);
-		weatherSystems.Add(cyclone);
-		weatherSystemCount++;
+		var pruneList = new List<Anticyclone>();
+
+		// TODO ROLA - investigate sorting after creation loop to avoid going through this whole list
+		foreach(var weatherSystem in weatherSystems)
+		{
+			var distance = weatherSystem.transform.position - position;
+			var furthestDistanceAway = playArea + weatherSystem.radius;
+			var sqrFurthestDistanceAway = furthestDistanceAway * furthestDistanceAway;
+			if (distance.sqrMagnitude > sqrFurthestDistanceAway)
+			{
+
+				pruneList.Add(weatherSystem);
+			}
+ 		}
+
+		weatherSystems = weatherSystems.Except(pruneList).ToList();
+		pruneList.ForEach(w => GameObject.Destroy(w.gameObject));
+		weatherSystemCount -= pruneList.Count();
 	}
 
-	private bool HasWeatherSystemThere(Vector3 locationToCheck, int diameterOfNewOne)
+	private void TryToCreateNewSystem(float x, float z)
+	{
+		var newWeatherSystemLocation = new Vector3(x, 0f, z);
+		int perlinNoiseValue = FindPerlinNoiseValue(newWeatherSystemLocation);
+
+		var weatherSystemCreationStrategy = weatherSystemFactory.FindCreationStrategy(perlinNoiseValue);
+
+		if (!HasWeatherSystemThere(newWeatherSystemLocation, weatherSystemCreationStrategy))
+		{
+			weatherSystems.Add(
+				weatherSystemFactory.Create(newWeatherSystemLocation, weatherSystemCreationStrategy));
+			weatherSystemCount++;
+		}
+	}
+
+	private int FindPerlinNoiseValue(Vector3 worldPosition)
+	{
+		float perlinX = worldPosition.x / perlinDenominator;
+		float perlinZ = worldPosition.z / perlinDenominator;
+		return (int) (Mathf.PerlinNoise(perlinX,perlinZ) * 10);
+	}
+
+	private bool HasWeatherSystemThere(Vector3 locationToCheck, 
+		IWeatherSystemCreationStrategy weatherSystemCreationStrategy)
 	{
 		foreach(var weatherSystem in weatherSystems)
 		{
-			var radiusOfNewOne = diameterOfNewOne / 2;
-			var distanceBetween = (weatherSystem.radius * (1 - overlapAmount)) + 
-				(radiusOfNewOne * (1 - overlapAmount));
-			
-			var sqrDistanceBetween = distanceBetween * distanceBetween;
-
-			if ((weatherSystem.transform.position - locationToCheck).sqrMagnitude < 
-				sqrDistanceBetween)
+			if (weatherSystem.IsTooCloseTo(locationToCheck, weatherSystemCreationStrategy.Radius))
 			{
 				return true;
 			}
  		}
 		return false;
-		//return weatherSystems.Any(w => w.IsOverlapTooMuch(locationToCheck));
 	}	
 }

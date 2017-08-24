@@ -12,7 +12,7 @@ public class Anticyclone : MonoBehaviour {
 	private float overlapAmount = 0f;
 	public float sqrNotOverlappedAmountInUnits = 0;
 	private float speed = 0; // 10 - 100
-	private float speedDenominator = 100f;
+	private float speedDenominator = 80f;
 	private bool isClockwise = true;
 	
 	// TODO ROLA - remove when putting in clouds
@@ -23,11 +23,12 @@ public class Anticyclone : MonoBehaviour {
 		Disc.transform.localScale = new Vector3(diameter, 0.1f, diameter);
 	}
 
-	internal void Setup(int diameter, int speed, bool isClockwise, float overlapAmout)
+	internal void Setup(IWeatherSystemCreationStrategy strategy)
     {
-		this.diameter = diameter;
-		this.speed = speed;
-		this.isClockwise = isClockwise;
+		diameter = strategy.Diameter;
+		speed = strategy.Speed;
+		overlapAmount = strategy.OverlapAmount;
+		isClockwise = strategy.IsClockwise;
 		
 		radius = diameter / 2;
 		radiusOfBestSpeedInUnits = radius * pointOfBestSpeed;
@@ -53,13 +54,22 @@ public class Anticyclone : MonoBehaviour {
 
         return Vector3.Cross(heading, unitYVector);
 	}
-/* 
-	internal bool IsOverlapTooMuch(Vector3 other)
+
+	internal bool IsTooCloseTo(Vector3 other, float radiusOfOther)
 	{
-		Debug.Log("Is too close: " + (transform.position - other).sqrMagnitude + " < " + sqrNotOverlappedAmountInUnits);
-		return (transform.position - other).sqrMagnitude < sqrNotOverlappedAmountInUnits;
+		var distanceBetween = (radius * (1 - overlapAmount)) + 
+			(radiusOfOther * (1 - overlapAmount));
+		
+		var sqrDistanceBetween = distanceBetween * distanceBetween;
+
+		if ((transform.position - other).sqrMagnitude < 
+			sqrDistanceBetween)
+		{
+			return true;
+		}
+		return false;
 	}
-*/
+
 	// Returns hat function between 0 and 1, 1 being at the Point of best speed
 	private float MagnitudeHat(Vector3 heading)
 	{

@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 2111925491}
   - component: {fileID: 2111925492}
   - component: {fileID: 2111925493}
+  - component: {fileID: 2111925494}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -399,6 +400,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ed8deac7dbb754185ee50f3d4f7432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherSystemFactory: {fileID: 2111925494}
+--- !u!114 &2111925494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2111925490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb877935777b7b74699555f4972c18c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   AnticyclonePrefab: {fileID: 1144079346509390, guid: 09cb3adbeac165f44a5de7b5101140b9,
     type: 2}
-  weatherSystemCount: 0
