@@ -196,7 +196,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4077828997907110, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4077828997907110, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -204,7 +204,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4077828997907110, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4077828997907110, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -257,6 +257,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &925297838 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114218498763122706, guid: c00a0010c86c86f4283b6e9c4c6aff5e,
+    type: 2}
+  m_PrefabInternal: {fileID: 691912809}
+  m_Script: {fileID: 11500000, guid: 6b3c16866670a624db6081dea131156d, type: 3}
 --- !u!1 &1173164697
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +339,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1173164697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: -0.1, z: 50}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 100, y: 0.1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -348,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2111925491}
   - component: {fileID: 2111925492}
+  - component: {fileID: 2111925493}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -379,5 +386,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfbbd5b66a5e14449c7f913e88804d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherSystemManager: {fileID: 2111925493}
+  playerCloudship: {fileID: 925297838}
+--- !u!114 &2111925493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2111925490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ed8deac7dbb754185ee50f3d4f7432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   AnticyclonePrefab: {fileID: 1144079346509390, guid: 09cb3adbeac165f44a5de7b5101140b9,
     type: 2}
+  weatherSystemCount: 0

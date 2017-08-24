@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Cloudship : MonoBehaviour
 {
     private Rigidbody rigidBody;
     private float cycloneEffect = 1f;
