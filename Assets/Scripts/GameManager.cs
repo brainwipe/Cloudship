@@ -8,86 +8,71 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject AnticyclonePrefab;
 
-	private int playAreaX;
-	private int playAreaZ;
-
-	private GameObject[] weatherSystems;
+	private int playArea;
+ 	private List<GameObject> weatherSystems;
 
 	private float perlinScale = 0.1f;
-	private int numberOfWeatherSystems = 20;
 	private float sqrWeatherMinSeparation = 250;
 
 	void Start () {
-		playAreaX = 100;
-		playAreaZ = 100;
-		GenerateWeatherSystems();
+		playArea = 100;
+		GenerateWeatherSystems(new Vector3(50,0,50));
 	}
 
     void Update () {
 		
 	}
 
-	private void GenerateWeatherSystems()
+	private void GenerateWeatherSystems(Vector3 position)
     {
-		weatherSystems = new GameObject[numberOfWeatherSystems];
-		var weatherSystemCount = 0;
+		weatherSystems = new List<GameObject>();
+		var startX = position.x - (playArea / 2);
+		var startZ = position.z - (playArea / 2);
 
-        for (float x=0; x < playAreaX; x++)
+		var endX = position.x + (playArea / 2);
+		var endZ = position.z + (playArea / 2);
+
+		var perlinDenominator = (playArea * perlinScale);
+
+        for (float x=startX; x < endX; x++)
 		{
-			for (float z=0; z < playAreaZ; z++)
+			for (float z=startZ; z < endZ; z++)
 			{
-				float perlinX = x / (playAreaX * perlinScale);
-				float perlinZ = z / (playAreaZ * perlinScale);
+				float perlinX = x / perlinDenominator;
+				float perlinZ = z / perlinDenominator;
 				int result = (int) (Mathf.PerlinNoise(perlinX,perlinZ) * 10);
 				if (result < 8)
 				{
 					continue;
 				}
 
-				var newWeatherSystemLocation = new Vector3(x, 0f, z );
+				var newWeatherSystemLocation = new Vector3(x, 0f, z);
 
-				if (weatherSystemCount == 0)
+				if (!weatherSystems.Any())
 				{
-					CreateWeatherSystem(newWeatherSystemLocation, weatherSystemCount);
-					weatherSystemCount++;
+					CreateWeatherSystem(newWeatherSystemLocation);
 					continue;
 				}
 				
 				if (!HasWeatherSystemThere(newWeatherSystemLocation))
 				{
-					CreateWeatherSystem(newWeatherSystemLocation, weatherSystemCount);
-					weatherSystemCount++;
+					CreateWeatherSystem(newWeatherSystemLocation);
 				}
 			}
 		}
     }
 
-	private void CreateWeatherSystem(Vector3 location, int index)
+	private void CreateWeatherSystem(Vector3 location)
 	{
-		if (index >= weatherSystems.Length)
-		{
-			return;
-		}
-		weatherSystems[index] = Instantiate(AnticyclonePrefab, location, Quaternion.identity);
-		weatherSystems[index].tag = "WeatherSystem";
+		var weatherSystem = Instantiate(AnticyclonePrefab, location, 
+		Quaternion.identity);
+		weatherSystem.tag = "WeatherSystem";
+		weatherSystems.Add(weatherSystem);
 	}
 
 	private bool HasWeatherSystemThere(Vector3 locationToCheck)
 	{
-		foreach(var weatherSystem in weatherSystems)
-		{
-			if (weatherSystem == null)
-			{
-				continue;
-			}
-
-			var rawDifference = weatherSystem.transform.position - locationToCheck;
-			if (rawDifference.sqrMagnitude < sqrWeatherMinSeparation)
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return weatherSystems.Any(w => 
+		(w.transform.position - locationToCheck).sqrMagnitude < sqrWeatherMinSeparation);
 	}
 }
