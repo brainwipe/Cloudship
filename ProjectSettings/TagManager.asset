@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - WeatherSystem
+  - Enemy
   layers:
   - Default
   - TransparentFX
