@@ -14,12 +14,7 @@ public class ChaseState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var direction = player.transform.position - enemy.transform.position;
-        enemy.transform.rotation = Quaternion.Slerp(
-			enemy.transform.rotation,
-            Quaternion.LookRotation(direction),
-            Time.deltaTime);
-		enemy.transform.Translate(Vector3.forward * Time.deltaTime);
+        enemy.Heading = player.transform.position - enemy.transform.position;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

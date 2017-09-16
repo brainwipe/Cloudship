@@ -8,14 +8,12 @@ public class PatrolState : BaseState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-		enemy.transform.forward = defaultHeading;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // TODO ADD WEATHER
-		enemy.transform.Translate(Vector3.forward * Time.deltaTime);
+		enemy.Heading = defaultHeading;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

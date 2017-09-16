@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeatherSystemManager : MonoBehaviour 
 {
 	public WeatherSystemFactory weatherSystemFactory;
-	public float ForceMultiplier = 3f;
+	public float ForceMultiplier = 2f;
  	private List<Anticyclone> weatherSystems = new List<Anticyclone>();
 	private int playArea = 100;
 	private float playAreaRadius = 0;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseState : StateMachineBehaviour
 {
-	protected GameObject enemy;
+	protected Enemy enemy;
 	protected GameObject player;
 	protected Vector3 defaultHeading;
 
@@ -12,7 +12,7 @@ public class BaseState : StateMachineBehaviour
 	{
 		defaultHeading = new Vector3(Random.Range(0f,1f), 0f, Random.Range(0f,1f));
 
-		enemy = animator.gameObject;
-		player = enemy.GetComponent<Enemy>().Player;
+		enemy = animator.gameObject.GetComponent<Enemy>();
+		player = enemy.Player;
 	}
 }
