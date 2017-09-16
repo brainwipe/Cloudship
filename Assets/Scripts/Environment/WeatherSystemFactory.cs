@@ -6,6 +6,7 @@ using System.Linq;
 public class WeatherSystemFactory : MonoBehaviour 
 {
 	public GameObject AnticyclonePrefab;
+	public GameObject WeatherSystemsParent;
 
 	private List<IWeatherSystemCreationStrategy> creationStrategies = 
 		new List<IWeatherSystemCreationStrategy> 
@@ -17,7 +18,11 @@ public class WeatherSystemFactory : MonoBehaviour
 		Vector3 location, 
 		IWeatherSystemCreationStrategy weatherSystemCreationStrategy)
 	{
-		var weatherSystem = Instantiate(AnticyclonePrefab, location, Quaternion.identity);
+		var weatherSystem = Instantiate(
+			AnticyclonePrefab, 
+			location,
+			Quaternion.identity, 
+			WeatherSystemsParent.transform);
 		weatherSystem.tag = "WeatherSystem";
 		var cyclone = weatherSystem.GetComponent<Anticyclone>();
 		cyclone.Setup(weatherSystemCreationStrategy);
