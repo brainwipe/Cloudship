@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Cloudship : MonoBehaviour
 {
+    public WeatherSystemManager weatherSystemManager;
+    public GameObject cycloneForceIndicator;
     private Rigidbody rigidBody;
-    private float cycloneEffect = 1f;
     public float thrust;
     public float turn;
     public float velocity;
     public float Speed = 12f;
     public float Torque = 2f; 
     public float MaxVelocity = 0.4f;
+
+    
 
     void Start()
     {
@@ -33,21 +36,21 @@ public class Cloudship : MonoBehaviour
         float forward = thrust * Speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward); 
 
-        var cycloneForce = GetCycloneForce() * Time.deltaTime;
-        rigidBody.AddForce(cycloneForce * cycloneEffect);
+        var cycloneForce = weatherSystemManager.GetCycloneForce(transform.position) * Time.deltaTime;
+        UpdateCycloneForceIndicator(cycloneForce);
+        rigidBody.AddForce(cycloneForce);
     }
 
-    Vector3 GetCycloneForce()
+    void UpdateCycloneForceIndicator(Vector3 cycloneForce)
     {
-        var cyclones = GameObject.FindGameObjectsWithTag("WeatherSystem");
-
-        Vector3 sum = new Vector3();
-
-        foreach(var cyclone in cyclones)
+        if (cycloneForce.magnitude == 0)
         {
-            sum += cyclone.GetComponent<Anticyclone>().GetForceFor(transform.position);
+            cycloneForceIndicator.transform.rotation = new Quaternion(0f,0f,0f,0f);
+            return;
         }
-
-        return sum;
+        cycloneForceIndicator.transform.rotation = Quaternion.LookRotation(cycloneForce);
+        cycloneForceIndicator.transform.localScale.Set(0.1f, 1f, cycloneForce.magnitude);
     }
+
+    
 }

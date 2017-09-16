@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeatherSystemManager : MonoBehaviour 
 {
 	public WeatherSystemFactory weatherSystemFactory;
-
+	public float ForceMultiplier = 3f;
  	private List<Anticyclone> weatherSystems = new List<Anticyclone>();
 	private int playArea = 100;
 	private float playAreaRadius = 0;
@@ -47,6 +47,17 @@ public class WeatherSystemManager : MonoBehaviour
 			}
 		}
 		PruneDistantWeatherSystems(position);
+    }
+
+	public Vector3 GetCycloneForce(Vector3 airborneObject)
+    {
+        Vector3 sum = new Vector3();
+        foreach(var weatherSystem in weatherSystems)
+        {
+            sum += weatherSystem.GetForceFor(airborneObject);
+
+        }
+        return sum * ForceMultiplier;
     }
 
 	private void PruneDistantWeatherSystems(Vector3 position)

@@ -52,6 +52,11 @@ public class Anticyclone : MonoBehaviour {
         heading = heading * MagnitudeHat(heading) * (speed / speedDenominator);
         var unitYVector = new Vector3(0, -1 ,0);
 
+		if (!isClockwise)
+		{
+			return -Vector3.Cross(heading, unitYVector);
+		}
+
         return Vector3.Cross(heading, unitYVector);
 	}
 
