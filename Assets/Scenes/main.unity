@@ -260,11 +260,6 @@ Prefab:
       propertyPath: weatherSystemManager
       value: 
       objectReference: {fileID: 1492920960}
-    - target: {fileID: 114218498763122706, guid: c00a0010c86c86f4283b6e9c4c6aff5e,
-        type: 2}
-      propertyPath: cycloneForceIndicator
-      value: 
-      objectReference: {fileID: 1336205358}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
   m_IsPrefabParent: 0
@@ -341,6 +336,10 @@ Prefab:
         type: 2}
       propertyPath: m_Direction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191708431109194, guid: 674e387e056b8e448a73747587dfaab2, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 674e387e056b8e448a73747587dfaab2, type: 2}
@@ -433,75 +432,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1336205358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1336205361}
-  - component: {fileID: 1336205360}
-  - component: {fileID: 1336205359}
-  m_Layer: 8
-  m_Name: CycloneForceIndicator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1336205359
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1336205358}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: e1f7d42609bf34b40a16d194c2c563a7, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1336205360
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1336205358}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1336205361
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1336205358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.6, z: 0.382}
-  m_LocalScale: {x: 0.1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1790760648}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492920959
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,11 +504,6 @@ Transform:
   m_Father: {fileID: 1492920961}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1790760648 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4077828997907110, guid: c00a0010c86c86f4283b6e9c4c6aff5e,
-    type: 2}
-  m_PrefabInternal: {fileID: 691912809}
 --- !u!1 &2111925490
 GameObject:
   m_ObjectHideFlags: 0

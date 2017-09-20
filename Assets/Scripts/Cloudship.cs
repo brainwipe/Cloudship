@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cloudship : MonoBehaviour
+public class Cloudship : MonoBehaviour, ITakeDamage
 {
     public WeatherSystemManager weatherSystemManager;
     public GameObject cycloneForceIndicator;
@@ -11,15 +11,16 @@ public class Cloudship : MonoBehaviour
     public float turn;
     public float velocity;
     public float Speed = 12f;
-    public float Torque = 2f; 
+    public float Torque = 2f;
     public float MaxVelocity = 0.4f;
 
-    
+    public float Health { get; set; }
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.maxAngularVelocity = 0.6f;
+        Health = 100;
     }
 
     void Update()
@@ -34,7 +35,7 @@ public class Cloudship : MonoBehaviour
         rigidBody.AddTorque(transform.up * yaw);
 
         float forward = thrust * Speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * forward); 
+        rigidBody.AddForce(transform.forward * forward);
 
         var cycloneForce = weatherSystemManager.GetCycloneForce(transform.position) * Time.deltaTime;
         UpdateCycloneForceIndicator(cycloneForce);
@@ -45,12 +46,12 @@ public class Cloudship : MonoBehaviour
     {
         if (cycloneForce.magnitude == 0)
         {
-            cycloneForceIndicator.transform.rotation = new Quaternion(0f,0f,0f,0f);
+            cycloneForceIndicator.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             return;
         }
         cycloneForceIndicator.transform.rotation = Quaternion.LookRotation(cycloneForce);
         cycloneForceIndicator.transform.localScale.Set(0.1f, 1f, cycloneForce.magnitude);
     }
 
-    
+
 }
