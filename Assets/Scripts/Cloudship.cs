@@ -13,7 +13,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public float Speed = 12f;
     public float Torque = 2f;
     public float MaxVelocity = 0.4f;
-
     public float Health { get; set; }
 
     void Start()

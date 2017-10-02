@@ -19,10 +19,22 @@ public class Shooting : MonoBehaviour
     {
         if (Input.GetButtonUp(fireButton))
         {
-			Rigidbody ball = Instantiate(cannonball, cannon.position, cannon.rotation) as Rigidbody;
-			ball.velocity = cannon.forward * 10;
-			var cannonBall = ball.GetComponent<Cannonball>();
-			cannonBall.originator = GetComponent<Cloudship>();
+            var shooter = GetComponent<Cloudship>();
+            var lookVector = (NearestTarget(shooter) - shooter.transform.position).normalized;
+            
+			Rigidbody ball = Instantiate(
+                cannonball, 
+                cannon.position, 
+                Quaternion.LookRotation(lookVector)) as Rigidbody;
+            var cannonBall = ball.GetComponent<Cannonball>();
+			cannonBall.originator = shooter;
+            ball.AddForce(lookVector * 5, ForceMode.Impulse);
         }
+    }
+
+    private Vector3 NearestTarget(Cloudship shooter)
+    {
+        var target = GameObject.FindGameObjectsWithTag("Enemy");
+        return target[0].transform.position;
     }
 }
