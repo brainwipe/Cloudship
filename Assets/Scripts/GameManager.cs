@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
 
 	public Cloudship playerCloudship;
 	private Vector3 positionOfLastUpdate;
-	private float sqrDisplacementBetweenUpdates = 220;
+	private float sqrDisplacementBetweenUpdates = 100;
 	void Start () 
 	{
-		weatherSystemManager.GenerateWeatherSystems(playerCloudship.transform.position);
+		weatherSystemManager.GenerateWeatherIndicators(playerCloudship.transform.position);
 	}
 
     void Update () 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 		if (ShouldTheWeatherSystemUpdate(playerCloudship.transform.position))
 		{
 			positionOfLastUpdate = playerCloudship.transform.position;
-			weatherSystemManager.GenerateWeatherSystems(playerCloudship.transform.position);
+			weatherSystemManager.GenerateWeatherIndicators(playerCloudship.transform.position);
 		}
 	}
 

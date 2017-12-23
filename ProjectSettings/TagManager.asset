@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WeatherSystem
   - Enemy
+  - WeatherIndicator
   layers:
   - Default
   - TransparentFX
