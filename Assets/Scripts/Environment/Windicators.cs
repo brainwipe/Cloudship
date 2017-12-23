@@ -29,18 +29,41 @@ public class Windicators : MonoBehaviour
             for (int z = startZ; z < endZ; z++)
             {
                 var position = new Vector3(x, 0, z);
-                if (MakeNewIndicator(position) && !AlreadyIndicatorThere(position))
+                if (CanIMakeANewIndicator(position))
                 {
-                    var startDirection = weatherSystemManager.WindDirectionAt(position);
-                    indicators[position] = Instantiate(weatherIndicator, position, startDirection);
+                    var rotation = weatherSystemManager.WindDirectionAt(position);
+                    
+                    var magnitude = weatherSystemManager.WindMagnitudeAt(position) * 1.2f;
+                    var newScale = new Vector3(magnitude, 0.5f, magnitude) ;
+
+                    if (!AlreadyIndicatorThere(position))
+                    {
+                        indicators[position] = Instantiate(weatherIndicator, position, rotation);
+                        indicators[position].transform.localScale = newScale;
+                        SetColour(indicators[position], rotation);
+                    }
                 }
             }
         }
     }
 
+    private void SetColour(GameObject indicator, Quaternion rotation)
+    {
+        var vectorAxis = Vector3.up;
+        float angle;
+        rotation.ToAngleAxis(out angle, out vectorAxis);
+        angle = Mathf.Abs(angle);
+        Debug.Log(angle);
+        float h = angle / 360f;
+        var color = Color.HSVToRGB(h, 1f, 1f);
+
+        Renderer rend = indicator.GetComponent<Renderer>();
+        rend.material.color = color;
+    }
+
     internal void UpdateWindicators(Vector3 position)
     {
-        if (ShouldTheWeatherSystemUpdate(position))
+        if (ShouldIMakeMoreWindicators(position))
 		{
 			positionOfLastUpdate = position;
 			Generate(position);
@@ -52,13 +75,13 @@ public class Windicators : MonoBehaviour
         return indicators.ContainsKey(position);
     }
 
-    private bool MakeNewIndicator(Vector3 position)
+    private bool CanIMakeANewIndicator(Vector3 position)
     {
         return (position.x % indicatorGridWith == 0) && 
         (position.z % indicatorGridWith == 0);
     }
 
-    private bool ShouldTheWeatherSystemUpdate(Vector3 playerCloudshipPosition)
+    private bool ShouldIMakeMoreWindicators(Vector3 playerCloudshipPosition)
 	{
 		return ((positionOfLastUpdate - playerCloudshipPosition).sqrMagnitude > 
 			sqrDisplacementBetweenUpdates);
