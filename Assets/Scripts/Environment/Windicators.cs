@@ -53,7 +53,6 @@ public class Windicators : MonoBehaviour
         float angle;
         rotation.ToAngleAxis(out angle, out vectorAxis);
         angle = Mathf.Abs(angle);
-        Debug.Log(angle);
         float h = angle / 360f;
         var color = Color.HSVToRGB(h, 1f, 1f);
 

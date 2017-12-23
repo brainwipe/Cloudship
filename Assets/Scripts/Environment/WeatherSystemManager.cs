@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class WeatherSystemManager : MonoBehaviour
 {
-    float perlinScale = 30f;
+    float perlinScale = 22f;
     int samplesForGradient = 4;
     float sampleMultiplier = 2f;
 
+    float windStrength = 5f;
+
     public Vector3 GetCycloneForce(Vector3 cycloneForce)
     {
-        return  WindDirectionAt(cycloneForce) * (Vector3.back * 5);
+        return  WindDirectionAt(cycloneForce) * (Vector3.back * windStrength * WindMagnitudeAt(cycloneForce));
     }
 
     public float WindMagnitudeAt(Vector3 location)
