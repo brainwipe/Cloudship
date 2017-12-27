@@ -221,7 +221,7 @@ Prefab:
         type: 2}
       propertyPath: weatherSystemManager
       value: 
-      objectReference: {fileID: 1492920960}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
   m_IsPrefabParent: 0
@@ -315,46 +315,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1492920959
+--- !u!1 &1376252814
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1492920961}
-  - component: {fileID: 1492920960}
+  - component: {fileID: 1376252815}
+  - component: {fileID: 1376252816}
+  - component: {fileID: 1376252817}
   m_Layer: 0
-  m_Name: WeatherSystemManager
+  m_Name: PressureBalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1492920960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1492920959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ed8deac7dbb754185ee50f3d4f7432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1492920961
+--- !u!4 &1376252815
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1492920959}
+  m_GameObject: {fileID: 1376252814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2111925491}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376252816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1376252814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e374425a3375da84fa5f87580e2a491c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressureBall: {fileID: 1849754898343304, guid: 70b307c73b8776a4caac3a3f47406074,
+    type: 2}
+--- !u!114 &1376252817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1376252814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e05a6d76e5c37944a92898c64618001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2111925490
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,8 +395,8 @@ Transform:
   m_LocalPosition: {x: -8.39, y: 0.37199998, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1492920961}
   - {fileID: 2125013693}
+  - {fileID: 1376252815}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -398,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windicators: {fileID: 2125013692}
+  pressureBalls: {fileID: 1376252816}
   playerCloudship: {fileID: 925297838}
 --- !u!1 &2125013691
 GameObject:
@@ -427,7 +442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weatherIndicator: {fileID: 100000, guid: 779865c4f46af2f46ab47a714422febd, type: 3}
-  weatherSystemManager: {fileID: 1492920960}
 --- !u!4 &2125013693
 Transform:
   m_ObjectHideFlags: 0
@@ -439,5 +453,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2111925491}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 {
     public float Speed = 12f;
     public Vector3 Heading = new Vector3();
-    public WeatherSystemManager weatherSystemManager;
+    public IWindMaker windMaker;
 
     private Rigidbody rigidBody;
     private GameObject player;
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         float forward = Speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward);
 
-        var cycloneForce = weatherSystemManager.GetCycloneForce(transform.position) * Time.deltaTime;
+        var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
         rigidBody.AddForce(cycloneForce);
     }
 

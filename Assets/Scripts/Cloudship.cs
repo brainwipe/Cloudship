@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cloudship : MonoBehaviour, ITakeDamage
 {
-    public WeatherSystemManager weatherSystemManager;
+    public IWindMaker windMaker;
     public GameObject cycloneForceIndicator;
     private Rigidbody rigidBody;
     public float thrust;
@@ -18,6 +18,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        windMaker = GetComponent<IWindMaker>();
         rigidBody.maxAngularVelocity = 0.6f;
         Health = 100;
     }
@@ -36,7 +37,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage
         float forward = thrust * Speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward);
 
-        var cycloneForce = weatherSystemManager.GetCycloneForce(transform.position) * Time.deltaTime;
+        var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
         UpdateCycloneForceIndicator(cycloneForce);
         rigidBody.AddForce(cycloneForce);
     }

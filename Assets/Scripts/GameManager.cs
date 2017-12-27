@@ -8,16 +8,20 @@ public class GameManager : MonoBehaviour
 {
 	public Windicators windicators;
 
+	public PressureBalls pressureBalls;
+
 	public Cloudship playerCloudship;
-	
+
 
 	void Start () 
 	{
-		windicators.Generate(playerCloudship.transform.position);
+		
+		
 	}
 
     void Update () 
 	{
-		windicators.UpdateWindicators(playerCloudship.transform.position);
+		windicators.Generate(playerCloudship.transform.position); // Uncomment to show the wind direction arrows
+		//pressureBalls.Generate(playerCloudship.transform.position); // Uncomment to show the perlin pressure field
 	}
 }
