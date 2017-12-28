@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
 	public Cloudship playerCloudship;
 
+	public CloudFactory cloudFactory;
+
 
 	void Start () 
 	{

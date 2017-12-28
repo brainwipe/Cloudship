@@ -358,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressureBall: {fileID: 1849754898343304, guid: 70b307c73b8776a4caac3a3f47406074,
     type: 2}
+  Magnitude: 0
 --- !u!114 &1376252817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125013693}
   - component: {fileID: 2125013692}
+  - component: {fileID: 2125013694}
   m_Layer: 0
   m_Name: Windicators
   m_TagString: Untagged
@@ -455,3 +457,14 @@ Transform:
   m_Father: {fileID: 2111925491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2125013694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2125013691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e05a6d76e5c37944a92898c64618001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

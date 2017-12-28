@@ -35,6 +35,10 @@ public class Shooting : MonoBehaviour
     private Vector3 NearestTarget(Cloudship shooter)
     {
         var target = GameObject.FindGameObjectsWithTag("Enemy");
-        return target[0].transform.position;
+        if (target.Length > 0)
+        {
+            return target[0].transform.position;
+        }
+        return Vector3.forward;
     }
 }
