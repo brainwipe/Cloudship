@@ -7,9 +7,9 @@ using UnityEngine;
 public class Windicators : MonoBehaviour
 {
     public GameObject weatherIndicator;
-
-    public IWindMaker windMaker;
-
+    
+    Cloudship playerCloudship;
+    IWindMaker windMaker;
     int distanceFromPlayer = 20;
     float sqrDisplacementBetweenUpdates = 100;
     private Vector3 positionOfLastUpdate;
@@ -20,12 +20,15 @@ public class Windicators : MonoBehaviour
     
     void Start()
     {
-        windMaker = GetComponent<IWindMaker>();
         hasInitialSetBeenMade = false;
+        playerCloudship = GameManager.Instance.PlayerCloudship;
+        windMaker = GameManager.Instance.WindMaker;
     }
 
-    public void Generate(Vector3 centre)
+    public void Update()
     {
+        var centre = playerCloudship.Position;
+
         if (ShouldIMakeMoreWindicators(centre))
 		{
 		    int startX = (int)centre.x - distanceFromPlayer;

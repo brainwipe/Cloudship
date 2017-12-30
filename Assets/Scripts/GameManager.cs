@@ -6,24 +6,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour 
 {
-	public Windicators windicators;
+	public static GameManager Instance = null;
 
-	public PressureBalls pressureBalls;
+	public Cloudship PlayerCloudship;
 
-	public Cloudship playerCloudship;
+	public IWindMaker WindMaker = null;
 
-	public CloudFactory cloudFactory;
-
-
-	void Start () 
+	void Awake()
 	{
-		
-		
-	}
+		if (Instance == null)
+		{
+			Instance = this;
 
-    void Update () 
-	{
-		windicators.Generate(playerCloudship.transform.position); // Uncomment to show the wind direction arrows
-		//pressureBalls.Generate(playerCloudship.transform.position); // Uncomment to show the perlin pressure field
+		}
+		else if (Instance != this)
+		{
+			Destroy(gameObject);
+		}
+		DontDestroyOnLoad(gameObject);
+		PlayerCloudship = FindObjectOfType<Cloudship>();
+		WindMaker = new PerlinPressure();
 	}
 }

@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class CloudFactory : MonoBehaviour
 {
-    public GameObject cloudship;
-
     public GameObject cloudPrefab;
-
     public GameObject[] clouds;
-
-    public IWindMaker windMaker;
-
     public int cloudCount = 20;
-    float windEffect = 0.15f;
     public int distanceFromPlayer = 20;
     public int sqrDistanceFromPlayer = 400;
     public int furthestFromplayer = 25;
     public int sqrFurthestFromPlayer = 625;
     public int sqrElimiationDistanceFromPlayer = 800;
-
     public int sqrCloudSeparation = 10;
+
+    IWindMaker windMaker;
+    Cloudship playerCloudship;
+    float windEffect = 0.15f;
+    
     public void Start()
     {
-        CreateIntialClouds(cloudship.transform.position);
-        windMaker = GetComponent<IWindMaker>();
+        playerCloudship = GameManager.Instance.PlayerCloudship;
+        windMaker = GameManager.Instance.WindMaker;
+        CreateIntialClouds(playerCloudship.Position);
     }
 
     public void FixedUpdate()
@@ -39,7 +37,7 @@ public class CloudFactory : MonoBehaviour
 
             var cycloneForce = windMaker.GetCycloneForce(cloud.transform.position) * Time.deltaTime;
             cloud.transform.position += cycloneForce * windEffect;
-            RemoveOldAddNew(cloudship.transform.position, i);
+            RemoveOldAddNew(playerCloudship.Position, i);
         }
     }
 

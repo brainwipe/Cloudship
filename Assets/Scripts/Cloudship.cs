@@ -53,5 +53,13 @@ public class Cloudship : MonoBehaviour, ITakeDamage
         cycloneForceIndicator.transform.localScale.Set(0.1f, 1f, cycloneForce.magnitude);
     }
 
+    public Vector3 Position
+    {
+        get
+        {
+            return this.transform.position;
+        }
+    }
+
 
 }

@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class PressureBalls : MonoBehaviour
 {
-    public IWindMaker windMaker;
     public GameObject pressureBall;
-
     public float Magnitude;
 
+    Cloudship playerCloudship;
+    IWindMaker windMaker;
     int indicatorGridWith = 1;
     Dictionary<Vector3, GameObject> balls = new Dictionary<Vector3, GameObject>();
     int distanceFromPlayer = 15;
     
     public void Start() 
     {
-        windMaker = GetComponent<IWindMaker>();
+        playerCloudship = GameManager.Instance.PlayerCloudship;
+        windMaker = GameManager.Instance.WindMaker;
     }
 
-    public void Generate(Vector3 centre)
+    public void Update()
     {
+        var centre = playerCloudship.Position;
+
         int startX = (int)centre.x - distanceFromPlayer;
         int endX = (int)centre.x + distanceFromPlayer;
         int startZ = (int)centre.z - distanceFromPlayer;
