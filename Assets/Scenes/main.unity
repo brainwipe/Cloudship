@@ -113,71 +113,69 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &13302547
+--- !u!1 &534518482
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 13302549}
-  - component: {fileID: 13302548}
+  - component: {fileID: 534518484}
+  - component: {fileID: 534518483}
+  - component: {fileID: 534518485}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: CloudFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &13302548
-Light:
+--- !u!114 &534518483
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 13302547}
+  m_GameObject: {fileID: 534518482}
   m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &13302549
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59b772c08f4d8f42b920122b558ad1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudship: {fileID: 1573746305}
+  cloudPrefab: {fileID: 1996174443779088, guid: e3e47ccf159b59141977a94faab898b2,
+    type: 2}
+  clouds: []
+  cloudCount: 20
+  distanceFromPlayer: 20
+  sqrDistanceFromPlayer: 400
+  furthestFromplayer: 24
+  sqrFurthestFromPlayer: 440
+  sqrElimiationDistanceFromPlayer: 800
+  sqrCloudSeparation: 5
+--- !u!4 &534518484
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 13302547}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_GameObject: {fileID: 534518482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_Father: {fileID: 2111925491}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534518485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534518482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e05a6d76e5c37944a92898c64618001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &691912809
 Prefab:
   m_ObjectHideFlags: 0
@@ -222,6 +220,11 @@ Prefab:
       propertyPath: weatherSystemManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 20175178893904176, guid: c00a0010c86c86f4283b6e9c4c6aff5e,
+        type: 2}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c00a0010c86c86f4283b6e9c4c6aff5e, type: 2}
   m_IsPrefabParent: 0
@@ -231,6 +234,71 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 691912809}
   m_Script: {fileID: 11500000, guid: 6b3c16866670a624db6081dea131156d, type: 3}
+--- !u!1 &1000338458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1000338460}
+  - component: {fileID: 1000338459}
+  m_Layer: 0
+  m_Name: Sun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1000338459
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1000338458}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1000338460
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1000338458}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1173164697
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +438,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e05a6d76e5c37944a92898c64618001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1573746305 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1432351309316322, guid: c00a0010c86c86f4283b6e9c4c6aff5e,
+    type: 2}
+  m_PrefabInternal: {fileID: 691912809}
 --- !u!1 &2111925490
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +471,7 @@ Transform:
   m_Children:
   - {fileID: 2125013693}
   - {fileID: 1376252815}
+  - {fileID: 534518484}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -415,6 +489,7 @@ MonoBehaviour:
   windicators: {fileID: 2125013692}
   pressureBalls: {fileID: 1376252816}
   playerCloudship: {fileID: 925297838}
+  cloudFactory: {fileID: 534518483}
 --- !u!1 &2125013691
 GameObject:
   m_ObjectHideFlags: 0

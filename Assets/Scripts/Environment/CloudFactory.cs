@@ -16,10 +16,9 @@ public class CloudFactory : MonoBehaviour
     float windEffect = 0.15f;
     public int distanceFromPlayer = 20;
     public int sqrDistanceFromPlayer = 400;
-
     public int furthestFromplayer = 25;
-
     public int sqrFurthestFromPlayer = 625;
+    public int sqrElimiationDistanceFromPlayer = 800;
 
     public int sqrCloudSeparation = 10;
     public void Start()
@@ -48,7 +47,7 @@ public class CloudFactory : MonoBehaviour
     {
         var cloud = clouds[cloudIndex];
 
-        if ((cloud.transform.position - location).sqrMagnitude > sqrFurthestFromPlayer)
+        if ((cloud.transform.position - location).sqrMagnitude > sqrElimiationDistanceFromPlayer)
         {
             var newLocation = FindNewLocation(location);
             if (newLocation == null)
@@ -71,6 +70,7 @@ public class CloudFactory : MonoBehaviour
             }
             
             clouds[i] = Instantiate(cloudPrefab, newLocation.Value, Quaternion.identity);
+            clouds[i].transform.parent = this.transform;
         }
     }
 

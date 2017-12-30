@@ -41,7 +41,6 @@ public class Windicators : MonoBehaviour
                     if (CanIMakeANewIndicator(position))
                     {
                         var rotation = windMaker.WindDirectionAt(position);
-                        
                         var magnitude = windMaker.WindMagnitudeAt(position) * 1.2f;
                         var newScale = new Vector3(magnitude, 0.5f, magnitude);
 
@@ -49,6 +48,7 @@ public class Windicators : MonoBehaviour
                         {
                             indicators[position] = Instantiate(weatherIndicator, position, rotation);
                             indicators[position].transform.localScale = newScale;
+                            indicators[position].transform.parent = this.transform;
                             SetColour(indicators[position], rotation);
                         }
                     }
