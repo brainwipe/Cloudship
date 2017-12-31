@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PerlinPressure : MonoBehaviour, IWindMaker
+public class PerlinPressure : IWindMaker
 {
     float perlinScale = 22f;
     float perlinOffset = 20000;

@@ -7,27 +7,19 @@ public class Enemy : MonoBehaviour, ITakeDamage
 {
     public float Speed = 12f;
     public Vector3 Heading = new Vector3();
-    public IWindMaker windMaker;
 
-    private Rigidbody rigidBody;
-    private GameObject player;
-    private Animator animator;
-    public GameObject Player
-    {
-        get
-        {
-            return player;
-        }
-    }
-
-    public float Health { get; set; }
+    IWindMaker windMaker;
+    Rigidbody rigidBody;
+    Cloudship playerCloudship;
+    Animator animator;
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        Health = 100;
+        windMaker = GameManager.Instance.WindMaker;
+        playerCloudship = GameManager.Instance.PlayerCloudship;
     }
 
     void FixedUpdate()
@@ -46,6 +38,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        animator.SetFloat("distance", Vector3.Distance(transform.position, player.transform.position));
+        animator.SetFloat("distance", Vector3.Distance(transform.position, playerCloudship.Position));
     }
 }

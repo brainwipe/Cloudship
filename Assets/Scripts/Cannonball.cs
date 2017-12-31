@@ -28,7 +28,7 @@ public class Cannonball : MonoBehaviour
 			return;
 		}
 
-		target.Health -= damage;
+		// TODO reduce health
 		
 		Destroy(gameObject);
 	}

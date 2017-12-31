@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Cloudship : MonoBehaviour, ITakeDamage
 {
-    public IWindMaker windMaker;
     public GameObject cycloneForceIndicator;
-    private Rigidbody rigidBody;
     public float thrust;
     public float turn;
     public float velocity;
@@ -15,10 +13,13 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public float MaxVelocity = 0.4f;
     public float Health { get; set; }
 
+    Rigidbody rigidBody;
+    IWindMaker windMaker;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        windMaker = GetComponent<IWindMaker>();
+        windMaker = GameManager.Instance.WindMaker;
         rigidBody.maxAngularVelocity = 0.6f;
         Health = 100;
     }
