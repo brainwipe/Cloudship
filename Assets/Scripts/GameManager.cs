@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance = null;
 
+	// TODO This needs to go in a settings class when there are a few of them
+	public static int DrawDistance = 200;
+
 	public Cloudship PlayerCloudship;
 
 	public IWindMaker WindMaker = null;

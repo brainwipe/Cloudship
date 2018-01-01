@@ -1,6 +1,6 @@
 # Cloudship
 
-A game built in Unity 3D used as a learning project for a bit of fun during a holiday at home. Steer your Cloudship ellipse through a procedurally generated world of weather systems.
+A game built in Unity 3D used as a learning project for a bit of fun during a holiday at home. Steer your Cloudship ellipse through a procedurally generated sandy world of weather systems.
 
 * Dev blog on [Lack Of](http://www.lack-of.org/blog/2)
 * Images on [Imgur](http://imgur.com/a/i06oJ)
@@ -10,7 +10,7 @@ A game built in Unity 3D used as a learning project for a bit of fun during a ho
 
 It's a work in progress!
 
-![A screenshot of the game running alongside some code](http://imgur.com/romyI6H.png)
+![A screenshot of the game running alongside some code](https://imgur.com/aUprWQJ.png)
 
 ## Installing
 

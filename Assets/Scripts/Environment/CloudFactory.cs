@@ -6,26 +6,37 @@ public class CloudFactory : MonoBehaviour
 {
     public GameObject cloudPrefab;
     public GameObject[] clouds;
-    public int cloudCount = 20;
-    public int distanceFromPlayer = 20;
-    public int sqrDistanceFromPlayer = 400;
-    public int furthestFromplayer = 25;
-    public int sqrFurthestFromPlayer = 625;
-    public int sqrElimiationDistanceFromPlayer = 800;
-    public int sqrCloudSeparation = 10;
-
+    public int cloudCount =100;
+    int sqrCloudSeparation = 20;
+    
     IWindMaker windMaker;
     Cloudship playerCloudship;
     float windEffect = 0.15f;
-    
-    public void Start()
+    int eliminationDistanceFromPlayer;
+    int sqrElimiationDistanceFromPlayer;
+    int distanceFromPlayer;
+    int sqrDistanceFromPlayer;
+    int furthestFromplayer;
+
+    void Awake()
+    {
+        var drawDistance = GameManager.DrawDistance;
+        distanceFromPlayer = drawDistance;
+        sqrDistanceFromPlayer = distanceFromPlayer * distanceFromPlayer;
+        eliminationDistanceFromPlayer = drawDistance + 40;
+        sqrElimiationDistanceFromPlayer = eliminationDistanceFromPlayer * eliminationDistanceFromPlayer;
+        furthestFromplayer = distanceFromPlayer + 10;
+        clouds = new GameObject[cloudCount];
+    }
+
+    void Start()
     {
         playerCloudship = GameManager.Instance.PlayerCloudship;
         windMaker = GameManager.Instance.WindMaker;
         CreateIntialClouds(playerCloudship.Position);
     }
 
-    public void FixedUpdate()
+    void FixedUpdate()
     {
         for (int i=0; i < cloudCount; i++)
         {
@@ -41,7 +52,7 @@ public class CloudFactory : MonoBehaviour
         }
     }
 
-    private void RemoveOldAddNew(Vector3 location, int cloudIndex)
+    void RemoveOldAddNew(Vector3 location, int cloudIndex)
     {
         var cloud = clouds[cloudIndex];
 
@@ -56,9 +67,8 @@ public class CloudFactory : MonoBehaviour
         }
     }
 
-    private void CreateIntialClouds(Vector3 location)
+    void CreateIntialClouds(Vector3 location)
     {
-        clouds = new GameObject[cloudCount];
         for(var i=0; i<cloudCount; i++)
         {
             var newLocation = FindInitialLocation(location);
@@ -72,7 +82,7 @@ public class CloudFactory : MonoBehaviour
         }
     }
 
-    private Vector3? FindNewLocation(Vector3 location)
+    Vector3? FindNewLocation(Vector3 location)
     {
         for (var i=0; i< 100; i++)
         {
@@ -89,7 +99,7 @@ public class CloudFactory : MonoBehaviour
         return null;
     }
 
-    private Vector3? FindInitialLocation(Vector3 location)
+    Vector3? FindInitialLocation(Vector3 location)
     {
         for (var i=0; i< 100; i++)
         {
@@ -106,7 +116,7 @@ public class CloudFactory : MonoBehaviour
         return null;
     }
 
-    private bool HasCloudNearby(Vector3 location)
+    bool HasCloudNearby(Vector3 location)
     {
         foreach(var cloud in clouds)
         {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class TerrainFactory : MonoBehaviour
 {
     int chunkSize = 10;
-    int chunkRadius = 10;
+    int chunkRadius;
     Dictionary<Vector3, TerrainChunk> chunks = new Dictionary<Vector3, TerrainChunk>();
     
     Vector3 start;
@@ -19,6 +19,7 @@ public class TerrainFactory : MonoBehaviour
     void Awake()
     {
         start = Vector3.zero;
+        chunkRadius = GameManager.DrawDistance / chunkSize;
     }
 
     void Start()
