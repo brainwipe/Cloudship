@@ -452,7 +452,12 @@ Prefab:
     - target: {fileID: 114758498540518754, guid: 4422eabe9ef5e194988b0bd3917a9f11,
         type: 2}
       propertyPath: cloudCount
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758498540518754, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: cloudSizeUpper
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
