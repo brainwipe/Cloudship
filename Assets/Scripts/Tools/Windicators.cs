@@ -43,8 +43,10 @@ public class Windicators : MonoBehaviour
                     var position = new Vector3(x, 0, z);
                     if (CanIMakeANewIndicator(position))
                     {
-                        var rotation = windMaker.WindDirectionAt(position);
-                        var magnitude = windMaker.WindMagnitudeAt(position) * 1.2f;
+                        var force = windMaker.GetCycloneForce(position);
+
+                        var rotation = Quaternion.FromToRotation(Vector3.back, force);
+                        var magnitude = force.magnitude * 0.3f;
                         var newScale = new Vector3(magnitude, 0.5f, magnitude);
 
                         if (!AlreadyIndicatorThere(position))

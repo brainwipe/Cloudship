@@ -35,7 +35,7 @@ public class PressureBalls : MonoBehaviour
                 var position = new Vector3(x, 0, z);
                 if (CanIMakeANewBall(position))
                 {
-                    var Magnitude = windMaker.WindMagnitudeAt(position);
+                    var Magnitude = windMaker.GetCycloneForce(position).magnitude;
 
                     if (!AlreadyBallThere(position))
                     {
