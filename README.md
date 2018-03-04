@@ -10,7 +10,7 @@ A game built in Unity 3D used as a learning project for a bit of fun during a ho
 
 It's a work in progress!
 
-![A screenshot of the game running alongside some code](https://imgur.com/aUprWQJ.png)
+![A screenshot of the game running alongside some code](https://imgur.com/n3v0dKB.png)
 
 ## Installing
 
