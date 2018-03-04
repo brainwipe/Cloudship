@@ -8,6 +8,9 @@ public class CloudFactory : MonoBehaviour
     public GameObject[] clouds;
     public int cloudCount =100;
     int sqrCloudSeparation = 20;
+    public float cloudSizeUpper = 2f;
+
+    public float cloudSizeLower = 1f;
     
     IWindMaker windMaker;
     Cloudship playerCloudship;
@@ -79,6 +82,10 @@ public class CloudFactory : MonoBehaviour
             
             clouds[i] = Instantiate(cloudPrefab, newLocation.Value, Quaternion.identity);
             clouds[i].transform.parent = this.transform;
+            float scale = UnityEngine.Random.Range(cloudSizeLower, cloudSizeUpper);
+            clouds[i].transform.localScale = new Vector3(scale,scale,scale);
+            float yOffset = scale / 2;
+            clouds[i].transform.position += new Vector3(0, 6 * yOffset, 0);
         }
     }
 
