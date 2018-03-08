@@ -6,23 +6,31 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour 
 {
-	public static GameManager Instance = null;
+    private static GameManager instance;
 
-	// TODO This needs to go in a settings class when there are a few of them
-	public static int DrawDistance = 200;
+    // TODO This needs to go in a settings class when there are a few of them
+    public static int DrawDistance = 200;
 
 	public Cloudship PlayerCloudship;
 
 	public IWindMaker WindMaker = null;
 
-	void Awake()
+    public static GameManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    void Awake()
 	{
-		if (Instance == null)
+		if (instance == null)
 		{
-			Instance = this;
+			instance = this;
 
 		}
-		else if (Instance != this)
+		else if (instance != this)
 		{
 			Destroy(gameObject);
 		}
