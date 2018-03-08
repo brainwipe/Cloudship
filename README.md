@@ -14,10 +14,20 @@ It's a work in progress!
 
 ## Installing
 
-Download the latest release from the [Releases Tab](https://github.com/brainwipe/Cloudship/releases).
+Download the latest release from the [Releases Tab](https://github.com/brainwipe/Cloudship/releases). Open the zip file and run the exe.
+
+## Controls
+- <kbd>W</kbd> thrust forwards
+- <kbd>A</kbd> turn left
+- <kbd>S</kbd> thrust backwards
+- <kbd>D</kbd> turn right
+
+Click right mouse button and drag rotates the view.
 
 ## Built With
 
 * [Unity3D](https://unity3D.com) - The game development studio (personal edition)
 * [Visual Studio Code](https://code.visualstudio.com/) - Code editor
 * [Moleskine](http://www.moleskine.com/gb/) - Notebook
+
+:cloud:
