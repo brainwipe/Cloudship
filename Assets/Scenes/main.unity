@@ -217,7 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2513b77e2c95145b846c340aec7dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonball: {fileID: 0}
+  cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
+    type: 2}
   cannon: {fileID: 1906244854}
 --- !u!114 &655051481
 MonoBehaviour:
@@ -407,6 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df427e2a2a799942b6f13a602d1c2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 655051483}
+  SmoothFactor: 0.158
+  LookAtPlayer: 1
+  newPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1000338458
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +699,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -2.2
       objectReference: {fileID: 0}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: PlayerCloudship
+      value: 
+      objectReference: {fileID: 655051481}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabParent: 0
