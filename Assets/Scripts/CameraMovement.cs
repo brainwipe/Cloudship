@@ -12,7 +12,11 @@ public class CameraMovement : MonoBehaviour
 
     public bool LookAtPlayer = false;
 
-    public Vector3 newPos;
+    private Vector3 newPos;
+
+    public bool RotateAroundPlayer = true;
+
+    public float RotationSpeed = 5f;
 
     void Start()
     {
@@ -21,10 +25,17 @@ public class CameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-       Vector3 targetPosition = Player.position + offset;
-       newPos = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
-       transform.position = newPos;
-        if (LookAtPlayer)
+        if (RotateAroundPlayer && Input.GetMouseButton(1))
+        {
+            Quaternion turnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * RotationSpeed, Vector3.up);
+            offset = turnAngle * offset;
+        }
+
+        Vector3 targetPosition = Player.position + offset;
+        newPos = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
+        transform.position = newPos;
+        
+        if (LookAtPlayer || RotateAroundPlayer)
         {
            transform.LookAt(Player);
         }
