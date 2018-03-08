@@ -40,7 +40,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage
 
         var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
         UpdateCycloneForceIndicator(cycloneForce);
-        rigidBody.AddForce(cycloneForce);
+        rigidBody.AddForce(cycloneForce);   
     }
 
     void UpdateCycloneForceIndicator(Vector3 cycloneForce)
