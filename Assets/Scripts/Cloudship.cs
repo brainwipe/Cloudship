@@ -50,8 +50,13 @@ public class Cloudship : MonoBehaviour, ITakeDamage
             cycloneForceIndicator.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             return;
         }
-        cycloneForceIndicator.transform.rotation = Quaternion.LookRotation(cycloneForce);
-        cycloneForceIndicator.transform.localScale.Set(0.1f, 1f, cycloneForce.magnitude);
+
+        var windDirection = Quaternion.LookRotation(-cycloneForce);
+
+        cycloneForceIndicator.transform.rotation = Quaternion.Slerp(
+            cycloneForceIndicator.transform.rotation, 
+            windDirection,
+            Time.deltaTime * 1.5f);
     }
 
     public Vector3 Position
