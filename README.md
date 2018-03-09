@@ -5,6 +5,7 @@ A game built in Unity 3D used as a learning project for a bit of fun during a ho
 * Dev blog on [Lack Of](http://www.lack-of.org/blog/2)
 * Images on [Imgur](http://imgur.com/a/i06oJ)
 * Original inspiration was my free pen and paper RPG [Cloudship Atlantis](http://www.thefreerpgblog.com/p/my-games.html)
+* Picture inspiration collected on [Pinterest](https://www.pinterest.co.uk/brainwipe/cloudship-ideas/)
 
 ![A scruffy set of scribbles that make up my design document](http://imgur.com/KlqBbGh.png)
 
