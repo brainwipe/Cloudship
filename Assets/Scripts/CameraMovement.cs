@@ -10,9 +10,7 @@ public class CameraMovement : MonoBehaviour
     [Range(0.01f, 0.4f)]
     public float SmoothFactor = 0.2f;
 
-    public bool LookAtPlayer = false;
-
-    private Vector3 newPos;
+    public bool LookAtPlayer = true;
 
     public bool RotateAroundPlayer = true;
 
@@ -32,7 +30,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         Vector3 targetPosition = Player.position + offset;
-        newPos = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
+        var newPos = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
         transform.position = newPos;
         
         if (LookAtPlayer || RotateAroundPlayer)
