@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform Player;
+    public Transform Controller;
+
     private Vector3 offset;
 
     [Range(0.01f, 0.4f)]
@@ -18,7 +20,10 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
+        Camera camera = GetComponentInChildren<Camera>();
         offset = transform.position - Player.position;
+        var v3Pos = new Vector3(0.2f, 0.25f, 0.8f);
+        Controller.transform.position = camera.ViewportToWorldPoint(v3Pos);
     }
 
     void FixedUpdate()

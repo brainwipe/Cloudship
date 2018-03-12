@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 655051483}
+  Controller: {fileID: 2029135391}
   SmoothFactor: 0.2
   LookAtPlayer: 1
   RotateAroundPlayer: 1
