@@ -8,19 +8,38 @@ ModelImporter:
     100000: Barrel
     100002: //RootNode
     100004: Wheel
+    100006: EOT_Disc
+    100008: EOT_Handle
     400000: Barrel
     400002: //RootNode
     400004: Wheel
+    400006: EOT_Disc
+    400008: EOT_Handle
     2100000: Barrel_Wood
     2100002: Barrel_Metal_Band
     2100004: Wheel_Wood_1
     2100006: Wheel_Brass_1
+    2100008: EOT_Brass
+    2100010: EOT_Black_Face
+    2100012: EOT_Dark_Inset
+    2100014: Barrel_Wood_1
+    2100016: Barrel_Metal_Band_1
+    2100018: Wheel_Wood_2
+    2100020: Wheel_Brass_2
+    2100022: EOT_Brass_3
+    2100024: EOT_Wood_3
     2300000: Barrel
     2300002: Wheel
+    2300004: EOT_Disc
+    2300006: EOT_Handle
     3300000: Barrel
     3300002: Wheel
+    3300004: EOT_Disc
+    3300006: EOT_Handle
     4300000: Barrel
     4300002: Wheel
+    4300004: EOT_Disc
+    4300006: EOT_Handle
     9500000: //RootNode
   externalObjects: {}
   materials:
