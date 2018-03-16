@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class Helm : MonoBehaviour {
 
-	public Rigidbody player;
+	public Cloudship player;
 
 	public float wheelSpeed = 6f;
 
-	Rigidbody rigidBody;
-
-	void Start()
-	{
-		rigidBody = GetComponent<Rigidbody>();
-	}
-
 	void Update () {
+		player.Turn = Input.GetAxis("Horizontal");
+
 		var angles = new Vector3(
 			transform.eulerAngles.x,
 			transform.eulerAngles.y,

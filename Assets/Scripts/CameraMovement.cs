@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 offset;
 
     [Range(0.01f, 0.4f)]
-    public float SmoothFactor = 0.2f;
+    public float SmoothFactor = 0.6f;
 
     public bool LookAtPlayer = true;
 

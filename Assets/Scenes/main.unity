@@ -113,6 +113,10 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &73598596 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+  m_PrefabInternal: {fileID: 1824026160}
 --- !u!4 &100493940 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4455065497538944, guid: 4422eabe9ef5e194988b0bd3917a9f11,
@@ -181,6 +185,10 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: -0.279
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 1b50e088e3aa62e4ca0488b27035c737, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b50e088e3aa62e4ca0488b27035c737, type: 3}
   m_IsPrefabParent: 0
@@ -232,8 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cycloneForceIndicator: {fileID: 1396390899}
-  thrust: 0
-  turn: 0
+  Thrust: 0
+  Turn: 0
   velocity: 0
   Speed: 12
   Torque: 2
@@ -607,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7537892b4c655943a6e583dbb6d016e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 655051482}
+  player: {fileID: 655051481}
   wheelSpeed: 6
 --- !u!1001 &1824026160
 Prefab:
@@ -732,6 +740,22 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0.00452
       objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
@@ -814,6 +838,23 @@ Transform:
   m_Father: {fileID: 655051483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 335, y: 0, z: 0}
+--- !u!1 &1934101805 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100006, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+  m_PrefabInternal: {fileID: 1824026160}
+--- !u!114 &1934101809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1934101805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f5f1c3f60f1184b8ca765b463fb37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 655051481}
+  EotHandle: {fileID: 73598596}
 --- !u!1001 &1973308850
 Prefab:
   m_ObjectHideFlags: 0

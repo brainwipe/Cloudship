@@ -5,8 +5,8 @@ using UnityEngine;
 public class Cloudship : MonoBehaviour, ITakeDamage
 {
     public GameObject cycloneForceIndicator;
-    public float thrust;
-    public float turn;
+    public float Thrust;
+    public float Turn;
     public float velocity;
     public float Speed = 12f;
     public float Torque = 2f;
@@ -24,18 +24,12 @@ public class Cloudship : MonoBehaviour, ITakeDamage
         Health = 100;
     }
 
-    void Update()
-    {
-        thrust = Input.GetAxis("Vertical");
-        turn = Input.GetAxis("Horizontal");
-    }
-
     void FixedUpdate()
     {
-        float yaw = turn * Torque * Time.deltaTime;
+        float yaw = Turn * Torque * Time.deltaTime;
         rigidBody.AddTorque(transform.up * yaw);
 
-        float forward = thrust * Speed * Time.deltaTime;
+        float forward = Thrust * Speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward);
 
         var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;

@@ -41,7 +41,12 @@ ModelImporter:
     4300004: EOT_Disc
     4300006: EOT_Handle
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Black_Face
+    second: {fileID: 2100000, guid: bdbc20200c5754f49a8aae89744db843, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
