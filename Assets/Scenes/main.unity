@@ -674,15 +674,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
       propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
-      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
-      propertyPath: m_CastShadows
+      propertyPath: m_ReceiveShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
       propertyPath: m_LocalScale.x
@@ -754,6 +754,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
       propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300004, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300006, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300006, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300004, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
