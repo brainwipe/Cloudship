@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 655051482}
+  Camera: {fileID: 1885774938}
 --- !u!1001 &475181657
 Prefab:
   m_ObjectHideFlags: 0
@@ -945,7 +946,6 @@ GameObject:
   - component: {fileID: 1560992631}
   - component: {fileID: 1560992633}
   - component: {fileID: 1560992632}
-  - component: {fileID: 1560992634}
   m_Layer: 0
   m_Name: Compass_Rose_5
   m_TagString: Untagged
@@ -1010,18 +1010,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1560992630}
   m_Mesh: {fileID: 4300008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
---- !u!114 &1560992634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1560992630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94329d8de27b7247a186beed23ea0ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Controller: {fileID: 2029135391}
 --- !u!1 &1885774936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 655051483}
   Controller: {fileID: 2029135391}
+  CompassRose: {fileID: 1560992631}
   SmoothFactor: 0.2
   LookAtPlayer: 1
   RotateAroundPlayer: 1
