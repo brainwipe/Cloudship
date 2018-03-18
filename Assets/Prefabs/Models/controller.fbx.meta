@@ -10,11 +10,17 @@ ModelImporter:
     100004: Wheel
     100006: EOT_Disc
     100008: EOT_Handle
+    100010: Compass_Rose_5
+    100012: Empty_Mesh
+    100014: Compass_Player_Direction_6
     400000: Barrel
     400002: //RootNode
     400004: Wheel
     400006: EOT_Disc
     400008: EOT_Handle
+    400010: Compass_Rose_5
+    400012: Empty_Mesh
+    400014: Compass_Player_Direction_6
     2100000: Barrel_Wood
     2100002: Barrel_Metal_Band
     2100004: Wheel_Wood_1
@@ -28,20 +34,38 @@ ModelImporter:
     2100020: Wheel_Brass_2
     2100022: EOT_Brass_3
     2100024: EOT_Wood_3
+    2100026: Compass_Brass_1
+    2100028: Compass_Rose_4
+    2100030: Compass_Brass_4
+    2100032: Compass_Player_Direction_5
     2300000: Barrel
     2300002: Wheel
     2300004: EOT_Disc
     2300006: EOT_Handle
+    2300008: Compass_Rose_5
+    2300010: Empty_Mesh
+    2300012: Compass_Player_Direction_6
     3300000: Barrel
     3300002: Wheel
     3300004: EOT_Disc
     3300006: EOT_Handle
+    3300008: Compass_Rose_5
+    3300010: Empty_Mesh
+    3300012: Compass_Player_Direction_6
     4300000: Barrel
     4300002: Wheel
     4300004: EOT_Disc
     4300006: EOT_Handle
+    4300008: Compass_Rose_5
+    4300010: Empty_Mesh
+    4300012: Compass_Player_Direction_6
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Compass_Rose_4
+    second: {fileID: 2100000, guid: 8cce504f53b13184193d1c47690a0c8c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -89,7 +113,7 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001

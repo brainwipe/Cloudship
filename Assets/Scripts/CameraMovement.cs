@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     public Transform Player;
     public Transform Controller;
-
+    public Transform CompassRose;
     private Vector3 offset;
 
     [Range(0.01f, 0.4f)]
@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
     {
         Camera camera = GetComponentInChildren<Camera>();
         offset = transform.position - Player.position;
-        var v3Pos = new Vector3(0.2f, 0.25f, 0.8f);
+        var v3Pos = new Vector3(0.15f, 0.25f, 0.8f);
         Controller.transform.position = camera.ViewportToWorldPoint(v3Pos);
     }
 
@@ -42,5 +42,7 @@ public class CameraMovement : MonoBehaviour
         {
            transform.LookAt(Player);
         }
+
+        CompassRose.localRotation = Quaternion.Euler(0,transform.eulerAngles.y,0);
     } 
 }
