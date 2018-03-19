@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, ITakeDamage
 {
-    public float Speed = 12f;
+    public float Speed = 6f;
     public Vector3 Heading = new Vector3();
 
     IWindMaker windMaker;
@@ -13,7 +13,9 @@ public class Enemy : MonoBehaviour, ITakeDamage
     Cloudship playerCloudship;
     Animator animator;
 
-    void Awake()
+    public float Distance;
+
+    void Start()
     {
         
         rigidBody = GetComponent<Rigidbody>();
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        animator.SetFloat("distance", Vector3.Distance(transform.position, playerCloudship.Position));
+        Distance = Vector3.Distance(transform.position, playerCloudship.Position);
+
+        animator.SetFloat("distance", Distance);
     }
 }
