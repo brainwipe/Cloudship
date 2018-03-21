@@ -59,6 +59,12 @@ ModelImporter:
     4300008: Compass_Rose_5
     4300010: Empty_Mesh
     4300012: Compass_Player_Direction_6
+    6400000: Barrel
+    6400002: Compass_Player_Direction_6
+    6400004: Compass_Rose_5
+    6400006: EOT_Disc
+    6400008: EOT_Handle
+    6400010: Wheel
     9500000: //RootNode
   externalObjects:
   - first:
@@ -102,7 +108,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0

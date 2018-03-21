@@ -34,6 +34,9 @@ ModelImporter:
     4300000: Top
     4300002: Bags_2
     4300004: Flag_3
+    6400000: Bags_2
+    6400002: Flag_3
+    6400004: Top
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -67,7 +70,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

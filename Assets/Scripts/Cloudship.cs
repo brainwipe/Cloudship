@@ -7,10 +7,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public GameObject cycloneForceIndicator;
     public float Thrust;
     public float Turn;
-    public float velocity;
     public float Speed = 12f;
     public float Torque = 2f;
-    public float MaxVelocity = 0.4f;
+    public float Lift = 10f;
     public float Health { get; set; }
 
     Rigidbody rigidBody;
@@ -26,15 +25,31 @@ public class Cloudship : MonoBehaviour, ITakeDamage
 
     void FixedUpdate()
     {
+        ForceDueToPlayer();
+        ForceDueToWind();
+        ForceDueToBouyancy();
+    }
+
+    void ForceDueToPlayer()
+    {
         float yaw = Turn * Torque * Time.deltaTime;
         rigidBody.AddTorque(transform.up * yaw);
 
         float forward = Thrust * Speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward);
+    }
 
+    void ForceDueToWind()
+    {
         var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
         UpdateCycloneForceIndicator(cycloneForce);
         rigidBody.AddForce(cycloneForce);   
+    }
+
+    void ForceDueToBouyancy()
+    {
+        var torqueAxis = Vector3.Cross(transform.up, Vector3.up) * Lift * Time.deltaTime;
+        rigidBody.AddTorque(torqueAxis);
     }
 
     void UpdateCycloneForceIndicator(Vector3 cycloneForce)
