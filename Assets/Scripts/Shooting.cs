@@ -24,10 +24,21 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= lastTimeFired && Input.GetButtonUp(fireButton))
+        if (shooter is Cloudship)
         {
-            Shoot();
-            lastTimeFired = Time.time + timeBetweenShotsInSeconds;
+            if (Time.time >= lastTimeFired && Input.GetButtonUp(fireButton))
+            {
+                Shoot();
+                lastTimeFired = Time.time + timeBetweenShotsInSeconds;
+            }
+        }
+        else
+        {
+            if (Time.time >= lastTimeFired)
+            {
+                Shoot();
+                lastTimeFired = Time.time + timeBetweenShotsInSeconds;
+            }
         }
     }
 
@@ -50,10 +61,19 @@ public class Shooting : MonoBehaviour
 
     private Vector3 NearestTarget()
     {
-        var target = GameObject.FindGameObjectsWithTag("Enemy");
-        if (target.Length > 0)
+        GameObject[] targets;
+        if (shooter is Cloudship)
         {
-            return target[0].transform.position;
+            targets = GameObject.FindGameObjectsWithTag("Enemy");
+        }
+        else
+        {
+            targets = GameObject.FindGameObjectsWithTag("Player");
+        }
+
+        if (targets.Length > 0)
+        {
+            return targets[0].transform.position;
         }
         return transform.forward;
     }
