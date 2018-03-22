@@ -11,6 +11,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public float Torque = 2f;
     public float Lift = 10f;
     public float Health { get; set; }
+    public bool AllowMovement = true;
 
     Rigidbody rigidBody;
     IWindMaker windMaker;
@@ -25,8 +26,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage
 
     void FixedUpdate()
     {
-        ForceDueToPlayer();
-        ForceDueToWind();
+        if (AllowMovement)
+        {
+            ForceDueToPlayer();
+            ForceDueToWind();
+        }
         ForceDueToBouyancy();
     }
 

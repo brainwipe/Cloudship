@@ -8,7 +8,9 @@ public class CompassPlayerDirection : MonoBehaviour {
 	public Transform Camera;
 
 	void Update () {
-		transform.localRotation = Quaternion.Inverse(Quaternion.Euler(0,Camera.transform.eulerAngles.y,0)) * Quaternion.LookRotation(Player.velocity);
-
+		if (Player.velocity.sqrMagnitude > 0)
+		{
+			transform.localRotation = Quaternion.Inverse(Quaternion.Euler(0,Camera.transform.eulerAngles.y,0)) * Quaternion.LookRotation(Player.velocity);
+		}
 	}
 }

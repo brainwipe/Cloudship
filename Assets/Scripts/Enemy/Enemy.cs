@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
     public float Lift = 12f;
     public Vector3 Heading = new Vector3();
 
+    public bool AllowMovement = true;
+
     IWindMaker windMaker;
     Rigidbody rigidBody;
     Cloudship playerCloudship;
@@ -26,8 +28,11 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void FixedUpdate()
     {
-        ForceDueToHeading();
-        ForceDueToWind();
+        if (AllowMovement)
+        {
+            ForceDueToHeading();
+            ForceDueToWind();
+        }
         ForceDueToBouyancy();
     }
 

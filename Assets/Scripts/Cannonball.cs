@@ -16,7 +16,7 @@ public class Cannonball : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		var targetRigidbody = other.GetComponent<Rigidbody>();
+		var targetRigidbody = other.attachedRigidbody;
 		if (!targetRigidbody)
 		{
 			return;

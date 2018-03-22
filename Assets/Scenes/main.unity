@@ -470,6 +470,7 @@ MonoBehaviour:
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   cannon: {fileID: 1906244854}
+  timeBetweenShotsInSeconds: 0.4
 --- !u!114 &655051481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,6 +488,7 @@ MonoBehaviour:
   Speed: 12
   Torque: 2
   Lift: 10
+  AllowMovement: 1
 --- !u!54 &655051482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -692,7 +694,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 20
+  Lift: 12
   Heading: {x: 0, y: 0, z: 0}
+  AllowMovement: 1
   Distance: 0
 --- !u!54 &888170791
 Rigidbody:
