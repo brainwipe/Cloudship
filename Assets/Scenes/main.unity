@@ -489,6 +489,7 @@ MonoBehaviour:
   Torque: 2
   Lift: 10
   AllowMovement: 1
+  Health: 100
 --- !u!54 &655051482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -502,7 +503,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!4 &655051483
 Transform:
@@ -725,8 +726,12 @@ MonoBehaviour:
   Speed: 20
   Lift: 12
   Heading: {x: 0, y: 0, z: 0}
-  AllowMovement: 1
+  AllowMovementForce: 1
+  AllowWindForce: 1
+  AllowBuoyancy: 1
   Distance: 0
+  Health: 10
+  BuoyancyHealth: 1
 --- !u!54 &888170791
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -740,7 +745,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!4 &888170792
 Transform:

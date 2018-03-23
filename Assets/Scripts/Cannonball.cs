@@ -6,7 +6,7 @@ public class Cannonball : MonoBehaviour
 {
     public LayerMask CraftMask;
     private float maxLifeTime = 3f;
-	private float damage = 2;
+	private float damage = 10;
 	public ITakeDamage originator;
 
     void Start()
@@ -28,7 +28,7 @@ public class Cannonball : MonoBehaviour
 			return;
 		}
 
-		// TODO reduce health
+		target.Damage(damage);
 		
 		Destroy(gameObject);
 	}

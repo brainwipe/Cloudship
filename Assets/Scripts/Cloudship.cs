@@ -10,9 +10,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public float Speed = 12f;
     public float Torque = 2f;
     public float Lift = 10f;
-    public float Health { get; set; }
     public bool AllowMovement = true;
-
+    public float Health = 100;
     Rigidbody rigidBody;
     IWindMaker windMaker;
 
@@ -54,6 +53,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     {
         var torqueAxis = Vector3.Cross(transform.up, Vector3.up) * Lift * Time.deltaTime;
         rigidBody.AddTorque(torqueAxis);
+
+        var force = -Physics.gravity * rigidBody.mass;
+        rigidBody.AddForce(force);
     }
 
     void UpdateCycloneForceIndicator(Vector3 cycloneForce)
@@ -70,6 +72,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage
             cycloneForceIndicator.transform.rotation, 
             windDirection,
             Time.deltaTime * 1.5f);
+    }
+
+    public void Damage(float amount)
+    {
+        Health -= amount;
     }
 
     public Vector3 Position
