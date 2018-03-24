@@ -20,8 +20,9 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public float Distance;
 
-    public float Health = 50;
+    public float Health = 0;
     public float BuoyancyHealth = 1f;
+    public bool ReadyToSpawn = true;
 
     float timeDead;
     bool grounded = false;
@@ -100,10 +101,9 @@ public class Enemy : MonoBehaviour, ITakeDamage
                 transform.position = sinking;
             }
 
-            if (transform.position.y < -4.9f)
-            {
-                // Reset!
-                Debug.Log("Reset");
+            if (transform.position.y < -4f)
+            {   
+                ReadyToSpawn = true;
             }
         }
     }
@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
     }
 
-    bool IsDead 
+    public bool IsDead 
     {
         get {
             return Health < 1;
@@ -144,5 +144,32 @@ public class Enemy : MonoBehaviour, ITakeDamage
             var shooting = GetComponent<Shooting>();
             shooting.enabled = false;
         }
+    }
+
+    public void Reset()
+    {
+        if (!ReadyToSpawn)
+        {
+            return;
+        }
+        Health = 50;
+
+        var newLocation = GameManager.Instance.PlayerCloudship.transform.position;
+        newLocation.x = newLocation.x + 15f;    
+    
+        transform.position = newLocation;
+
+        timeDead = 0;
+        grounded = false;
+        AllowMovementForce = true;
+        AllowBuoyancy = true;
+        AllowWindForce = true;
+        BuoyancyHealth = 1f;
+        rigidBody.isKinematic = false;
+
+        var shooting = GetComponent<Shooting>();
+        shooting.enabled = true;
+        ReadyToSpawn = false;
+        
     }
 }
