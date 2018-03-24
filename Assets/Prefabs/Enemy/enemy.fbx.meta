@@ -28,7 +28,47 @@ ModelImporter:
     6400000: Bags_1
     6400002: Top
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bags
+    second: {fileID: 2100000, guid: 08328ec4b1d668e499be0a0fab712f46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boiler_Housing_1
+    second: {fileID: 2100000, guid: 87120673526a5b44e93307a3e335dbd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chimney_1
+    second: {fileID: 2100000, guid: dae32cabebc6b6c40a4e8d876085b176, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chimney_Inside_1
+    second: {fileID: 2100000, guid: dfed3d7ef2be0be469b76b8976c00844, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cloudship_Base_1
+    second: {fileID: 2100000, guid: 171108b5fbda93149a42c3bc79098342, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cloudship_Girders_1
+    second: {fileID: 2100000, guid: e807f4a070400be419708c773a8f42d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass_1
+    second: {fileID: 2100000, guid: cda22e48aa4b6aa4eb6f8d64048c4c4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Random_Building_1
+    second: {fileID: 2100000, guid: 0d89262b33e8657449f71e970dfc21cf, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,9 +103,9 @@ ModelImporter:
     addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
-    swapUVChannels: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 1
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1

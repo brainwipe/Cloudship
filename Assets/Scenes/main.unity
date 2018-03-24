@@ -559,6 +559,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1488766315375856, guid: 038bc1747a5f25d499635091c169e229, type: 2}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 038bc1747a5f25d499635091c169e229, type: 2}
   m_IsPrefabParent: 0
@@ -1191,6 +1195,10 @@ Prefab:
     - target: {fileID: 6400000, guid: 2f5815259d3b6e34eaf125a01e32cba3, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2f5815259d3b6e34eaf125a01e32cba3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f5815259d3b6e34eaf125a01e32cba3, type: 3}

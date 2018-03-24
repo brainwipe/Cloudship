@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class TerrainFactory : MonoBehaviour
 {
+    public static string TerrainTag = "Terrain";
+
     int chunkSize = 10;
     int chunkRadius;
     Dictionary<Vector3, TerrainChunk> chunks = new Dictionary<Vector3, TerrainChunk>();
@@ -58,6 +60,7 @@ public class TerrainFactory : MonoBehaviour
                 if (!chunks.ContainsKey(pos))
                 {
                     var chunkGameObj = Instantiate(chunkPrefab, pos, Quaternion.identity);
+                    chunkGameObj.tag = TerrainTag;
                     var chunk = chunkGameObj.GetComponent<TerrainChunk>();
                     chunk.transform.parent = this.transform;
                     chunks.Add(pos, chunk);
