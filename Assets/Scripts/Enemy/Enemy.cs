@@ -91,10 +91,11 @@ public class Enemy : MonoBehaviour, ITakeDamage
         if (grounded)
         {
             timeDead += Time.deltaTime;
-            if (timeDead > 7)
+            if (timeDead > 5)
             {
+                AllowBuoyancy = false;
                 rigidBody.isKinematic = true;
-                var sunken = new Vector3(0,-5,0);
+                var sunken = new Vector3(transform.position.x,-5, transform.position.z);
                 var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.03f);
                 transform.position = sinking;
             }
@@ -110,10 +111,15 @@ public class Enemy : MonoBehaviour, ITakeDamage
     void OnCollisionEnter(Collision collisionInfo) {
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
-            AllowBuoyancy = false;
+            BuoyancyHealth = 0.8f;
             Health = 0;
             grounded = true;
-            BuoyancyHealth = 0.99f;
+        }
+        if (collisionInfo.gameObject.tag == playerCloudship.tag)
+        {
+            var damageDueToCollision = collisionInfo.relativeVelocity.sqrMagnitude;
+            Damage(damageDueToCollision);
+            playerCloudship.Damage(damageDueToCollision);
         }
     }
 
