@@ -7,9 +7,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public GameObject cycloneForceIndicator;
     public float Thrust;
     public float Turn;
-    public float Speed = 12f;
-    public float Torque = 2f;
-    public float Lift = 10f;
+    public float Speed = 120f;
+    public float Torque = 20f;
+    public float Lift = 100f;
     public bool AllowMovement = true;
     public float Health = 100;
 
@@ -24,6 +24,10 @@ public class Cloudship : MonoBehaviour, ITakeDamage
         windMaker = GameManager.Instance.WindMaker;
         rigidBody.maxAngularVelocity = 0.6f;
         Health = 100;
+
+        var rend = GetComponentInChildren<Renderer>();
+
+        Debug.Log(rend.bounds.size);
     }
 
     void FixedUpdate()

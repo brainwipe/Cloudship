@@ -9,13 +9,14 @@ public class CameraMovement : MonoBehaviour
     public Transform CompassRose;
     private Vector3 offset;
 
-    [Range(0.01f, 0.4f)]
+    [Range(0.01f, 0.8f)]
     public float SmoothFactor = 0.6f;
 
     public float RotationSpeed = 5f;
+    public float VerticalSpeed = 100f;
 
-    public float MaxY = 1.15f;
-    public float MinY = -0.75f;
+    public float MaxY = 80f;
+    public float MinY = -20f;
 
 
     void Start()
@@ -33,7 +34,7 @@ public class CameraMovement : MonoBehaviour
             Quaternion turnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * RotationSpeed, Vector3.up);
             offset = turnAngle * offset;
 
-            offset = offset - new Vector3(0, Input.GetAxis("Mouse Y") * 0.05f, 0);
+            offset = offset - new Vector3(0, Input.GetAxis("Mouse Y") * VerticalSpeed, 0);
         }
 
         Vector3 targetPosition = Player.position + offset;

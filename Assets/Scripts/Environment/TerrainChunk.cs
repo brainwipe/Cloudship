@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TerrainChunk : MonoBehaviour
 {
-    float perlinScale = 0.2f;
-    float heightScale = 2f;
+    float perlinScale = 0.01f;
+    float heightScale = 1f;
 
     public float TimeUpdated;
 
@@ -14,7 +14,7 @@ public class TerrainChunk : MonoBehaviour
 
         for(int i=0; i<vertices.Length; i++)
         {
-            vertices[i].y = CalculateHeight(vertices[i].x, vertices[i].z);
+            vertices[i].y = CalculateHeight(transform.TransformPoint(vertices[i]));
         }
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
@@ -22,10 +22,10 @@ public class TerrainChunk : MonoBehaviour
         this.gameObject.AddComponent<MeshCollider>();
     }
 
-    float CalculateHeight(float x, float z)
+    float CalculateHeight(Vector3 vertex)
     {
-        float xScaled = (x + this.transform.position.x) * perlinScale;
-        float zScaled = (z + this.transform.position.z) * perlinScale;
+        float xScaled =vertex.x * perlinScale;
+        float zScaled =vertex.z * perlinScale;
 
         return Mathf.PerlinNoise(xScaled, zScaled) * heightScale;
     }

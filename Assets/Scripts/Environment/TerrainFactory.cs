@@ -7,7 +7,6 @@ public class TerrainFactory : MonoBehaviour
 {
     public static string TerrainTag = "Terrain";
 
-    int chunkSize = 10;
     int chunkRadius;
     Dictionary<Vector3, TerrainChunk> chunks = new Dictionary<Vector3, TerrainChunk>();
     
@@ -16,16 +15,15 @@ public class TerrainFactory : MonoBehaviour
 
     Cloudship playerCloudship;
 
-    public GameObject chunkPrefab;
+    float chunkSize;
 
-    void Awake()
-    {
-        start = Vector3.zero;
-        chunkRadius = GameManager.DrawDistance / chunkSize;
-    }
+    public GameObject chunkPrefab;
 
     void Start()
     {   
+        start = Vector3.zero;
+        chunkSize =  chunkPrefab.GetComponent<Renderer>().bounds.extents.x * 2;
+        chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize);
         playerCloudship = GameManager.Instance.PlayerCloudship;
         RebuildChunks(0,0);
     }
@@ -91,6 +89,6 @@ public class TerrainFactory : MonoBehaviour
 
     int WorldToChunkConversion(float worldPosition)
     {
-        return (int)(Mathf.Floor(worldPosition/chunkSize)) * chunkSize;
+        return (int)(Mathf.Floor(worldPosition/chunkSize) * chunkSize);
     }
 }

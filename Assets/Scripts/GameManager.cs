@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    // TODO This needs to go in a settings class when there are a few of them
-    public static int DrawDistance = 200;
+    public float DrawDistance;
 
 	public Cloudship PlayerCloudship;
 
 	public IWindMaker WindMaker = null;
+
+	public Camera Camera;
 
     public static GameManager Instance
     {
@@ -37,5 +38,6 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 		PlayerCloudship = FindObjectOfType<Cloudship>();
 		WindMaker = new PerlinPressure();
+		DrawDistance = Camera.farClipPlane + 500;
 	}
 }

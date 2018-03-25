@@ -10,12 +10,12 @@ public class Windicators : MonoBehaviour
     
     Cloudship playerCloudship;
     IWindMaker windMaker;
-    int distanceFromPlayer = 20;
-    float sqrDisplacementBetweenUpdates = 100;
+    int distanceFromPlayer = 2000;
+    float sqrDisplacementBetweenUpdates = 1000;
     private Vector3 positionOfLastUpdate;
     bool hasInitialSetBeenMade;
 
-    int indicatorGridWith = 2;
+    int indicatorGridWith = 200;
     Dictionary<Vector3, GameObject> indicators = new Dictionary<Vector3, GameObject>();
     
     void Start()

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PerlinPressure : IWindMaker
 {
-    float perlinScale = 22f;
+    float perlinScale = 2000f;
     float perlinOffset = 20000;
-    float gradientSampleWidth = 0.5f;
-    float windStrength = 100f;
+    float gradientSampleWidth = 20f;
+    float windStrength = 10000f;
 
     public Vector3 GetCycloneForce(Vector3 cycloneForce)
     {

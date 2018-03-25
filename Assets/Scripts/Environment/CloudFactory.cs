@@ -7,33 +7,25 @@ public class CloudFactory : MonoBehaviour
     public GameObject cloudPrefab;
     public GameObject[] clouds;
     public int cloudCount =100;
-    int sqrCloudSeparation = 20;
-    public float cloudSizeUpper = 2f;
-
-    public float cloudSizeLower = 1f;
-    
+    int sqrCloudSeparation = 10000;
+     
     IWindMaker windMaker;
     Cloudship playerCloudship;
     float windEffect = 0.15f;
-    int eliminationDistanceFromPlayer;
-    int sqrElimiationDistanceFromPlayer;
-    int distanceFromPlayer;
-    int sqrDistanceFromPlayer;
-    int furthestFromplayer;
-
-    void Awake()
-    {
-        var drawDistance = GameManager.DrawDistance;
-        distanceFromPlayer = drawDistance;
-        sqrDistanceFromPlayer = distanceFromPlayer * distanceFromPlayer;
-        eliminationDistanceFromPlayer = drawDistance + 40;
-        sqrElimiationDistanceFromPlayer = eliminationDistanceFromPlayer * eliminationDistanceFromPlayer;
-        furthestFromplayer = distanceFromPlayer + 10;
-        clouds = new GameObject[cloudCount];
-    }
+    float eliminationDistanceFromPlayer;
+    float sqrElimiationDistanceFromPlayer;
+    float sqrDistanceFromPlayer;
+    float furthestFromplayer;
+    float drawDistance;
 
     void Start()
     {
+        drawDistance = GameManager.Instance.DrawDistance;
+        eliminationDistanceFromPlayer = drawDistance + 400;
+        sqrElimiationDistanceFromPlayer = eliminationDistanceFromPlayer * eliminationDistanceFromPlayer;
+        furthestFromplayer = drawDistance + 100;
+        clouds = new GameObject[cloudCount];
+
         playerCloudship = GameManager.Instance.PlayerCloudship;
         windMaker = GameManager.Instance.WindMaker;
         CreateIntialClouds(playerCloudship.Position);
@@ -51,7 +43,7 @@ public class CloudFactory : MonoBehaviour
 
             var cycloneForce = windMaker.GetCycloneForce(cloud.transform.position) * Time.deltaTime;
             cloud.transform.position += cycloneForce * windEffect;
-            RemoveOldAddNew(playerCloudship.Position, i);
+            //RemoveOldAddNew(playerCloudship.Position, i);
         }
     }
 
@@ -82,10 +74,6 @@ public class CloudFactory : MonoBehaviour
             
             clouds[i] = Instantiate(cloudPrefab, newLocation.Value, Quaternion.identity);
             clouds[i].transform.parent = this.transform;
-            float scale = UnityEngine.Random.Range(cloudSizeLower, cloudSizeUpper);
-            clouds[i].transform.localScale = new Vector3(scale,scale,scale);
-            float yOffset = scale / 2;
-            clouds[i].transform.position += new Vector3(0, 6 * yOffset, 0);
         }
     }
 
@@ -111,9 +99,9 @@ public class CloudFactory : MonoBehaviour
         for (var i=0; i< 100; i++)
         {
             var tryNewLocation = new Vector3(
-                UnityEngine.Random.Range(location.x - distanceFromPlayer, location.x + distanceFromPlayer),
-                0,
-                UnityEngine.Random.Range(location.z - distanceFromPlayer, location.z + distanceFromPlayer));
+                UnityEngine.Random.Range(location.x - drawDistance, location.x + drawDistance),
+                transform.position.y,
+                UnityEngine.Random.Range(location.z - drawDistance, location.z + drawDistance));
 
             if (!HasCloudNearby(tryNewLocation))
             {
