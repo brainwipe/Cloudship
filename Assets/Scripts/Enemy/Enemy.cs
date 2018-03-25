@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 {
     public float Speed = 6f;
     public float Lift = 12f;
+    public float StandardAltitude = 0f;
     public Vector3 Heading = new Vector3();
 
     public bool AllowMovementForce = true;
@@ -79,7 +80,9 @@ public class Enemy : MonoBehaviour, ITakeDamage
         var torqueAxis = Vector3.Cross(transform.up, Vector3.up) * Lift * Time.deltaTime * BuoyancyHealth;
         rigidBody.AddTorque(torqueAxis);
 
-        var force = -Physics.gravity * rigidBody.mass * BuoyancyHealth;
+        var differenceInAltitude = 1 - (Mathf.Lerp(transform.position.y, StandardAltitude, Time.deltaTime) * 0.01f);
+
+        var force = -Physics.gravity * rigidBody.mass * BuoyancyHealth * differenceInAltitude;
         rigidBody.AddForce(force);
     }
 
@@ -96,12 +99,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
             {
                 AllowBuoyancy = false;
                 rigidBody.isKinematic = true;
-                var sunken = new Vector3(transform.position.x,-5, transform.position.z);
-                var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.03f);
+                var sunken = new Vector3(transform.position.x,-7.5f, transform.position.z);
+                var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.02f);
                 transform.position = sinking;
             }
 
-            if (transform.position.y < -4f)
+            if (transform.position.y < -6f)
             {   
                 ReadyToSpawn = true;
             }

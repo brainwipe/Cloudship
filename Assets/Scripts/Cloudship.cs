@@ -12,6 +12,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     public float Lift = 10f;
     public bool AllowMovement = true;
     public float Health = 100;
+
+    public float StandardAltitude = 0f;
+
     Rigidbody rigidBody;
     IWindMaker windMaker;
 
@@ -54,7 +57,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
         var torqueAxis = Vector3.Cross(transform.up, Vector3.up) * Lift * Time.deltaTime;
         rigidBody.AddTorque(torqueAxis);
 
-        var force = -Physics.gravity * rigidBody.mass;
+        var differenceInAltitude = 1 - (Mathf.Lerp(transform.position.y, StandardAltitude, Time.deltaTime) * 0.01f);
+
+        var force = -Physics.gravity * rigidBody.mass * differenceInAltitude;
         rigidBody.AddForce(force);
     }
 

@@ -533,6 +533,7 @@ MonoBehaviour:
   Lift: 10
   AllowMovement: 1
   Health: 100
+  StandardAltitude: 0
 --- !u!54 &655051482
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,7 +10,8 @@ public class CompassPlayerDirection : MonoBehaviour {
 	void Update () {
 		if (Player.velocity.sqrMagnitude > 0)
 		{
-			transform.localRotation = Quaternion.Inverse(Quaternion.Euler(0,Camera.transform.eulerAngles.y,0)) * Quaternion.LookRotation(Player.velocity);
+			var velocityInTwoAxis = new Vector3(Player.velocity.x, 0, Player.velocity.z);
+			transform.localRotation = Quaternion.Inverse(Quaternion.Euler(0,Camera.transform.eulerAngles.y,0)) * Quaternion.LookRotation(velocityInTwoAxis);
 		}
 	}
 }
