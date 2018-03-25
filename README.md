@@ -8,11 +8,11 @@ A game built in Unity 3D used as a learning project for a bit of fun during a ho
 * Original inspiration was my free pen and paper RPG [Cloudship Atlantis](http://www.thefreerpgblog.com/p/my-games.html)
 * Picture inspiration collected on [Pinterest](https://www.pinterest.co.uk/brainwipe/cloudship-ideas/)
 
-![A scruffy set of scribbles that make up my design document](http://imgur.com/KlqBbGh.png)
+![A screenshot of the game running as of version 0.13](https://i.imgur.com/Ty4qSUG.jpg.png)
 
 It's a work in progress!
 
-![A screenshot of the game running as of version 0.10](https://imgur.com/lWZkhRG.png)
+![A scruffy set of scribbles that make up my design document](http://imgur.com/KlqBbGh.png)
 
 ## Installing
 
