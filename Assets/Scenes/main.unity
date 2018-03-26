@@ -515,7 +515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &654624879
 Transform:
   m_ObjectHideFlags: 0
@@ -772,7 +772,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4955295147775494, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 4955295147775494, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -797,6 +797,16 @@ Prefab:
     - target: {fileID: 4955295147775494, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938606991111428, guid: d5801eaa44dca0d488e20720dbf58fb0,
+        type: 2}
+      propertyPath: ShotForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938606991111428, guid: d5801eaa44dca0d488e20720dbf58fb0,
+        type: 2}
+      propertyPath: TimeBetweenShotsInSeconds
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}

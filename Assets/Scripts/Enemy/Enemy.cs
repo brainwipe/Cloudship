@@ -99,12 +99,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
             {
                 AllowBuoyancy = false;
                 rigidBody.isKinematic = true;
-                var sunken = new Vector3(transform.position.x,-7.5f, transform.position.z);
-                var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.02f);
+                var sunken = new Vector3(transform.position.x,-220f, transform.position.z);
+                var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.1f);
                 transform.position = sinking;
             }
 
-            if (transform.position.y < -6f)
+            if (transform.position.y < -180)
             {   
                 ReadyToSpawn = true;
             }
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     void OnCollisionEnter(Collision collisionInfo) {
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
-            BuoyancyHealth = 0.8f;
+            AllowBuoyancy = false;
             Health = 0;
             grounded = true;
         }
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
             Speed = 0;
             AllowMovementForce = false;
             AllowWindForce = false;
-            BuoyancyHealth = 0.95f;
+            BuoyancyHealth = 0.2f;
 
             var shooting = GetComponent<Shooting>();
             shooting.enabled = false;
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         Health = 50;
 
         var newLocation = GameManager.Instance.PlayerCloudship.transform.position;
-        newLocation.x = newLocation.x + 15f;    
+        newLocation.x = newLocation.x + 2000f;    
     
         transform.position = newLocation;
 
