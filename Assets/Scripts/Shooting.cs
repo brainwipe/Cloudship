@@ -6,11 +6,12 @@ public class Shooting : MonoBehaviour
 {
     public Rigidbody cannonball;
     public Transform cannon;
+    public float TimeBetweenShotsInSeconds = 0.5f;
+    public float ShotForce = 100f;
     private ITakeDamage shooter;
 
     private string fireButton = "Fire1";
     private bool fired;
-    public float timeBetweenShotsInSeconds = 0.5f;
     private float lastTimeFired;
 
     void Start()
@@ -29,7 +30,7 @@ public class Shooting : MonoBehaviour
             if (Time.time >= lastTimeFired && Input.GetButtonUp(fireButton))
             {
                 Shoot();
-                lastTimeFired = Time.time + timeBetweenShotsInSeconds;
+                lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
             }
         }
         else
@@ -37,7 +38,7 @@ public class Shooting : MonoBehaviour
             if (Time.time >= lastTimeFired)
             {
                 Shoot();
-                lastTimeFired = Time.time + timeBetweenShotsInSeconds;
+                lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
             }
         }
     }
@@ -45,18 +46,19 @@ public class Shooting : MonoBehaviour
     void Shoot()
     {
         var lookVector = (NearestTarget() - transform.position).normalized;
-        var shootVector = Vector3.RotateTowards(lookVector, Vector3.up, 0.785398f, 10f);
+        var shootVector = Vector3.RotateTowards(lookVector, Vector3.up, 0.3f, 10f);
         
         Debug.DrawRay(transform.position, shootVector, Color.green);
 
         Rigidbody ball = Instantiate(
             cannonball, 
             cannon.position, 
-            Quaternion.LookRotation(shootVector)) as Rigidbody;
+            Quaternion.LookRotation(shootVector),
+            transform) as Rigidbody;
 
         var cannonBall = ball.GetComponent<Cannonball>();
         cannonBall.originator = shooter;
-        ball.AddForce(shootVector * 5, ForceMode.Impulse);
+        ball.AddForce(shootVector * ShotForce, ForceMode.Impulse);
     }
 
     private Vector3 NearestTarget()

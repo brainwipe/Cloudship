@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cannonball : MonoBehaviour
 {
     public LayerMask CraftMask;
-    private float maxLifeTime = 3f;
+    private float maxLifeTime = 10f;
 	private float damage = 10;
 	public ITakeDamage originator;
 

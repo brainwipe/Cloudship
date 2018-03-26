@@ -575,7 +575,8 @@ MonoBehaviour:
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   cannon: {fileID: 1906244854}
-  timeBetweenShotsInSeconds: 0.4
+  TimeBetweenShotsInSeconds: 1
+  ShotForce: 100
 --- !u!114 &655051481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,13 +1324,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1906244853}
-  m_LocalRotation: {x: 0.21643986, y: -0, z: -0, w: -0.97629595}
-  m_LocalPosition: {x: 0, y: 0.07800001, z: -0.19099987}
-  m_LocalScale: {x: 0.5, y: 0.19503444, z: 0.82496554}
+  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 655051483}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 335, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &1934101805
 GameObject:
   m_ObjectHideFlags: 0
