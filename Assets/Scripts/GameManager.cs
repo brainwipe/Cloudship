@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    public float DrawDistance;
+  	public float DrawDistance;
 
 	public Cloudship PlayerCloudship;
 

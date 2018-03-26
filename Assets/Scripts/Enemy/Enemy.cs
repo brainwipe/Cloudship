@@ -138,7 +138,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         Health -= amount;
         if (IsDead)
         {
-            Debug.Log("Dead");
+            Debug.Log("Enemy Dead");
             Speed = 0;
             AllowMovementForce = false;
             AllowWindForce = false;

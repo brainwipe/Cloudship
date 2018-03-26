@@ -14,16 +14,15 @@ public class CloudFactory : MonoBehaviour
     float windEffect = 0.15f;
     float eliminationDistanceFromPlayer;
     float sqrElimiationDistanceFromPlayer;
-    float sqrDistanceFromPlayer;
     float furthestFromplayer;
     float drawDistance;
 
     void Start()
     {
         drawDistance = GameManager.Instance.DrawDistance;
-        eliminationDistanceFromPlayer = drawDistance + 400;
+        eliminationDistanceFromPlayer = drawDistance + 1600;
         sqrElimiationDistanceFromPlayer = eliminationDistanceFromPlayer * eliminationDistanceFromPlayer;
-        furthestFromplayer = drawDistance + 100;
+        furthestFromplayer = drawDistance + 400;
         clouds = new GameObject[cloudCount];
 
         playerCloudship = GameManager.Instance.PlayerCloudship;
@@ -43,7 +42,7 @@ public class CloudFactory : MonoBehaviour
 
             var cycloneForce = windMaker.GetCycloneForce(cloud.transform.position) * Time.deltaTime;
             cloud.transform.position += cycloneForce * windEffect;
-            //RemoveOldAddNew(playerCloudship.Position, i);
+                RemoveOldAddNew(playerCloudship.Position, i);
         }
     }
 
@@ -86,7 +85,7 @@ public class CloudFactory : MonoBehaviour
                 0,
                 UnityEngine.Random.Range(location.z - furthestFromplayer, location.z + furthestFromplayer));
 
-            if (!HasCloudNearby(tryNewLocation) && (location - tryNewLocation).sqrMagnitude > sqrDistanceFromPlayer)
+            if (!HasCloudNearby(tryNewLocation) && (location - tryNewLocation).magnitude > furthestFromplayer)
             {
                 return tryNewLocation;
             }
