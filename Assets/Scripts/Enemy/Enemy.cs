@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
         if (collisionInfo.gameObject.tag == playerCloudship.tag)
         {
-            var damageDueToCollision = collisionInfo.relativeVelocity.sqrMagnitude;
+            var damageDueToCollision = collisionInfo.relativeVelocity.magnitude / 8f;
             Damage(damageDueToCollision);
             playerCloudship.Damage(damageDueToCollision);
         }
