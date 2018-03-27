@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, ITakeDamage
 {
     public float Speed = 6f;
     public float Lift = 12f;
+    public float BuoyancyHealth = 1f;
     public float StandardAltitude = 0f;
-    public Vector3 Heading = new Vector3();
-
-    public bool AllowMovementForce = true;
-    public bool AllowWindForce = true;
-    public bool AllowBuoyancy = true;
+    public float Health = 0;
+    public float Distance;
+    
+    bool AllowMovementForce = true;
+    bool AllowWindForce = true;
+    bool AllowBuoyancy = true;
 
     IWindMaker windMaker;
     Rigidbody rigidBody;
     Cloudship playerCloudship;
     Animator animator;
-
-    public float Distance;
-
-    public float Health = 0;
-    public float BuoyancyHealth = 1f;
-    public bool ReadyToSpawn = true;
-
+    public Image HealthBar;
+    
+    float HealthMax = 0;
     float timeDead;
     bool grounded = false;
+
+    [HideInInspector]
+    public Vector3 Heading = new Vector3();
+
+    [HideInInspector]
+    public bool ReadyToSpawn = true;
 
     void Start()
     {
@@ -34,6 +39,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         animator = GetComponent<Animator>();
         windMaker = GameManager.Instance.WindMaker;
         playerCloudship = GameManager.Instance.PlayerCloudship;
+        HealthMax = Health;
     }
 
     void FixedUpdate()
@@ -136,6 +142,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     public void Damage(float amount)
     {
         Health -= amount;
+        HealthBar.fillAmount = Health/HealthMax;
         if (IsDead)
         {
             Debug.Log("Enemy Dead");
@@ -146,6 +153,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
             var shooting = GetComponent<Shooting>();
             shooting.enabled = false;
+            HealthBar.enabled = false;
         }
     }
 
@@ -155,7 +163,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         {
             return;
         }
-        Health = 50;
+        Health = HealthMax;
 
         var newLocation = GameManager.Instance.PlayerCloudship.transform.position;
         newLocation.x = newLocation.x + 2000f;    
@@ -173,6 +181,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         var shooting = GetComponent<Shooting>();
         shooting.enabled = true;
         ReadyToSpawn = false;
+        HealthBar.enabled = true;
         
     }
 }
