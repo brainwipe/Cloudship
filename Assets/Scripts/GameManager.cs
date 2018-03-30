@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		DontDestroyOnLoad(gameObject);
+
 		PlayerCloudship = FindObjectOfType<Cloudship>();
 		WindMaker = new PerlinPressure();
 		DrawDistance = Camera.farClipPlane + 500;

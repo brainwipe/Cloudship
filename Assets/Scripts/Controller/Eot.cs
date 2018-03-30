@@ -6,12 +6,10 @@ public class Eot : MonoBehaviour {
 
 	public Cloudship Player;
 	public GameObject EotHandle;
-	bool isMoving = false;
 
 	int thrustIndex = 3;
 
 	float eotHandleSpeed = 3f;
-	float magnitudeCutoff = 0.1f;
 	float[] thrustSettings = {
 		-1f, -0.5f, -0.3f, 0, 0.3f, 0.5f, 1f
 	};
