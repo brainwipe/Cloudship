@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Cloudship : MonoBehaviour, ITakeDamage, IFly
 {
+    public enum Modes {
+        Drive,
+        Build
+    }
+
+    public Modes Mode;
+
     public float Thrust;
     public float Turn;
     public float Health = 100;
@@ -19,6 +26,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         flyingPhysics.Parent = this;
 
         Health = 100;
+
+        Mode = Modes.Drive;
     }
 
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
@@ -42,6 +51,4 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
             return this.transform.position;
         }
     }
-
-
 }

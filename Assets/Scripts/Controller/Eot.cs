@@ -23,19 +23,18 @@ public class Eot : MonoBehaviour {
 	}
 
 	void Update () {
-		UpdateThrust(Input.GetButtonUp("Throttle Up"), Input.GetButtonUp("Throttle Down"));
-		UpdateEotHandlePosition();
-
-		player.Thrust = thrustSettings[thrustIndex];
+		if (player.Mode == Cloudship.Modes.Drive)
+		{
+			UpdateThrust(Input.GetButtonUp("Throttle Up"), Input.GetButtonUp("Throttle Down"));
+			UpdateEotHandlePosition();
+			player.Thrust = thrustSettings[thrustIndex];
+		}
 	}
 
 	void UpdateEotHandlePosition()
 	{
-		float lerped = Mathf.LerpAngle(
-			EotHandle.transform.localEulerAngles.z, 
-			handlePositions[thrustIndex],
-			Time.deltaTime * eotHandleSpeed);
-		EotHandle.transform.localEulerAngles =  new Vector3(0,0,lerped);
+        var target = Quaternion.Euler(0,0,handlePositions[thrustIndex]);
+        EotHandle.transform.localRotation = Quaternion.Lerp(EotHandle.transform.localRotation, target, Time.deltaTime * eotHandleSpeed);
 	}
 
 	void UpdateThrust(bool up, bool down)

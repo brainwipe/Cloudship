@@ -60,6 +60,11 @@ ModelImporter:
     2100060: Compass_Rose_5
     2100062: Compass_Brass_5
     2100064: Compass_Player_Direction_6
+    2100066: Back_Barrel_Inner_1
+    2100068: Back_Barrel_Bronze_Edge_1
+    2100070: EOT_Brass_2
+    2100072: EOT_Black_Face_2
+    2100074: EOT_Dark_Inset_2
     2300000: Barrel
     2300002: Wheel
     2300004: EOT_Disc

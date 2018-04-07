@@ -14,7 +14,10 @@ public class Helm : MonoBehaviour {
 	}
 
 	void Update () {
-		player.Turn = Input.GetAxis("Horizontal");
+		if (player.Mode == Cloudship.Modes.Drive)
+		{
+			player.Turn = Input.GetAxis("Horizontal");
+		}
 
 		var angles = new Vector3(
 			transform.eulerAngles.x,
@@ -22,7 +25,5 @@ public class Helm : MonoBehaviour {
 			-player.transform.eulerAngles.y * wheelSpeed);
 
 		transform.eulerAngles = angles;
-		
-		
 	}
 }

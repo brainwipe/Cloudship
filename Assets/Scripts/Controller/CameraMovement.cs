@@ -39,13 +39,11 @@ public class CameraMovement : MonoBehaviour
         }
 
         Vector3 targetPosition = player.transform.position + offset;
-
         float clampY = Mathf.Clamp(targetPosition.y, MinY, MaxY);
-      
         targetPosition = new Vector3(targetPosition.x, clampY, targetPosition.z);
-
         transform.position = Vector3.Slerp(transform.position, targetPosition, SmoothFactor);
-        transform.LookAt(player.transform);
+
+        transform.LookAt(player.transform.position);
 
         CompassRose.localRotation = Quaternion.Euler(0,transform.eulerAngles.y,0);
     } 
