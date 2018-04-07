@@ -21,13 +21,9 @@ public class Cloudship : MonoBehaviour, ITakeDamage
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        windMaker = GameManager.Instance.WindMaker;
         rigidBody.maxAngularVelocity = 0.6f;
         Health = 100;
-
-        var rend = GetComponentInChildren<Renderer>();
-
-        Debug.Log(rend.bounds.size);
+        windMaker = GameManager.Instance.WindMaker;
     }
 
     void FixedUpdate()

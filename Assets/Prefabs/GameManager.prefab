@@ -27,6 +27,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1782499541352934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4202540080608602}
+  - component: {fileID: 114017790401730650}
+  m_Layer: 0
+  m_Name: TerrainFactory
+  m_TagString: Terrain
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1968713585131480
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,7 +66,20 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398137551612962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4455065497538944}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4202540080608602
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782499541352934}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4455065497538944}
@@ -66,10 +95,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4202540080608602}
   - {fileID: 4032361141003958}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114017790401730650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782499541352934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe5ac8c8b080244aae8cd638ff37989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkPrefab: {fileID: 1586141308954550, guid: 1922de8cfc5f6e24990eaf0436f631a8,
+    type: 2}
 --- !u!114 &114447722083175718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,7 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfbbd5b66a5e14449c7f913e88804d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrawDistance: 0
   PlayerCloudship: {fileID: 0}
+  Camera: {fileID: 0}
 --- !u!114 &114758498540518754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -96,10 +141,4 @@ MonoBehaviour:
   cloudPrefab: {fileID: 1996174443779088, guid: e3e47ccf159b59141977a94faab898b2,
     type: 2}
   clouds: []
-  cloudCount: 20
-  distanceFromPlayer: 20
-  sqrDistanceFromPlayer: 400
-  furthestFromplayer: 24
-  sqrFurthestFromPlayer: 440
-  sqrElimiationDistanceFromPlayer: 800
-  sqrCloudSeparation: 5
+  cloudCount: 200

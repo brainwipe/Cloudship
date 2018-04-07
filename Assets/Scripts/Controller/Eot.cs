@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Eot : MonoBehaviour {
 
-	public Cloudship Player;
+	Cloudship player;
 	public GameObject EotHandle;
 
 	int thrustIndex = 3;
@@ -18,11 +18,15 @@ public class Eot : MonoBehaviour {
 		270f, 300f, 330f, 0, 30f, 60f, 90f
 	};
 
+	void Start() {
+		player = GameManager.Instance.PlayerCloudship;
+	}
+
 	void Update () {
 		UpdateThrust(Input.GetButtonUp("Throttle Up"), Input.GetButtonUp("Throttle Down"));
 		UpdateEotHandlePosition();
 
-		Player.Thrust = thrustSettings[thrustIndex];
+		player.Thrust = thrustSettings[thrustIndex];
 	}
 
 	void UpdateEotHandlePosition()

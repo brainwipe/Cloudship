@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Helm : MonoBehaviour {
 
-	public Cloudship player;
+	Cloudship player;
 
 	public float wheelSpeed = 6f;
+
+	void Start()
+	{
+		player = GameManager.Instance.PlayerCloudship;
+	}
 
 	void Update () {
 		player.Turn = Input.GetAxis("Horizontal");
