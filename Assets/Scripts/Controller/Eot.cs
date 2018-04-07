@@ -15,7 +15,7 @@ public class Eot : MonoBehaviour {
 	};
 
 	float[] handlePositions = {
-		270f, 300f, 330f, 0, 30f, 60f, 90f
+		90f, 60f, 30f, 0, 330f, 300f, 270f
 	};
 
 	void Start() {

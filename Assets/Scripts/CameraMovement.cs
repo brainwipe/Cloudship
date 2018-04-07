@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
         player = GameManager.Instance.PlayerCloudship;
         Camera camera = GetComponentInChildren<Camera>();
         offset = transform.position - player.transform.position;
-        var v3Pos = new Vector3(0.15f, 0.25f, 0.8f);
+        var v3Pos = new Vector3(0.12f, 0.25f, 1.5f);
         Controller.transform.position = camera.ViewportToWorldPoint(v3Pos);
     }
 

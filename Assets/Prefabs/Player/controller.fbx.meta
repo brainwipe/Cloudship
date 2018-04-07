@@ -13,6 +13,9 @@ ModelImporter:
     100010: Compass_Rose_5
     100012: Empty_Mesh
     100014: Compass_Player_Direction_6
+    100016: Builder_Selection
+    100018: Compass_Player_Direction_7
+    100020: Compass_Rose_6
     400000: Barrel
     400002: //RootNode
     400004: Wheel
@@ -21,6 +24,9 @@ ModelImporter:
     400010: Compass_Rose_5
     400012: Empty_Mesh
     400014: Compass_Player_Direction_6
+    400016: Builder_Selection
+    400018: Compass_Player_Direction_7
+    400020: Compass_Rose_6
     2100000: Barrel_Wood
     2100002: Barrel_Metal_Band
     2100004: Wheel_Wood_1
@@ -38,6 +44,22 @@ ModelImporter:
     2100028: Compass_Rose_4
     2100030: Compass_Brass_4
     2100032: Compass_Player_Direction_5
+    2100034: Builder_Selection_Wheel
+    2100036: EOT_Brass_1
+    2100038: EOT_Black_Face_1
+    2100040: EOT_Dark_Inset_1
+    2100042: Barrel_Wood_2
+    2100044: Barrel_Metal_Band_2
+    2100046: Compass_Brass_2
+    2100048: Back_Barrel_Inner_2
+    2100050: Back_Barrel_Bronze_Edge_2
+    2100052: Wheel_Wood_3
+    2100054: Wheel_Brass_3
+    2100056: EOT_Brass_4
+    2100058: EOT_Wood_4
+    2100060: Compass_Rose_5
+    2100062: Compass_Brass_5
+    2100064: Compass_Player_Direction_6
     2300000: Barrel
     2300002: Wheel
     2300004: EOT_Disc
@@ -45,6 +67,9 @@ ModelImporter:
     2300008: Compass_Rose_5
     2300010: Empty_Mesh
     2300012: Compass_Player_Direction_6
+    2300014: Builder_Selection
+    2300016: Compass_Player_Direction_7
+    2300018: Compass_Rose_6
     3300000: Barrel
     3300002: Wheel
     3300004: EOT_Disc
@@ -52,6 +77,9 @@ ModelImporter:
     3300008: Compass_Rose_5
     3300010: Empty_Mesh
     3300012: Compass_Player_Direction_6
+    3300014: Builder_Selection
+    3300016: Compass_Player_Direction_7
+    3300018: Compass_Rose_6
     4300000: Barrel
     4300002: Wheel
     4300004: EOT_Disc
@@ -59,14 +87,45 @@ ModelImporter:
     4300008: Compass_Rose_5
     4300010: Empty_Mesh
     4300012: Compass_Player_Direction_6
+    4300014: Builder_Selection
+    4300016: Compass_Rose_6
+    4300018: Compass_Player_Direction_7
     6400000: Barrel
     6400002: Compass_Player_Direction_6
     6400004: Compass_Rose_5
     6400006: EOT_Disc
     6400008: EOT_Handle
     6400010: Wheel
+    6400012: Builder_Selection
+    6400014: Compass_Player_Direction_7
+    6400016: Compass_Rose_6
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel_Metal_Band_1
+    second: {fileID: 2100000, guid: b83a03058da68c04e8656b33032c6d41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel_Wood_1
+    second: {fileID: 2100000, guid: 95184bac47c7e244ea6e423fc97123df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Compass_Brass_1
+    second: {fileID: 2100000, guid: bfe09fde34ce89741988b6bc03b5e669, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Compass_Brass_4
+    second: {fileID: 2100000, guid: 83f364dd3745cea458376a9756b87295, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Compass_Player_Direction_5
+    second: {fileID: 2100000, guid: 9218e87beff95a445a2dfe629242bfd6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -77,10 +136,40 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: EOT_Black_Face
     second: {fileID: 2100000, guid: bdbc20200c5754f49a8aae89744db843, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Brass
+    second: {fileID: 2100000, guid: f73e959e45813e44f8b188b95d4e0622, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Brass_3
+    second: {fileID: 2100000, guid: c609e116fa7314448bf29d5ef87fbd47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Dark_Inset
+    second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Wood_3
+    second: {fileID: 2100000, guid: c11420831a07b6e4fbf1c0678e49a5f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheel_Brass_2
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheel_Wood_2
+    second: {fileID: 2100000, guid: 46153f4be6814764ab34745c241ff5d5, type: 2}
   materials:
     importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

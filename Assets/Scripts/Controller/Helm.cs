@@ -19,7 +19,7 @@ public class Helm : MonoBehaviour {
 		var angles = new Vector3(
 			transform.eulerAngles.x,
 			transform.eulerAngles.y,
-			player.transform.eulerAngles.y * wheelSpeed);
+			-player.transform.eulerAngles.y * wheelSpeed);
 
 		transform.eulerAngles = angles;
 		
