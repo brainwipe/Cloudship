@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 114118024519024402}
   - component: {fileID: 95306397798695828}
   - component: {fileID: 114938606991111428}
+  - component: {fileID: 114396056742841846}
   m_Layer: 0
   m_Name: EnemyParent
   m_TagString: Enemy
@@ -416,10 +417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8015027848c2954f8e8a66958cc9259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 500
-  Lift: 2000
-  BuoyancyHealth: 1
-  StandardAltitude: 0
   Health: 50
   Distance: 0
   HealthBar: {fileID: 114782510594628990}
@@ -468,6 +465,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114396056742841846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1903300416238804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c6fbb3ff05fb04ea97547779387f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowMovement: 1
+  AllowBuoyancy: 1
+  AllowWind: 1
+  Lift: 0
+  Torque: 0
+  Speed: 0
 --- !u!114 &114782510594628990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,7 +524,7 @@ MonoBehaviour:
     type: 2}
   cannon: {fileID: 4561336613980348}
   TimeBetweenShotsInSeconds: 4
-  ShotForce: 500
+  ShotForce: 200
 --- !u!222 &222525628139361532
 CanvasRenderer:
   m_ObjectHideFlags: 1

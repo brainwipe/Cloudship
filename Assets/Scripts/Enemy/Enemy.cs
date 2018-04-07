@@ -4,24 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour, ITakeDamage
+public class Enemy : MonoBehaviour, ITakeDamage, IFly
 {
-    public float Speed = 6f;
-    public float Lift = 12f;
-    public float BuoyancyHealth = 1f;
-    public float StandardAltitude = 0f;
     public float Health = 0;
     public float Distance;
-    
-    bool AllowMovementForce = true;
-    bool AllowWindForce = true;
-    bool AllowBuoyancy = true;
 
-    IWindMaker windMaker;
-    Rigidbody rigidBody;
     Cloudship playerCloudship;
     Animator animator;
     public Image HealthBar;
+    FlyingPhysics flyingPhysics;
+    Rigidbody rigidBody;
     
     float HealthMax = 0;
     float timeDead;
@@ -35,61 +27,28 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        windMaker = GameManager.Instance.WindMaker;
+        rigidBody = GetComponent<Rigidbody>();
+
+        flyingPhysics = GetComponent<FlyingPhysics>();
+        flyingPhysics.Lift = 2000f;
+        flyingPhysics.Torque = 2200f;
+        flyingPhysics.Speed = 500f;
+        flyingPhysics.Parent = this;
+
         playerCloudship = GameManager.Instance.PlayerCloudship;
         HealthMax = Health;
     }
 
-    void FixedUpdate()
+    public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
-        ForceDueToHeading();
-        ForceDueToWind();
-        ForceDueToBuoyancy();
-        Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
-    }
-
-    void ForceDueToHeading()
-    {
-        if (!AllowWindForce)
-        {
-            return;
-        }
-
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             Quaternion.LookRotation(Heading),
             Time.deltaTime);
 
-        float forward = Speed * Time.deltaTime;
+        float forward = speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * forward);
-    }
-
-    void ForceDueToWind()
-    {
-        if (!AllowWindForce)
-        {
-            return;
-        }
-
-        var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
-        rigidBody.AddForce(cycloneForce);
-    }
-
-    void ForceDueToBuoyancy()
-    {
-        if (!AllowBuoyancy)
-        {
-            return;
-        }
-        var torqueAxis = Vector3.Cross(transform.up, Vector3.up) * Lift * Time.deltaTime * BuoyancyHealth;
-        rigidBody.AddTorque(torqueAxis);
-
-        var differenceInAltitude = 1 - (Mathf.Lerp(transform.position.y, StandardAltitude, Time.deltaTime) * 0.01f);
-
-        var force = -Physics.gravity * rigidBody.mass * BuoyancyHealth * differenceInAltitude;
-        rigidBody.AddForce(force);
     }
 
     void Update()
@@ -103,8 +62,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
             timeDead += Time.deltaTime;
             if (timeDead > 5)
             {
-                AllowBuoyancy = false;
-                rigidBody.isKinematic = true;
                 var sunken = new Vector3(transform.position.x,-220f, transform.position.z);
                 var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.1f);
                 transform.position = sinking;
@@ -120,7 +77,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     void OnCollisionEnter(Collision collisionInfo) {
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
-            AllowBuoyancy = false;
+            flyingPhysics.Grounded();
             Health = 0;
             grounded = true;
         }
@@ -146,10 +103,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         if (IsDead)
         {
             Debug.Log("Enemy Dead");
-            Speed = 0;
-            AllowMovementForce = false;
-            AllowWindForce = false;
-            BuoyancyHealth = 0.2f;
+            flyingPhysics.SinkToGround();
 
             var shooting = GetComponent<Shooting>();
             shooting.enabled = false;
@@ -167,21 +121,18 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
         var newLocation = GameManager.Instance.PlayerCloudship.transform.position;
         newLocation.x = newLocation.x + 2000f;    
-    
         transform.position = newLocation;
 
         timeDead = 0;
         grounded = false;
-        AllowMovementForce = true;
-        AllowBuoyancy = true;
-        AllowWindForce = true;
-        BuoyancyHealth = 1f;
-        rigidBody.isKinematic = false;
+        
+        flyingPhysics.Reset();
 
         var shooting = GetComponent<Shooting>();
         shooting.enabled = true;
         ReadyToSpawn = false;
         HealthBar.enabled = true;
+        HealthBar.fillAmount = Health/HealthMax;
         
     }
 }
