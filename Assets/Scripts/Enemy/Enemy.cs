@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly
     Animator animator;
     public Image HealthBar;
     FlyingPhysics flyingPhysics;
-    Rigidbody rigidBody;
     
     float HealthMax = 0;
     float timeDead;
@@ -28,7 +27,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly
     void Start()
     {
         animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody>();
 
         flyingPhysics = GetComponent<FlyingPhysics>();
         flyingPhysics.Lift = 2000f;

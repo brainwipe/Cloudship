@@ -6,13 +6,11 @@ public class Controller : MonoBehaviour {
 
     Animator animator;
     Cloudship player;
-    CameraMovement root;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameManager.Instance.PlayerCloudship;
-        root = GetComponentInParent<CameraMovement>();
     }
 
     void Update()
