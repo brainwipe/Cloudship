@@ -268,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0474bcf5fbce143875ae324a20beda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionIndex: 0
 --- !u!1 &104885798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1429,10 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f94f6e9ab265c304fa37456dd1f83d91, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f94f6e9ab265c304fa37456dd1f83d91, type: 3}
   m_IsPrefabParent: 0
@@ -2153,7 +2156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 1
+  AllowWind: 0
   Lift: 0
   Torque: 0
   Speed: 0
