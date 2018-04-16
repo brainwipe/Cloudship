@@ -16,10 +16,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
     public float Health = 100;
 
     FlyingPhysics flyingPhysics;
+    BuildSurface builder;
+    Shooting shooting;
 
     void Start()
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
+        builder = GetComponentInChildren<BuildSurface>();
+        shooting = GetComponent<Shooting>();
         flyingPhysics.Lift = 2000f;
         flyingPhysics.Torque = 2500f;
         flyingPhysics.Speed = 500f;
@@ -28,6 +32,15 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         Health = 100;
 
         Mode = Modes.Drive;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            builder.enabled = !builder.enabled;
+            shooting.enabled = !shooting.enabled;
+        }
     }
 
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)

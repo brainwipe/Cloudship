@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingDisplay : MonoBehaviour {
+
+    public bool RunOnLoad = false;
+
+
     void Start()
     {
+        if (!RunOnLoad)
+        {
+            return;
+        }
+
         var buildingPrefabs = BuildingLoader.Load();
 
         for(var i = 0; i < buildingPrefabs.Length; i++)

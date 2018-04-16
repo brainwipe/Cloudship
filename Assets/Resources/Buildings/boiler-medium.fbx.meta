@@ -1,18 +1,43 @@
 fileFormatVersion: 2
-guid: d9db9d74abfebc34aaff523bfe8654e1
-timeCreated: 1523569429
+guid: e427a96c84c5aee4eb1986f37705fa89
+timeCreated: 1523712359
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Building_Seven
+    2100000: Building_Chimney
+    2100002: Building_Boiler
+    2100004: Building_Boiler_Containers
+    2100006: Building_Timming
+    2100008: Building_Door_Open_Black
+    2100010: Building_Underside
     2300000: //RootNode
     3300000: //RootNode
     4300000: Empty_Mesh
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Boiler
+    second: {fileID: 2100000, guid: 19ef926501d13be40aa40542e81dfd9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Boiler_Containers
+    second: {fileID: 2100000, guid: e4641f5dc0eb0d341a2425ddb5fe255c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Chimney
+    second: {fileID: 2100000, guid: 74f0d43fbedeef6408589f925c702316, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Timming
+    second: {fileID: 2100000, guid: dd95e47de58abe24fb2a69459c960b0f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,19 +1,23 @@
 fileFormatVersion: 2
-guid: fbed2e8cb7a0f0f4d9281d1b4308db04
-timeCreated: 1523343282
+guid: bc5fb3ef057810747b59fae34365dd72
+timeCreated: 1523777536
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: TestBuildingOne
+    2100000: BuildingSpace
     2300000: //RootNode
     3300000: //RootNode
     4300000: Empty_Mesh
-    6400000: //RootNode
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BuildingSpace
+    second: {fileID: 2100000, guid: 7a6b52db15dfc914f9c18efd791ef9f6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -48,8 +52,8 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

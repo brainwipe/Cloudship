@@ -1,18 +1,43 @@
 fileFormatVersion: 2
-guid: 0677dc394f678a54b81b4d76a75a241f
-timeCreated: 1523427916
+guid: 08d70fa521b52e84e89567bf55ff9a18
+timeCreated: 1523712358
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Cylinder
+    2100000: Building_House_Wall
+    2100002: Building_Timming
+    2100004: Building_Door_Open_Black
+    2100006: Building_Roof
+    2100008: Building_Glass
+    2100010: Building_Underside
     2300000: //RootNode
     3300000: //RootNode
     4300000: Empty_Mesh
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Glass
+    second: {fileID: 2100000, guid: f441fa7a3a899f747afe8c2fc178699d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_House_Wall
+    second: {fileID: 2100000, guid: d2f54b892faa46e4e8556296e7d25d54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Roof
+    second: {fileID: 2100000, guid: f441fa7a3a899f747afe8c2fc178699d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Timming
+    second: {fileID: 2100000, guid: dd95e47de58abe24fb2a69459c960b0f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

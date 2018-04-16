@@ -5,6 +5,6 @@ using UnityEngine;
 public static class BuildingLoader {
     public static GameObject[] Load()
     {
-        return Resources.LoadAll<GameObject>("BuildingPrefabs");
+        return Resources.LoadAll<GameObject>("Buildings");
     }
 }

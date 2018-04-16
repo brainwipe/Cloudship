@@ -4,40 +4,53 @@ using UnityEngine;
 
 public class BuildSurface : MonoBehaviour {
 
-	private static string BuilderLocationTag = "BuilderLocation";
-	private static string BuildingTag = "Building";
+	static string BuilderLocationTag = "BuilderLocation";
+	static string BuildingTag = "Building";
+
 	public Material HighlightedMaterial;
 	public GameObject BuildingSpaceIndicatorPrefab;
+	public GameObject Buildings;
 
-	Vector3 mapOffset = new Vector3(0.5f, 0.5f, 0.5f);
+	Vector3 mapOffset = new Vector3(5f, 0f, 5f);
 
 	GameObject selectedBuilding;
 	public Material originalMaterial;
 
 	Dictionary<Vector3, GameObject> buildingMap = new Dictionary<Vector3, GameObject>
 	{
-		{ new Vector3(-4f, 0, -1f), null },
-		{ new Vector3(-4f, 0, 0f), null },
-		{ new Vector3(-3f, 0, -1f), null },
-		{ new Vector3(-3f, 0, 0f), null },
-		{ new Vector3(-2f, 0, -1f), null },
-		{ new Vector3(-2f, 0, 0f), null },
-		{ new Vector3(-1f, 0, -2f), null },
-		{ new Vector3(-1f, 0, -1f), null },
-		{ new Vector3(-1f, 0, 0f), null },
-		{ new Vector3(-1f, 0, 1f), null },
-		{ new Vector3(0f, 0, -2f), null },
-		{ new Vector3(0f, 0, -1f), null },
+		{ new Vector3(-10f, 0, -40f), null },
+		{ new Vector3(0, 0, -40f), null },
+		{ new Vector3(-10f, 0, -30f), null },
+		{ new Vector3(0, 0, -30f), null },
+		{ new Vector3(-10f, 0, -20f), null },
+		{ new Vector3(0, 0, -20f), null },
+		{ new Vector3(-20f, 0, -10f), null },
+		{ new Vector3(-10f, 0, -10f), null },
+		{ new Vector3(0, 0, -10f), null },
+		{ new Vector3(10f, 0, -10f), null },
+		{ new Vector3(-20f, 0, 0), null },
+		{ new Vector3(-10f, 0, 0), null },
 		{ new Vector3(0f, 0, 0f), null },
-		{ new Vector3(0f, 0, 1f), null },
-		{ new Vector3(3f, 0, -1f), null },
-		{ new Vector3(3f, 0, 0f), null },
-		{ new Vector3(2f, 0, -1f), null },
-		{ new Vector3(2f, 0, 0f), null },
-		{ new Vector3(1f, 0, -1f), null },
-		{ new Vector3(1f, 0, 0f), null },
-
+		{ new Vector3(10f, 0, 0), null },
+		{ new Vector3(-10f, 0, 30f), null },
+		{ new Vector3(0, 0, 30f), null },
+		{ new Vector3(-10f, 0, 20f), null },
+		{ new Vector3(0, 0, 20f), null },
+		{ new Vector3(-10f, 0, 10f), null },
+		{ new Vector3(0, 0, 10f), null },
 	};
+
+	bool BuildModeOn = false;
+
+	public void Off()
+	{
+		BuildModeOn = false;
+	}
+
+	public void On()
+	{
+		BuildModeOn = true;
+	}
 
 	void Start()
 	{
@@ -46,6 +59,11 @@ public class BuildSurface : MonoBehaviour {
 	
 	void Update()
 	{
+		if (!BuildModeOn)
+		{
+			return;
+		}
+		
 		if (Input.GetMouseButtonDown(0))
 		{
 			MouseDown();
