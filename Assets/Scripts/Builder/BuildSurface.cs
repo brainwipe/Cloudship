@@ -14,8 +14,10 @@ public class BuildSurface : MonoBehaviour {
 	Vector3 mapOffset = new Vector3(5f, 0f, 5f);
 
 	GameObject selectedBuilding;
+	BuildMenu buildMenu;
 	public Material originalMaterial;
 
+	// TODO ROLA - using position in the world is not good. We need x/y int grid-space values
 	Dictionary<Vector3, GameObject> buildingMap = new Dictionary<Vector3, GameObject>
 	{
 		{ new Vector3(-10f, 0, -40f), null },
@@ -40,30 +42,15 @@ public class BuildSurface : MonoBehaviour {
 		{ new Vector3(0, 0, 10f), null },
 	};
 
-	bool BuildModeOn = false;
-
-	public void Off()
-	{
-		BuildModeOn = false;
-	}
-
-	public void On()
-	{
-		BuildModeOn = true;
-	}
-
 	void Start()
 	{
 		CreateBuildingLocations();
+		buildMenu = FindObjectOfType<BuildMenu>();
 	}
 	
 	void Update()
 	{
-		if (!BuildModeOn)
-		{
-			return;
-		}
-		
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			MouseDown();
@@ -90,7 +77,9 @@ public class BuildSurface : MonoBehaviour {
 		foreach(var map in buildingMap)
 		{
 			var position =  map.Key + mapOffset;
-			Instantiate(BuildingSpaceIndicatorPrefab, position, Quaternion.identity, this.transform);
+			var location = Instantiate(BuildingSpaceIndicatorPrefab, position, Quaternion.identity, this.transform);
+			location.tag = BuilderLocationTag;
+			location.layer = transform.parent.gameObject.layer;
 		}
 	}
 
@@ -116,7 +105,7 @@ public class BuildSurface : MonoBehaviour {
 			Vector3 location;
 			if (GetEmptyLocation(out location))
 			{
-				selectedBuilding = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+				selectedBuilding = Instantiate(buildMenu.SelectedBuilding, location, Quaternion.identity, this.transform);
 				selectedBuilding.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
 				selectedBuilding.transform.position = location;
 				selectedBuilding.tag = BuildingTag;
@@ -138,6 +127,7 @@ public class BuildSurface : MonoBehaviour {
 	{
 		if (selectedBuilding != null)
 		{
+			
 			Vector3 location;
 			if (GetEmptyLocation(out location))
 			{
@@ -148,9 +138,12 @@ public class BuildSurface : MonoBehaviour {
 
 	void MouseUp()
 	{
-		var renderer = selectedBuilding.GetComponent<Renderer>();
-		renderer.sharedMaterial = originalMaterial;
-		SaveBuilding(selectedBuilding.transform.position, selectedBuilding);
+		if (selectedBuilding != null)
+		{
+			var renderer = selectedBuilding.GetComponent<Renderer>();
+			renderer.sharedMaterial = originalMaterial;
+			SaveBuilding(selectedBuilding.transform.position, selectedBuilding);
+		}
 	}
 
 	GameObject WhatIsUnderTheMousePointer()
@@ -177,16 +170,23 @@ public class BuildSurface : MonoBehaviour {
 	bool GetEmptyLocation(out Vector3 location)
 	{
 		GameObject selected = WhatIsUnderTheMousePointer();
-		if (selected != null && selected.tag == BuilderLocationTag)
+		location = Vector3.zero;
+
+		if (selected == null)
 		{
-			var position = selected.transform.position - mapOffset;
+			return false;
+		}
+		if (selected.tag == BuilderLocationTag)
+		{
+			var position = selected.transform.localPosition - mapOffset;
+			position = new Vector3(position.x, 0, position.z);
 			if (buildingMap.ContainsKey(position) && buildingMap[position] == null)
 			{
 				location = position + mapOffset;
 				return true;
 			}
 		}
-		location = Vector3.zero;
+		
 		return false;
 	}
 

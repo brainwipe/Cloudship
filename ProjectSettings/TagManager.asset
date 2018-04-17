@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - WeatherIndicator
   - Terrain
+  - BuilderLocation
+  - Building
   layers:
   - Default
   - TransparentFX

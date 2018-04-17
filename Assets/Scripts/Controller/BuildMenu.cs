@@ -20,7 +20,14 @@ public class BuildMenu : MonoBehaviour {
     float wheelSpeed = 4f;
     GameObject[] BuildingPrefabs;
     
-    
+    public GameObject SelectedBuilding 
+    {
+        get
+        {
+            return menuPositions[selectionIndex].Building;
+        }
+    }
+
     void Start()
     {
         player = GameManager.Instance.PlayerCloudship;
