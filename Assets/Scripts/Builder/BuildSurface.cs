@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,34 +13,37 @@ public class BuildSurface : MonoBehaviour {
 	public GameObject Buildings;
 
 	Vector3 mapOffset = new Vector3(5f, 0f, 5f);
+	float gridSize = 10f;
 
 	GameObject selectedBuilding;
 	BuildMenu buildMenu;
 	public Material originalMaterial;
 
+
 	// TODO ROLA - using position in the world is not good. We need x/y int grid-space values
-	Dictionary<Vector3, GameObject> buildingMap = new Dictionary<Vector3, GameObject>
+
+	Dictionary<Grid, IAmBuilding> buildingMap = new Dictionary<Grid, IAmBuilding>
 	{
-		{ new Vector3(-10f, 0, -40f), null },
-		{ new Vector3(0, 0, -40f), null },
-		{ new Vector3(-10f, 0, -30f), null },
-		{ new Vector3(0, 0, -30f), null },
-		{ new Vector3(-10f, 0, -20f), null },
-		{ new Vector3(0, 0, -20f), null },
-		{ new Vector3(-20f, 0, -10f), null },
-		{ new Vector3(-10f, 0, -10f), null },
-		{ new Vector3(0, 0, -10f), null },
-		{ new Vector3(10f, 0, -10f), null },
-		{ new Vector3(-20f, 0, 0), null },
-		{ new Vector3(-10f, 0, 0), null },
-		{ new Vector3(0f, 0, 0f), null },
-		{ new Vector3(10f, 0, 0), null },
-		{ new Vector3(-10f, 0, 30f), null },
-		{ new Vector3(0, 0, 30f), null },
-		{ new Vector3(-10f, 0, 20f), null },
-		{ new Vector3(0, 0, 20f), null },
-		{ new Vector3(-10f, 0, 10f), null },
-		{ new Vector3(0, 0, 10f), null },
+		{ Grid.From(-1,-4), null },
+		{ Grid.From(0,-4), null },
+		{ Grid.From(-1,-3), null },
+		{ Grid.From(0,-3), null },
+		{ Grid.From(-1,-2), null },
+		{ Grid.From(0,-2), null },
+		{ Grid.From(-2,-1), null },
+		{ Grid.From(-1,-1), null },
+		{ Grid.From(-0,-1), null },
+		{ Grid.From(-1,-1), null },
+		{ Grid.From(-2,0), null },
+		{ Grid.From(-1,0), null },
+		{ Grid.From(0,0), null },
+		{ Grid.From(1,0), null },
+		{ Grid.From(-1,1), null },
+		{ Grid.From(0,1), null },
+		{ Grid.From(-1,2), null },
+		{ Grid.From(0,2), null },
+		{ Grid.From(-1,3), null },
+		{ Grid.From(0,3), null },
 	};
 
 	void Start()
@@ -76,10 +80,12 @@ public class BuildSurface : MonoBehaviour {
 	{
 		foreach(var map in buildingMap)
 		{
-			var position =  map.Key + mapOffset;
+			var position =  map.Key.ToWorld() + mapOffset;
 			var location = Instantiate(BuildingSpaceIndicatorPrefab, position, Quaternion.identity, this.transform);
 			location.tag = BuilderLocationTag;
 			location.layer = transform.parent.gameObject.layer;
+			var buildLocation = location.GetComponent<BuildLocation>();
+			buildLocation.GridSpaceLocation = map.Key;
 		}
 	}
 
@@ -88,7 +94,8 @@ public class BuildSurface : MonoBehaviour {
 		var selected = WhatIsUnderTheMousePointer();
 		if (selected.tag == BuildingTag)
 		{
-			ClearBuildingAt(selected.transform.position);
+			var location = selected.GetComponent<Building>();
+			ClearBuilding(location);
 			Destroy(selected);
 		}
 	}
@@ -102,13 +109,20 @@ public class BuildSurface : MonoBehaviour {
 		}
 		if (selected.tag == BuilderLocationTag)
 		{
-			Vector3 location;
-			if (GetEmptyLocation(out location))
+			var location = selected.GetComponent<BuildLocation>();
+			if (GetEmptyLocation(location))
 			{
-				selectedBuilding = Instantiate(buildMenu.SelectedBuilding, location, Quaternion.identity, this.transform);
+				selectedBuilding = Instantiate(
+					buildMenu.SelectedBuilding, 
+					GridSpaceToLocalSpace(location.GridSpaceLocation), 
+					Quaternion.identity, 
+					this.transform);
 				selectedBuilding.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
-				selectedBuilding.transform.position = location;
+				selectedBuilding.transform.position = GridSpaceToLocalSpace(location.GridSpaceLocation);
 				selectedBuilding.tag = BuildingTag;
+				var building = selectedBuilding.AddComponent<Building>();
+				building.GridSpaceLocation = location.GridSpaceLocation;
+
 				var renderer = selectedBuilding.GetComponent<Renderer>();
 				originalMaterial = renderer.sharedMaterial;
 			}
@@ -116,7 +130,8 @@ public class BuildSurface : MonoBehaviour {
 		else if (selected.tag == BuildingTag)
 		{
 			selectedBuilding = selected;
-			ClearBuildingAt(selectedBuilding.transform.position);
+			var building = selected.GetComponent<Building>();
+			ClearBuilding(building);
 			var renderer = selectedBuilding.GetComponent<Renderer>();
 			originalMaterial = renderer.sharedMaterial;
 			renderer.sharedMaterial = HighlightedMaterial;
@@ -127,22 +142,27 @@ public class BuildSurface : MonoBehaviour {
 	{
 		if (selectedBuilding != null)
 		{
-			
-			Vector3 location;
-			if (GetEmptyLocation(out location))
+			var building = selectedBuilding.GetComponent<Building>();
+			if (GetEmptyLocation(building))
 			{
-				selectedBuilding.transform.position = location;
+				selectedBuilding.transform.position = GridSpaceToLocalSpace(building.GridSpaceLocation);
 			}
 		}
+	}
+
+	Vector3 GridSpaceToLocalSpace(Grid grid)
+	{
+		return new Vector3(grid.X * gridSize, 0, grid.Y * gridSize) + mapOffset;
 	}
 
 	void MouseUp()
 	{
 		if (selectedBuilding != null)
 		{
+			var building = selectedBuilding.GetComponent<Building>();
 			var renderer = selectedBuilding.GetComponent<Renderer>();
 			renderer.sharedMaterial = originalMaterial;
-			SaveBuilding(selectedBuilding.transform.position, selectedBuilding);
+			SaveBuilding(building);
 		}
 	}
 
@@ -157,37 +177,28 @@ public class BuildSurface : MonoBehaviour {
 		return null;
 	}
 
-	void SaveBuilding(Vector3 worldPosition, GameObject building)
+	void SaveBuilding(Building building)
 	{
-		buildingMap[worldPosition - mapOffset] = building;
+		buildingMap[building.GridSpaceLocation] = building;
 	}
 
-	void ClearBuildingAt(Vector3 worldPosition)
+	void ClearBuilding(Building building)
 	{
-		buildingMap[worldPosition - mapOffset] = null;
+		buildingMap[building.GridSpaceLocation] = null;
 	}
 
-	bool GetEmptyLocation(out Vector3 location)
+	bool GetEmptyLocation(IHaveGridSpace location)
 	{
-		GameObject selected = WhatIsUnderTheMousePointer();
-		location = Vector3.zero;
-
-		if (selected == null)
+		if (location == null)
 		{
 			return false;
 		}
-		if (selected.tag == BuilderLocationTag)
+
+		if (buildingMap.ContainsKey(location.GridSpaceLocation) && buildingMap[location.GridSpaceLocation] == null)
 		{
-			var position = selected.transform.localPosition - mapOffset;
-			position = new Vector3(position.x, 0, position.z);
-			if (buildingMap.ContainsKey(position) && buildingMap[position] == null)
-			{
-				location = position + mapOffset;
-				return true;
-			}
+			return true;
 		}
 		
 		return false;
 	}
-
 }
