@@ -20,12 +20,12 @@ public class Controller : MonoBehaviour {
             if (!animator.GetBool("BuildMode"))
             {
                 animator.SetBool("BuildMode", true);
-                player.Mode = Cloudship.Modes.Build;
+                player.SetBuildModeOn();
             }
             else
             {
                 animator.SetBool("BuildMode", false);
-                player.Mode = Cloudship.Modes.Drive;
+                player.SetBuildModeOff();
             }
         }
     }

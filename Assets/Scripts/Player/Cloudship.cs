@@ -34,15 +34,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         Mode = Modes.Drive;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            builder.enabled = !builder.enabled;
-            shooting.enabled = !shooting.enabled;
-        }
-    }
-
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
         float yaw = Turn * torque * Time.deltaTime;
@@ -55,6 +46,20 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
     public void Damage(float amount)
     {
         Health -= amount;
+    }
+
+    public void SetBuildModeOn()
+    {
+        Mode = Modes.Build;
+        builder.enabled = true;
+        shooting.enabled = false;
+    }
+
+    public void SetBuildModeOff()
+    {
+        Mode = Modes.Drive;
+        builder.enabled = false;
+        shooting.enabled = true;
     }
 
     public Vector3 Position

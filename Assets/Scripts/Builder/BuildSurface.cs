@@ -19,9 +19,6 @@ public class BuildSurface : MonoBehaviour {
 	BuildMenu buildMenu;
 	public Material originalMaterial;
 
-
-	// TODO ROLA - using position in the world is not good. We need x/y int grid-space values
-
 	Dictionary<Grid, IAmBuilding> buildingMap = new Dictionary<Grid, IAmBuilding>
 	{
 		{ Grid.From(-1,-4), null },
@@ -46,10 +43,23 @@ public class BuildSurface : MonoBehaviour {
 		{ Grid.From(0,3), null },
 	};
 
-	void Start()
+	void Awake()
 	{
 		CreateBuildingLocations();
-		buildMenu = FindObjectOfType<BuildMenu>();
+		if (buildMenu == null)
+		{
+			buildMenu = FindObjectOfType<BuildMenu>();
+		}
+	}
+
+	void OnDisable()
+	{
+		HideBuildingLocations();
+	}
+
+	void OnEnable()
+	{
+		ShowBuildingLocations();
 	}
 	
 	void Update()
@@ -86,6 +96,27 @@ public class BuildSurface : MonoBehaviour {
 			location.layer = transform.parent.gameObject.layer;
 			var buildLocation = location.GetComponent<BuildLocation>();
 			buildLocation.GridSpaceLocation = map.Key;
+			var renderer = location.GetComponent<Renderer>();
+			renderer.enabled = false;
+			
+		}
+	}
+
+	void HideBuildingLocations()
+	{
+		var renderers = transform.GetComponentsInChildren<Renderer>();
+		foreach(var renderer in renderers)
+		{
+			renderer.enabled = false;
+		}
+	}
+
+	void ShowBuildingLocations()
+	{
+		var renderers = transform.GetComponentsInChildren<Renderer>();
+		foreach(var renderer in renderers)
+		{
+			renderer.enabled = true;
 		}
 	}
 
