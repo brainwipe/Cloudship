@@ -104,7 +104,7 @@ public class BuildSurface : MonoBehaviour {
 
 	void HideBuildingLocations()
 	{
-		var renderers = transform.GetComponentsInChildren<Renderer>();
+		var renderers = transform.FindObjectsWithTag(BuilderLocationTag).Select(x => x.GetComponent<Renderer>());
 		foreach(var renderer in renderers)
 		{
 			renderer.enabled = false;
@@ -113,7 +113,7 @@ public class BuildSurface : MonoBehaviour {
 
 	void ShowBuildingLocations()
 	{
-		var renderers = transform.GetComponentsInChildren<Renderer>();
+		var renderers = transform.FindObjectsWithTag(BuilderLocationTag).Select(x => x.GetComponent<Renderer>());
 		foreach(var renderer in renderers)
 		{
 			renderer.enabled = true;
