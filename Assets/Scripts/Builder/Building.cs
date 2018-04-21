@@ -5,5 +5,6 @@ using UnityEngine;
 public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
 
     public Grid GridSpaceLocation { get; set; }
-
+    public BuildingSize Size;
+    
 }

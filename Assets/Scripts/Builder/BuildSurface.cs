@@ -30,7 +30,7 @@ public class BuildSurface : MonoBehaviour {
 		{ Grid.From(-2,-1), null },
 		{ Grid.From(-1,-1), null },
 		{ Grid.From(-0,-1), null },
-		{ Grid.From(-1,-1), null },
+		{ Grid.From(1,-1), null },
 		{ Grid.From(-2,0), null },
 		{ Grid.From(-1,0), null },
 		{ Grid.From(0,0), null },
@@ -145,15 +145,16 @@ public class BuildSurface : MonoBehaviour {
 			{
 				selectedBuilding = Instantiate(
 					buildMenu.SelectedBuilding, 
-					GridSpaceToLocalSpace(location.GridSpaceLocation), 
+					Vector3.zero, 
 					Quaternion.identity, 
 					this.transform);
-				selectedBuilding.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
-				selectedBuilding.transform.position = GridSpaceToLocalSpace(location.GridSpaceLocation);
-				selectedBuilding.tag = BuildingTag;
-				var building = selectedBuilding.AddComponent<Building>();
-				building.GridSpaceLocation = location.GridSpaceLocation;
 
+				selectedBuilding.tag = BuildingTag;
+
+				var building = selectedBuilding.GetComponent<Building>();	
+				building.GridSpaceLocation = location.GridSpaceLocation;
+				selectedBuilding.transform.position = GridSpaceToLocalSpace(building);
+				selectedBuilding.transform.localScale = new Vector3(1f,1f,1f);
 				var renderer = selectedBuilding.GetComponent<Renderer>();
 				originalMaterial = renderer.sharedMaterial;
 			}
@@ -171,19 +172,35 @@ public class BuildSurface : MonoBehaviour {
 
 	void MouseMove()
 	{
+		return; // TODO ROLA - get this method working
 		if (selectedBuilding != null)
 		{
 			var building = selectedBuilding.GetComponent<Building>();
 			if (GetEmptyLocation(building))
 			{
-				selectedBuilding.transform.position = GridSpaceToLocalSpace(building.GridSpaceLocation);
+				selectedBuilding.transform.position = GridSpaceToLocalSpace(building);
 			}
 		}
 	}
 
-	Vector3 GridSpaceToLocalSpace(Grid grid)
+	Vector3 GridSpaceToLocalSpace(Building building)
 	{
-		return new Vector3(grid.X * gridSize, 0, grid.Y * gridSize) + mapOffset;
+		var grid = building.GridSpaceLocation;
+
+		var buildingSizeOffset = Vector3.zero;
+		if (building.Size.IsLargerThanUnit)
+		{
+			buildingSizeOffset = new Vector3(
+				((building.Size.WidthX) / 2) * (gridSize / 2),
+				0,
+				((building.Size.LengthZ) / 2) * (gridSize / 2));
+		}
+
+		var position = new Vector3((grid.X * gridSize),0, (grid.Z * gridSize))
+			+ buildingSizeOffset
+			+ mapOffset;
+
+		return position;
 	}
 
 	void MouseUp()
@@ -210,7 +227,17 @@ public class BuildSurface : MonoBehaviour {
 
 	void SaveBuilding(Building building)
 	{
-		buildingMap[building.GridSpaceLocation] = building;
+		for(int width = 0; width < building.Size.WidthX; width++)
+		{
+			for(int length =0; length < building.Size.LengthZ; length++)	
+			{
+				var alsogridLocation = new Grid{
+					X = building.GridSpaceLocation.X + width,
+					Z = building.GridSpaceLocation.Z + length
+				};
+				buildingMap[alsogridLocation] = building;
+			}
+		}
 	}
 
 	void ClearBuilding(Building building)
@@ -225,11 +252,54 @@ public class BuildSurface : MonoBehaviour {
 			return false;
 		}
 
-		if (buildingMap.ContainsKey(location.GridSpaceLocation) && buildingMap[location.GridSpaceLocation] == null)
+		var building = buildMenu.SelectedBuilding.GetComponent<Building>();
+		if (buildingMap.ContainsKey(location.GridSpaceLocation) && WillItFit(location.GridSpaceLocation, building.Size))
 		{
 			return true;
 		}
 		
 		return false;
+	}
+	
+	IHaveGridSpace NearestEmptySpace(IHaveGridSpace desiredLocation, BuildingSize size)
+	{
+		
+		return desiredLocation;
+	}
+
+	bool WillItFit(Grid gridLocation, BuildingSize size)
+	{
+		for(int width = 0; width < size.WidthX; width++)
+		{
+			for(int length =0; length < size.LengthZ; length++)	
+			{
+				var testGridLocation = new Grid{
+					X = gridLocation.X + width,
+					Z = gridLocation.Z + length
+				};
+				
+				if (!CanIBuildThere(testGridLocation))
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	bool CanIBuildThere(Grid gridLocation)
+	{
+		if (gridLocation == null)
+		{
+			return false;
+		}
+
+		if (!buildingMap.ContainsKey(gridLocation))
+		{
+			return false;
+		}
+
+		return buildingMap[gridLocation] == null;
 	}
 }
