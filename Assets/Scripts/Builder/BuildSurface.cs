@@ -153,8 +153,9 @@ public class BuildSurface : MonoBehaviour {
 
 				var building = selectedBuilding.GetComponent<Building>();	
 				building.GridSpaceLocation = location.GridSpaceLocation;
-				selectedBuilding.transform.position = GridSpaceToLocalSpace(building);
-				selectedBuilding.transform.localScale = new Vector3(1f,1f,1f);
+				selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
+				selectedBuilding.transform.localScale = Vector3.one;
+				selectedBuilding.transform.localRotation = Quaternion.identity;
 				var renderer = selectedBuilding.GetComponent<Renderer>();
 				originalMaterial = renderer.sharedMaterial;
 			}
