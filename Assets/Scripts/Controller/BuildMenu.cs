@@ -49,19 +49,38 @@ public class BuildMenu : MonoBehaviour {
 
     void CreateBuildingAt(int buildingIndex, int menuIndex)
     {
-        var building = Instantiate(BuildingPrefabs[buildingIndex],  this.transform.position, Quaternion.identity, this.transform);
+        var position = menuPositions[menuIndex];
+        
+        var building = Instantiate(BuildingPrefabs[buildingIndex], position.Anchor.transform.position, Quaternion.identity, position.Anchor.transform);
+        building.transform.localRotation = Quaternion.identity;
         building.layer = gameObject.layer;
-        building.transform.localScale = new Vector3(0.015f, 0.015f, 0.015f);
-        building.transform.localPosition = new Vector3(0,0,0.27f);
-        building.transform.RotateAround(
-            transform.position, 
-            -transform.right, 
-            menuPositions[menuIndex].Angle);
-        menuPositions[menuIndex].Building = building;
+         
+        Mesh mesh = building.GetComponent<MeshFilter>().mesh;
+        
+        float newScale = (1 / mesh.bounds.extents.magnitude) * 0.11f;
+        building.transform.localScale = new Vector3(newScale, newScale, newScale);
+
+        var offsetPosition = new Vector3(0, mesh.bounds.center.y * newScale, 0);
+        building.transform.localPosition -= offsetPosition;
+        
+
+        position.Building = building;
     }
 
     void FillWheel()
     {
+        foreach(var position in menuPositions)
+        {
+            position.Anchor = new GameObject();
+            position.Anchor.transform.SetParent(this.transform, false);
+            position.Anchor.transform.localPosition = new Vector3(0,0,0.27f);
+            position.Anchor.transform.RotateAround(
+                transform.position, 
+                -transform.right, 
+                position.Angle);
+        }
+
+
        CreateBuildingAt(0,0);
        CreateBuildingAt(1,1);
        CreateBuildingAt(2,2);
@@ -117,6 +136,11 @@ public class BuildMenu : MonoBehaviour {
         public MenuPosition(float angle)
         {
             this.angle = angle;
+        }
+
+        public GameObject Anchor
+        {
+            get;set;
         }
 
         public GameObject Building 
