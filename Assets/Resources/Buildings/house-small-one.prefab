@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23992140298746848}
   - component: {fileID: 95892162910594084}
   - component: {fileID: 114141047168434516}
+  - component: {fileID: 65430304006819890}
   m_Layer: 0
   m_Name: house-small-one
   m_TagString: Building
@@ -89,6 +90,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234980188809224}
   m_Mesh: {fileID: 4300000, guid: 717b9637318c3e34886c5505ead9c5d9, type: 3}
+--- !u!65 &65430304006819890
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234980188809224}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 5.6000004, z: 7.3999996}
+  m_Center: {x: 0, y: 2.8000002, z: 0.14999998}
 --- !u!95 &95892162910594084
 Animator:
   serializedVersion: 3

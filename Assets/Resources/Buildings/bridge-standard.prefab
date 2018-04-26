@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23152673258847120}
   - component: {fileID: 95455686480732832}
   - component: {fileID: 114757617169345188}
+  - component: {fileID: 65262408838371700}
   m_Layer: 0
   m_Name: bridge-standard
   m_TagString: Building
@@ -89,6 +90,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1233157453192596}
   m_Mesh: {fileID: 4300000, guid: 08d70fa521b52e84e89567bf55ff9a18, type: 3}
+--- !u!65 &65262408838371700
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233157453192596}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.55, y: 12.099999, z: 7.2999997}
+  m_Center: {x: 0.12500012, y: 6.0499997, z: 0}
 --- !u!95 &95455686480732832
 Animator:
   serializedVersion: 3

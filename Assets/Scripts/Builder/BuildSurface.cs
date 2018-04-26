@@ -173,13 +173,12 @@ public class BuildSurface : MonoBehaviour {
 
 	void MouseMove()
 	{
-		return; // TODO ROLA - get this method working
 		if (selectedBuilding != null)
 		{
 			var building = selectedBuilding.GetComponent<Building>();
 			if (GetEmptyLocation(building))
 			{
-				selectedBuilding.transform.position = GridSpaceToLocalSpace(building);
+				selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
 			}
 		}
 	}
@@ -210,6 +209,7 @@ public class BuildSurface : MonoBehaviour {
 		{
 			var building = selectedBuilding.GetComponent<Building>();
 			var renderer = selectedBuilding.GetComponent<Renderer>();
+			ClearBuildingIfExists(building);
 			renderer.sharedMaterial = originalMaterial;
 			SaveBuilding(building);
 		}
@@ -241,9 +241,34 @@ public class BuildSurface : MonoBehaviour {
 		}
 	}
 
+	void ClearBuildingIfExists(Building building)
+	{
+		for(int width = 0; width < building.Size.WidthX; width++)
+		{
+			for(int length =0; length < building.Size.LengthZ; length++)	
+			{
+				var alsogridLocation = new Grid{
+					X = building.GridSpaceLocation.X + width,
+					Z = building.GridSpaceLocation.Z + length
+				};
+				buildingMap[alsogridLocation] = null;
+			}
+		}
+	}
+
 	void ClearBuilding(Building building)
 	{
-		buildingMap[building.GridSpaceLocation] = null;
+		for(int width = 0; width < building.Size.WidthX; width++)
+		{
+			for(int length =0; length < building.Size.LengthZ; length++)	
+			{
+				var alsogridLocation = new Grid{
+					X = building.GridSpaceLocation.X + width,
+					Z = building.GridSpaceLocation.Z + length
+				};
+				buildingMap[building.GridSpaceLocation] = null;
+			}
+		}
 	}
 
 	bool GetEmptyLocation(IHaveGridSpace location)

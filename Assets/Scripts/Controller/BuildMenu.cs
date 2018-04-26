@@ -51,20 +51,9 @@ public class BuildMenu : MonoBehaviour {
     {
         var position = menuPositions[menuIndex];
         
-        var building = Instantiate(BuildingPrefabs[buildingIndex], position.Anchor.transform.position, Quaternion.identity, position.Anchor.transform);
-        building.transform.localRotation = Quaternion.identity;
-        building.layer = gameObject.layer;
-         
-        Mesh mesh = building.GetComponent<MeshFilter>().mesh;
-        
-        float newScale = (1 / mesh.bounds.extents.magnitude) * 0.11f;
-        building.transform.localScale = new Vector3(newScale, newScale, newScale);
-
-        var offsetPosition = new Vector3(0, mesh.bounds.center.y * newScale, 0);
-        building.transform.localPosition -= offsetPosition;
-        
-
-        position.Building = building;
+        var obj = Instantiate(BuildingPrefabs[buildingIndex], position.Anchor.transform.position, Quaternion.identity, position.Anchor.transform);
+        obj.GetComponent<Building>().SetupForMenu(gameObject.layer);
+        position.Building = obj;
     }
 
     void FillWheel()
