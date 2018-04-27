@@ -156,7 +156,7 @@ public class BuildSurface : MonoBehaviour {
 				selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
 				selectedBuilding.transform.localScale = Vector3.one;
 				selectedBuilding.transform.localRotation = Quaternion.identity;
-				var renderer = selectedBuilding.GetComponent<Renderer>();
+				var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
 				originalMaterial = renderer.sharedMaterial;
 			}
 		}
@@ -208,7 +208,7 @@ public class BuildSurface : MonoBehaviour {
 		if (selectedBuilding != null)
 		{
 			var building = selectedBuilding.GetComponent<Building>();
-			var renderer = selectedBuilding.GetComponent<Renderer>();
+			var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
 			ClearBuildingIfExists(building);
 			renderer.sharedMaterial = originalMaterial;
 			SaveBuilding(building);

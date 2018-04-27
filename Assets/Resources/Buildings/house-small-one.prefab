@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33733372547811596}
   - component: {fileID: 23992140298746848}
   - component: {fileID: 95892162910594084}
-  - component: {fileID: 114141047168434516}
   - component: {fileID: 65430304006819890}
+  - component: {fileID: 114141047168434516}
   m_Layer: 0
   m_Name: house-small-one
   m_TagString: Building
@@ -133,3 +133,5 @@ MonoBehaviour:
   Size:
     WidthX: 1
     LengthZ: 1
+  MenuPosition: {x: 0, y: -0.04, z: 0}
+  MenuScale: 0.02

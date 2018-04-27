@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33756047860429876}
   - component: {fileID: 23391628909767502}
   - component: {fileID: 95445277600182920}
-  - component: {fileID: 114067011724942954}
   - component: {fileID: 65475248975301464}
+  - component: {fileID: 114067011724942954}
   m_Layer: 0
   m_Name: boiler-medium
   m_TagString: Building
@@ -133,3 +133,5 @@ MonoBehaviour:
   Size:
     WidthX: 2
     LengthZ: 2
+  MenuPosition: {x: 0, y: -0.074, z: 0}
+  MenuScale: 0.0045

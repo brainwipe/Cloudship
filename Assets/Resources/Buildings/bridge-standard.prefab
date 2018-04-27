@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33907099343462824}
   - component: {fileID: 23152673258847120}
   - component: {fileID: 95455686480732832}
-  - component: {fileID: 114757617169345188}
   - component: {fileID: 65262408838371700}
+  - component: {fileID: 114757617169345188}
   m_Layer: 0
   m_Name: bridge-standard
   m_TagString: Building
@@ -133,3 +133,5 @@ MonoBehaviour:
   Size:
     WidthX: 1
     LengthZ: 1
+  MenuPosition: {x: 0, y: -0.078, z: 0}
+  MenuScale: 0.015

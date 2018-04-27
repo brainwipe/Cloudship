@@ -114,7 +114,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1838906278851360}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -127,14 +127,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1235554380841272}
-  m_LocalRotation: {x: 0, y: -0.052335896, z: 0, w: 0.9986295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4654036869397706}
   m_Father: {fileID: 4487288415505626}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -6, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23353440015258612
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -291,6 +291,8 @@ MonoBehaviour:
   Size:
     WidthX: 1
     LengthZ: 1
+  MenuPosition: {x: 0, y: -0.07, z: 0}
+  MenuScale: 0.018
 --- !u!136 &136077999746810440
 CapsuleCollider:
   m_ObjectHideFlags: 1
