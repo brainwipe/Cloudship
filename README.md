@@ -19,10 +19,20 @@ It's a work in progress!
 Download the latest release from the [Releases Tab](https://github.com/brainwipe/Cloudship/releases). Open the zip file and run the exe.
 
 ## Controls
-- <kbd>W</kbd> increase EOT ahead (forward)
-- <kbd>A</kbd> turn left
-- <kbd>S</kbd> decrease EOT astern (backwards)
-- <kbd>D</kbd> turn right
+
+### Flight Mode
+- <kbd>w</kbd> increase EOT ahead (forward)
+- <kbd>a</kbd> turn left
+- <kbd>s</kbd> decrease EOT astern (backwards)
+- <kbd>d</kbd> turn right
+- <kbd>b</kbd> toggle build/flight mode (stops controls)
+
+### Build Mode
+- <kbd>w</kbd> select next building
+- <kbd>a</kbd> select previous building
+- <kbd>Hold left mouse button down</kbd> Place building
+- <kbd>Click and drag left mouse button</kbd> Move building
+- <kbd>Click and hold left mouse button</kbd> + <kbd>delete</kbd> Remove building
 
 Click right mouse button and drag rotates the view.
 
