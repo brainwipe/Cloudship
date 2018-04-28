@@ -10,7 +10,6 @@ public class BuildSurface : MonoBehaviour {
 
 	public Material HighlightedMaterial;
 	public GameObject BuildingSpaceIndicatorPrefab;
-	public GameObject Buildings;
 
 	Vector3 mapOffset = new Vector3(5f, 0f, 5f);
 	float gridSize = 10f;
@@ -73,16 +72,15 @@ public class BuildSurface : MonoBehaviour {
 		if (Input.GetMouseButton(0))
 		{
 			MouseMove();
+			if (Input.GetKeyUp(KeyCode.Delete))
+			{
+				Delete();
+			}
 		}
 	
 		if(Input.GetMouseButtonUp(0))
 		{
 			MouseUp();
-		}
-
-		if (Input.GetKeyUp(KeyCode.Delete))
-		{
-			Delete();
 		}
 	}
 
@@ -93,7 +91,6 @@ public class BuildSurface : MonoBehaviour {
 			var position =  map.Key.ToWorld() + mapOffset;
 			var location = Instantiate(BuildingSpaceIndicatorPrefab, position, Quaternion.identity, this.transform);
 			location.tag = BuilderLocationTag;
-			location.layer = transform.parent.gameObject.layer;
 			var buildLocation = location.GetComponent<BuildLocation>();
 			buildLocation.GridSpaceLocation = map.Key;
 			var renderer = location.GetComponent<Renderer>();
@@ -126,7 +123,7 @@ public class BuildSurface : MonoBehaviour {
 		if (selected.tag == BuildingTag)
 		{
 			var location = selected.GetComponent<Building>();
-			ClearBuilding(location);
+			ClearBuildingIfExists(location);
 			Destroy(selected);
 		}
 	}
@@ -138,33 +135,11 @@ public class BuildSurface : MonoBehaviour {
 		{
 			return;
 		}
-		if (selected.tag == BuilderLocationTag)
-		{
-			var location = selected.GetComponent<BuildLocation>();
-			if (GetEmptyLocation(location))
-			{
-				selectedBuilding = Instantiate(
-					buildMenu.SelectedBuilding, 
-					Vector3.zero, 
-					Quaternion.identity, 
-					this.transform);
-
-				selectedBuilding.tag = BuildingTag;
-
-				var building = selectedBuilding.GetComponent<Building>();	
-				building.GridSpaceLocation = location.GridSpaceLocation;
-				selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
-				selectedBuilding.transform.localScale = Vector3.one;
-				selectedBuilding.transform.localRotation = Quaternion.identity;
-				var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
-				originalMaterial = renderer.sharedMaterial;
-			}
-		}
 		else if (selected.tag == BuildingTag)
 		{
 			selectedBuilding = selected;
 			var building = selected.GetComponent<Building>();
-			ClearBuilding(building);
+			ClearBuildingIfExists(building);
 			var renderer = selectedBuilding.GetComponent<Renderer>();
 			originalMaterial = renderer.sharedMaterial;
 			renderer.sharedMaterial = HighlightedMaterial;
@@ -173,12 +148,42 @@ public class BuildSurface : MonoBehaviour {
 
 	void MouseMove()
 	{
-		if (selectedBuilding != null)
+		var selected = FindLocationUnderMouse();
+
+		if (selected == null)
 		{
-			var building = selectedBuilding.GetComponent<Building>();
-			if (GetEmptyLocation(building))
+			return;
+		}
+
+		if (selected.tag == BuilderLocationTag)
+		{
+			var location = selected.GetComponent<BuildLocation>();
+			if (selectedBuilding == null)
 			{
-				selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
+				if (GetEmptyLocation(location))
+				{
+					selectedBuilding = Instantiate(
+						buildMenu.SelectedBuilding, 
+						Vector3.zero, 
+						Quaternion.identity, 
+						this.transform);
+
+					selectedBuilding.tag = BuildingTag;
+					selectedBuilding.transform.localScale = Vector3.one;
+					selectedBuilding.transform.localRotation = Quaternion.identity;
+					var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
+					originalMaterial = renderer.sharedMaterial;
+					renderer.sharedMaterial = HighlightedMaterial;
+				}
+			}
+			if (selectedBuilding != null) 
+			{
+				if (GetEmptyLocation(location))
+				{
+					var building = selectedBuilding.GetComponent<Building>();	
+					building.GridSpaceLocation = location.GridSpaceLocation;
+					selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
+				}
 			}
 		}
 	}
@@ -226,6 +231,18 @@ public class BuildSurface : MonoBehaviour {
 		return null;
 	}
 
+	GameObject FindLocationUnderMouse()
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		var layerMask = 1 << BuildingSpaceIndicatorPrefab.layer;
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+		{
+			return hit.collider.gameObject;
+		}
+		return null;
+	}
+
 	void SaveBuilding(Building building)
 	{
 		for(int width = 0; width < building.Size.WidthX; width++)
@@ -236,7 +253,9 @@ public class BuildSurface : MonoBehaviour {
 					X = building.GridSpaceLocation.X + width,
 					Z = building.GridSpaceLocation.Z + length
 				};
+
 				buildingMap[alsogridLocation] = building;
+				selectedBuilding = null;
 			}
 		}
 	}
@@ -255,22 +274,7 @@ public class BuildSurface : MonoBehaviour {
 			}
 		}
 	}
-
-	void ClearBuilding(Building building)
-	{
-		for(int width = 0; width < building.Size.WidthX; width++)
-		{
-			for(int length =0; length < building.Size.LengthZ; length++)	
-			{
-				var alsogridLocation = new Grid{
-					X = building.GridSpaceLocation.X + width,
-					Z = building.GridSpaceLocation.Z + length
-				};
-				buildingMap[building.GridSpaceLocation] = null;
-			}
-		}
-	}
-
+	
 	bool GetEmptyLocation(IHaveGridSpace location)
 	{
 		if (location == null)
