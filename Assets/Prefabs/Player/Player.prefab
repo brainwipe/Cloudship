@@ -11,21 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1534430523172698}
   m_IsPrefabParent: 1
---- !u!1 &1264302627082824
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4551479008122880}
-  m_Layer: 8
-  m_Name: Cannon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1274992207589180
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +40,6 @@ GameObject:
   - component: {fileID: 4679564425058322}
   - component: {fileID: 54672570686858296}
   - component: {fileID: 114778670297398594}
-  - component: {fileID: 114029510154673172}
   - component: {fileID: 114910085069060166}
   m_Layer: 8
   m_Name: Player
@@ -91,21 +75,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4679564425058322}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4551479008122880
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1264302627082824}
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4679564425058322}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!4 &4645751355127758
 Transform:
   m_ObjectHideFlags: 1
@@ -117,7 +88,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4679564425058322}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4679564425058322
 Transform:
@@ -129,7 +100,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4551479008122880}
   - {fileID: 4645751355127758}
   - {fileID: 4290503869774054}
   m_Father: {fileID: 0}
@@ -228,22 +198,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114029510154673172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1534430523172698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2513b77e2c95145b846c340aec7dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
-    type: 2}
-  cannon: {fileID: 4551479008122880}
-  TimeBetweenShotsInSeconds: 1
-  ShotForce: 200
 --- !u!114 &114177711906819454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,7 +212,6 @@ MonoBehaviour:
   HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
   BuildingSpaceIndicatorPrefab: {fileID: 1725175290945636, guid: 2d5b05e3b1c1d5246a7d3200b6e60f64,
     type: 2}
-  Buildings: {fileID: 0}
   originalMaterial: {fileID: 0}
 --- !u!114 &114778670297398594
 MonoBehaviour:

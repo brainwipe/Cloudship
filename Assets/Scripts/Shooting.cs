@@ -11,7 +11,6 @@ public class Shooting : MonoBehaviour
     private ITakeDamage shooter;
 
     private string fireButton = "Fire1";
-    private bool fired;
     private float lastTimeFired;
 
     void Start()
@@ -48,8 +47,6 @@ public class Shooting : MonoBehaviour
         var lookVector = (NearestTarget() - transform.position).normalized;
         var shootVector = Vector3.RotateTowards(lookVector, Vector3.up, 0.3f, 10f);
         
-        Debug.DrawRay(transform.position, shootVector, Color.green);
-
         Rigidbody ball = Instantiate(
             cannonball, 
             cannon.position, 

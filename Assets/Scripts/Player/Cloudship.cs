@@ -17,13 +17,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
 
     FlyingPhysics flyingPhysics;
     BuildSurface builder;
-    Shooting shooting;
 
     void Start()
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
-        shooting = GetComponent<Shooting>();
         flyingPhysics.Lift = 2000f;
         flyingPhysics.Torque = 2500f;
         flyingPhysics.Speed = 500f;
@@ -52,14 +50,12 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
     {
         Mode = Modes.Build;
         builder.enabled = true;
-        shooting.enabled = false;
     }
 
     public void SetBuildModeOff()
     {
         Mode = Modes.Drive;
         builder.enabled = false;
-        shooting.enabled = true;
     }
 
     public Vector3 Position

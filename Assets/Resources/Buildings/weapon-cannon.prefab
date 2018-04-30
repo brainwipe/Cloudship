@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 95031339849286154}
   - component: {fileID: 136077999746810440}
   - component: {fileID: 114725801456436570}
+  - component: {fileID: 114588827062324936}
   m_Layer: 0
   m_Name: weapon-cannon
   m_TagString: Building
@@ -100,7 +101,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1818432014346428}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -277,6 +278,24 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114588827062324936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1749684208349342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
+    type: 2}
+  Swivel: {fileID: 4745918217125868}
+  Barrel: {fileID: 4654036869397706}
+  TimeBetweenShotsInSeconds: 0.5
+  ShotForce: 100
+  SwivelSpeed: 0.521
 --- !u!114 &114725801456436570
 MonoBehaviour:
   m_ObjectHideFlags: 1
