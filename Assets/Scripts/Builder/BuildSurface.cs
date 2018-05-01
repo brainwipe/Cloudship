@@ -7,12 +7,10 @@ public class BuildSurface : MonoBehaviour {
 
 	static string BuilderLocationTag = "BuilderLocation";
 
-	public Material HighlightedMaterial;
 	public GameObject BuildingSpaceIndicatorPrefab;
 
 	Building selectedBuilding;
 	BuildMenu buildMenu;
-	public Material originalMaterial;
 
 	Dictionary<Grid, IAmBuilding> buildingMap = new Dictionary<Grid, IAmBuilding>
 	{
@@ -91,7 +89,6 @@ public class BuildSurface : MonoBehaviour {
 			buildLocation.GridSpaceLocation = map.Key;
 			var renderer = location.GetComponent<Renderer>();
 			renderer.enabled = false;
-
 		}
 	}
 
@@ -135,9 +132,7 @@ public class BuildSurface : MonoBehaviour {
 		{
 			selectedBuilding = selected.GetComponent<Building>();
 			ClearBuildingIfExists(selectedBuilding);
-			var renderer = selectedBuilding.GetComponent<Renderer>();
-			originalMaterial = renderer.sharedMaterial;
-			renderer.sharedMaterial = HighlightedMaterial;
+			selectedBuilding.ToggleHighlight();
 		}
 	}
 
@@ -153,19 +148,14 @@ public class BuildSurface : MonoBehaviour {
 		if (selected.tag == BuilderLocationTag)
 		{
 			var location = selected.GetComponent<BuildLocation>();
-			if (selectedBuilding == null)
+			if (GetEmptyLocation(location))
 			{
-				if (GetEmptyLocation(location))
+				if (selectedBuilding == null)
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-					var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
-					originalMaterial = renderer.sharedMaterial;
-					renderer.sharedMaterial = HighlightedMaterial;
+					selectedBuilding.ToggleHighlight();
 				}
-			}
-			if (selectedBuilding != null) 
-			{
-				if (GetEmptyLocation(location))
+				else
 				{
 					selectedBuilding.GridSpaceLocation = location.GridSpaceLocation;
 				}
@@ -180,7 +170,7 @@ public class BuildSurface : MonoBehaviour {
 			var building = selectedBuilding.GetComponent<Building>();
 			var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
 			ClearBuildingIfExists(building);
-			renderer.sharedMaterial = originalMaterial;
+			selectedBuilding.ToggleHighlight();
 			SaveBuilding(building);
 		}
 	}

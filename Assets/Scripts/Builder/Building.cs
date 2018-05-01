@@ -10,6 +10,12 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
     public Vector3 MenuPosition;
     public float MenuScale;
 
+    Material originalMaterial;
+    public Material HighlightedMaterial;
+    Renderer highlightTarget;
+
+    Cloudship player;
+
     Grid gridSpaceLocation;
     public Grid GridSpaceLocation 
     { 
@@ -22,9 +28,26 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
         }
     }
 
+    bool highlight = false;
+
+    void Awake()
+    {
+        highlightTarget = GetComponentInChildren<Renderer>();
+        originalMaterial = highlightTarget.sharedMaterial;
+    }
+
+    void Start()
+    {
+        player = GameManager.Instance.PlayerCloudship;
+    }
+
     public void SetupForMenu(int menuLayer)
     {
         gameObject.layer = menuLayer;
+        foreach(Transform child in transform)
+        {
+            child.gameObject.layer = menuLayer;    
+        }
         transform.localRotation = Quaternion.identity;
         transform.localPosition = MenuPosition;
         transform.localScale = new Vector3(MenuScale,MenuScale,MenuScale);
@@ -44,8 +67,32 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
         clone.tag = BuildingTag;
 		clone.transform.localScale = Vector3.one;
         clone.transform.localRotation = Quaternion.identity;
-
+        
+        gameObject.layer = player.gameObject.layer;
+        foreach(Transform child in transform)
+        {
+            child.gameObject.layer = player.gameObject.layer;      
+        }
+             
         return clone.GetComponent<Building>();
+    }
+
+    public void ToggleHighlight()
+    {
+        if (highlight)
+        {
+            highlightTarget.sharedMaterial = originalMaterial;
+        }
+        else
+        {
+            highlightTarget.sharedMaterial = HighlightedMaterial;
+        }
+        highlight = !highlight;
+    }
+
+    public void Remove()
+    {
+        Destroy(gameObject);
     }
 
     private Vector3 LocalLocation

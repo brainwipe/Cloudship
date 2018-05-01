@@ -70,7 +70,6 @@ public class BuildMenu : MonoBehaviour {
                 position.Angle);
         }
 
-
        CreateBuildingAt(0,0);
        CreateBuildingAt(1,1);
        CreateBuildingAt(2,2);
@@ -97,7 +96,8 @@ public class BuildMenu : MonoBehaviour {
 
         var forwardMenuIndex = WrapAround(menuPositions.Length, selectionIndex + (2 * directionMultiplier));
         var forwardBuildingIndex = WrapAround(BuildingPrefabs.Length, buildingIndex + (2 * directionMultiplier));
-        Destroy(menuPositions[forwardMenuIndex].Building);
+
+        menuPositions[forwardMenuIndex].RemoveBuilding();
         CreateBuildingAt(forwardBuildingIndex, forwardMenuIndex);
     }
 
@@ -141,6 +141,14 @@ public class BuildMenu : MonoBehaviour {
         public float Angle{
             get{
                 return angle;
+            }
+        }
+
+        public void RemoveBuilding()
+        {
+            if (Building != null)
+            {
+                Building.Remove();
             }
         }
     }
