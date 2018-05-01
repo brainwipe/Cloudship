@@ -6,15 +6,11 @@ using UnityEngine;
 public class BuildSurface : MonoBehaviour {
 
 	static string BuilderLocationTag = "BuilderLocation";
-	static string BuildingTag = "Building";
 
 	public Material HighlightedMaterial;
 	public GameObject BuildingSpaceIndicatorPrefab;
 
-	Vector3 mapOffset = new Vector3(5f, 0f, 5f);
-	float gridSize = 10f;
-
-	GameObject selectedBuilding;
+	Building selectedBuilding;
 	BuildMenu buildMenu;
 	public Material originalMaterial;
 
@@ -88,14 +84,14 @@ public class BuildSurface : MonoBehaviour {
 	{
 		foreach(var map in buildingMap)
 		{
-			var position =  map.Key.ToWorld() + mapOffset;
+			var position =  map.Key.ToWorld();
 			var location = Instantiate(BuildingSpaceIndicatorPrefab, position, Quaternion.identity, this.transform);
 			location.tag = BuilderLocationTag;
 			var buildLocation = location.GetComponent<BuildLocation>();
 			buildLocation.GridSpaceLocation = map.Key;
 			var renderer = location.GetComponent<Renderer>();
 			renderer.enabled = false;
-			
+
 		}
 	}
 
@@ -120,7 +116,7 @@ public class BuildSurface : MonoBehaviour {
 	void Delete()
 	{
 		var selected = WhatIsUnderTheMousePointer();
-		if (selected.tag == BuildingTag)
+		if (selected.tag == Building.BuildingTag)
 		{
 			var location = selected.GetComponent<Building>();
 			ClearBuildingIfExists(location);
@@ -135,11 +131,10 @@ public class BuildSurface : MonoBehaviour {
 		{
 			return;
 		}
-		else if (selected.tag == BuildingTag)
+		else if (selected.tag == Building.BuildingTag)
 		{
-			selectedBuilding = selected;
-			var building = selected.GetComponent<Building>();
-			ClearBuildingIfExists(building);
+			selectedBuilding = selected.GetComponent<Building>();
+			ClearBuildingIfExists(selectedBuilding);
 			var renderer = selectedBuilding.GetComponent<Renderer>();
 			originalMaterial = renderer.sharedMaterial;
 			renderer.sharedMaterial = HighlightedMaterial;
@@ -162,15 +157,7 @@ public class BuildSurface : MonoBehaviour {
 			{
 				if (GetEmptyLocation(location))
 				{
-					selectedBuilding = Instantiate(
-						buildMenu.SelectedBuilding, 
-						Vector3.zero, 
-						Quaternion.identity, 
-						this.transform);
-
-					selectedBuilding.tag = BuildingTag;
-					selectedBuilding.transform.localScale = Vector3.one;
-					selectedBuilding.transform.localRotation = Quaternion.identity;
+					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
 					originalMaterial = renderer.sharedMaterial;
 					renderer.sharedMaterial = HighlightedMaterial;
@@ -180,32 +167,10 @@ public class BuildSurface : MonoBehaviour {
 			{
 				if (GetEmptyLocation(location))
 				{
-					var building = selectedBuilding.GetComponent<Building>();	
-					building.GridSpaceLocation = location.GridSpaceLocation;
-					selectedBuilding.transform.localPosition = GridSpaceToLocalSpace(building);
+					selectedBuilding.GridSpaceLocation = location.GridSpaceLocation;
 				}
 			}
 		}
-	}
-
-	Vector3 GridSpaceToLocalSpace(Building building)
-	{
-		var grid = building.GridSpaceLocation;
-
-		var buildingSizeOffset = Vector3.zero;
-		if (building.Size.IsLargerThanUnit)
-		{
-			buildingSizeOffset = new Vector3(
-				((building.Size.WidthX) / 2) * (gridSize / 2),
-				0,
-				((building.Size.LengthZ) / 2) * (gridSize / 2));
-		}
-
-		var position = new Vector3((grid.X * gridSize),0, (grid.Z * gridSize))
-			+ buildingSizeOffset
-			+ mapOffset;
-
-		return position;
 	}
 
 	void MouseUp()
@@ -245,34 +210,13 @@ public class BuildSurface : MonoBehaviour {
 
 	void SaveBuilding(Building building)
 	{
-		for(int width = 0; width < building.Size.WidthX; width++)
-		{
-			for(int length =0; length < building.Size.LengthZ; length++)	
-			{
-				var alsogridLocation = new Grid{
-					X = building.GridSpaceLocation.X + width,
-					Z = building.GridSpaceLocation.Z + length
-				};
-
-				buildingMap[alsogridLocation] = building;
-				selectedBuilding = null;
-			}
-		}
+		building.Locations.ForAll(b => buildingMap[b] = building);
+		selectedBuilding = null;
 	}
 
 	void ClearBuildingIfExists(Building building)
 	{
-		for(int width = 0; width < building.Size.WidthX; width++)
-		{
-			for(int length =0; length < building.Size.LengthZ; length++)	
-			{
-				var alsogridLocation = new Grid{
-					X = building.GridSpaceLocation.X + width,
-					Z = building.GridSpaceLocation.Z + length
-				};
-				buildingMap[alsogridLocation] = null;
-			}
-		}
+		building.Locations.ForAll(b => buildingMap[b] = null);
 	}
 	
 	bool GetEmptyLocation(IHaveGridSpace location)
@@ -291,30 +235,16 @@ public class BuildSurface : MonoBehaviour {
 		return false;
 	}
 	
-	IHaveGridSpace NearestEmptySpace(IHaveGridSpace desiredLocation, BuildingSize size)
-	{
-		
-		return desiredLocation;
-	}
-
 	bool WillItFit(Grid gridLocation, BuildingSize size)
 	{
-		for(int width = 0; width < size.WidthX; width++)
+		foreach(var location in gridLocation.GetAllLocations(size))
 		{
-			for(int length =0; length < size.LengthZ; length++)	
+			if (!CanIBuildThere(location))
 			{
-				var testGridLocation = new Grid{
-					X = gridLocation.X + width,
-					Z = gridLocation.Z + length
-				};
-				
-				if (!CanIBuildThere(testGridLocation))
-				{
-					return false;
-				}
+				return false;
 			}
 		}
-
+		
 		return true;
 	}
 

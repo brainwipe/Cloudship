@@ -20,7 +20,7 @@ public class BuildMenu : MonoBehaviour {
     float wheelSpeed = 4f;
     GameObject[] BuildingPrefabs;
     
-    public GameObject SelectedBuilding 
+    public Building SelectedBuilding 
     {
         get
         {
@@ -52,8 +52,9 @@ public class BuildMenu : MonoBehaviour {
         var position = menuPositions[menuIndex];
         
         var obj = Instantiate(BuildingPrefabs[buildingIndex], position.Anchor.transform.position, Quaternion.identity, position.Anchor.transform);
-        obj.GetComponent<Building>().SetupForMenu(gameObject.layer);
-        position.Building = obj;
+        var building = obj.GetComponent<Building>();
+        building.SetupForMenu(gameObject.layer);
+        position.Building = building;
     }
 
     void FillWheel()
@@ -132,7 +133,7 @@ public class BuildMenu : MonoBehaviour {
             get;set;
         }
 
-        public GameObject Building 
+        public Building Building 
         {
             get;set;
         }
