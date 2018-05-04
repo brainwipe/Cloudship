@@ -17,20 +17,18 @@ public class Cannon : MonoBehaviour
     private string fireButton = "Fire1";
     private float lastTimeFired;
 
-    private Building building;
     private Cloudship cloudship;
     private float fuzzyShotForce = 0.2f;
 
     void Start()
     {
-        building = GetComponent<Building>();
         cloudship = GameManager.Instance.PlayerCloudship;
     }
 
     void Update()
     {
         // TODO ROLA refactor when Building creation is changed.
-        if (building.GridSpaceLocation == null || cloudship.Mode == Cloudship.Modes.Build)
+        if (cloudship.Mode == Cloudship.Modes.Build)
         {
             return;
         }

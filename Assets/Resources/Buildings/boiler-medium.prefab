@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 95445277600182920}
   - component: {fileID: 65475248975301464}
   - component: {fileID: 114067011724942954}
+  - component: {fileID: 54875997018724288}
   m_Layer: 0
   m_Name: boiler-medium
   m_TagString: Building
@@ -57,13 +58,14 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 74f0d43fbedeef6408589f925c702316, type: 2}
   - {fileID: 2100000, guid: 19ef926501d13be40aa40542e81dfd9a, type: 2}
   - {fileID: 2100000, guid: e4641f5dc0eb0d341a2425ddb5fe255c, type: 2}
   - {fileID: 2100000, guid: dd95e47de58abe24fb2a69459c960b0f, type: 2}
-  - {fileID: 2100008, guid: e427a96c84c5aee4eb1986f37705fa89, type: 3}
-  - {fileID: 2100010, guid: e427a96c84c5aee4eb1986f37705fa89, type: 3}
+  - {fileID: 2100000, guid: 664427c70695318468c50d4313320f65, type: 2}
+  - {fileID: 2100000, guid: aa9f537981e5cff41b563d6fbc800203, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,6 +92,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1787292943901636}
   m_Mesh: {fileID: 4300000, guid: e427a96c84c5aee4eb1986f37705fa89, type: 3}
+--- !u!54 &54875997018724288
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787292943901636}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65475248975301464
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -100,8 +117,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18.415361, y: 37.507683, z: 17.198198}
-  m_Center: {x: 0, y: 18.746159, z: -0.4630785}
+  m_Size: {x: 23.095419, y: 37.507683, z: 23.771025}
+  m_Center: {x: 1.0309429, y: 18.746159, z: -0.5663557}
 --- !u!95 &95445277600182920
 Animator:
   serializedVersion: 3
@@ -119,6 +136,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114067011724942954
 MonoBehaviour:
   m_ObjectHideFlags: 1

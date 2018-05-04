@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
+public class Building : MonoBehaviour, IAmBuilding {
 
     public static string BuildingTag = "Building";
 
@@ -16,19 +16,7 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
 
     Cloudship player;
 
-    Grid gridSpaceLocation;
-    public Grid GridSpaceLocation 
-    { 
-        get{
-            return gridSpaceLocation;
-        }
-        set{
-            gridSpaceLocation = value;
-            transform.localPosition = LocalLocation;
-        }
-    }
-
-    bool highlight = false;
+       bool highlight = false;
 
     void Awake()
     {
@@ -53,20 +41,13 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
         transform.localScale = new Vector3(MenuScale,MenuScale,MenuScale);
     }
 
-    public IEnumerable<Grid> Locations
-    {
-        get 
-        {
-            return gridSpaceLocation.GetAllLocations(Size);
-        }
-    }
-
     public Building Clone(Transform buildSurface)
     {
         var clone = Instantiate(gameObject, Vector3.zero, Quaternion.identity, buildSurface);
         clone.tag = BuildingTag;
 		clone.transform.localScale = Vector3.one;
         clone.transform.localRotation = Quaternion.identity;
+        clone.layer = 10;
         
         gameObject.layer = player.gameObject.layer;
         foreach(Transform child in transform)
@@ -93,29 +74,6 @@ public class Building : MonoBehaviour, IAmBuilding, IHaveGridSpace {
     public void Remove()
     {
         Destroy(gameObject);
-    }
-
-    private Vector3 LocalLocation
-    {
-        get {
-            var buildingSizeOffset = Vector3.zero;
-            if (Size.IsLargerThanUnit)
-            {
-                buildingSizeOffset = new Vector3(
-                    ((Size.WidthX) / 2) * (Grid.GridSize / 2),
-                    0,
-                    ((Size.LengthZ) / 2) * (Grid.GridSize / 2));
-            }
-
-            var location = new Vector3(
-                    (gridSpaceLocation.X * Grid.GridSize),
-                    0, 
-                    (gridSpaceLocation.Z * Grid.GridSize))
-                + buildingSizeOffset
-                + Grid.Offset;
-
-            return location;
-        }
     }
 
 }
