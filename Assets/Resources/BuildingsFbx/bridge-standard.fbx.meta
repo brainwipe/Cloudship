@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 08d70fa521b52e84e89567bf55ff9a18
-timeCreated: 1523712358
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -18,6 +16,11 @@ ModelImporter:
     4300000: Empty_Mesh
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Door_Open_Black
+    second: {fileID: 2100000, guid: 664427c70695318468c50d4313320f65, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -38,6 +41,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Building_Timming
     second: {fileID: 2100000, guid: dd95e47de58abe24fb2a69459c960b0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Underside
+    second: {fileID: 2100000, guid: aa9f537981e5cff41b563d6fbc800203, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -56,6 +64,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

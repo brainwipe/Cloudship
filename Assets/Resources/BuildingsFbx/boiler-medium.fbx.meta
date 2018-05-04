@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: e427a96c84c5aee4eb1986f37705fa89
-timeCreated: 1523712359
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -36,12 +34,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Building_Door_Open_Black
+    second: {fileID: 2100000, guid: 664427c70695318468c50d4313320f65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Building_Timming
     second: {fileID: 2100000, guid: dd95e47de58abe24fb2a69459c960b0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_Underside
+    second: {fileID: 2100000, guid: aa9f537981e5cff41b563d6fbc800203, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -56,6 +64,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

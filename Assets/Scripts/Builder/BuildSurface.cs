@@ -168,7 +168,6 @@ public class BuildSurface : MonoBehaviour {
 		if (selectedBuilding != null)
 		{
 			var building = selectedBuilding.GetComponent<Building>();
-			var renderer = selectedBuilding.GetComponentInChildren<Renderer>();
 			ClearBuildingIfExists(building);
 			selectedBuilding.ToggleHighlight();
 			SaveBuilding(building);
