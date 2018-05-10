@@ -9,6 +9,7 @@ public class Building : MonoBehaviour, IAmBuilding {
     public BuildingSize Size;
     public Vector3 MenuPosition;
     public float MenuScale;
+    public string Name;
 
     Material originalMaterial;
     public Material HighlightedMaterial;
@@ -16,12 +17,16 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     Cloudship player;
 
-       bool highlight = false;
+    bool highlight = false;
+    public bool InMenu = false;
+
+    public bool CanPlace { get; private set; }
 
     void Awake()
     {
         highlightTarget = GetComponentInChildren<Renderer>();
         originalMaterial = highlightTarget.sharedMaterial;
+        CanPlace = true;
     }
 
     void Start()
@@ -39,6 +44,7 @@ public class Building : MonoBehaviour, IAmBuilding {
         transform.localRotation = Quaternion.identity;
         transform.localPosition = MenuPosition;
         transform.localScale = new Vector3(MenuScale,MenuScale,MenuScale);
+        InMenu = true;
     }
 
     public Building Clone(Transform buildSurface)
@@ -54,8 +60,9 @@ public class Building : MonoBehaviour, IAmBuilding {
         {
             child.gameObject.layer = player.gameObject.layer;      
         }
-             
-        return clone.GetComponent<Building>();
+        var cloneBuilding = clone.GetComponent<Building>();
+        cloneBuilding.InMenu = false;
+        return cloneBuilding;
     }
 
     public void ToggleHighlight()
@@ -74,6 +81,45 @@ public class Building : MonoBehaviour, IAmBuilding {
     public void Remove()
     {
         Destroy(gameObject);
+    }
+
+    public void UpdateVisibility()
+    {
+        foreach(var renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.enabled =CanPlace;
+        }
+		
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (InMenu)
+        {
+            return;
+        }
+
+        if (other.tag == "BuilderBoundary")
+        {
+            CanPlace = true;
+            return;
+        }
+        CanPlace = false;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (InMenu)
+        {
+            return;
+        }
+
+        if (other.tag == "BuilderBoundary")
+        {
+            CanPlace = false;
+            return;
+        }
+        CanPlace = true;
     }
 
 }

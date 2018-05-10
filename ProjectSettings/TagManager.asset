@@ -10,6 +10,7 @@ TagManager:
   - Terrain
   - BuilderLocation
   - Building
+  - BuilderBoundary
   layers:
   - Default
   - TransparentFX

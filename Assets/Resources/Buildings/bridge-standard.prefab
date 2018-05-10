@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 95455686480732832}
   - component: {fileID: 65262408838371700}
   - component: {fileID: 114757617169345188}
-  m_Layer: 0
+  - component: {fileID: 54988876152790570}
+  m_Layer: 10
   m_Name: bridge-standard
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -91,6 +92,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1233157453192596}
   m_Mesh: {fileID: 4300000, guid: 08d70fa521b52e84e89567bf55ff9a18, type: 3}
+--- !u!54 &54988876152790570
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233157453192596}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65262408838371700
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -98,7 +114,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1233157453192596}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.55, y: 12.099999, z: 7.2999997}
@@ -137,4 +153,5 @@ MonoBehaviour:
     LengthZ: 1
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
+  Name: Overlook Bridge
   HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}

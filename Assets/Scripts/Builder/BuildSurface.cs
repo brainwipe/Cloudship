@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class BuildSurface : MonoBehaviour {
 
-	public GameObject BuildingSpaceIndicatorPrefab;
-
 	Building selectedBuilding;
 	BuildMenu buildMenu;
+	public MeshFilter Boundary;
 
 	void Awake()
 	{
@@ -28,18 +27,18 @@ public class BuildSurface : MonoBehaviour {
 	
 	void Update()
 	{
-
+		MouseMove();
+		
 		if (Input.GetMouseButtonDown(0))
 		{
-			MouseDown();
+			// TODO ROLA Select
 		}
 
 		if (Input.GetMouseButton(0))
 		{
-			MouseMove();
 			if (Input.GetKeyUp(KeyCode.Delete))
 			{
-				// TODO
+				// TODO ROLA Delete
 			}
 		}
 	
@@ -49,72 +48,69 @@ public class BuildSurface : MonoBehaviour {
 		}
 	}
 
-	void MouseDown()
-	{
-		var selected = WhatIsUnderTheMousePointer();
-		if (selected == null)
-		{
-			return;
-		}
-		else if (selected.tag == "Player")
-		{
-			if (selectedBuilding == null)
-			{
-				selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-				Debug.Log(GetPlace());
-				var place = GetPlace();
-				selectedBuilding.transform.position = new Vector3(place.x, selected.transform.position.y, place.z);
-				selectedBuilding.ToggleHighlight();
-			}
-		}
-	}
-
 	void MouseMove()
 	{
-		var selected = WhatIsUnderTheMousePointer();
-
-		if (selected == null)
+		if (selectedBuilding == null)
 		{
-			return;
+			selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
+			selectedBuilding.ToggleHighlight();
+			SetBoundary(selectedBuilding);
 		}
-
+		else if(buildMenu.SelectedBuilding.Name != selectedBuilding.Name) 
+		{
+			selectedBuilding.Remove();
+			selectedBuilding = null;
+		}
+		else
+		{
+			var place = GetDesired();
+			var zeroedY = new Vector3(place.x, 0, place.z);
+			selectedBuilding.transform.position = zeroedY;
+			selectedBuilding.UpdateVisibility();
+		}
 		
 	}
-
 	void MouseUp()
 	{
-		if (selectedBuilding != null)
+		if (selectedBuilding != null && selectedBuilding.CanPlace)
 		{
 			var building = selectedBuilding.GetComponent<Building>();
 			selectedBuilding.ToggleHighlight();
 			SaveBuilding(building);
+			selectedBuilding = null;
 		}
-	}
-
-	Vector3 GetPlace()
-	{
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast(ray, out hit))
-		{
-			return hit.point;
-		}
-		return Vector3.zero;
-	}
-
-	GameObject WhatIsUnderTheMousePointer()
-	{
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if (Physics.Raycast(ray, out hit))
-		{
-			return hit.collider.gameObject;
-		}
-		return null;
 	}
 
 	void SaveBuilding(Building building)
 	{
 		selectedBuilding = null;
+	}
+
+	Vector3 GetDesired()
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		int layerMask = 1 << 8;
+
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+		{
+				return hit.point;
+			
+		}
+		return Vector3.zero;
+	}
+
+	void SetBoundary(Building building)
+	{
+		float safetyMargin = 2f;
+
+		Boundary.transform.localScale = Vector3.one;
+		var boundaryExtents = Boundary.mesh.bounds.extents;
+		var buildingMeshFilter = building.GetComponent<MeshFilter>();
+		var buildingSizes = (buildingMeshFilter.mesh.bounds.extents + new Vector3(safetyMargin, 0, safetyMargin)) * 2;
+
+		var xScale = (boundaryExtents.x - buildingSizes.x) / boundaryExtents.x;
+		var zScale = (boundaryExtents.z - buildingSizes.z) / boundaryExtents.z;
+		Boundary.transform.localScale = new Vector3(xScale, 1, zScale);
 	}
 }

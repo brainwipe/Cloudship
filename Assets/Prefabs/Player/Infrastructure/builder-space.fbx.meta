@@ -1,43 +1,16 @@
 fileFormatVersion: 2
-guid: 299f40ace5dea6b42882dbe6b8835402
+guid: 50ca3bb13fc09d0498aea9958e34de4f
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: edge-wall
-    100004: medium-base-surface
-    100006: Collider_layer
     400000: //RootNode
-    400002: edge-wall
-    400004: medium-base-surface
-    400006: Collider_layer
     2100000: Default_1
-    2100002: Default_2
-    2100004: Boundary_Collider
     2300000: //RootNode
-    2300002: edge-wall
-    2300004: medium-base-surface
-    2300006: Collider_layer
     3300000: //RootNode
-    3300002: edge-wall
-    3300004: medium-base-surface
-    3300006: Collider_layer
-    4300000: Empty_Mesh
-    4300002: medium-base-surface
-    4300004: edge-wall
-    4300006: Collider_layer
+    4300000: medium-base-surface
     9500000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Default_1
-    second: {fileID: 2100000, guid: 6b34065a04a62c24a8f68fce0e4de5c1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Default_2
-    second: {fileID: 2100000, guid: 6b34065a04a62c24a8f68fce0e4de5c1, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -89,8 +62,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
