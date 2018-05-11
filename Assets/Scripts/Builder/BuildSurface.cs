@@ -76,14 +76,8 @@ public class BuildSurface : MonoBehaviour {
 		{
 			var building = selectedBuilding.GetComponent<Building>();
 			selectedBuilding.ToggleHighlight();
-			SaveBuilding(building);
 			selectedBuilding = null;
 		}
-	}
-
-	void SaveBuilding(Building building)
-	{
-		selectedBuilding = null;
 	}
 
 	Vector3 GetDesired()
@@ -102,12 +96,12 @@ public class BuildSurface : MonoBehaviour {
 
 	void SetBoundary(Building building)
 	{
-		float safetyMargin = 2f;
+		float safetyMargin = 1f;
 
 		Boundary.transform.localScale = Vector3.one;
 		var boundaryExtents = Boundary.mesh.bounds.extents;
 		var buildingMeshFilter = building.GetComponent<MeshFilter>();
-		var buildingSizes = (buildingMeshFilter.mesh.bounds.extents + new Vector3(safetyMargin, 0, safetyMargin)) * 2;
+		var buildingSizes = (buildingMeshFilter.mesh.bounds.extents + new Vector3(safetyMargin, 0, safetyMargin));
 
 		var xScale = (boundaryExtents.x - buildingSizes.x) / boundaryExtents.x;
 		var zScale = (boundaryExtents.z - buildingSizes.z) / boundaryExtents.z;

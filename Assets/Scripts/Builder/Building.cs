@@ -20,7 +20,7 @@ public class Building : MonoBehaviour, IAmBuilding {
     bool highlight = false;
     public bool InMenu = false;
 
-    public bool CanPlace { get; private set; }
+    public bool CanPlace;
 
     void Awake()
     {
@@ -91,35 +91,4 @@ public class Building : MonoBehaviour, IAmBuilding {
         }
 		
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (InMenu)
-        {
-            return;
-        }
-
-        if (other.tag == "BuilderBoundary")
-        {
-            CanPlace = true;
-            return;
-        }
-        CanPlace = false;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (InMenu)
-        {
-            return;
-        }
-
-        if (other.tag == "BuilderBoundary")
-        {
-            CanPlace = false;
-            return;
-        }
-        CanPlace = true;
-    }
-
 }
