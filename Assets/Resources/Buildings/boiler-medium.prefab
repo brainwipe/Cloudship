@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114071953685756778}
   m_Layer: 10
   m_Name: collision
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114854359536379790}
   m_Layer: 10
   m_Name: boundary-collision
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +168,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!54 &54460514887236936
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -237,15 +237,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size:
-    WidthX: 2
-    LengthZ: 2
   MenuPosition: {x: 0, y: -0.074, z: 0}
   MenuScale: 0.0045
   Name: Medium Boiler
   HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
   InMenu: 0
-  CanPlace: 0
+  AnotherObjectCollision: 0
+  BoundaryCollision: 0
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

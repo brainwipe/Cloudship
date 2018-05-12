@@ -13,7 +13,6 @@ public class BoundaryCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter: Boundary: " + other.tag + ", " +other.gameObject.layer);
         if (building.InMenu)
         {
             return;
@@ -21,13 +20,12 @@ public class BoundaryCollision : MonoBehaviour
 
         if (other.tag == "BuilderBoundary")
         {
-            building.CanPlace = true;
+            building.BoundaryCollision = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit: Boundary: " + other.tag + ", " +other.gameObject.layer);
         if (building.InMenu)
         {
             return;
@@ -35,7 +33,7 @@ public class BoundaryCollision : MonoBehaviour
 
         if (other.tag == "BuilderBoundary")
         {
-            building.CanPlace = false;
+            building.BoundaryCollision = false;
         }
     }
 }

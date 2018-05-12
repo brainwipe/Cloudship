@@ -6,7 +6,6 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     public static string BuildingTag = "Building";
 
-    public BuildingSize Size;
     public Vector3 MenuPosition;
     public float MenuScale;
     public string Name;
@@ -20,13 +19,15 @@ public class Building : MonoBehaviour, IAmBuilding {
     bool highlight = false;
     public bool InMenu = false;
 
-    public bool CanPlace;
+    public bool AnotherObjectCollision;
+    public bool BoundaryCollision;
 
     void Awake()
     {
         highlightTarget = GetComponentInChildren<Renderer>();
         originalMaterial = highlightTarget.sharedMaterial;
-        CanPlace = true;
+        BoundaryCollision = true;
+        AnotherObjectCollision = false;
     }
 
     void Start()
@@ -55,10 +56,9 @@ public class Building : MonoBehaviour, IAmBuilding {
         clone.transform.localRotation = Quaternion.identity;
         clone.layer = 10;
         
-        gameObject.layer = player.gameObject.layer;
-        foreach(Transform child in transform)
+        foreach(Transform child in clone.transform)
         {
-            child.gameObject.layer = player.gameObject.layer;      
+            child.gameObject.layer = clone.layer;      
         }
         var cloneBuilding = clone.GetComponent<Building>();
         cloneBuilding.InMenu = false;
@@ -85,10 +85,19 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     public void UpdateVisibility()
     {
+        Debug.Log("Boundary: " + BoundaryCollision + ", Another:" + AnotherObjectCollision);
         foreach(var renderer in GetComponentsInChildren<Renderer>())
         {
-            renderer.enabled =CanPlace;
+            renderer.enabled = CanPlace;
         }
 		
+    }
+
+    public bool CanPlace
+    {
+        get
+        {
+            return BoundaryCollision && !AnotherObjectCollision;
+        }
     }
 }

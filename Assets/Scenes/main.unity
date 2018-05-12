@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 316302003}
   - component: {fileID: 655051481}
   - component: {fileID: 316302002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
       propertyPath: m_TagString
-      value: BuilderLocation
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
       propertyPath: m_Layer
@@ -650,6 +650,10 @@ Prefab:
     - target: {fileID: 400006, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}

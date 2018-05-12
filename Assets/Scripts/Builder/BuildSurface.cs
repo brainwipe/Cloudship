@@ -74,7 +74,6 @@ public class BuildSurface : MonoBehaviour {
 	{
 		if (selectedBuilding != null && selectedBuilding.CanPlace)
 		{
-			var building = selectedBuilding.GetComponent<Building>();
 			selectedBuilding.ToggleHighlight();
 			selectedBuilding = null;
 		}
