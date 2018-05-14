@@ -10,29 +10,27 @@ public class Building : MonoBehaviour, IAmBuilding {
     public float MenuScale;
     public string Name;
 
-    Material originalMaterial;
-    public Material HighlightedMaterial;
     Renderer highlightTarget;
-
-    Cloudship player;
+    public Shader standardShader;
+    public Shader highlightShader;
 
     bool highlight = false;
     public bool InMenu = false;
 
     public bool AnotherObjectCollision;
     public bool BoundaryCollision;
+    public bool IsOverCloudship;
+    
 
     void Awake()
     {
-        highlightTarget = GetComponentInChildren<Renderer>();
-        originalMaterial = highlightTarget.sharedMaterial;
         BoundaryCollision = true;
         AnotherObjectCollision = false;
-    }
+        IsOverCloudship = false;
 
-    void Start()
-    {
-        player = GameManager.Instance.PlayerCloudship;
+        highlightTarget = GetComponentInChildren<Renderer>();
+        standardShader = highlightTarget.materials[0].shader;
+        highlightShader = Shader.Find("graphs/BuildingHighlight");
     }
 
     public void SetupForMenu(int menuLayer)
@@ -65,18 +63,6 @@ public class Building : MonoBehaviour, IAmBuilding {
         return cloneBuilding;
     }
 
-    public void ToggleHighlight()
-    {
-        if (highlight)
-        {
-            highlightTarget.sharedMaterial = originalMaterial;
-        }
-        else
-        {
-            highlightTarget.sharedMaterial = HighlightedMaterial;
-        }
-        highlight = !highlight;
-    }
 
     public void Remove()
     {
@@ -85,10 +71,16 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     public void UpdateVisibility()
     {
-        Debug.Log("Boundary: " + BoundaryCollision + ", Another:" + AnotherObjectCollision);
-        foreach(var renderer in GetComponentsInChildren<Renderer>())
+        foreach(var material in highlightTarget.materials)
         {
-            renderer.enabled = CanPlace;
+            if (CanPlace)
+            {
+                material.shader = standardShader;
+            }
+            else
+            {
+                material.shader = highlightShader;
+            }
         }
 		
     }
@@ -97,7 +89,7 @@ public class Building : MonoBehaviour, IAmBuilding {
     {
         get
         {
-            return BoundaryCollision && !AnotherObjectCollision;
+            return BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
         }
     }
 }

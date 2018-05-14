@@ -37,7 +37,6 @@ public class EnemyFactory : MonoBehaviour
 
     void Spawn()
     {
-        Debug.Log("Spawning enemy");
         Enemy.Reset();
     }
 }

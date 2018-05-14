@@ -53,7 +53,6 @@ public class BuildSurface : MonoBehaviour {
 		if (selectedBuilding == null)
 		{
 			selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-			selectedBuilding.ToggleHighlight();
 			SetBoundary(selectedBuilding);
 		}
 		else if(buildMenu.SelectedBuilding.Name != selectedBuilding.Name) 
@@ -63,10 +62,19 @@ public class BuildSurface : MonoBehaviour {
 		}
 		else
 		{
-			var place = GetDesired();
-			var zeroedY = new Vector3(place.x, 0, place.z);
-			selectedBuilding.transform.position = zeroedY;
+			Vector3 place;
+			if (GetDesired(out place))
+			{
+				var zeroedY = new Vector3(place.x, 0, place.z);
+				selectedBuilding.transform.position = zeroedY;
+				selectedBuilding.IsOverCloudship = true;
+			}
+			else 
+			{
+				selectedBuilding.IsOverCloudship = false;
+			}
 			selectedBuilding.UpdateVisibility();
+
 		}
 		
 	}
@@ -74,23 +82,24 @@ public class BuildSurface : MonoBehaviour {
 	{
 		if (selectedBuilding != null && selectedBuilding.CanPlace)
 		{
-			selectedBuilding.ToggleHighlight();
 			selectedBuilding = null;
 		}
 	}
 
-	Vector3 GetDesired()
+	bool GetDesired(out Vector3 position)
 	{
 		RaycastHit hit;
+		position = Vector3.zero;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		int layerMask = 1 << 8;
 
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 		{
-				return hit.point;
+			position = hit.point;
+			return true;
 			
 		}
-		return Vector3.zero;
+		return false;
 	}
 
 	void SetBoundary(Building building)
