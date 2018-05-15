@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class BuildSurface : MonoBehaviour {
 
+	enum BuildMode {
+		Select,
+		Place
+	}
+
 	Building selectedBuilding;
 	BuildMenu buildMenu;
 	public MeshFilter Boundary;
+	BuildMode mode;
 
 	void Awake()
 	{
@@ -15,6 +21,7 @@ public class BuildSurface : MonoBehaviour {
 		{
 			buildMenu = FindObjectOfType<BuildMenu>();
 		}
+		mode = BuildMode.Select;
 	}
 
 	void OnDisable()
@@ -31,7 +38,20 @@ public class BuildSurface : MonoBehaviour {
 		
 		if (Input.GetMouseButtonDown(0))
 		{
-			// TODO ROLA Select
+			if (selectedBuilding == null)
+			{
+				Building building;
+				if (IsThereABuildingUnderMousePointer(out building))
+				{
+
+					selectedBuilding = building;
+				}
+				else
+				{
+					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
+				}
+				SetBoundary(selectedBuilding);
+			}
 		}
 
 		if (Input.GetMouseButton(0))
@@ -44,7 +64,7 @@ public class BuildSurface : MonoBehaviour {
 	
 		if(Input.GetMouseButtonUp(0))
 		{
-			MouseUp();
+			PlaceBuilding();
 		}
 	}
 
@@ -52,38 +72,61 @@ public class BuildSurface : MonoBehaviour {
 	{
 		if (selectedBuilding == null)
 		{
-			selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-			SetBoundary(selectedBuilding);
-		}
-		else if(buildMenu.SelectedBuilding.Name != selectedBuilding.Name) 
+			return;
+		}	
+
+		if(buildMenu.SelectedBuilding.Name != selectedBuilding.Name) 
 		{
 			selectedBuilding.Remove();
 			selectedBuilding = null;
 		}
-		else
-		{
-			Vector3 place;
-			if (GetDesired(out place))
-			{
-				var zeroedY = new Vector3(place.x, 0, place.z);
-				selectedBuilding.transform.position = zeroedY;
-				selectedBuilding.IsOverCloudship = true;
-			}
-			else 
-			{
-				selectedBuilding.IsOverCloudship = false;
-			}
-			selectedBuilding.UpdateVisibility();
 
-		}
-		
+		MoveSelectedBuilding();
 	}
-	void MouseUp()
+
+	void PlaceBuilding()
 	{
-		if (selectedBuilding != null && selectedBuilding.CanPlace)
+		if (selectedBuilding != null && !selectedBuilding.CanPlace)
 		{
-			selectedBuilding = null;
+			selectedBuilding.Remove();
 		}
+		selectedBuilding = null;
+	}
+
+	void MoveSelectedBuilding()
+	{
+		Vector3 place;
+		if (GetDesired(out place))
+		{
+			var zeroedY = new Vector3(place.x, 0, place.z);
+			selectedBuilding.transform.position = zeroedY;
+			selectedBuilding.IsOverCloudship = true;
+		}
+		else 
+		{
+			selectedBuilding.IsOverCloudship = false;
+		}
+		selectedBuilding.UpdateVisibility();
+	}
+
+	bool IsThereABuildingUnderMousePointer(out Building building)
+	{
+		RaycastHit hit;
+		building = null;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		int layerMask = 1 << 10;
+
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+		{
+			Debug.Log(hit.transform.tag);
+			if (hit.transform.tag == "Building")
+			{
+				building = hit.transform.GetComponentInParent<Building>();
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
 	bool GetDesired(out Vector3 position)

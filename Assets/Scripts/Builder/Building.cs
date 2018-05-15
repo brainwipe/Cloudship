@@ -12,9 +12,8 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     Renderer highlightTarget;
     public Shader standardShader;
-    public Shader highlightShader;
+    public Shader notYetPlacedShader;
 
-    bool highlight = false;
     public bool InMenu = false;
 
     public bool AnotherObjectCollision;
@@ -30,7 +29,7 @@ public class Building : MonoBehaviour, IAmBuilding {
 
         highlightTarget = GetComponentInChildren<Renderer>();
         standardShader = highlightTarget.materials[0].shader;
-        highlightShader = Shader.Find("graphs/BuildingHighlight");
+        notYetPlacedShader = Shader.Find("graphs/BuildingHighlight");
     }
 
     public void SetupForMenu(int menuLayer)
@@ -79,7 +78,7 @@ public class Building : MonoBehaviour, IAmBuilding {
             }
             else
             {
-                material.shader = highlightShader;
+                material.shader = notYetPlacedShader;
             }
         }
 		
