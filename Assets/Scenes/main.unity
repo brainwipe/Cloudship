@@ -641,7 +641,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 299f40ace5dea6b42882dbe6b8835402, type: 3}
       propertyPath: m_LocalScale.x
@@ -715,6 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boundary: {fileID: 658459420}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &723365611 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
@@ -2120,6 +2121,10 @@ Prefab:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 725829110}
+    - target: {fileID: 1398137551612962, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabParent: 0
