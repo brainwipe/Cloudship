@@ -35,9 +35,13 @@ public class BuildSurface : MonoBehaviour
 				else
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
+					
+					Vector3 globalPosition;
+					GetDesired(out globalPosition);
+					selectedBuilding.transform.position = globalPosition;
 					buildingToGrabPointOffset = Vector3.zero;
+					SetBoundary(selectedBuilding);
 				}
-				SetBoundary(selectedBuilding);
 			}
 		}
 
@@ -63,12 +67,6 @@ public class BuildSurface : MonoBehaviour
 			return;
 		}	
 
-		if(buildMenu.SelectedBuilding.Name != selectedBuilding.Name) 
-		{
-			selectedBuilding.Remove();
-			selectedBuilding = null;
-		}
-
 		MoveSelectedBuilding();
 	}
 
@@ -83,10 +81,13 @@ public class BuildSurface : MonoBehaviour
 
 	void MoveSelectedBuilding()
 	{
-		Vector3 place;
-		if (GetDesired(out place))
+		Vector3 globalPosition;
+		if (GetDesired(out globalPosition))
 		{
-			selectedBuilding.transform.position = place;
+			selectedBuilding.transform.position = Vector3.Lerp(
+				selectedBuilding.transform.position, 
+				globalPosition, 
+				Time.deltaTime * 40);
 			selectedBuilding.IsOverCloudship = true;
 		}
 		else 
@@ -131,11 +132,8 @@ public class BuildSurface : MonoBehaviour
 
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			position = Vector3.Lerp(
-				selectedBuilding.transform.position, 
-				hit.point, 
-				Time.deltaTime * 40); 
-
+			var zeroedY = new Vector3(hit.point.x, 0, hit.point.z);
+			position = zeroedY;
 			return true;
 		}
 		return false;
@@ -159,8 +157,8 @@ public class BuildSurface : MonoBehaviour
 
 		Boundary.transform.localScale = Vector3.one;
 		var boundaryExtents = Boundary.mesh.bounds.extents;
-		var buildingMeshFilter = building.GetComponent<MeshFilter>();
-		var buildingSizes = (buildingMeshFilter.mesh.bounds.extents + new Vector3(safetyMargin, 0, safetyMargin));
+		var buildingBounds = building.GetBounds();
+		var buildingSizes = (buildingBounds.extents + new Vector3(safetyMargin, 0, safetyMargin));
 
 		var xScale = (boundaryExtents.x - buildingSizes.x) / boundaryExtents.x;
 		var zScale = (boundaryExtents.z - buildingSizes.z) / boundaryExtents.z;

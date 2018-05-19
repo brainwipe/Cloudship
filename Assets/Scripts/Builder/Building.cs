@@ -10,7 +10,7 @@ public class Building : MonoBehaviour, IAmBuilding {
     public float MenuScale;
     public string Name;
 
-    Renderer highlightTarget;
+    Renderer[] highlightTargets;
     public Shader standardShader;
     public Shader notYetPlacedShader;
 
@@ -27,8 +27,8 @@ public class Building : MonoBehaviour, IAmBuilding {
         AnotherObjectCollision = false;
         IsOverCloudship = false;
 
-        highlightTarget = GetComponentInChildren<Renderer>();
-        standardShader = highlightTarget.materials[0].shader;
+        highlightTargets = GetComponentsInChildren<Renderer>();
+        standardShader = highlightTargets[0].materials[0].shader;
         notYetPlacedShader = Shader.Find("graphs/BuildingHighlight");
     }
 
@@ -63,6 +63,16 @@ public class Building : MonoBehaviour, IAmBuilding {
         return cloneBuilding;
     }
 
+    public Bounds GetBounds()
+    {
+        var bounds = new Bounds (transform.position, Vector3.one);
+        Renderer[] renderers = GetComponentsInChildren<Renderer> ();
+        foreach (Renderer renderer in renderers)
+        {
+            bounds.Encapsulate (renderer.bounds);
+        }
+        return bounds;
+    }
 
     public void Remove()
     {
@@ -71,18 +81,20 @@ public class Building : MonoBehaviour, IAmBuilding {
 
     public void UpdateVisibility()
     {
-        foreach(var material in highlightTarget.materials)
+        foreach(var target in highlightTargets)
         {
-            if (CanPlace)
+            foreach(var material in target.materials)
             {
-                material.shader = standardShader;
-            }
-            else
-            {
-                material.shader = notYetPlacedShader;
+                if (CanPlace)
+                {
+                    material.shader = standardShader;
+                }
+                else
+                {
+                    material.shader = notYetPlacedShader;
+                }
             }
         }
-		
     }
 
     public bool CanPlace
