@@ -8,7 +8,7 @@ public class BuildSurface : MonoBehaviour
 	Building selectedBuilding;
 	BuildMenu buildMenu;
 	public MeshFilter Boundary;
-	public Vector3 offset = Vector3.zero;
+	public Vector3 buildingToGrabPointOffset = Vector3.zero;
 
 	void Awake()
 	{
@@ -30,12 +30,12 @@ public class BuildSurface : MonoBehaviour
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
 					selectedBuilding = building;
-					offset = FindOffset(selectedBuilding);
+					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
 				else
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-					offset = Vector3.zero;
+					buildingToGrabPointOffset = Vector3.zero;
 				}
 				SetBoundary(selectedBuilding);
 			}
@@ -51,7 +51,7 @@ public class BuildSurface : MonoBehaviour
 	
 		if(Input.GetMouseButtonUp(0))
 		{
-			offset = Vector3.zero;
+			buildingToGrabPointOffset = Vector3.zero;
 			PlaceBuilding();
 		}
 	}
@@ -86,8 +86,7 @@ public class BuildSurface : MonoBehaviour
 		Vector3 place;
 		if (GetDesired(out place))
 		{
-			var zeroedY = new Vector3(place.x, 0, place.z);
-			selectedBuilding.transform.position = zeroedY;
+			selectedBuilding.transform.position = place;
 			selectedBuilding.IsOverCloudship = true;
 		}
 		else 
@@ -122,42 +121,36 @@ public class BuildSurface : MonoBehaviour
 
 	bool GetDesired(out Vector3 position)
 	{
-		RaycastHit hit;
 		position = Vector3.zero;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-		Debug.DrawRay(ray.origin, ray.direction * 100000, Color.green, 1);
+		RaycastHit hit;
+		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
+		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
 
 		int layerMask = 1 << 8;
 
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			position = hit.point;
+			position = Vector3.Lerp(
+				selectedBuilding.transform.position, 
+				hit.point, 
+				Time.deltaTime * 40); 
+
 			return true;
 		}
 		return false;
 	}
 
-	Vector3 UnfilteredMousePosition()
+	Vector3 FindGrabPoint(Building selectedBuilding)
 	{
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+		int layerMask = 1 << 10;
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 		{
-			return hit.point;
+			return hit.point - selectedBuilding.transform.position;
 		}
 		return Vector3.zero;
-	}
-
-	Vector3 FindOffset(Building building)
-	{
-		Vector3 mouseClickedLocation = UnfilteredMousePosition();
-		Vector3 newOffset = Vector3.zero;
-		
-		newOffset = mouseClickedLocation - building.transform.position;
-		
-		return newOffset;
 	}
 
 	void SetBoundary(Building building)

@@ -51,6 +51,7 @@ public class Building : MonoBehaviour, IAmBuilding {
         clone.tag = BuildingTag;
 		clone.transform.localScale = Vector3.one;
         clone.transform.localRotation = Quaternion.identity;
+        clone.transform.localPosition = Vector3.zero;
         clone.layer = 10;
         
         foreach(Transform child in clone.transform)
