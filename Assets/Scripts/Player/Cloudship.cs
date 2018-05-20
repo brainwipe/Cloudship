@@ -23,8 +23,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
         flyingPhysics.Lift = 2000f;
-        flyingPhysics.Torque = 2500f;
-        flyingPhysics.Speed = 500f;
+        flyingPhysics.Torque = 2100f;
+        flyingPhysics.Speed = 400f;
         flyingPhysics.Parent = this;
 
         Health = 100;

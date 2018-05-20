@@ -13,7 +13,7 @@ public class Cannon : MonoBehaviour
 
     [Range(0.2f, 0.8f)]
     public float SwivelSpeed = 0.4f;
-    public float MaxSwivelAngle = 30f;
+    public float BarrelElevation = 65f;
 
     private string fireButton = "Fire1";
     private float lastTimeFired;
@@ -24,7 +24,7 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         cloudship = GameManager.Instance.PlayerCloudship;
-        Barrel.localRotation = Quaternion.Euler(65f, 0, 0);
+        Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
     }
 
     void Update()
@@ -43,6 +43,11 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
+        if (!AmIClearToShoot(ShootingTip.position, ShootingTip.rotation))
+        {
+            return;
+        }
+
         Rigidbody ball = Instantiate(
             cannonball, 
             ShootingTip.position, 
@@ -57,6 +62,21 @@ public class Cannon : MonoBehaviour
 
         ball.AddForce(ballForce, ForceMode.Impulse);
         
+    }
+
+    bool AmIClearToShoot(Vector3 shootingTipPosition, Quaternion shootingTipRotation)
+    {
+        var shootingTipDirection = shootingTipRotation * Vector3.one;
+        RaycastHit hit;
+		int layerMask = 1 << 10;
+		if (Physics.Raycast(shootingTipPosition, shootingTipDirection,  out hit, Mathf.Infinity, layerMask))
+		{
+			if (hit.transform.tag == "Building")
+			{
+                return false;
+            }
+        }
+        return true;
     }
 
     Vector3 NearestTarget()

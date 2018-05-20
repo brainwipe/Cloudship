@@ -431,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 0
+  AllowWind: 1
   Lift: 0
   Torque: 0
   Speed: 0

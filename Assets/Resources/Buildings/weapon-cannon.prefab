@@ -446,6 +446,7 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 1
   ShotForce: 400
   SwivelSpeed: 0.521
+  BarrelElevation: 65
 --- !u!114 &114643608483370940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -471,10 +472,12 @@ MonoBehaviour:
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
   Name: Cannon
-  HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
+  standardShader: {fileID: 0}
+  notYetPlacedShader: {fileID: 0}
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
+  IsOverCloudship: 0
 --- !u!136 &136478061356110122
 CapsuleCollider:
   m_ObjectHideFlags: 1

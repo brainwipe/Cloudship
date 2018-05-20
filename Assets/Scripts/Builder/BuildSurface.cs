@@ -36,8 +36,13 @@ public class BuildSurface : MonoBehaviour
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					Vector3 globalPosition;
-					GetDesired(out globalPosition);
-					selectedBuilding.transform.position = globalPosition;
+					if (GetDesired(out globalPosition))
+					{
+						selectedBuilding.transform.position = globalPosition;
+					}
+					else{
+						selectedBuilding.transform.localPosition = Vector3.zero;
+					}
 					buildingToGrabPointOffset = Vector3.zero;
 					SetBoundary(selectedBuilding);
 				}
