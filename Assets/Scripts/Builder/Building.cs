@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,18 @@ public class Building : MonoBehaviour, IAmBuilding {
         transform.localPosition = MenuPosition;
         transform.localScale = new Vector3(MenuScale,MenuScale,MenuScale);
         InMenu = true;
+    }
+
+    internal void RotateAntiClockwise()
+    {
+        var aimRotation = transform.localEulerAngles + new Vector3(0, -90, 0);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(aimRotation), Time.deltaTime);
+    }
+
+    internal void RotateClockwise()
+    {
+        var aimRotation = transform.localEulerAngles + new Vector3(0, 90, 0);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(aimRotation), Time.deltaTime);
     }
 
     public Building Clone(Transform buildSurface)

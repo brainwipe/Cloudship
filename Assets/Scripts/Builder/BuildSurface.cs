@@ -35,7 +35,6 @@ public class BuildSurface : MonoBehaviour
 				else
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-					
 					Vector3 globalPosition;
 					GetDesired(out globalPosition);
 					selectedBuilding.transform.position = globalPosition;
@@ -47,12 +46,19 @@ public class BuildSurface : MonoBehaviour
 
 		if (Input.GetMouseButton(0))
 		{
-			if (Input.GetKeyUp(KeyCode.Delete))
+			if (selectedBuilding != null)
 			{
-				// TODO ROLA Delete
+				if (Input.GetKey(KeyCode.Q))
+				{
+					selectedBuilding.RotateAntiClockwise();
+				}
+				else if (Input.GetKey(KeyCode.E))
+				{
+					selectedBuilding.RotateClockwise();
+				}
 			}
 		}
-	
+
 		if(Input.GetMouseButtonUp(0))
 		{
 			buildingToGrabPointOffset = Vector3.zero;
