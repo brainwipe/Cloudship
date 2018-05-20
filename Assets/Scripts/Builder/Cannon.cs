@@ -13,6 +13,7 @@ public class Cannon : MonoBehaviour
 
     [Range(0.2f, 0.8f)]
     public float SwivelSpeed = 0.4f;
+    public float MaxSwivelAngle = 30f;
 
     private string fireButton = "Fire1";
     private float lastTimeFired;
@@ -23,11 +24,11 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         cloudship = GameManager.Instance.PlayerCloudship;
+        Barrel.localRotation = Quaternion.Euler(65f, 0, 0);
     }
 
     void Update()
     {
-        // TODO ROLA refactor when Building creation is changed.
         if (cloudship.Mode == Cloudship.Modes.Build)
         {
             return;
@@ -38,18 +39,6 @@ public class Cannon : MonoBehaviour
             Shoot();
             lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
         }
-
-        TurnTowardEnemy();
-    }
-
-    void TurnTowardEnemy()
-    {
-        var difference = NearestTarget() - Swivel.position;
-        var lookVector = new Vector3(difference.x, Swivel.position.y, difference.z);
-        var lookingAtEnemy = Quaternion.LookRotation(lookVector, transform.up);
-        Swivel.rotation = Quaternion.Lerp(Swivel.rotation, lookingAtEnemy, Time.deltaTime * SwivelSpeed);
-
-        Barrel.localRotation = Quaternion.Euler(65f, 0, 0);
     }
 
     void Shoot()
