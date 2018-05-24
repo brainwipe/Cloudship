@@ -30,6 +30,7 @@ public class BuildSurface : MonoBehaviour
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
 					selectedBuilding = building;
+					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
 				else
@@ -87,7 +88,9 @@ public class BuildSurface : MonoBehaviour
 		{
 			selectedBuilding.Remove();
 		}
+		selectedBuilding.UnSelected();
 		selectedBuilding = null;
+
 	}
 
 	void MoveSelectedBuilding()

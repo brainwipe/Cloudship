@@ -443,10 +443,10 @@ MonoBehaviour:
   Swivel: {fileID: 4745918217125868}
   Barrel: {fileID: 4654036869397706}
   ShootingTip: {fileID: 4575211488392156}
-  TimeBetweenShotsInSeconds: 1
-  ShotForce: 400
+  TimeBetweenShotsInSeconds: 2
+  ShotForce: 350
   SwivelSpeed: 0.521
-  BarrelElevation: 65
+  BarrelElevation: 70
 --- !u!114 &114643608483370940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,8 +472,6 @@ MonoBehaviour:
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
   Name: Cannon
-  standardShader: {fileID: 0}
-  notYetPlacedShader: {fileID: 0}
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0

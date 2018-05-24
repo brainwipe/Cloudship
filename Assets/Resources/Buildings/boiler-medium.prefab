@@ -240,10 +240,14 @@ MonoBehaviour:
   MenuPosition: {x: 0, y: -0.074, z: 0}
   MenuScale: 0.0045
   Name: Medium Boiler
-  HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
+  standardShader: {fileID: 0}
+  cannotPlaceShader: {fileID: 4800000, guid: 42a43b3fe659f7f4f827188eb3e5ea22, type: 3}
+  hoverShader: {fileID: 0}
+  selectedShader: {fileID: 0}
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
+  IsOverCloudship: 0
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

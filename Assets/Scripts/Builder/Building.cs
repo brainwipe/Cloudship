@@ -12,9 +12,6 @@ public class Building : MonoBehaviour, IAmBuilding {
     public string Name;
 
     Renderer[] highlightTargets;
-    public Shader standardShader;
-    public Shader notYetPlacedShader;
-
     public bool InMenu = false;
 
     public bool AnotherObjectCollision;
@@ -29,8 +26,6 @@ public class Building : MonoBehaviour, IAmBuilding {
         IsOverCloudship = false;
 
         highlightTargets = GetComponentsInChildren<Renderer>();
-        standardShader = highlightTargets[0].materials[0].shader;
-        notYetPlacedShader = Shader.Find("graphs/BuildingHighlight");
     }
 
     public void SetupForMenu(int menuLayer)
@@ -73,6 +68,7 @@ public class Building : MonoBehaviour, IAmBuilding {
         }
         var cloneBuilding = clone.GetComponent<Building>();
         cloneBuilding.InMenu = false;
+        cloneBuilding.Selected();
         return cloneBuilding;
     }
 
@@ -92,20 +88,47 @@ public class Building : MonoBehaviour, IAmBuilding {
         Destroy(gameObject);
     }
 
+    public void Hover()
+    {
+        SetShaderBool("Boolean_8EBFB74C", true);
+    }
+
+    public void UnHover()
+    {
+        SetShaderBool("Boolean_8EBFB74C", false);
+    }
+
+    public void Selected()
+    {
+        SetShaderBool("Boolean_ED362197", true);
+    }
+
+    public void UnSelected()
+    {
+        SetShaderBool("Boolean_ED362197", false);
+    }
+
     public void UpdateVisibility()
     {
+        if (CanPlace)
+        {
+            SetShaderBool("Boolean_8F81C679", false);
+        }
+        else
+        {
+            SetShaderBool("Boolean_8F81C679", true);
+        }
+    }
+
+    void SetShaderBool(string shaderPropertyId, bool value)
+    {
+        float shaderValue = value ? 1 : 0;
+
         foreach(var target in highlightTargets)
         {
             foreach(var material in target.materials)
             {
-                if (CanPlace)
-                {
-                    material.shader = standardShader;
-                }
-                else
-                {
-                    material.shader = notYetPlacedShader;
-                }
+                material.SetFloat(shaderPropertyId, shaderValue);
             }
         }
     }
