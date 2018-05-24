@@ -30,9 +30,10 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 ### Build Mode
 - <kbd>w</kbd> select next building
 - <kbd>a</kbd> select previous building
-- <kbd>Hold left mouse button down</kbd> Place building
+- <kbd>Hold left mouse button down</kbd> Place building, let go to leave it there
 - <kbd>Click and drag left mouse button</kbd> Move building
-- <kbd>Click and hold left mouse button</kbd> + <kbd>delete</kbd> Remove building
+- <kbd>Click and hold left mouse button</kbd> and move building off the Cloudship to delete
+- <kbd>Q</kbd> and <kbd>E</kbd> to rotate.
 
 Click right mouse button and drag rotates the view.
 
@@ -42,4 +43,4 @@ Click right mouse button and drag rotates the view.
 * [Visual Studio Code](https://code.visualstudio.com/) - Code editor
 * [Moleskine](http://www.moleskine.com/gb/) - Notebook
 
-:cloud:
+:cloud: 0.17
