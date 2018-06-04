@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FlyingPhysics : MonoBehaviour
 {
+    public static float Vne = 50f;
+
     public IFly Parent;
     public bool AllowMovement;
     public bool AllowBuoyancy;
@@ -11,6 +14,7 @@ public class FlyingPhysics : MonoBehaviour
     public float Lift;
     public float Torque;
     public float Speed;
+    public Telemetry Blackbox;
 
     Rigidbody rigidBody;
     IWindMaker windMaker;
@@ -18,6 +22,11 @@ public class FlyingPhysics : MonoBehaviour
     float StandardAltitude = 0;
     float buoyancyHealth = 1f;
     
+    void Awake()
+    {
+        Blackbox = new Telemetry();
+    }
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -39,6 +48,7 @@ public class FlyingPhysics : MonoBehaviour
         {
             ForceDueToBouyancy();
         }
+        Blackbox.Set(rigidBody.velocity);
     }
 
     void ForceDueToWind()
@@ -81,4 +91,19 @@ public class FlyingPhysics : MonoBehaviour
         rigidBody.isKinematic = false;
     }
 
+    [Serializable]
+    public class Telemetry
+    {
+        public float Velocity;
+        public float MaxVelocity;
+
+        public void Set(Vector3 velocity)
+        {
+            Velocity = velocity.magnitude;
+            if (Velocity > MaxVelocity)
+            {
+                MaxVelocity = Velocity;
+            }
+        }
+    }
 }

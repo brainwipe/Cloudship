@@ -32,6 +32,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         Mode = Modes.Drive;
     }
 
+    void LateUpdate()
+    {
+        AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
+    }
+
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
         float yaw = Turn * torque * Time.deltaTime;
