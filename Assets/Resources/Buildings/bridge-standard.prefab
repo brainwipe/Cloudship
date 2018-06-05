@@ -251,10 +251,11 @@ MonoBehaviour:
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
   Name: Overlook Bridge
-  HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
+  IsOverCloudship: 0
+  Health: 30
 --- !u!114 &114844628475908366
 MonoBehaviour:
   m_ObjectHideFlags: 1

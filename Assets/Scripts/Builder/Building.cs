@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour, IAmBuilding {
+public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
 
     public static string BuildingTag = "Building";
 
@@ -17,6 +17,8 @@ public class Building : MonoBehaviour, IAmBuilding {
     public bool AnotherObjectCollision;
     public bool BoundaryCollision;
     public bool IsOverCloudship;
+
+    public float Health;
     
 
     void Awake()
@@ -130,6 +132,15 @@ public class Building : MonoBehaviour, IAmBuilding {
             {
                 material.SetFloat(shaderPropertyId, shaderValue);
             }
+        }
+    }
+
+    public void Damage(float amount)
+    {
+        Health -= amount;
+        if (Health < 1)
+        {
+            Destroy(this.gameObject);
         }
     }
 

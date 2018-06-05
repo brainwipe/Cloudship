@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Cannonball : MonoBehaviour
 {
-    public LayerMask CraftMask;
     private float maxLifeTime = 10f;
 	private float damage = 10;
 	public ITakeDamage originator;
@@ -22,7 +21,7 @@ public class Cannonball : MonoBehaviour
 			return;
 		}
 
-		var target = targetRigidbody.GetComponent<ITakeDamage>();
+		var target = targetRigidbody.GetComponentInParent<ITakeDamage>();
 		if (target == null || target == originator)
 		{
 			return;

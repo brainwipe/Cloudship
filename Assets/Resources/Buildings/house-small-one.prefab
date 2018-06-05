@@ -240,10 +240,11 @@ MonoBehaviour:
   MenuPosition: {x: 0, y: -0.04, z: 0}
   MenuScale: 0.02
   Name: Small House
-  HighlightedMaterial: {fileID: 2100000, guid: da539413e962a1b478b07bac24742177, type: 2}
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
+  IsOverCloudship: 0
+  Health: 10
 --- !u!114 &114252331362443010
 MonoBehaviour:
   m_ObjectHideFlags: 1

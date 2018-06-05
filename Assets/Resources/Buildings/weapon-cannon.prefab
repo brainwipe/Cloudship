@@ -476,6 +476,7 @@ MonoBehaviour:
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  Health: 10
 --- !u!136 &136478061356110122
 CapsuleCollider:
   m_ObjectHideFlags: 1

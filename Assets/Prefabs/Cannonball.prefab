@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23464331800927402}
   - component: {fileID: 54987675591206120}
   - component: {fileID: 114386055041634526}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cannonball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 105079553c246f94abd1df724ecadbf0, type: 2}
   m_StaticBatchInfo:
@@ -111,9 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6593e7bfc060564ebdac5ad2a330a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CraftMask:
-    serializedVersion: 2
-    m_Bits: 1280
 --- !u!135 &135028202918942076
 SphereCollider:
   m_ObjectHideFlags: 1
