@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class FlyingPhysics : MonoBehaviour
 {
     public static float Vne = 50f;

@@ -245,6 +245,9 @@ MonoBehaviour:
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 50
+  Abilities:
+    Torque: 2000
+    Speed: 150
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

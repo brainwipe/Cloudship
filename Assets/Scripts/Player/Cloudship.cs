@@ -30,6 +30,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         Health = 100;
 
         Mode = Modes.Drive;
+        UpdateAbilities();
     }
 
     void LateUpdate()
@@ -68,6 +69,34 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         get
         {
             return this.transform.position;
+        }
+    }
+
+    public void UpdateAbilities()
+    {
+        var canGiveOrders = false;
+
+        var childWithAbility = GetComponentsInChildren<IHaveAbilities>();
+        Debug.Log(childWithAbility.Length);
+
+        flyingPhysics.Torque = 0;
+        flyingPhysics.Speed = 0;
+
+        foreach(var child in childWithAbility)
+        {
+            flyingPhysics.Torque += child.Skills.Torque;
+            flyingPhysics.Speed += child.Skills.Speed;
+            
+            if (child.Skills.GiveOrders)
+            {
+                canGiveOrders = true;
+            }
+        }
+
+        if (!canGiveOrders)
+        {
+            flyingPhysics.Torque = 0;
+            flyingPhysics.Speed = 0;
         }
     }
 }

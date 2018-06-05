@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
+public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities {
 
     public static string BuildingTag = "Building";
+
+    public Cloudship player;
 
     public Vector3 MenuPosition;
     public float MenuScale;
@@ -19,6 +21,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
     public bool IsOverCloudship;
 
     public float Health;
+    public Abilities Abilities;
     
 
     void Awake()
@@ -28,6 +31,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
         IsOverCloudship = false;
 
         highlightTargets = GetComponentsInChildren<Renderer>();
+        player = GetComponentInParent<Cloudship>();
     }
 
     public void SetupForMenu(int menuLayer)
@@ -90,6 +94,11 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
         Destroy(gameObject);
     }
 
+    void OnDestroyed()
+    {
+        player.UpdateAbilities();   
+    }
+
     public void Hover()
     {
         SetShaderBool("Boolean_8EBFB74C", true);
@@ -140,7 +149,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
         Health -= amount;
         if (Health < 1)
         {
-            Destroy(this.gameObject);
+            Remove();
         }
     }
 
@@ -149,6 +158,14 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage {
         get
         {
             return BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
+        }
+    }
+
+    public Abilities Skills
+    {
+        get
+        {
+            return Abilities;
         }
     }
 }

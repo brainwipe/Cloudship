@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BuildSurface : MonoBehaviour 
 {
+	Cloudship player;
 	Building selectedBuilding;
 	BuildMenu buildMenu;
 	public MeshFilter Boundary;
@@ -15,6 +16,10 @@ public class BuildSurface : MonoBehaviour
 		if (buildMenu == null)
 		{
 			buildMenu = FindObjectOfType<BuildMenu>();
+		}
+		if (player == null)
+		{
+			player = FindObjectOfType<Cloudship>();
 		}
 	}
 
@@ -90,7 +95,7 @@ public class BuildSurface : MonoBehaviour
 		}
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
-
+		player.UpdateAbilities();
 	}
 
 	void MoveSelectedBuilding()
