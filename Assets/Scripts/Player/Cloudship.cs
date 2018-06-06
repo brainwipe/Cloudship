@@ -72,12 +72,31 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         }
     }
 
+    public bool CanMove
+    {
+        get
+        {
+            return flyingPhysics.Speed > 0 && CanGiveOrders;
+        }
+    }
+
+    public bool CanTurn
+    {
+        get 
+        {
+            return flyingPhysics.Torque > 0 && CanGiveOrders;
+        }
+    }
+
+    public bool CanGiveOrders { get; private set; }
+    
+
     public void UpdateAbilities()
     {
-        var canGiveOrders = false;
+        CanGiveOrders = false;
 
         var childWithAbility = GetComponentsInChildren<IHaveAbilities>();
-        Debug.Log(childWithAbility.Length);
+        Debug.Log("Update abilities for: " + childWithAbility.Length);
 
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
@@ -89,11 +108,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
             
             if (child.Skills.GiveOrders)
             {
-                canGiveOrders = true;
+                CanGiveOrders = true;
             }
         }
 
-        if (!canGiveOrders)
+        if (!CanGiveOrders)
         {
             flyingPhysics.Torque = 0;
             flyingPhysics.Speed = 0;

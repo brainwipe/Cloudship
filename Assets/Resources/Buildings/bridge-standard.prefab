@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
   Name: Overlook Bridge
@@ -256,6 +257,10 @@ MonoBehaviour:
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 30
+  Abilities:
+    Torque: 0
+    Speed: 0
+    GiveOrders: 1
 --- !u!114 &114844628475908366
 MonoBehaviour:
   m_ObjectHideFlags: 1

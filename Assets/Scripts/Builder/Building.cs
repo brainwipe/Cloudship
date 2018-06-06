@@ -94,9 +94,12 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         Destroy(gameObject);
     }
 
-    void OnDestroyed()
+    void OnDestroy()
     {
-        player.UpdateAbilities();   
+        if (!InMenu)
+        {
+            player.UpdateAbilities();   
+        }
     }
 
     public void Hover()

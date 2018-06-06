@@ -7,13 +7,13 @@ public class Eot : MonoBehaviour {
 	Cloudship player;
 	public GameObject EotHandle;
 
-	int thrustIndex = 3;
+	const int allStopThrustIndex = 3;
 
+	int thrustIndex = allStopThrustIndex;
 	float eotHandleSpeed = 3f;
 	float[] thrustSettings = {
 		-1f, -0.5f, -0.3f, 0, 0.3f, 0.5f, 1f
 	};
-
 	float[] handlePositions = {
 		90f, 60f, 30f, 0, 330f, 300f, 270f
 	};
@@ -23,6 +23,14 @@ public class Eot : MonoBehaviour {
 	}
 
 	void Update () {
+		if (!player.CanMove)
+		{
+			thrustIndex = allStopThrustIndex;
+			UpdateEotHandlePosition();
+			player.Thrust = thrustSettings[thrustIndex];
+			return;
+		}
+
 		if (player.Mode == Cloudship.Modes.Drive)
 		{
 			UpdateThrust(Input.GetButtonUp("Throttle Up"), Input.GetButtonUp("Throttle Down"));
