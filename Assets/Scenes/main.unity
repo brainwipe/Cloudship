@@ -902,11 +902,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1248,11 +1248,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1383,11 +1383,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 1842036022}
   CompassRose: {fileID: 1842036021}
-  SmoothFactor: 0.6
-  RotationSpeed: 4
-  VerticalSpeed: 8
-  MaxY: 80
-  MinY: -20
+  current:
+    Rotation: 0
+    Vertical: 0
+    Smooth: 0
+  game:
+    Rotation: 4
+    Vertical: 8
+    Smooth: 0.6
+  cinematic:
+    Rotation: 1.7
+    Vertical: 3
+    Smooth: 0.5
+  MaxY: 90
+  MinY: -30
 --- !u!4 &1026415046
 Transform:
   m_ObjectHideFlags: 0
@@ -2513,11 +2522,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:

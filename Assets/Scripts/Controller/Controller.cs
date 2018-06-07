@@ -17,13 +17,13 @@ public class Controller : MonoBehaviour {
     {
         if (Input.GetKeyUp(KeyCode.F1))
         {
-            if (animator.GetBool("CinematicCamera"))
+            if (animator.GetBool("Cinematic"))
             {
-                animator.SetBool("CinematicCamera", false);
+                animator.SetBool("Cinematic", false);
             }
             else
             {
-                animator.SetBool("CinematicCamera", true);
+                animator.SetBool("Cinematic", true);
             }
 
             if (animator.GetBool("BuildMode"))
