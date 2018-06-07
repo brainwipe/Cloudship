@@ -15,17 +15,35 @@ public class Controller : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.F1))
         {
-            if (!animator.GetBool("BuildMode"))
+            if (animator.GetBool("CinematicCamera"))
             {
-                animator.SetBool("BuildMode", true);
-                player.SetBuildModeOn();
+                animator.SetBool("CinematicCamera", false);
             }
             else
             {
+                animator.SetBool("CinematicCamera", true);
+            }
+
+            if (animator.GetBool("BuildMode"))
+            {
                 animator.SetBool("BuildMode", false);
                 player.SetBuildModeOff();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            if (animator.GetBool("BuildMode"))
+            {
+                animator.SetBool("BuildMode", false);
+                player.SetBuildModeOff();
+            }
+            else
+            {
+                animator.SetBool("BuildMode", true);
+                player.SetBuildModeOn();
             }
         }
     }

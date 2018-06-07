@@ -124,7 +124,10 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly
         timeDead = 0;
         grounded = false;
         
-        flyingPhysics.Reset();
+        if (flyingPhysics != null)
+        {
+            flyingPhysics.Reset();
+        }
 
         var shooting = GetComponent<Shooting>();
         shooting.enabled = true;
