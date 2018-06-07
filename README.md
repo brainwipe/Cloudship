@@ -26,6 +26,7 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 - <kbd>s</kbd> decrease EOT astern (backwards)
 - <kbd>d</kbd> turn right
 - <kbd>b</kbd> toggle build/flight mode (stops controls)
+- <kbd>F1</kbd> cinematic camera
 
 ### Build Mode
 - <kbd>w</kbd> select next building
