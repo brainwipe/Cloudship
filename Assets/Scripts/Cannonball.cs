@@ -6,7 +6,7 @@ public class Cannonball : MonoBehaviour
 {
     private float maxLifeTime = 10f;
 	private float damage = 10;
-	public ITakeDamage originator;
+	public IAmAShip owner;
 
     void Start()
     {
@@ -15,19 +15,18 @@ public class Cannonball : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		var targetRigidbody = other.attachedRigidbody;
-		if (!targetRigidbody)
+		var target = other.transform.GetComponentInParent<IAmAShip>();
+
+		if (target == null || target == owner)
 		{
 			return;
 		}
 
-		var target = targetRigidbody.GetComponentInParent<ITakeDamage>();
-		if (target == null || target == originator)
+		var damageable = other.attachedRigidbody.GetComponentInParent<ITakeDamage>();
+		if (damageable != null)
 		{
-			return;
+			damageable.Damage(damage);
 		}
-
-		target.Damage(damage);
 		
 		Destroy(gameObject);
 	}

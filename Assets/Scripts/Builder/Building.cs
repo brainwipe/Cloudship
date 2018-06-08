@@ -89,10 +89,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         return bounds;
     }
 
-    public void Remove()
-    {
-        Destroy(gameObject);
-    }
+    public void Remove() => Destroy(gameObject);
 
     void OnDestroy()
     {
@@ -102,16 +99,10 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
     }
 
-    public void Hover()
-    {
-        SetShaderBool("Boolean_8EBFB74C", true);
-    }
-
-    public void UnHover()
-    {
-        SetShaderBool("Boolean_8EBFB74C", false);
-    }
-
+    public void Hover() => SetShaderBool("Boolean_8EBFB74C", true);
+    
+    public void UnHover() => SetShaderBool("Boolean_8EBFB74C", false);
+    
     public void Selected()
     {
         SetShaderBool("Boolean_ED362197", true);
@@ -140,6 +131,10 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
         foreach(var target in highlightTargets)
         {
+            if (target == null)
+            {
+                continue;
+            }
             foreach(var material in target.materials)
             {
                 material.SetFloat(shaderPropertyId, shaderValue);
@@ -156,19 +151,8 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
     }
 
-    public bool CanPlace
-    {
-        get
-        {
-            return BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
-        }
-    }
 
-    public Abilities Skills
-    {
-        get
-        {
-            return Abilities;
-        }
-    }
+    public bool CanPlace => BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
+    
+    public Abilities Skills => Abilities;
 }

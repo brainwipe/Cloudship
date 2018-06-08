@@ -8,7 +8,7 @@ public class Shooting : MonoBehaviour
     public Transform cannon;
     public float TimeBetweenShotsInSeconds = 0.5f;
     public float ShotForce = 100f;
-    private ITakeDamage shooter;
+    private IAmAShip shooter;
 
     private string fireButton = "Fire1";
     private float lastTimeFired;
@@ -54,7 +54,7 @@ public class Shooting : MonoBehaviour
             transform) as Rigidbody;
 
         var cannonBall = ball.GetComponent<Cannonball>();
-        cannonBall.originator = shooter;
+        cannonBall.owner = shooter;
         ball.AddForce(shootVector * ShotForce, ForceMode.Impulse);
     }
 

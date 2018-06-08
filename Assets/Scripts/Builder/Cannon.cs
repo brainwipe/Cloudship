@@ -55,7 +55,7 @@ public class Cannon : MonoBehaviour
             transform) as Rigidbody;
 
         var cannonBall = ball.GetComponent<Cannonball>();
-        cannonBall.originator = cloudship;
+        cannonBall.owner = cloudship;
 
         var forceRandomiser = Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
         var ballForce = ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser;

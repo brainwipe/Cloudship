@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cloudship : MonoBehaviour, ITakeDamage, IFly
+public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 {
     public enum Modes {
         Drive,
@@ -33,10 +33,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         UpdateAbilities();
     }
 
-    void LateUpdate()
-    {
-        AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
-    }
+    void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
 
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
@@ -47,11 +44,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         rigidBody.AddForce(transform.forward * forward);
     }
 
-    public void Damage(float amount)
-    {
-        Health -= amount;
-    }
-
+    public void Damage(float amount) => Health -= amount;
+    
     public void SetBuildModeOn()
     {
         Mode = Modes.Build;
@@ -64,39 +58,19 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly
         builder.enabled = false;
     }
 
-    public Vector3 Position
-    {
-        get
-        {
-            return this.transform.position;
-        }
-    }
-
-    public bool CanMove
-    {
-        get
-        {
-            return flyingPhysics.Speed > 0 && CanGiveOrders;
-        }
-    }
-
-    public bool CanTurn
-    {
-        get 
-        {
-            return flyingPhysics.Torque > 0 && CanGiveOrders;
-        }
-    }
+    public Vector3 Position => this.transform.position;
+    
+    public bool CanMove => flyingPhysics.Speed > 0 && CanGiveOrders;
+    
+    public bool CanTurn => flyingPhysics.Torque > 0 && CanGiveOrders;
 
     public bool CanGiveOrders { get; private set; }
-    
 
     public void UpdateAbilities()
     {
         CanGiveOrders = false;
 
         var childWithAbility = GetComponentsInChildren<IHaveAbilities>();
-        Debug.Log("Update abilities for: " + childWithAbility.Length);
 
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;

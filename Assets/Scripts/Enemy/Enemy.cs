@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour, ITakeDamage, IFly
+public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 {
     public float Health = 0;
     public float Distance;
@@ -87,12 +87,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly
         }
     }
 
-    public bool IsDead 
-    {
-        get {
-            return Health < 1;
-        }
-    }
+    public bool IsDead => Health < 1;
 
     public void Damage(float amount)
     {
