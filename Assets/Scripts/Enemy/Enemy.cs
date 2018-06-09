@@ -129,6 +129,5 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         ReadyToSpawn = false;
         HealthBar.enabled = true;
         HealthBar.fillAmount = Health/HealthMax;
-        
     }
 }

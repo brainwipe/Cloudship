@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 {
@@ -14,7 +15,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public float Thrust;
     public float Turn;
     public float Health = 100;
-
+    private float HealthMax;
+    public Image HealthBar;
     FlyingPhysics flyingPhysics;
     BuildSurface builder;
 
@@ -28,6 +30,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         flyingPhysics.Parent = this;
 
         Health = 100;
+        HealthMax = Health;
 
         Mode = Modes.Drive;
         UpdateAbilities();
@@ -44,7 +47,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         rigidBody.AddForce(transform.forward * forward);
     }
 
-    public void Damage(float amount) => Health -= amount;
+    public void Damage(float amount) 
+    {
+        Health -= amount;
+        HealthBar.fillAmount = Health/HealthMax;
+    }
     
     public void SetBuildModeOn()
     {
