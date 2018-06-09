@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+	public GameModes Mode;
+
   	public float DrawDistance;
 
 	public Cloudship PlayerCloudship;
@@ -16,14 +18,8 @@ public class GameManager : MonoBehaviour
 
 	public Camera Camera;
 
-    public static GameManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
+    public static GameManager Instance => instance;
+    
     void Awake()
 	{
 		if (instance == null)
@@ -39,5 +35,20 @@ public class GameManager : MonoBehaviour
 		PlayerCloudship = FindObjectOfType<Cloudship>();
 		WindMaker = new PerlinPressure();
 		DrawDistance = Camera.farClipPlane + 500;
+		Mode = new GameModes();
+
+		GameMode(MenuOutputData.isCreative);
 	}
+
+    internal void GameMode(bool isCreative)
+    {
+        if (isCreative)
+		{
+			Mode.SetCreativeMode();
+		}
+		else
+		{
+			Mode.SetSurvivalMode();
+		}
+    }
 }

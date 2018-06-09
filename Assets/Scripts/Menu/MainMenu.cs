@@ -50,6 +50,11 @@ public class MainMenu : MonoBehaviour {
 		Application.Quit();
 	}
 
+	public void SetGameMode(bool isCreative)
+	{
+		MenuOutputData.isCreative = true;
+	}
+
 	public void SetQuality(int qualityIndex)
 	{
 		QualitySettings.SetQualityLevel(qualityIndex);

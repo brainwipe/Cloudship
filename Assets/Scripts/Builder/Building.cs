@@ -144,13 +144,17 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public void Damage(float amount)
     {
+        if (!GameManager.Instance.Mode.PlayerTakesDamage)
+        {
+            return;
+        }
+
         Health -= amount;
         if (Health < 1)
         {
             Remove();
         }
     }
-
 
     public bool CanPlace => BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
     
