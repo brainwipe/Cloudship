@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 	public Camera Camera;
 
     public static GameManager Instance => instance;
+
+	public LevelChanger LevelChanger;
     
     void Awake()
 	{
@@ -50,5 +52,10 @@ public class GameManager : MonoBehaviour
 		{
 			Mode.SetSurvivalMode();
 		}
+    }
+
+    internal void End()
+    {
+        LevelChanger.FadeToLevel(0);
     }
 }

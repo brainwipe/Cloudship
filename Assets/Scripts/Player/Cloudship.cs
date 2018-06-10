@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public float Thrust;
     public float Turn;
     public float Health = 100;
+    public bool IsAlive => Health > 0;
     private float HealthMax;
     public Image HealthBar;
     FlyingPhysics flyingPhysics;
@@ -47,12 +49,30 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         rigidBody.AddForce(transform.forward * forward);
     }
 
+    void OnCollisionEnter(Collision collisionInfo) {
+        if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
+        {
+            flyingPhysics.Grounded();
+            Health = 0;
+        }
+    }
+
     public void Damage(float amount) 
     {
         Health -= amount;
         HealthBar.fillAmount = Health/HealthMax;
+
+        if (Health < 1)
+        {
+            Die();
+        }
     }
-    
+
+    private void Die()
+    {
+        flyingPhysics.SinkToGround();
+    }
+
     public void SetBuildModeOn()
     {
         Mode = Modes.Build;

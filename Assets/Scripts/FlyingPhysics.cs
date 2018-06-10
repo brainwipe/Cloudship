@@ -22,6 +22,8 @@ public class FlyingPhysics : MonoBehaviour
 
     float StandardAltitude = 0;
     float buoyancyHealth = 1f;
+    bool grounded = false;
+    float timeDead = 0;
     
     void Awake()
     {
@@ -37,6 +39,22 @@ public class FlyingPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (grounded)
+        {
+            timeDead += Time.deltaTime;
+            if (timeDead > 5)
+            {
+                var sunken = new Vector3(rigidBody.transform.position.x,-220f, rigidBody.transform.position.z);
+                var sinking = Vector3.Slerp(rigidBody.transform.position, sunken, Time.deltaTime * 0.1f);
+                rigidBody.transform.position = sinking;
+            }
+            if (rigidBody.transform.position.y < -200f)
+            {
+                GameManager.Instance.End();
+            }
+            return;
+        }
+
         if (AllowMovement)
         {
             Parent.ForceMovement(rigidBody, Torque, Speed);
@@ -81,6 +99,7 @@ public class FlyingPhysics : MonoBehaviour
     {
         AllowBuoyancy = false;
         rigidBody.isKinematic = true;
+        grounded = true;
     }
 
     public void Reset()
@@ -90,6 +109,8 @@ public class FlyingPhysics : MonoBehaviour
         AllowBuoyancy = true;
         buoyancyHealth = 1f;
         rigidBody.isKinematic = false;
+        grounded = false;
+        timeDead = 0;
     }
 
     [Serializable]

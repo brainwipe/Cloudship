@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
 	public TMP_Dropdown resolutionDropdown;
+	public LevelChanger levelChanger;
 
 	Resolution[] resolutions;
+
+	
 
 	void Awake()
 	{
@@ -41,7 +44,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void PlayGame()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		levelChanger.FadeToLevel(1);
 	}
 
 	public void QuitGame()

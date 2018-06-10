@@ -15,8 +15,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     FlyingPhysics flyingPhysics;
     
     float HealthMax = 0;
-    float timeDead;
-    bool grounded = false;
 
     [HideInInspector]
     public Vector3 Heading = new Vector3();
@@ -54,22 +52,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         Distance = Vector3.Distance(transform.position, playerCloudship.Position);
         animator.SetFloat("distance", Distance);
         animator.SetFloat("health", Health);
-
-        if (grounded)
-        {
-            timeDead += Time.deltaTime;
-            if (timeDead > 5)
-            {
-                var sunken = new Vector3(transform.position.x,-220f, transform.position.z);
-                var sinking = Vector3.Slerp(transform.position, sunken, Time.deltaTime * 0.1f);
-                transform.position = sinking;
-            }
-
-            if (transform.position.y < -180)
-            {   
-                ReadyToSpawn = true;
-            }
-        }
+        animator.SetBool("playerAlive", playerCloudship.IsAlive);
     }
 
     void OnCollisionEnter(Collision collisionInfo) {
@@ -77,7 +60,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         {
             flyingPhysics.Grounded();
             Health = 0;
-            grounded = true;
         }
         if (collisionInfo.gameObject.tag == playerCloudship.tag)
         {
@@ -95,9 +77,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         HealthBar.fillAmount = Health/HealthMax;
         if (IsDead)
         {
-            Debug.Log("Enemy Dead");
             flyingPhysics.SinkToGround();
-
             var shooting = GetComponent<Shooting>();
             shooting.enabled = false;
             HealthBar.enabled = false;
@@ -116,9 +96,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         newLocation.x = newLocation.x + 2000f;    
         transform.position = newLocation;
 
-        timeDead = 0;
-        grounded = false;
-        
         if (flyingPhysics != null)
         {
             flyingPhysics.Reset();
