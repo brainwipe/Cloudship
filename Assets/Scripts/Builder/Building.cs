@@ -26,7 +26,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     void Awake()
     {
-        BoundaryCollision = true;
+        BoundaryCollision = false;
         AnotherObjectCollision = false;
         IsOverCloudship = false;
 

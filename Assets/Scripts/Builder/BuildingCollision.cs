@@ -11,7 +11,7 @@ public class BuildingCollision : MonoBehaviour
         building = GetComponentInParent<Building>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (building.InMenu)
         {
@@ -21,6 +21,7 @@ public class BuildingCollision : MonoBehaviour
         if (other.tag == "Building")
         {
             building.AnotherObjectCollision = true;
+            Debug.Log("Building Collide");
         }
     }
 

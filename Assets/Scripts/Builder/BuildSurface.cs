@@ -143,15 +143,21 @@ public class BuildSurface : MonoBehaviour
 	{
 		position = Vector3.zero;
 		RaycastHit hit;
+
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
+		
 		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
 		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
-
+		
+		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
+		
 		int layerMask = 1 << 8;
 
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			var zeroedY = new Vector3(hit.point.x, 0, hit.point.z);
+			var zeroedY = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+			Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
 			position = zeroedY;
 			return true;
 		}
@@ -172,7 +178,7 @@ public class BuildSurface : MonoBehaviour
 
 	void SetBoundary(Building building)
 	{
-		float safetyMargin = 1f;
+		float safetyMargin = 2f;
 
 		Boundary.transform.localScale = Vector3.one;
 		var boundaryExtents = Boundary.mesh.bounds.extents;
