@@ -100,12 +100,12 @@ public class BuildSurface : MonoBehaviour
 
 	void MoveSelectedBuilding()
 	{
-		Vector3 globalPosition;
-		if (GetDesired(out globalPosition))
+		Vector3 localPosition;
+		if (GetDesired(out localPosition))
 		{
-			selectedBuilding.transform.position = Vector3.Lerp(
-				selectedBuilding.transform.position, 
-				globalPosition, 
+			selectedBuilding.transform.localPosition = Vector3.Lerp(
+				selectedBuilding.transform.localPosition, 
+				localPosition, 
 				Time.deltaTime * 40);
 			selectedBuilding.IsOverCloudship = true;
 		}
@@ -145,19 +145,20 @@ public class BuildSurface : MonoBehaviour
 		RaycastHit hit;
 
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
+		// Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
 		
 		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
 		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
 		
-		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
+		// Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
 		
 		int layerMask = 1 << 8;
 
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			var zeroedY = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-			Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
+			var toLocal = hit.point - transform.position;
+			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
+			// Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
 			position = zeroedY;
 			return true;
 		}
