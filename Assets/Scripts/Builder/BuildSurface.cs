@@ -183,7 +183,7 @@ public class BuildSurface : MonoBehaviour
 
 		Boundary.transform.localScale = Vector3.one;
 		var boundaryExtents = Boundary.mesh.bounds.extents;
-		var buildingBounds = building.GetBounds();
+		var buildingBounds = building.PreCalculatedBounds;
 		var buildingSizes = (buildingBounds.extents + new Vector3(safetyMargin, 0, safetyMargin));
 
 		var xScale = (boundaryExtents.x - buildingSizes.x) / boundaryExtents.x;

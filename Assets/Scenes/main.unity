@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 1
+  AllowWind: 0
   Lift: 0
   Torque: 0
   Speed: 0
@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &654624879
 Transform:
   m_ObjectHideFlags: 0
@@ -2580,7 +2580,7 @@ Prefab:
       objectReference: {fileID: 725829110}
     - target: {fileID: 1398137551612962, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
         type: 2}

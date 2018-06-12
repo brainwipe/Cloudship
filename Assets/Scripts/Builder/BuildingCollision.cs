@@ -21,7 +21,6 @@ public class BuildingCollision : MonoBehaviour
         if (other.tag == "Building")
         {
             building.AnotherObjectCollision = true;
-            Debug.Log("Building Collide");
         }
     }
 

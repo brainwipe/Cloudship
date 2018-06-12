@@ -23,6 +23,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public float Health;
     public Abilities Abilities;
     
+    public Bounds PreCalculatedBounds;
 
     void Awake()
     {
@@ -61,9 +62,12 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public Building Clone(Transform buildSurface)
     {
-        var clone = Instantiate(gameObject, Vector3.zero, Quaternion.identity, buildSurface);
+        var clone = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+        clone.transform.localScale = Vector3.one;
         clone.tag = BuildingTag;
-		clone.transform.localScale = Vector3.one;
+        var cloneBuilding = clone.GetComponent<Building>();
+        cloneBuilding.CalculateBounds();
+        clone.transform.parent = buildSurface;
         clone.transform.localRotation = Quaternion.identity;
         clone.transform.localPosition = Vector3.zero;
         clone.layer = 10;
@@ -72,21 +76,20 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         {
             child.gameObject.layer = clone.layer;      
         }
-        var cloneBuilding = clone.GetComponent<Building>();
+        
         cloneBuilding.InMenu = false;
         cloneBuilding.Selected();
         return cloneBuilding;
     }
 
-    public Bounds GetBounds()
+    public void CalculateBounds()
     {
-        var bounds = new Bounds (transform.position, Vector3.one);
+        PreCalculatedBounds = new Bounds (transform.position, Vector3.one);
         Renderer[] renderers = GetComponentsInChildren<Renderer> ();
         foreach (Renderer renderer in renderers)
         {
-            bounds.Encapsulate (renderer.bounds);
+            PreCalculatedBounds.Encapsulate (renderer.bounds);
         }
-        return bounds;
     }
 
     public void Remove() => Destroy(gameObject);
@@ -95,7 +98,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     {
         if (!InMenu)
         {
-            player.UpdateAbilities();   
+            GameManager.Instance.PlayerCloudship.UpdateAbilities();   
         }
     }
 
