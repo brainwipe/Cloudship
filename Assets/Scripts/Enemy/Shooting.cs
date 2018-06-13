@@ -15,36 +15,22 @@ public class Shooting : MonoBehaviour
 
     void Start()
     {
-        shooter = GetComponent<Cloudship>();
-        if (shooter == null)
-        {
-            shooter = GetComponent<Enemy>();
-        }
+        shooter = GetComponent<Enemy>();
     }
 
     void Update()
     {
-        if (shooter is Cloudship)
+        if (Time.time >= lastTimeFired)
         {
-            if (Time.time >= lastTimeFired && Input.GetButtonUp(fireButton))
-            {
-                Shoot();
-                lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
-            }
-        }
-        else
-        {
-            if (Time.time >= lastTimeFired)
-            {
-                Shoot();
-                lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
-            }
+            var nearestTargetPosition = NearestTargetPosition();
+            Shoot(nearestTargetPosition);
+            lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
         }
     }
 
-    void Shoot()
+    void Shoot(Vector3 nearestTargetPosition)
     {
-        var lookVector = (NearestTarget() - transform.position).normalized;
+        var lookVector = (nearestTargetPosition - transform.position).normalized;
         var shootVector = Vector3.RotateTowards(lookVector, Vector3.up, 0.3f, 10f);
         
         Rigidbody ball = Instantiate(
@@ -58,21 +44,27 @@ public class Shooting : MonoBehaviour
         ball.AddForce(shootVector * ShotForce, ForceMode.Impulse);
     }
 
-    private Vector3 NearestTarget()
+    Vector3 NearestTargetPosition()
     {
         GameObject[] targets;
-        if (shooter is Cloudship)
-        {
-            targets = GameObject.FindGameObjectsWithTag("Enemy");
-        }
-        else
-        {
-            targets = GameObject.FindGameObjectsWithTag("Player");
-        }
+        targets = GameObject.FindGameObjectsWithTag("Player");
 
         if (targets.Length > 0)
         {
-            return targets[0].transform.position;
+
+            GameObject nearest = null;
+            float lowestSqrMagnitude = float.MaxValue;
+            foreach(var target in targets)
+            {
+                var range = (target.transform.position - shooter.Position).sqrMagnitude;
+                if (range < lowestSqrMagnitude)
+                {
+                    lowestSqrMagnitude = range;
+                    nearest = target;
+                }
+            }
+       
+            return nearest.transform.position;
         }
         return transform.forward;
     }

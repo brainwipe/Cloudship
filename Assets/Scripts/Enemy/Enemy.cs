@@ -71,6 +71,8 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
     public bool IsDead => Health < 1;
 
+    public Vector3 Position => transform.position;
+
     public void Damage(float amount)
     {
         Health -= amount;

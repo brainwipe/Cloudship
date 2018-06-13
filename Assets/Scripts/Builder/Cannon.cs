@@ -43,7 +43,8 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        if (!AmIClearToShoot(ShootingTip.position, ShootingTip.rotation))
+        if (!IsThereATargetInMyArc() || 
+            !AmIClearToShoot(ShootingTip.position, ShootingTip.rotation))
         {
             return;
         }
@@ -64,6 +65,26 @@ public class Cannon : MonoBehaviour
         
     }
 
+    bool IsThereATargetInMyArc()
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+        if (targets.Length > 0)
+        {
+            foreach(var target in targets)
+            {
+                var targetDirection = target.transform.position - ShootingTip.position;
+                float angle = Vector3.Angle(targetDirection, Swivel.forward);
+                
+                if (Mathf.Abs(angle) < 15f)
+                {
+                    Debug.Log("angle is: " + angle);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     bool AmIClearToShoot(Vector3 shootingTipPosition, Quaternion shootingTipRotation)
     {
         var shootingTipDirection = shootingTipRotation * Vector3.one;
@@ -77,18 +98,5 @@ public class Cannon : MonoBehaviour
             }
         }
         return true;
-    }
-
-    Vector3 NearestTarget()
-    {
-        GameObject[] targets;
-        
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-        
-        if (targets.Length > 0)
-        {
-            return targets[0].transform.position;
-        }
-        return Barrel.forward;
     }
 }
