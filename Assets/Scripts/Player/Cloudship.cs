@@ -26,10 +26,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
-        flyingPhysics.Lift = 2000f;
-        flyingPhysics.Torque = 2000f;
-        flyingPhysics.Speed = 350f;
-        flyingPhysics.Parent = this;
 
         Health = 100;
         HealthMax = Health;
@@ -93,21 +89,27 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
     public bool CanGiveOrders { get; private set; }
 
+    public bool CanShoot => Mode != Cloudship.Modes.Build;
+
+    public string MyEnemyTagIs => "Enemy";
+
+    public bool ShootFullAuto => false;
+
     public void UpdateAbilities()
     {
         CanGiveOrders = false;
 
-        var childWithAbility = GetComponentsInChildren<IHaveAbilities>();
+        var buildingsWithAbility = transform.GetComponentsInChildren<IHaveAbilities>();
 
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
 
-        foreach(var child in childWithAbility)
+        foreach(var building in buildingsWithAbility)
         {
-            flyingPhysics.Torque += child.Skills.Torque;
-            flyingPhysics.Speed += child.Skills.Speed;
+            flyingPhysics.Torque += building.Skills.Torque;
+            flyingPhysics.Speed += building.Skills.Speed;
             
-            if (child.Skills.GiveOrders)
+            if (building.Skills.GiveOrders)
             {
                 CanGiveOrders = true;
             }

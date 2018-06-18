@@ -25,26 +25,22 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     void Start()
     {
         animator = GetComponent<Animator>();
-
         flyingPhysics = GetComponent<FlyingPhysics>();
-        flyingPhysics.Lift = 2000f;
-        flyingPhysics.Torque = 2200f;
-        flyingPhysics.Speed = 500f;
-        flyingPhysics.Parent = this;
-
         playerCloudship = GameManager.Instance.PlayerCloudship;
         HealthMax = Health;
+        UpdateAbilities();
     }
 
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
+        float yaw = Time.deltaTime * torque;
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             Quaternion.LookRotation(Heading),
-            Time.deltaTime);
+            yaw);
 
-        float forward = speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * forward);
+        float thrust = speed * Time.deltaTime;
+        rigidBody.AddForce(transform.forward * thrust);
     }
 
     void Update()
@@ -73,6 +69,18 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
     public Vector3 Position => transform.position;
 
+    public bool CanMove => flyingPhysics.Speed > 0 && CanGiveOrders;
+    
+    public bool CanTurn => flyingPhysics.Torque > 0 && CanGiveOrders;
+
+    public bool CanGiveOrders { get; private set; }
+
+    public bool CanShoot => true;
+
+    public string MyEnemyTagIs => "Player";
+
+    public bool ShootFullAuto => true;
+
     public void Damage(float amount)
     {
         Health -= amount;
@@ -80,8 +88,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         if (IsDead)
         {
             flyingPhysics.SinkToGround();
-            var shooting = GetComponent<Shooting>();
-            shooting.enabled = false;
             HealthBar.enabled = false;
         }
     }
@@ -103,10 +109,35 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
             flyingPhysics.Reset();
         }
 
-        var shooting = GetComponent<Shooting>();
-        shooting.enabled = true;
         ReadyToSpawn = false;
         HealthBar.enabled = true;
         HealthBar.fillAmount = Health/HealthMax;
+    }
+
+    public void UpdateAbilities()
+    {
+        CanGiveOrders = false;
+
+        var buildingsWithAbility = GetComponentsInChildren<IHaveAbilities>();
+
+        flyingPhysics.Torque = 0;
+        flyingPhysics.Speed = 0;
+
+        foreach(var building in buildingsWithAbility)
+        {
+            flyingPhysics.Torque += building.Skills.Torque;
+            flyingPhysics.Speed += building.Skills.Speed;
+            
+            if (building.Skills.GiveOrders)
+            {
+                CanGiveOrders = true;
+            }
+        }
+
+        if (!CanGiveOrders)
+        {
+            flyingPhysics.Torque = 0;
+            flyingPhysics.Speed = 0;
+        }
     }
 }

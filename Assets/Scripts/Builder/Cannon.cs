@@ -15,29 +15,32 @@ public class Cannon : MonoBehaviour
     public float SwivelSpeed = 0.4f;
     public float BarrelElevation = 65f;
 
-    private string fireButton = "Fire1";
-    private float lastTimeFired;
+    string fireButton = "Fire1";
+    float lastTimeFired;
 
-    private Cloudship cloudship;
-    private float fuzzyShotForce = 0.2f;
+    IAmAShip parent;
+    float fuzzyShotForce = 0.2f;
 
     void Start()
     {
-        cloudship = GameManager.Instance.PlayerCloudship;
         Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
+        parent = transform.GetComponentInParent<IAmAShip>();  
     }
 
     void Update()
     {
-        if (cloudship.Mode == Cloudship.Modes.Build)
+        if (parent == null || !parent.CanShoot)
         {
             return;
         }
 
-        if (Time.time >= lastTimeFired && Input.GetButtonUp(fireButton))
+        if (Time.time >= lastTimeFired)
         {
-            Shoot();
-            lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
+            if (Input.GetButtonUp(fireButton) || parent.ShootFullAuto)
+            {
+                Shoot();
+                lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
+            }
         }
     }
 
@@ -56,7 +59,7 @@ public class Cannon : MonoBehaviour
             transform) as Rigidbody;
 
         var cannonBall = ball.GetComponent<Cannonball>();
-        cannonBall.owner = cloudship;
+        cannonBall.owner = parent;
 
         var forceRandomiser = Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
         var ballForce = ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser;
@@ -67,7 +70,7 @@ public class Cannon : MonoBehaviour
 
     bool IsThereATargetInMyArc()
     {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag(parent.MyEnemyTagIs);
         if (targets.Length > 0)
         {
             foreach(var target in targets)
@@ -77,7 +80,6 @@ public class Cannon : MonoBehaviour
                 
                 if (Mathf.Abs(angle) < 15f)
                 {
-                    Debug.Log("angle is: " + angle);
                     return true;
                 }
             }

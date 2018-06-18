@@ -33,6 +33,7 @@ public class FlyingPhysics : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        Parent = transform.GetComponentInParent<IFly>();
         windMaker = GameManager.Instance.WindMaker;
         rigidBody.maxAngularVelocity = 0.6f;
     }

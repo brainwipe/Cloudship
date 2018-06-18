@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4561336613980348}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33726006466220780}
   - component: {fileID: 23931975132937082}
   - component: {fileID: 64930764625319296}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bags_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 33729029617868576}
   - component: {fileID: 23020829460122952}
   - component: {fileID: 64937408194978302}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ GameObject:
   - component: {fileID: 223663207358475376}
   - component: {fileID: 114082295796858236}
   - component: {fileID: 114392034816465206}
-  m_Layer: 0
-  m_Name: Canvas
+  m_Layer: 13
+  m_Name: HealthbarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 224783574410827582}
   - component: {fileID: 222565781719643836}
   - component: {fileID: 114284614291472540}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HealthbarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4729483132370916}
   - component: {fileID: 95166891188437136}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 224702038217520600}
   - component: {fileID: 222525628139361532}
   - component: {fileID: 114782510594628990}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 95306397798695828}
   - component: {fileID: 114938606991111428}
   - component: {fileID: 114396056742841846}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyParent
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -233,6 +233,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 171108b5fbda93149a42c3bc79098342, type: 2}
   - {fileID: 2100000, guid: e807f4a070400be419708c773a8f42d3, type: 2}
@@ -273,6 +274,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 08328ec4b1d668e499be0a0fab712f46, type: 2}
   m_StaticBatchInfo:
@@ -316,8 +318,8 @@ Rigidbody:
   m_GameObject: {fileID: 1903300416238804}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.5
-  m_AngularDrag: 0.05
+  m_Drag: 0.2
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -368,6 +370,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95306397798695828
 Animator:
   serializedVersion: 3
@@ -385,6 +388,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114082295796858236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8015027848c2954f8e8a66958cc9259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 50
+  Health: 70
   Distance: 0
   HealthBar: {fileID: 114782510594628990}
   Heading: {x: 0, y: 0, z: 0}
@@ -479,9 +483,12 @@ MonoBehaviour:
   AllowMovement: 1
   AllowBuoyancy: 1
   AllowWind: 1
-  Lift: 0
-  Torque: 0
-  Speed: 0
+  Lift: 2000
+  Torque: 2200
+  Speed: 300
+  Blackbox:
+    Velocity: 0
+    MaxVelocity: 0
 --- !u!114 &114782510594628990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -524,7 +531,7 @@ MonoBehaviour:
     type: 2}
   cannon: {fileID: 4561336613980348}
   TimeBetweenShotsInSeconds: 4
-  ShotForce: 200
+  ShotForce: 350
 --- !u!222 &222525628139361532
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -610,6 +617,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.00000023842142, y: 10.661667}
+  m_AnchoredPosition: {x: 0, y: 10.661667}
   m_SizeDelta: {x: 0.0000076294, y: 21.32}
   m_Pivot: {x: 0.5, y: 0.5}
