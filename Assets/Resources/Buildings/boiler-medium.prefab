@@ -247,9 +247,13 @@ MonoBehaviour:
   IsOverCloudship: 0
   Health: 50
   Abilities:
-    Torque: 500
-    Speed: 150
+    Torque: 500000
+    Speed: 130000
     GiveOrders: 0
+    Mass: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

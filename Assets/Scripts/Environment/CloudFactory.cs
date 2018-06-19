@@ -11,7 +11,7 @@ public class CloudFactory : MonoBehaviour
      
     IWindMaker windMaker;
     Cloudship playerCloudship;
-    float windEffect = 0.15f;
+    float windEffect = 0.00015f;
     float eliminationDistanceFromPlayer;
     float sqrElimiationDistanceFromPlayer;
     float furthestFromplayer;

@@ -24,16 +24,16 @@ public class FlyingPhysics : MonoBehaviour
     float buoyancyHealth = 1f;
     bool grounded = false;
     float timeDead = 0;
-    
+
     void Awake()
     {
         Blackbox = new Telemetry();
+        rigidBody = transform.GetComponent<Rigidbody>();
+        Parent = transform.GetComponentInParent<IFly>();
     }
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        Parent = transform.GetComponentInParent<IFly>();
         windMaker = GameManager.Instance.WindMaker;
         rigidBody.maxAngularVelocity = 0.6f;
     }
@@ -112,6 +112,18 @@ public class FlyingPhysics : MonoBehaviour
         rigidBody.isKinematic = false;
         grounded = false;
         timeDead = 0;
+    }
+
+    public float Mass 
+    {
+        get
+        {
+            return rigidBody.mass;
+        }
+        set
+        {
+            rigidBody.mass = value;
+        }
     }
 
     [Serializable]

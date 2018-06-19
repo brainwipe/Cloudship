@@ -26,21 +26,10 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     {
         animator = GetComponent<Animator>();
         flyingPhysics = GetComponent<FlyingPhysics>();
+
         playerCloudship = GameManager.Instance.PlayerCloudship;
         HealthMax = Health;
         UpdateAbilities();
-    }
-
-    public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
-    {
-        float yaw = Time.deltaTime * torque;
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            Quaternion.LookRotation(Heading),
-            yaw);
-
-        float thrust = speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * thrust);
     }
 
     void Update()
@@ -80,6 +69,18 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public string MyEnemyTagIs => "Player";
 
     public bool ShootFullAuto => true;
+
+    public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
+    {
+        float yaw = Time.deltaTime * torque;
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(Heading),
+            yaw);
+
+        float thrust = speed * Time.deltaTime;
+        rigidBody.AddForce(transform.forward * thrust);
+    }
 
     public void Damage(float amount)
     {
@@ -122,11 +123,13 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
+        float mass = 0f;
 
         foreach(var building in buildingsWithAbility)
         {
             flyingPhysics.Torque += building.Skills.Torque;
             flyingPhysics.Speed += building.Skills.Speed;
+            mass += building.Skills.Mass;
             
             if (building.Skills.GiveOrders)
             {
@@ -139,5 +142,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
             flyingPhysics.Torque = 0;
             flyingPhysics.Speed = 0;
         }
+        flyingPhysics.Mass = mass;
     }
 }

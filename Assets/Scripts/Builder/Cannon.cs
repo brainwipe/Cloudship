@@ -10,11 +10,8 @@ public class Cannon : MonoBehaviour
     public Transform ShootingTip;
     public float TimeBetweenShotsInSeconds = 0.5f;
     public float ShotForce = 1000f;
-
-    [Range(0.2f, 0.8f)]
-    public float SwivelSpeed = 0.4f;
     public float BarrelElevation = 65f;
-
+    public float MaxFiringAngle = 25f;
     string fireButton = "Fire1";
     float lastTimeFired;
 
@@ -78,7 +75,7 @@ public class Cannon : MonoBehaviour
                 var targetDirection = target.transform.position - ShootingTip.position;
                 float angle = Vector3.Angle(targetDirection, Swivel.forward);
                 
-                if (Mathf.Abs(angle) < 15f)
+                if (Mathf.Abs(angle) < MaxFiringAngle)
                 {
                     return true;
                 }

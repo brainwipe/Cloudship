@@ -5,7 +5,7 @@ public class PerlinPressure : IWindMaker
     float perlinScale = 2000f;
     float perlinOffset = 20000;
     float gradientSampleWidth = 20f;
-    float windStrength = 10000f;
+    float windStrength = 10000000f;
 
     public Vector3 GetCycloneForce(Vector3 cycloneForce)
     {

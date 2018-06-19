@@ -103,11 +103,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
+        float mass = 0f;
 
         foreach(var building in buildingsWithAbility)
         {
             flyingPhysics.Torque += building.Skills.Torque;
             flyingPhysics.Speed += building.Skills.Speed;
+            flyingPhysics.Lift += building.Skills.Lift;
+            mass += building.Skills.Mass;
             
             if (building.Skills.GiveOrders)
             {
@@ -120,5 +123,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
             flyingPhysics.Torque = 0;
             flyingPhysics.Speed = 0;
         }
+
+        flyingPhysics.Mass = mass;
     }
 }
