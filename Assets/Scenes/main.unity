@@ -717,6 +717,7 @@ MonoBehaviour:
     Speed: 130000
     GiveOrders: 0
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -1329,6 +1330,7 @@ MonoBehaviour:
     Speed: 0
     GiveOrders: 1
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -3465,8 +3467,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 1673605077}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  SwivelSpeed: 0.521
   BarrelElevation: 70
+  MaxFiringAngle: 25
 --- !u!114 &1277424971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3493,6 +3495,7 @@ MonoBehaviour:
     Speed: 0
     GiveOrders: 0
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -3800,8 +3803,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 350578096}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  SwivelSpeed: 0.521
   BarrelElevation: 70
+  MaxFiringAngle: 25
 --- !u!114 &1508843985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3828,6 +3831,7 @@ MonoBehaviour:
     Speed: 0
     GiveOrders: 0
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -4326,8 +4330,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 56692505}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  SwivelSpeed: 0.521
   BarrelElevation: 70
+  MaxFiringAngle: 25
 --- !u!114 &1727754755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4354,6 +4358,7 @@ MonoBehaviour:
     Speed: 0
     GiveOrders: 0
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -5201,7 +5206,7 @@ Prefab:
       objectReference: {fileID: 725829110}
     - target: {fileID: 1398137551612962, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
         type: 2}
@@ -5266,8 +5271,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 511655640}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  SwivelSpeed: 0.521
   BarrelElevation: 70
+  MaxFiringAngle: 25
 --- !u!114 &1990772486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5294,6 +5299,7 @@ MonoBehaviour:
     Speed: 0
     GiveOrders: 0
     Mass: 0
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
