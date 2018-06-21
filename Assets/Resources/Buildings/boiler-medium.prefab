@@ -250,7 +250,8 @@ MonoBehaviour:
     Torque: 500000
     Speed: 130000
     GiveOrders: 0
-    Mass: 0
+    Mass: 50
+    Lift: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

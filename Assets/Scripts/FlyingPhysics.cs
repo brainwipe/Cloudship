@@ -29,7 +29,7 @@ public class FlyingPhysics : MonoBehaviour
     {
         Blackbox = new Telemetry();
         rigidBody = transform.GetComponent<Rigidbody>();
-        Parent = transform.GetComponentInParent<IFly>();
+        Parent = transform.GetComponent<IFly>();
     }
 
     void Start()
@@ -51,7 +51,7 @@ public class FlyingPhysics : MonoBehaviour
             }
             if (rigidBody.transform.position.y < -200f)
             {
-                GameManager.Instance.End();
+                Parent.Dead();
             }
             return;
         }
@@ -101,17 +101,6 @@ public class FlyingPhysics : MonoBehaviour
         AllowBuoyancy = false;
         rigidBody.isKinematic = true;
         grounded = true;
-    }
-
-    public void Reset()
-    {
-        AllowWind = true;
-        AllowMovement = true;
-        AllowBuoyancy = true;
-        buoyancyHealth = 1f;
-        rigidBody.isKinematic = false;
-        grounded = false;
-        timeDead = 0;
     }
 
     public float Mass 

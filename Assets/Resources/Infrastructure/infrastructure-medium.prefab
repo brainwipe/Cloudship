@@ -354,7 +354,7 @@ MonoBehaviour:
     Torque: 0
     Speed: 0
     GiveOrders: 0
-    Mass: 1000
+    Mass: 800
     Lift: 2000000
 --- !u!114 &114358077082021128
 MonoBehaviour:

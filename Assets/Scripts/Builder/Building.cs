@@ -7,7 +7,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public static string BuildingTag = "Building";
 
-    public Cloudship player;
+    public IAmAShip owner;
 
     public Vector3 MenuPosition;
     public float MenuScale;
@@ -32,7 +32,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         IsOverCloudship = false;
 
         highlightTargets = GetComponentsInChildren<Renderer>();
-        player = GetComponentInParent<Cloudship>();
+        owner = GetComponentInParent<IAmAShip>();
     }
 
     public void SetupForMenu(int menuLayer)
@@ -62,7 +62,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public Building Clone(Transform buildSurface)
     {
-        var clone = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+        var clone = Instantiate(gameObject, transform.position, Quaternion.identity);
         clone.transform.localScale = Vector3.one;
         clone.tag = BuildingTag;
         var cloneBuilding = clone.GetComponent<Building>();
@@ -98,7 +98,10 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     {
         if (!InMenu)
         {
-            GameManager.Instance.PlayerCloudship.UpdateAbilities();   
+            if (owner != null)
+            {
+                owner.UpdateAbilities();
+            }
         }
     }
 
@@ -147,7 +150,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public void Damage(float amount)
     {
-        if (!GameManager.Instance.Mode.PlayerTakesDamage)
+        if (!GameManager.Instance.Mode.PlayerTakesDamage && owner.IAmAPlayer)
         {
             return;
         }

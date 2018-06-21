@@ -73,8 +73,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4483587615472010}
   - component: {fileID: 95031339849286154}
-  - component: {fileID: 114725801456436570}
   - component: {fileID: 114588827062324936}
+  - component: {fileID: 114725801456436570}
   m_Layer: 10
   m_Name: weapon-cannon
   m_TagString: Building
@@ -445,8 +445,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 4575211488392156}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  SwivelSpeed: 0.521
   BarrelElevation: 70
+  MaxFiringAngle: 25
 --- !u!114 &114643608483370940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,6 +477,15 @@ MonoBehaviour:
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 10
+  Abilities:
+    Torque: 0
+    Speed: 0
+    GiveOrders: 0
+    Mass: 20
+    Lift: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!136 &136478061356110122
 CapsuleCollider:
   m_ObjectHideFlags: 1

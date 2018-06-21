@@ -45,6 +45,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         rigidBody.AddForce(transform.forward * forward);
     }
 
+    public void Dead()
+    {
+        GameManager.Instance.End();
+    }
+
     void OnCollisionEnter(Collision collisionInfo) {
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
@@ -94,6 +99,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public string MyEnemyTagIs => "Enemy";
 
     public bool ShootFullAuto => false;
+
+    public bool IAmAPlayer => true;
 
     public void UpdateAbilities()
     {

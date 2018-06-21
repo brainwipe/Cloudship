@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   MenuPosition: {x: 0, y: -0.04, z: 0}
   MenuScale: 0.02
   Name: Small House
@@ -245,6 +246,15 @@ MonoBehaviour:
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 10
+  Abilities:
+    Torque: 0
+    Speed: 0
+    GiveOrders: 0
+    Mass: 10
+    Lift: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114252331362443010
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,11 +22,14 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     [HideInInspector]
     public bool ReadyToSpawn = true;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         flyingPhysics = GetComponent<FlyingPhysics>();
+    }
 
+    void Start()
+    {
         playerCloudship = GameManager.Instance.PlayerCloudship;
         HealthMax = Health;
         UpdateAbilities();
@@ -70,6 +73,8 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
     public bool ShootFullAuto => true;
 
+    public bool IAmAPlayer => false;
+
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
         float yaw = Time.deltaTime * torque;
@@ -80,6 +85,11 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
 
         float thrust = speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * thrust);
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
     }
 
     public void Damage(float amount)
@@ -93,34 +103,11 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         }
     }
 
-    public void Reset()
-    {
-        if (!ReadyToSpawn)
-        {
-            return;
-        }
-        Health = HealthMax;
-
-        var newLocation = GameManager.Instance.PlayerCloudship.transform.position;
-        newLocation.x = newLocation.x + 2000f;    
-        transform.position = newLocation;
-
-        if (flyingPhysics != null)
-        {
-            flyingPhysics.Reset();
-        }
-
-        ReadyToSpawn = false;
-        HealthBar.enabled = true;
-        HealthBar.fillAmount = Health/HealthMax;
-    }
-
     public void UpdateAbilities()
     {
         CanGiveOrders = false;
 
         var buildingsWithAbility = GetComponentsInChildren<IHaveAbilities>();
-
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
         float mass = 0f;
@@ -129,14 +116,14 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
         {
             flyingPhysics.Torque += building.Skills.Torque;
             flyingPhysics.Speed += building.Skills.Speed;
+            flyingPhysics.Lift += building.Skills.Lift;
             mass += building.Skills.Mass;
-            
+           
             if (building.Skills.GiveOrders)
             {
                 CanGiveOrders = true;
             }
         }
-
         if (!CanGiveOrders)
         {
             flyingPhysics.Torque = 0;

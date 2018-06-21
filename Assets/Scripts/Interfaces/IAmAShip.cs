@@ -8,4 +8,8 @@ public interface IAmAShip
     string MyEnemyTagIs { get; }
 
     bool ShootFullAuto { get; }
+
+    bool IAmAPlayer { get; }
+
+    void UpdateAbilities();
 }

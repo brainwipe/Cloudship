@@ -346,5 +346,5 @@ MonoBehaviour:
     Torque: 0
     Speed: 0
     GiveOrders: 0
-    Mass: 700
+    Mass: 500
     Lift: 1800000

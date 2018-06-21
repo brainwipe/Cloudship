@@ -5,38 +5,25 @@ using UnityEngine.AI;
 
 public class EnemyFactory : MonoBehaviour
 {
-    public Cloudship playerCloudship;
-    public Enemy Enemy;
+    public Enemy[] EnemyPrefabs;
+    Cloudship player;
 
     float lastSeen;
     
     float intervalSinceLastSeen;
 
     void Start()
-    {   
-        playerCloudship = GameManager.Instance.PlayerCloudship;
+    {
+        player = GameManager.Instance.PlayerCloudship;
     }
 
     void Update()
     {
-        if (ShouldISpawn())
+        var enemies = GetComponentsInChildren<Enemy>();
+        if (enemies.Length == 0)
         {
-            Spawn();
+            var location = player.transform.position + new Vector3(1000, 0,0);
+            Instantiate(EnemyPrefabs[0], location, Quaternion.identity, transform);
         }
-    }
-
-
-    bool ShouldISpawn()
-    {
-        if (Enemy.ReadyToSpawn)
-        {
-            return true;
-        }
-        return true;
-    }
-
-    void Spawn()
-    {
-        Enemy.Reset();
     }
 }
