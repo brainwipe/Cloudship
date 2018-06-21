@@ -41,10 +41,10 @@ public class BuildSurface : MonoBehaviour
 				else
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-					Vector3 globalPosition;
-					if (GetDesired(out globalPosition))
+					Vector3 localPosition;
+					if (GetDesired(out localPosition))
 					{
-						selectedBuilding.transform.position = globalPosition;
+						selectedBuilding.transform.localPosition = localPosition;
 					}
 					else{
 						selectedBuilding.transform.localPosition = Vector3.zero;
@@ -139,9 +139,9 @@ public class BuildSurface : MonoBehaviour
 		return false;
 	}
 
-	bool GetDesired(out Vector3 position)
+	bool GetDesired(out Vector3 localPosition)
 	{
-		position = Vector3.zero;
+		localPosition = Vector3.zero;
 		RaycastHit hit;
 
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -159,7 +159,7 @@ public class BuildSurface : MonoBehaviour
 			var toLocal = hit.point - transform.position;
 			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
 			// Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
-			position = zeroedY;
+			localPosition = zeroedY;
 			return true;
 		}
 		return false;
