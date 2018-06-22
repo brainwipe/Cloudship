@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance => instance;
 
+	public Transform Cannonballs;
+
 	public LevelChanger LevelChanger;
     
     void Awake()

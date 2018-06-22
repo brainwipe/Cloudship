@@ -10,30 +10,31 @@ public class Cannon : MonoBehaviour
     public Transform ShootingTip;
     public float TimeBetweenShotsInSeconds = 0.5f;
     public float ShotForce = 1000f;
-    public float BarrelElevation = 65f;
     public float MaxFiringAngle = 25f;
+    public float MaxRange = 600;
     string fireButton = "Fire1";
     float lastTimeFired;
 
-    IAmAShip parent;
-    float fuzzyShotForce = 0.2f;
+    float BarrelElevation = 65f;
+    IAmAShip shooter;
+    float fuzzyShotForce = 0.1f;
 
     void Start()
     {
         Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
-        parent = transform.GetComponentInParent<IAmAShip>();  
+        shooter = transform.GetComponentInParent<IAmAShip>();  
     }
 
     void Update()
     {
-        if (parent == null || !parent.CanShoot)
+        if (shooter == null || !shooter.CanShoot)
         {
             return;
         }
 
         if (Time.time >= lastTimeFired)
         {
-            if (Input.GetButtonUp(fireButton) || parent.ShootFullAuto)
+            if (Input.GetButtonUp(fireButton) || shooter.ShootFullAuto)
             {
                 Shoot();
                 lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
@@ -53,12 +54,12 @@ public class Cannon : MonoBehaviour
             cannonball, 
             ShootingTip.position, 
             Quaternion.identity,
-            transform) as Rigidbody;
+            GameManager.Instance.Cannonballs) as Rigidbody;
 
         var cannonBall = ball.GetComponent<Cannonball>();
-        cannonBall.owner = parent;
+        cannonBall.owner = shooter;
 
-        var forceRandomiser = Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
+        var forceRandomiser = 1;// Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
         var ballForce = ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser;
 
         ball.AddForce(ballForce, ForceMode.Impulse);
@@ -67,15 +68,17 @@ public class Cannon : MonoBehaviour
 
     bool IsThereATargetInMyArc()
     {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag(parent.MyEnemyTagIs);
+        GameObject[] targets = GameObject.FindGameObjectsWithTag(shooter.MyEnemyTagIs);
         if (targets.Length > 0)
         {
             foreach(var target in targets)
             {
                 var targetDirection = target.transform.position - ShootingTip.position;
                 float angle = Vector3.Angle(targetDirection, Swivel.forward);
-                
-                if (Mathf.Abs(angle) < MaxFiringAngle)
+                bool isInArc = Mathf.Abs(angle) < MaxFiringAngle;
+                bool isInRange = targetDirection.magnitude < MaxRange;
+
+                if (isInArc && isInRange)
                 {
                     return true;
                 }
