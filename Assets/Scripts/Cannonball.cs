@@ -12,8 +12,9 @@ public class Cannonball : MonoBehaviour
 
     void Start()
     {
-		Stats.Start = transform.position;
+		Stats.Start(transform.position);
         Destroy(gameObject, maxLifeTime);
+		
     }
 
 	void Update()
@@ -45,23 +46,46 @@ public class Cannonball : MonoBehaviour
 	[Serializable]
 	public class Telemetry
 	{
+		System.Diagnostics.Stopwatch timer;
 		public bool On;
-		public Vector3 Start;
-		Vector3 end;
+		Vector3 startPosition;
+		Vector3 endPosition;
 		public float Range;
+		public float TimeInFlight;
 
-		public Telemetry()
+        public float StartElevation { get; internal set; }
+        public float Force { get; internal set; }
+
+        public Telemetry()
 		{
-			end = Vector3.zero;
+			endPosition = Vector3.zero;
+			timer = new System.Diagnostics.Stopwatch();
+		}
+
+		public void Start(Vector3 start)
+		{
+			timer.Start();
+			startPosition = start;
+		}
+
+		public void End(Transform cannonball)
+		{
+			timer.Stop();
+			Range = (startPosition - cannonball.position).magnitude;
+			TimeInFlight = timer.Elapsed.Seconds;
+			Debug.Log($"Cannonball: Range: {Range}, Time In Flight: {TimeInFlight}, Elevation: {StartElevation}");
+			On = false;
 		}
 
 		public void Update(Transform cannonball)
 		{
-			if (cannonball.position.y < 0 && end == Vector3.zero)
+			if (!On)
 			{
-				end = cannonball.position;
-				Range = (Start - end).magnitude;
-				Debug.Log("Cannonball Range: " + Range);
+				return;
+			}
+			if (cannonball.position.y < 0 && endPosition == Vector3.zero)
+			{
+				End(cannonball);
 			}
 		}
 	}

@@ -9,6 +9,10 @@ public class PerlinPressure : IWindMaker
 
     public Vector3 GetCycloneForce(Vector3 cycloneForce)
     {
+        if (!GameManager.Instance.Features.WindMovement)
+        {
+            return Vector3.zero;
+        }
         var vectorGradient = FindVectorGradient(cycloneForce);
         return  Direction(vectorGradient) * (Vector3.back * windStrength * vectorGradient.magnitude);
     }

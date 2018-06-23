@@ -2277,7 +2277,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4455065497538944, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4455065497538944, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2331,6 +2331,16 @@ Prefab:
       propertyPath: Cannonballs
       value: 
       objectReference: {fileID: 516044162}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: Features.WindMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: Mode.PlayerTakesDamage
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabParent: 0

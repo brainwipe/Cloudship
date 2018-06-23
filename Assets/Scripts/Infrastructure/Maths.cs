@@ -12,7 +12,7 @@ public static class Maths
         }
         else
         {
-            return (outUpper - outLower) * ((inValue - inLower) / (inUpper - inLower)) + outLower;
+            return ((outUpper - outLower) * ((inValue - inLower) / (inUpper - inLower))) + outLower;
         }
     }
 }

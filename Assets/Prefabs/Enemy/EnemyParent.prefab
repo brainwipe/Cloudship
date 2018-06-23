@@ -2665,7 +2665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballParent: {fileID: 0}
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   Swivel: {fileID: 4020188878630260}
@@ -2673,8 +2672,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 4722106427336092}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  BarrelElevation: 70
   MaxFiringAngle: 25
+  MaxRange: 600
 --- !u!114 &114284614291472540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2803,7 +2802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 0
+  AllowWind: 1
   Lift: 0
   Torque: 0
   Speed: 0
@@ -2932,7 +2931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballParent: {fileID: 0}
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   Swivel: {fileID: 4725657979620318}
@@ -2940,8 +2938,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 4037158060647236}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  BarrelElevation: 70
   MaxFiringAngle: 25
+  MaxRange: 600
 --- !u!114 &114842390613372516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2981,7 +2979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballParent: {fileID: 0}
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   Swivel: {fileID: 4966619665212400}
@@ -2989,8 +2986,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 4161222572098348}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  BarrelElevation: 70
   MaxFiringAngle: 25
+  MaxRange: 600
 --- !u!114 &114930797960660734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3013,7 +3010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballParent: {fileID: 0}
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   Swivel: {fileID: 4907246615850696}
@@ -3021,8 +3017,8 @@ MonoBehaviour:
   ShootingTip: {fileID: 4947850985091374}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  BarrelElevation: 70
   MaxFiringAngle: 25
+  MaxRange: 600
 --- !u!114 &114988484009453284
 MonoBehaviour:
   m_ObjectHideFlags: 1

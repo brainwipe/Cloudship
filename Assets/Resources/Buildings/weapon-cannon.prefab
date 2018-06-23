@@ -438,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdda304f6709e4e98c7bb51b265a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballParent: {fileID: 0}
   cannonball: {fileID: 54987675591206120, guid: cef26b8182bda8344bd7373f3925df17,
     type: 2}
   Swivel: {fileID: 4745918217125868}
@@ -446,8 +445,9 @@ MonoBehaviour:
   ShootingTip: {fileID: 4575211488392156}
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
-  BarrelElevation: 70
   MaxFiringAngle: 25
+  MaxRange: 680
+  MinRange: 180
 --- !u!114 &114643608483370940
 MonoBehaviour:
   m_ObjectHideFlags: 1

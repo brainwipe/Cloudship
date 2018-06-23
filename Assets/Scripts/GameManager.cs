@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 	public Transform Cannonballs;
 
 	public LevelChanger LevelChanger;
+
+	public Switches Features;
     
     void Awake()
 	{
@@ -60,4 +62,11 @@ public class GameManager : MonoBehaviour
     {
         LevelChanger.FadeToLevel(0);
     }
+
+	[Serializable]
+	public class Switches
+	{
+		public bool WindMovement;
+	}
+
 }

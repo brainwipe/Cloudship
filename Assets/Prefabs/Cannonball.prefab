@@ -113,8 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
-    On: 1
+    On: 0
     Range: 0
+    TimeInFlight: 0
 --- !u!135 &135028202918942076
 SphereCollider:
   m_ObjectHideFlags: 1
