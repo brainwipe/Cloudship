@@ -145,20 +145,20 @@ public class BuildSurface : MonoBehaviour
 		RaycastHit hit;
 
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		// Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
+		 Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
 		
 		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
 		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
 		
-		// Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
+		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
 		
 		int layerMask = 1 << 8;
 
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			var toLocal = hit.point - transform.position;
+			var toLocal = transform.InverseTransformPoint(hit.point);
 			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
-			// Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
+			Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
 			localPosition = zeroedY;
 			return true;
 		}
