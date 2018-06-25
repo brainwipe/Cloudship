@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : BaseState
+public class LoopState : BaseState
 {
-    Vector3 defaultHeading = Vector3.zero;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -15,12 +14,10 @@ public class PatrolState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (defaultHeading == Vector3.zero)
-        {
-             defaultHeading = new Vector3(Random.Range(0f,1f), 0f, Random.Range(0f,1f));
-        }
-
-		enemy.Heading = defaultHeading;
+        var vectorBetweenEnemyAndPlayer = player.transform.position - enemy.transform.position;
+        var loopHeading = Vector3.Cross(vectorBetweenEnemyAndPlayer.normalized, Vector3.up);
+        loopHeading.y = 0;
+        enemy.Heading = loopHeading;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

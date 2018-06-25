@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
+public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 {
     public enum Modes {
         Drive,
@@ -72,6 +72,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     private void Die()
     {
         flyingPhysics.SinkToGround();
+        IsDead = true;
     }
 
     public void SetBuildModeOn()
@@ -101,6 +102,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public bool ShootFullAuto => false;
 
     public bool IAmAPlayer => true;
+
+    public bool IsDead { get; set;}
 
     public void UpdateAbilities()
     {

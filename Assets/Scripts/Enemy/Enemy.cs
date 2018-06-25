@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
+public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 {
     public float Health = 0;
     public float Distance;
@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     FlyingPhysics flyingPhysics;
     
     float HealthMax = 0;
+    float torquedamping = 0.01f;
 
     [HideInInspector]
     public Vector3 Heading = new Vector3();
@@ -78,10 +79,14 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
     {
         float yaw = Time.deltaTime * torque;
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            Quaternion.LookRotation(Heading),
-            yaw);
+        var desired = Vector3.SignedAngle(transform.forward, Heading, Vector3.up);
+
+        var torqueActual = Vector3.up * desired * yaw * torquedamping;
+
+        Debug.DrawRay(transform.position, transform.forward * 100, Color.blue);
+        Debug.DrawRay(transform.position, Heading * 100, Color.green);
+
+        rigidBody.AddTorque(torqueActual, ForceMode.Acceleration);
 
         float thrust = speed * Time.deltaTime;
         rigidBody.AddForce(transform.forward * thrust);

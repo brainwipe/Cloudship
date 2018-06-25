@@ -2080,7 +2080,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.2
-  m_AngularDrag: 0.1
+  m_AngularDrag: 0.2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2673,7 +2673,6 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
   MaxFiringAngle: 25
-  MaxRange: 600
 --- !u!114 &114284614291472540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2939,7 +2938,6 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
   MaxFiringAngle: 25
-  MaxRange: 600
 --- !u!114 &114842390613372516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2987,7 +2985,6 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
   MaxFiringAngle: 25
-  MaxRange: 600
 --- !u!114 &114930797960660734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3018,7 +3015,6 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
   MaxFiringAngle: 25
-  MaxRange: 600
 --- !u!114 &114988484009453284
 MonoBehaviour:
   m_ObjectHideFlags: 1

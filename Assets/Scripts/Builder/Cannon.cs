@@ -34,6 +34,7 @@ public class Cannon : MonoBehaviour
         }
 
         var target = GetMyTarget();
+        SetElevation(target);
 
         if (Time.time >= lastTimeFired)
         {
@@ -43,12 +44,9 @@ public class Cannon : MonoBehaviour
                 lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
             }
         }
-
-        
-        SetElevation(target);
     }
 
-    void Shoot(GameObject target)
+    void Shoot(IAmATarget target)
     {
         if (target == null || 
             !AmIClearToShoot(ShootingTip.position, ShootingTip.rotation))
@@ -70,10 +68,9 @@ public class Cannon : MonoBehaviour
         cannonBall.Stats.Force = ShotForce * forceRandomiser;
         cannonBall.Stats.StartElevation = ShootingTip.parent.eulerAngles.x;
         ball.AddForce(ballForce, ForceMode.Impulse);
-        
-    }
+}
 
-    GameObject GetMyTarget()
+    IAmATarget GetMyTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(shooter.MyEnemyTagIs);
         
@@ -86,7 +83,13 @@ public class Cannon : MonoBehaviour
 
             if (isInArc && isInRange)
             {
-                return target;
+                var asTarget = target.GetComponentInParent<IAmATarget>();
+                Debug.Log(target);
+                if (asTarget == null || asTarget.IsDead)
+                {
+                    return null;
+                }
+                return asTarget;
             }
         }
         return null;
@@ -107,13 +110,13 @@ public class Cannon : MonoBehaviour
         return true;
     }
 
-    void SetElevation(GameObject target)
+    void SetElevation(IAmATarget target)
     {
         if (target == null)
         {
             return;
         }
-        var range = (target.transform.position - ShootingTip.position).magnitude;
+        var range = (target.Position - ShootingTip.position).magnitude;
         BarrelElevation = Maths.Rescale(90, 65, MinRange, MaxRange, range);
         Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
     }
