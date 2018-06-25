@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 {
-    public float Health = 0;
+    public float Health;
     public float Distance;
 
     Cloudship playerCloudship;
@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     public Image HealthBar;
     FlyingPhysics flyingPhysics;
     
-    float HealthMax = 0;
+    float HealthMax;
     float torquedamping = 0.01f;
 
     [HideInInspector]
@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     void Start()
     {
         playerCloudship = GameManager.Instance.PlayerCloudship;
-        HealthMax = Health;
         UpdateAbilities();
     }
 
@@ -116,12 +115,14 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
         float mass = 0f;
+        Health = 0;
 
         foreach(var building in buildingsWithAbility)
         {
             flyingPhysics.Torque += building.Skills.Torque;
             flyingPhysics.Speed += building.Skills.Speed;
             flyingPhysics.Lift += building.Skills.Lift;
+            Health += building.Skills.Health;
             mass += building.Skills.Mass;
            
             if (building.Skills.GiveOrders)
@@ -135,5 +136,6 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
             flyingPhysics.Speed = 0;
         }
         flyingPhysics.Mass = mass;
+        HealthMax = Health;
     }
 }

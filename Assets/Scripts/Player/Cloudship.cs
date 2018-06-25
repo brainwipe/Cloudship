@@ -15,7 +15,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public float Thrust;
     public float Turn;
-    public float Health = 100;
+    public float Health;
     public bool IsAlive => Health > 0;
     private float HealthMax;
     public Image HealthBar;
@@ -26,9 +26,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
-
-        Health = 100;
-        HealthMax = Health;
 
         Mode = Modes.Drive;
         UpdateAbilities();
@@ -114,12 +111,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         flyingPhysics.Torque = 0;
         flyingPhysics.Speed = 0;
         float mass = 0f;
+        Health = 0;
 
         foreach(var building in buildingsWithAbility)
         {
             flyingPhysics.Torque += building.Skills.Torque;
             flyingPhysics.Speed += building.Skills.Speed;
             flyingPhysics.Lift += building.Skills.Lift;
+            Health += building.Skills.Health;
             mass += building.Skills.Mass;
             
             if (building.Skills.GiveOrders)
@@ -135,5 +134,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         }
 
         flyingPhysics.Mass = mass;
+        HealthMax = Health;
     }
 }

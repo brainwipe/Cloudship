@@ -348,3 +348,4 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 500
     Lift: 1800000
+    Health: 150

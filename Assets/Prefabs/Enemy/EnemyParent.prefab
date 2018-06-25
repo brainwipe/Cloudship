@@ -2534,6 +2534,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 500
     Lift: 1800000
+    Health: 150
 --- !u!114 &114062298598671126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2577,7 +2578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8015027848c2954f8e8a66958cc9259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 70
+  Health: 0
   Distance: 0
   HealthBar: {fileID: 114782510594628990}
   Heading: {x: 0, y: 0, z: 0}
@@ -2640,6 +2641,7 @@ MonoBehaviour:
     GiveOrders: 1
     Mass: 10
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -2736,6 +2738,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 20
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -2833,6 +2836,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 20
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -2861,6 +2865,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 20
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -2889,6 +2894,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 50
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -2963,6 +2969,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 20
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

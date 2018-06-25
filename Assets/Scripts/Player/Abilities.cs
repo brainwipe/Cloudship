@@ -8,6 +8,7 @@ public class Abilities
     public bool GiveOrders;
     public float Mass;
     public float Lift;
+    public float Health;
 }
 
 public interface IHaveAbilities

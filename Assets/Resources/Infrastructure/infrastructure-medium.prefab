@@ -356,6 +356,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 800
     Lift: 2000000
+    Health: 300
 --- !u!114 &114358077082021128
 MonoBehaviour:
   m_ObjectHideFlags: 1
