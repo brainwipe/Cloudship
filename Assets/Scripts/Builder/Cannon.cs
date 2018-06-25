@@ -84,7 +84,6 @@ public class Cannon : MonoBehaviour
             if (isInArc && isInRange)
             {
                 var asTarget = target.GetComponentInParent<IAmATarget>();
-                Debug.Log(target);
                 if (asTarget == null || asTarget.IsDead)
                 {
                     return null;
