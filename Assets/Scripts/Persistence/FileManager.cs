@@ -9,22 +9,18 @@ public class FileManager : MonoBehaviour
 
     private string SavePath => Path.Combine(Application.persistentDataPath, saveGameName);
 
-    void Awake()
-    {
-        if(PlayerPrefs.GetInt("Load",0) == 1)
-        {
-            Load();
-        }
-    }
-
     public void Save()
     {
+        if (File.Exists(SavePath))
+        {
+            File.Delete(SavePath);
+        }
+
         var bf = new BinaryFormatter();
         FileStream file = File.Create(SavePath);
         var save = CreateSave();
         bf.Serialize(file, save);
         file.Close();
-
     }
 
     public void Load()
@@ -43,6 +39,7 @@ public class FileManager : MonoBehaviour
     void ApplySave(SaveGame save)
     {
         var saveables = FindObjectsOfType<MonoBehaviour>().OfType<IAmPersisted>();
+        Debug.Log("load saveable count: " + saveables.Count());
         foreach(var saveable in saveables)
         {
             saveable.Load(save);
@@ -52,6 +49,7 @@ public class FileManager : MonoBehaviour
     SaveGame CreateSave()
     {
         var saveables = FindObjectsOfType<MonoBehaviour>().OfType<IAmPersisted>();
+        Debug.Log("save saveable count: " + saveables.Count());
         var save = new SaveGame();
         foreach(var saveable in saveables)
         {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities {
 
     public static string BuildingTag = "Building";
+    public string Id;
 
     public IAmAShip owner;
 

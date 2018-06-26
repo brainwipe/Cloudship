@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public static class UnityExtensions
 {
@@ -10,11 +11,9 @@ public static class UnityExtensions
         vector.z = array[2];
     }
 
+    public static Vector3 ToVector(this float[] array) => new Vector3(array[0], array[1], array[2]);
+ 
     public static float[] ToArray(this Quaternion quaternion) => quaternion.eulerAngles.ToArray();
     
-    public static void FromArray(this Quaternion quaternion, float[] array)
-    {
-        quaternion = Quaternion.Euler(array[0], array[1], array[2]);
-    }
-
+    public static Quaternion ToQuaternion(this float[] array) => Quaternion.Euler(array[0], array[1], array[2]);
 }

@@ -22,7 +22,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     FlyingPhysics flyingPhysics;
     BuildSurface builder;
 
-    void Start()
+    void Awake()
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
@@ -144,14 +144,17 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         save.Position = transform.position.ToArray();
         save.Rotation = transform.rotation.ToArray();
         save.Buildings = builder.Save();
+        Debug.Log(" save building count:" + save.Buildings.Count);
     }
 
     public void Load(SaveGame save)
     {
         Health = save.Health;
         HealthMax = save.HealthMax;
-        transform.position.FromArray(save.Position);
-        transform.rotation.FromArray(save.Rotation);
+        transform.position = save.Position.ToVector();
+        transform.rotation = save.Rotation.ToQuaternion();
+        builder.Load(save.Buildings);
+        Debug.Log(" load building count:" + save.Buildings.Count);
         UpdateAbilities();
     }
 }

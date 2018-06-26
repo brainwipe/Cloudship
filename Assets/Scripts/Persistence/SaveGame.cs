@@ -21,15 +21,15 @@ public class SaveGame
     {
         public BuildingSave(Building toSave)
         {
-            Name = toSave.name;
-            LocalPosition = toSave.transform.localPosition;
-            LocalRotation = toSave.transform.localRotation;
+            Id = toSave.Id;
+            LocalPosition = toSave.transform.localPosition.ToArray();
+            LocalRotation = toSave.transform.localRotation.ToArray();
             Health = toSave.Health;
         }
 
-        public string Name;
-        public Vector3 LocalPosition { get; set; }
-        public Quaternion LocalRotation { get; set; }
+        public string Id;
+        public float[] LocalPosition { get; set; }
+        public float[] LocalRotation { get; set; }
         public float Health { get; set; }
     }
 }

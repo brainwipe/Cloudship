@@ -20,18 +20,16 @@ public class CameraMovement : MonoBehaviour
     public float MinY = -20f;
 
     Cloudship player;
-    Vector3 offset;
+    Vector3 offset = new Vector3(0, 67.7f, -146.2f);
     CameraMode mode;
 
     void Start()
     {
         player = GameManager.Instance.PlayerCloudship;
         Camera camera = GetComponentInChildren<Camera>();
-        offset = transform.position - player.transform.position;
         var v3Pos = new Vector3(0.12f, 0.25f, 1.5f);
         Controller.transform.position = camera.ViewportToWorldPoint(v3Pos);
         current = game;
-
     }
 
     void Update()

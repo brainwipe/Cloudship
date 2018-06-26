@@ -8,10 +8,7 @@ public class MainMenu : MonoBehaviour {
 
 	public TMP_Dropdown resolutionDropdown;
 	public LevelChanger levelChanger;
-
 	Resolution[] resolutions;
-
-	
 
 	void Awake()
 	{
@@ -44,13 +41,12 @@ public class MainMenu : MonoBehaviour {
 
 	public void PlayGame()
 	{
-		PlayerPrefs.SetInt("Load", 0);
 		levelChanger.FadeToLevel(1);
 	}
 
 	public void LoadGame()
 	{
-		PlayerPrefs.SetInt("Load", 1);
+		GameManager.SetToLoad=true;
 		levelChanger.FadeToLevel(1);
 	}
 

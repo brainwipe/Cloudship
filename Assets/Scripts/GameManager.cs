@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 	public LevelChanger LevelChanger;
 
 	public Switches Features;
+	public static bool SetToLoad;
     
     void Awake()
 	{
@@ -67,6 +69,25 @@ public class GameManager : MonoBehaviour
 	public class Switches
 	{
 		public bool WindMovement;
+	}
+
+	void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
+
+	void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		if(SetToLoad)
+		{
+			var fileManager = GetComponent<FileManager>();
+			fileManager.Load();
+		}
 	}
 
 }

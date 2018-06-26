@@ -446,8 +446,6 @@ MonoBehaviour:
   TimeBetweenShotsInSeconds: 2
   ShotForce: 350
   MaxFiringAngle: 25
-  MaxRange: 680
-  MinRange: 180
 --- !u!114 &114643608483370940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: weapon-cannon
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
   Name: Cannon
@@ -484,6 +483,7 @@ MonoBehaviour:
     GiveOrders: 0
     Mass: 20
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

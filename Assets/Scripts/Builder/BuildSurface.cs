@@ -193,7 +193,7 @@ public class BuildSurface : MonoBehaviour
 
 	public List<SaveGame.BuildingSave> Save()
 	{
-		var buildings = GetComponentsInParent<Building>();
+		var buildings = GetComponentsInChildren<Building>();
 		var savedBuildings = new List<SaveGame.BuildingSave>();
 
 		foreach(var building in buildings)
@@ -207,10 +207,10 @@ public class BuildSurface : MonoBehaviour
 	{
 		foreach(var savedBuilding in buildings)
 		{
-			var prefab = BuildingLoader.Load(savedBuilding.Name);
+			var prefab = BuildingLoader.Find(savedBuilding.Id);
 			var gameObject = Instantiate(prefab, transform.position, Quaternion.identity, this.transform);
-			gameObject.transform.localPosition = savedBuilding.LocalPosition;
-			gameObject.transform.localRotation = savedBuilding.LocalRotation;
+			gameObject.transform.localPosition = savedBuilding.LocalPosition.ToVector();
+			gameObject.transform.localRotation = savedBuilding.LocalRotation.ToQuaternion();
 			var building = gameObject.GetComponent<Building>();
 			building.Health = savedBuilding.Health;
 		}

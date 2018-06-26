@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  Id: bridge-standard
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
   Name: Overlook Bridge
@@ -263,6 +263,7 @@ MonoBehaviour:
     GiveOrders: 1
     Mass: 10
     Lift: 0
+    Health: 0
   PreCalculatedBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
