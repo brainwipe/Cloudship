@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
+public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget, IAmPersisted
 {
     public enum Modes {
         Drive,
@@ -135,5 +135,22 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
         flyingPhysics.Mass = mass;
         HealthMax = Health;
+    }
+
+    public void Save(SaveGame save)
+    {
+        save.Health = Health;
+        save.HealthMax = HealthMax;
+        save.Position = transform.position;
+        save.Rotation = transform.rotation;
+        save.Buildings = builder.Save();
+    }
+
+    public void Load(SaveGame save)
+    {
+        Health = save.Health;
+        HealthMax = save.HealthMax;
+        transform.position = save.Position;
+        transform.rotation = save.Rotation;
     }
 }

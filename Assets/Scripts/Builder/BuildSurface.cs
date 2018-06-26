@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildSurface : MonoBehaviour 
+public class BuildSurface : MonoBehaviour
 {
 	Cloudship player;
 	Building selectedBuilding;
@@ -189,5 +189,31 @@ public class BuildSurface : MonoBehaviour
 		var xScale = (boundaryExtents.x - buildingSizes.x) / boundaryExtents.x;
 		var zScale = (boundaryExtents.z - buildingSizes.z) / boundaryExtents.z;
 		Boundary.transform.localScale = new Vector3(xScale, 1, zScale);
+	}
+
+	public List<SaveGame.BuildingSave> Save()
+	{
+		var buildings = GetComponentsInParent<Building>();
+		var savedBuildings = new List<SaveGame.BuildingSave>();
+
+		foreach(var building in buildings)
+		{
+			savedBuildings.Add(new SaveGame.BuildingSave(building));
+		}
+		return savedBuildings;
+	}
+
+	public void Load(List<SaveGame.BuildingSave> buildings)
+	{
+		foreach(var savedBuilding in buildings)
+		{
+			var prefab = BuildingLoader.Load(savedBuilding.Name);
+			var gameObject = Instantiate(prefab, transform.position, Quaternion.identity, this.transform);
+			gameObject.transform.localPosition = savedBuilding.LocalPosition;
+			gameObject.transform.localRotation = savedBuilding.LocalRotation;
+			var building = gameObject.GetComponent<Building>();
+			building.Health = savedBuilding.Health;
+
+		}
 	}
 }
