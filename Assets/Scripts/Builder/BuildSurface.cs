@@ -213,7 +213,6 @@ public class BuildSurface : MonoBehaviour
 			gameObject.transform.localRotation = savedBuilding.LocalRotation;
 			var building = gameObject.GetComponent<Building>();
 			building.Health = savedBuilding.Health;
-
 		}
 	}
 }

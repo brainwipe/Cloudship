@@ -44,6 +44,13 @@ public class MainMenu : MonoBehaviour {
 
 	public void PlayGame()
 	{
+		PlayerPrefs.SetInt("Load", 0);
+		levelChanger.FadeToLevel(1);
+	}
+
+	public void LoadGame()
+	{
+		PlayerPrefs.SetInt("Load", 1);
 		levelChanger.FadeToLevel(1);
 	}
 

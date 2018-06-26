@@ -141,8 +141,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     {
         save.Health = Health;
         save.HealthMax = HealthMax;
-        save.Position = transform.position;
-        save.Rotation = transform.rotation;
+        save.Position = transform.position.ToArray();
+        save.Rotation = transform.rotation.ToArray();
         save.Buildings = builder.Save();
     }
 
@@ -150,7 +150,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     {
         Health = save.Health;
         HealthMax = save.HealthMax;
-        transform.position = save.Position;
-        transform.rotation = save.Rotation;
+        transform.position.FromArray(save.Position);
+        transform.rotation.FromArray(save.Rotation);
+        UpdateAbilities();
     }
 }

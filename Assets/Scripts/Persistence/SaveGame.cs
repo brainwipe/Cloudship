@@ -7,8 +7,8 @@ public class SaveGame
 {
     public float Health { get; set;}
     public float HealthMax { get; set;}
-    public Vector3 Position { get; set; }
-    public Quaternion Rotation { get; set; }
+    public float[] Position { get; set; }
+    public float[] Rotation { get; set; }
     public List<BuildingSave> Buildings { get; set; }
 
     public SaveGame()
@@ -16,6 +16,7 @@ public class SaveGame
         Buildings = new List<BuildingSave>();
     }
 
+    [Serializable]
     public class BuildingSave
     {
         public BuildingSave(Building toSave)

@@ -39,6 +39,12 @@ public class PauseMenu : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 
+	public void Save()
+	{
+		var fileManager = FindObjectOfType<FileManager>();
+		fileManager.Save();
+	}
+
 	public void QuitGame()
 	{
 		Application.Quit();
