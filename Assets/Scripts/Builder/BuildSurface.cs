@@ -25,6 +25,11 @@ public class BuildSurface : MonoBehaviour
 
 	void Update()
 	{
+		if (GameManager.Instance.GameIsPaused)
+		{
+			return;
+		}
+
 		MouseMove();
 		
 		if (Input.GetMouseButtonDown(0))

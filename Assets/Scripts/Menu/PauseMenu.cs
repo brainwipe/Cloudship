@@ -5,15 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
-	public static bool GameIsPaused = false;
-	
 	public GameObject pauseMenuUi;
 	bool cursorStateWhenPaused;
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (GameIsPaused)
+			if (GameManager.Instance.GameIsPaused)
 			{
 				Cursor.visible = cursorStateWhenPaused;
 				Resume();
@@ -30,7 +28,7 @@ public class PauseMenu : MonoBehaviour {
 	{
 		pauseMenuUi.SetActive(false);
 		Time.timeScale = 1f;
-		GameIsPaused = false;
+		GameManager.Instance.GameIsPaused = false;
 	}
 
 	public void LoadMenu()
@@ -54,6 +52,6 @@ public class PauseMenu : MonoBehaviour {
 	{
 		pauseMenuUi.SetActive(true);
 		Time.timeScale = 0f;
-		GameIsPaused = true;
+		GameManager.Instance.GameIsPaused = true;
 	}
 }

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
 	public Switches Features;
 	public static bool SetToLoad;
+
+	public bool GameIsPaused = false;
     
     void Awake()
 	{
