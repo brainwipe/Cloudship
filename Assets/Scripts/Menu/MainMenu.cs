@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour {
 
 	void Awake()
 	{
-		Screen.SetResolution (Screen.currentResolution.width, Screen.currentResolution.height, true);
+		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 	}
 
 	void Start()
@@ -68,13 +68,12 @@ public class MainMenu : MonoBehaviour {
 
 	public void SetFullscreen(bool isFullscreen)
 	{
-		Screen.fullScreen = isFullscreen;
 		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, isFullscreen);
 	}
 
 	public void SetResolution(int resolutionIndex)
 	{
 		var resolution = resolutions[resolutionIndex];
-		
+		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 	}
 }
