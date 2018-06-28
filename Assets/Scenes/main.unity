@@ -739,6 +739,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs:
   - {fileID: 114118024519024402, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
+  MinSecsSpawn: 120
+  MaxSecsSpawn: 420
+  WidthOfSpawnCone: 40
+  MinDistance: 2700
+  MaxDistance: 3400
+  SpawnAltitude: 170
 --- !u!114 &655051481
 MonoBehaviour:
   m_ObjectHideFlags: 0
