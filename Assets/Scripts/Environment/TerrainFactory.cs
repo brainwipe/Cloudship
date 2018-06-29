@@ -69,12 +69,12 @@ public class TerrainFactory : MonoBehaviour
 
         var outDatedChunks = chunks
         .Where(c => c.Value.TimeUpdated != timestampForThisUpdateLoop)
-        .Select(c => c.Value)
         .ToList();
         
         foreach(var removeChunk in outDatedChunks)
         {
-            Destroy(removeChunk);
+            chunks.Remove(removeChunk.Key);
+            Destroy(removeChunk.Value.gameObject);
         }
 
         start = playerCloudship.transform.position;
