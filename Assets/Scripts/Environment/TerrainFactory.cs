@@ -23,7 +23,7 @@ public class TerrainFactory : MonoBehaviour
     void Start()
     {   
         start = Vector3.zero;
-        chunkSize =  chunkPrefab.GetComponent<Renderer>().bounds.extents.x * 2;
+        chunkSize =  1000f;
         chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize);
         playerCloudship = GameManager.Instance.PlayerCloudship;
         RebuildChunks(0,0);

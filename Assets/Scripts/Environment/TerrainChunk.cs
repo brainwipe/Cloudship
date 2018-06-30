@@ -1,5 +1,8 @@
 using UnityEngine;
+using System;
 using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TerrainChunk : MonoBehaviour
 {
@@ -13,7 +16,7 @@ public class TerrainChunk : MonoBehaviour
         sandMesh.vertices = CalculateHeight(sandMesh.vertices);
         sandMesh.RecalculateBounds();
         sandMesh.RecalculateNormals();
-        sandMesh.normals = RecalculateEdgeMeshNormals(sandMesh.normals);
+        sandMesh.normals = RecalculateEdgeMeshNormals(sandMesh);
         this.gameObject.AddComponent<MeshCollider>();
     }
 
@@ -34,14 +37,42 @@ public class TerrainChunk : MonoBehaviour
         return Mathf.PerlinNoise(xScaled, zScaled) * heightScale;
     }
 
-    Vector3[] RecalculateEdgeMeshNormals(Vector3[] sandMeshNormals)
+    Vector3[] RecalculateEdgeMeshNormals(Mesh sandMesh)
     {
-        Mesh edgeMesh = this.GetComponentsInChildren<MeshFilter>().Single(m => m.name == "edgemesh").mesh;
+        var edgeMesh = GetComponentsInChildren<MeshFilter>()
+            .Single(m => m.name.Contains("sandedgemesh"))
+            .mesh;
+
         edgeMesh.vertices = CalculateHeight(edgeMesh.vertices);
         edgeMesh.RecalculateNormals();
 
+        var sandMeshEdgeVertexIndices = sandMesh
+            .Edges()
+            .NotShared()
+            .SelectMany(x => new[] { x.vertexIndex1, x.vertexIndex2})
+            .Distinct();
         
+        var normals = new List<Vector3>(sandMesh.normals);
+        foreach(var vertexIndex in sandMeshEdgeVertexIndices)
+        {
+            var vertex = sandMesh.vertices[vertexIndex];
+            
+            var edgeMeshIndexForMatchingVertex = -1;
+            for(int i=0; i<edgeMesh.vertices.Length; i++)
+            {
+                if (edgeMesh.vertices[i] == vertex)
+                {
+                    edgeMeshIndexForMatchingVertex = i;
+                    break;
+                }
+            }
 
-        return sandMeshNormals;
+            if (edgeMeshIndexForMatchingVertex > -1)
+            {   
+                Debug.Log("Match found, updating");
+                normals[vertexIndex] = edgeMesh.normals[edgeMeshIndexForMatchingVertex];
+            }
+        } 
+        return normals.ToArray();
     }
 }

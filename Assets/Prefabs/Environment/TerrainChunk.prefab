@@ -37,14 +37,13 @@ GameObject:
   - component: {fileID: 4784066252641870}
   - component: {fileID: 33705803435895058}
   - component: {fileID: 23088385876147272}
-  - component: {fileID: 95402205828623452}
   m_Layer: 0
   m_Name: sandedgemesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1984892347807914
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +54,6 @@ GameObject:
   - component: {fileID: 4176033708891254}
   - component: {fileID: 33718052562342584}
   - component: {fileID: 23479135492454494}
-  - component: {fileID: 95868896032895696}
   m_Layer: 0
   m_Name: sand
   m_TagString: Untagged
@@ -110,7 +108,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721119516960490}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -188,42 +186,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984892347807914}
   m_Mesh: {fileID: 4300002, guid: 82e3f0ea93fff7d46a01d26e6704a512, type: 3}
---- !u!95 &95402205828623452
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721119516960490}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1b8c6402adf83ad4ebe65737dbc1c586, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95868896032895696
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1984892347807914}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 82e3f0ea93fff7d46a01d26e6704a512, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114131833152777302
 MonoBehaviour:
   m_ObjectHideFlags: 1
