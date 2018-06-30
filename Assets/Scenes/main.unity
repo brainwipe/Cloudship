@@ -539,7 +539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &316302002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &654624879
 Transform:
   m_ObjectHideFlags: 0
@@ -2624,6 +2624,18 @@ Prefab:
       propertyPath: Mode.PlayerTakesDamage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114017790401730650, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: flotsamPrefab
+      value: 
+      objectReference: {fileID: 1181007989410838, guid: de41f111a9936be4cbb314c6fedc4255,
+        type: 2}
+    - target: {fileID: 114017790401730650, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: chunkPrefab
+      value: 
+      objectReference: {fileID: 1572166704520752, guid: 5ac68d923c3cc9143ac05ba256476b37,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabParent: 0

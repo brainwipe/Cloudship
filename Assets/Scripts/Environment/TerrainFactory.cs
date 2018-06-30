@@ -18,6 +18,7 @@ public class TerrainFactory : MonoBehaviour
     float chunkSize;
 
     public GameObject chunkPrefab;
+    public GameObject flotsamPrefab;
 
     void Start()
     {   
@@ -57,16 +58,33 @@ public class TerrainFactory : MonoBehaviour
 
                 if (!chunks.ContainsKey(pos))
                 {
-                    var chunkGameObj = Instantiate(chunkPrefab, pos, Quaternion.identity);
-                    chunkGameObj.tag = TerrainTag;
-                    var chunk = chunkGameObj.GetComponent<TerrainChunk>();
-                    chunk.transform.parent = this.transform;
-                    chunks.Add(pos, chunk);
+                    CreateChunk(pos);
                 }
                 chunks[pos].TimeUpdated = timestampForThisUpdateLoop;
             }
         }
 
+         RemoveOutDatedChunks();
+
+        start = playerCloudship.transform.position;
+    }
+
+    void CreateChunk(Vector3 pos)
+    {
+        var chunkGameObj = Instantiate(chunkPrefab, pos, Quaternion.identity);
+        chunkGameObj.tag = TerrainTag;
+        chunkGameObj.transform.parent = this.transform;
+        var chunk = chunkGameObj.GetComponent<TerrainChunk>();
+        chunks.Add(pos, chunk);
+
+        if(ShouldICreateFlotsam())
+        {
+            CreateFlotsam(chunk);
+        }
+    }
+
+    void RemoveOutDatedChunks()
+    {
         var outDatedChunks = chunks
         .Where(c => c.Value.TimeUpdated != timestampForThisUpdateLoop)
         .ToList();
@@ -76,14 +94,23 @@ public class TerrainFactory : MonoBehaviour
             chunks.Remove(removeChunk.Key);
             Destroy(removeChunk.Value.gameObject);
         }
+    }
 
-        start = playerCloudship.transform.position;
+    bool ShouldICreateFlotsam()
+    {
+        return Random.Range(0f,100f) > 98f;
+    }
+
+    void CreateFlotsam(TerrainChunk chunk)
+    {
+        var flotsamPosition = chunk.transform.position;
+        var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, transform);
+        flotsam.transform.localPosition = new Vector3(chunk.transform.position.x, 33f, chunk.transform.position.z);
     }
 
     bool ShouldWeUpdate(Vector3 playerPosition, Vector3 start)
     {
         var change = playerPosition - start;
-
         return Mathf.Abs(change.x) >= chunkSize || Mathf.Abs(change.y) >= chunkSize;
     }
 
