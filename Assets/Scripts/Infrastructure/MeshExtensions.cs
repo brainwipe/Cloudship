@@ -42,11 +42,11 @@ public static class MeshExtensions
         }
 
         public bool IsSharedWith(Edge other) =>
-            vertexIndex1 == other.vertexIndex2 && 
-            vertexIndex2 == other.vertexIndex1;
+            (vertexIndex1 == other.vertexIndex2 && 
+            vertexIndex2 == other.vertexIndex1);
     }
 
-     public static IEnumerable<Triangle> Triangles(this Mesh mesh)
+    public static IEnumerable<Triangle> Triangles(this Mesh mesh)
     {
         int[] trianglesIndices = mesh.triangles;
         
@@ -71,6 +71,9 @@ public static class MeshExtensions
         return edges;
     }
 
+    public static int[] VertexIndices(this IEnumerable<Edge> edges) =>
+        edges.SelectMany(e => new[] {e.vertexIndex1, e.vertexIndex2}).Distinct().ToArray();
+    
     public static IEnumerable<Edge> NotShared(this IEnumerable<Edge> edges)
     {
         List<Edge> result = new List<Edge>(edges);

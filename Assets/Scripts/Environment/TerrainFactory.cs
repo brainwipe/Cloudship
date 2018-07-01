@@ -23,7 +23,7 @@ public class TerrainFactory : MonoBehaviour
     void Start()
     {   
         start = Vector3.zero;
-        chunkSize =  1000f;
+        chunkSize = TerrainChunk.Size;
         chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize);
         playerCloudship = GameManager.Instance.PlayerCloudship;
         RebuildChunks(0,0);
@@ -64,7 +64,7 @@ public class TerrainFactory : MonoBehaviour
             }
         }
 
-         RemoveOutDatedChunks();
+        RemoveOutDatedChunks();
 
         start = playerCloudship.transform.position;
     }
@@ -98,14 +98,15 @@ public class TerrainFactory : MonoBehaviour
 
     bool ShouldICreateFlotsam()
     {
-        return Random.Range(0f,100f) > 98f;
+        return Random.Range(0f,100f) > 70f;
     }
 
     void CreateFlotsam(TerrainChunk chunk)
     {
         var flotsamPosition = chunk.transform.position;
-        var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, transform);
-        flotsam.transform.localPosition = new Vector3(chunk.transform.position.x, 33f, chunk.transform.position.z);
+        var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, chunk.transform);
+        
+        flotsam.transform.localPosition = new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 33f, Random.Range(0f, chunkSize) - (chunkSize / 2));
     }
 
     bool ShouldWeUpdate(Vector3 playerPosition, Vector3 start)

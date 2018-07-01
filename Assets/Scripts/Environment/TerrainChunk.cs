@@ -6,17 +6,22 @@ using System.Collections.Generic;
 
 public class TerrainChunk : MonoBehaviour
 {
+    public const float Size = 1000f;
+    static RemovalContext removalContextInstance;
+
     float perlinScale = 0.04f;
     float heightScale = 60f;
 
+
     public float TimeUpdated;
+
     void Start()
     {
         Mesh sandMesh = this.GetComponentsInChildren<MeshFilter>().Single(m => m.name == "sand").mesh;
         sandMesh.vertices = CalculateHeight(sandMesh.vertices);
         sandMesh.RecalculateBounds();
         sandMesh.RecalculateNormals();
-        sandMesh.normals = RecalculateEdgeMeshNormals(sandMesh);
+        RemoveOuterMostEdge(sandMesh);
         this.gameObject.AddComponent<MeshCollider>();
     }
 
@@ -37,42 +42,71 @@ public class TerrainChunk : MonoBehaviour
         return Mathf.PerlinNoise(xScaled, zScaled) * heightScale;
     }
 
-    Vector3[] RecalculateEdgeMeshNormals(Mesh sandMesh)
+    RemovalContext FindRemovalItems(Mesh sandMesh)
     {
-        var edgeMesh = GetComponentsInChildren<MeshFilter>()
-            .Single(m => m.name.Contains("sandedgemesh"))
-            .mesh;
-
-        edgeMesh.vertices = CalculateHeight(edgeMesh.vertices);
-        edgeMesh.RecalculateNormals();
-
-        var sandMeshEdgeVertexIndices = sandMesh
+        var edgeVertexIndices = sandMesh
             .Edges()
             .NotShared()
-            .SelectMany(x => new[] { x.vertexIndex1, x.vertexIndex2})
-            .Distinct();
-        
-        var normals = new List<Vector3>(sandMesh.normals);
-        foreach(var vertexIndex in sandMeshEdgeVertexIndices)
-        {
-            var vertex = sandMesh.vertices[vertexIndex];
-            
-            var edgeMeshIndexForMatchingVertex = -1;
-            for(int i=0; i<edgeMesh.vertices.Length; i++)
-            {
-                if (edgeMesh.vertices[i] == vertex)
-                {
-                    edgeMeshIndexForMatchingVertex = i;
-                    break;
-                }
-            }
+            .VertexIndices();
 
-            if (edgeMeshIndexForMatchingVertex > -1)
-            {   
-                Debug.Log("Match found, updating");
-                normals[vertexIndex] = edgeMesh.normals[edgeMeshIndexForMatchingVertex];
+        var context = new RemovalContext(edgeVertexIndices);
+
+        var vertices = new List<Vector3>(sandMesh.vertices);
+        var triangles = new List<int>(sandMesh.triangles);
+
+        for(int i=0; i<triangles.Count(); i+=3)
+        {
+            if (edgeVertexIndices.Contains(triangles[i]) || 
+                edgeVertexIndices.Contains(triangles[i+1]) ||
+                edgeVertexIndices.Contains(triangles[i+2]))
+            {
+                context.AddTriangleIndex(i);
+                context.AddTriangleIndex(i+1);
+                context.AddTriangleIndex(i+2);
             }
-        } 
-        return normals.ToArray();
+        }
+        return context;
+    }
+
+    void RemoveOuterMostEdge(Mesh sandMesh)
+    {
+        if (removalContextInstance == null)
+        {
+            removalContextInstance = FindRemovalItems(sandMesh);
+        }
+
+        var triangles = new List<int>(sandMesh.triangles);
+        foreach(var triangleIndex in removalContextInstance.TriangleIndices)
+        {
+            triangles.RemoveAt(triangleIndex);
+        }
+        sandMesh.triangles = triangles.ToArray();
+
+        var vertices = new List<Vector3>(sandMesh.vertices);
+        foreach(var vertexIndices in removalContextInstance.VertexIndices)
+        {
+            vertices.RemoveAt(vertexIndices);
+        }
+        sandMesh.vertices = vertices.ToArray();
+    }
+
+    class RemovalContext
+    {
+        List<int> triangleIndices;
+        int[] vertexIndices;
+
+        public int[] VertexIndices => vertexIndices.Distinct().OrderByDescending(x => x).ToArray();
+        public int[] TriangleIndices => triangleIndices.Distinct().OrderByDescending(x => x).ToArray();
+
+        public RemovalContext(int[] vertexIndices)
+        {
+            triangleIndices = new List<int>();
+            this.vertexIndices = vertexIndices;
+        }
+
+        public void AddTriangleIndex(int index)
+        {
+            triangleIndices.Add(index);
+        }
     }
 }
