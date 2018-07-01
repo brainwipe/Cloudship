@@ -49,7 +49,7 @@ public class TerrainChunk : MonoBehaviour
             .NotShared()
             .VertexIndices();
 
-        var context = new RemovalContext(edgeVertexIndices);
+        var context = new RemovalContext();
 
         var vertices = new List<Vector3>(sandMesh.vertices);
         var triangles = new List<int>(sandMesh.triangles);
@@ -81,27 +81,16 @@ public class TerrainChunk : MonoBehaviour
             triangles.RemoveAt(triangleIndex);
         }
         sandMesh.triangles = triangles.ToArray();
-
-        var vertices = new List<Vector3>(sandMesh.vertices);
-        foreach(var vertexIndices in removalContextInstance.VertexIndices)
-        {
-            vertices.RemoveAt(vertexIndices);
-        }
-        sandMesh.vertices = vertices.ToArray();
     }
 
     class RemovalContext
     {
         List<int> triangleIndices;
-        int[] vertexIndices;
+        public int[] TriangleIndices => triangleIndices.OrderByDescending(x => x).ToArray();
 
-        public int[] VertexIndices => vertexIndices.Distinct().OrderByDescending(x => x).ToArray();
-        public int[] TriangleIndices => triangleIndices.Distinct().OrderByDescending(x => x).ToArray();
-
-        public RemovalContext(int[] vertexIndices)
+        public RemovalContext()
         {
             triangleIndices = new List<int>();
-            this.vertexIndices = vertexIndices;
         }
 
         public void AddTriangleIndex(int index)
