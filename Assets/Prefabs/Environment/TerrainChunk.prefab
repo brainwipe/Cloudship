@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4203191601830622}
   - component: {fileID: 114131833152777302}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TerrainChunk
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4784066252641870}
   - component: {fileID: 33705803435895058}
   - component: {fileID: 23088385876147272}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: sandedgemesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4176033708891254}
   - component: {fileID: 33718052562342584}
   - component: {fileID: 23479135492454494}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: sand
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -197,4 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e391f31f9377e34fa455693ca60aad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flotsam: {fileID: 0}
   TimeUpdated: 0

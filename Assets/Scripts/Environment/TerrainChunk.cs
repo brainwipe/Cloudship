@@ -59,8 +59,6 @@ public class TerrainChunk : MonoBehaviour
             .VertexIndices();
 
         var context = new RemovalContext();
-
-        var vertices = new List<Vector3>(sandMesh.vertices);
         var triangles = new List<int>(sandMesh.triangles);
 
         for(int i=0; i<triangles.Count(); i+=3)
