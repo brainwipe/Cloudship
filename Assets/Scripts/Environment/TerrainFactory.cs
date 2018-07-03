@@ -6,19 +6,17 @@ using System.Collections.Generic;
 public class TerrainFactory : MonoBehaviour
 {
     public static string TerrainTag = "Terrain";
+    Cloudship playerCloudship;
 
     int chunkRadius;
     Dictionary<Vector3, TerrainChunk> chunks = new Dictionary<Vector3, TerrainChunk>();
     
     Vector3 start;
-    float timestampForThisUpdateLoop;
-
-    Cloudship playerCloudship;
 
     float chunkSize;
 
     public GameObject chunkPrefab;
-    public GameObject flotsamPrefab;
+    public FlotsamFactory flotsamFactory;
 
     void Start()
     {   
@@ -45,7 +43,7 @@ public class TerrainFactory : MonoBehaviour
 
     void RebuildChunks(int chunkX, int chunkZ)
     {
-        timestampForThisUpdateLoop = Time.realtimeSinceStartup;
+        var timestampForThisUpdateLoop = Time.realtimeSinceStartup;
 
         for(int x = -chunkRadius; x < chunkRadius; x++)
         {
@@ -64,7 +62,7 @@ public class TerrainFactory : MonoBehaviour
             }
         }
 
-        RemoveOutDatedChunks();
+        RemoveOutDatedChunks(timestampForThisUpdateLoop);
 
         start = playerCloudship.transform.position;
     }
@@ -77,13 +75,10 @@ public class TerrainFactory : MonoBehaviour
         var chunk = chunkGameObj.GetComponent<TerrainChunk>();
         chunks.Add(pos, chunk);
 
-        if(ShouldICreateFlotsam())
-        {
-            CreateFlotsam(chunk);
-        }
+        flotsamFactory.CreateFlotsam(chunk);
     }
 
-    void RemoveOutDatedChunks()
+    void RemoveOutDatedChunks(float timestampForThisUpdateLoop)
     {
         var outDatedChunks = chunks
         .Where(c => c.Value.TimeUpdated != timestampForThisUpdateLoop)
@@ -96,19 +91,7 @@ public class TerrainFactory : MonoBehaviour
         }
     }
 
-    bool ShouldICreateFlotsam()
-    {
-        return Random.Range(0f,100f) > 70f;
-    }
-
-    void CreateFlotsam(TerrainChunk chunk)
-    {
-        var flotsamPosition = chunk.transform.position;
-        var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, chunk.transform);
-        
-        flotsam.transform.localPosition = new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 33f, Random.Range(0f, chunkSize) - (chunkSize / 2));
-    }
-
+    
     bool ShouldWeUpdate(Vector3 playerPosition, Vector3 start)
     {
         var change = playerPosition - start;

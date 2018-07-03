@@ -12,7 +12,8 @@ public class TerrainChunk : MonoBehaviour
     float perlinScale = 0.04f;
     float heightScale = 60f;
 
-
+    
+    public GameObject flotsam;
     public float TimeUpdated;
 
     void Start()
@@ -23,6 +24,14 @@ public class TerrainChunk : MonoBehaviour
         sandMesh.RecalculateNormals();
         RemoveOuterMostEdge(sandMesh);
         this.gameObject.AddComponent<MeshCollider>();
+    }
+
+    void OnDestroy()
+    {
+        if (flotsam != null)
+        {
+            Destroy(flotsam);
+        }
     }
 
     Vector3[] CalculateHeight(Vector3[] vertices)
