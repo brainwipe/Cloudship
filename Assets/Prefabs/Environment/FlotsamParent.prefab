@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4775056656370842}
   - component: {fileID: 136835757979021592}
-  - component: {fileID: 114505142134744432}
-  m_Layer: 0
+  - component: {fileID: 114981461625788768}
+  m_Layer: 15
   m_Name: nearby
-  m_TagString: Untagged
+  m_TagString: FlotsamNearby
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,9 +36,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4445633431227054}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: FlotsamParent
-  m_TagString: Untagged
+  m_TagString: Flotsam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 23878523155479632}
   - component: {fileID: 95291750626214076}
   - component: {fileID: 135769307079804198}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: flotsam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114505142134744432
+--- !u!114 &114981461625788768
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class FlotsamNearby : MonoBehaviour 
 {
-
-
-	
-
 	void OnTriggerEnter(Collider other)
 	{
+
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
+		Debug.Log("reel out");
 		if (player != null)
 		{
-			Debug.Log("player over!");
+			
+			player.ReelOut();
 		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
+		Debug.Log("reel in");
 		if (player != null)
 		{
-			Debug.Log("player leave!");
+			
+			player.ReelIn();
 		}
 	}
 }

@@ -21,11 +21,13 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     public Image HealthBar;
     FlyingPhysics flyingPhysics;
     BuildSurface builder;
+    Collector collector;
 
     void Awake()
     {
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
+        collector = GetComponentInChildren<Collector>();
 
         Mode = Modes.Drive;
         UpdateAbilities();
@@ -48,6 +50,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     }
 
     void OnCollisionEnter(Collision collisionInfo) {
+        Debug.Log(collisionInfo.gameObject.tag);
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
             flyingPhysics.Grounded();
@@ -83,6 +86,17 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         Mode = Modes.Drive;
         builder.enabled = false;
     }
+
+    public void ReelOut()
+    {
+        collector.ReelOut();
+    }
+
+    public void ReelIn()
+    {
+        collector.ReelIn();
+    }
+
 
     public Vector3 Position => this.transform.position;
     

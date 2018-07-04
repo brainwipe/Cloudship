@@ -94,7 +94,7 @@ Rigidbody:
   m_GameObject: {fileID: 1945272916150086}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.5
+  m_Drag: 0
   m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -124,8 +124,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -60
-    max: 60
+    min: 0
+    max: 50
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0

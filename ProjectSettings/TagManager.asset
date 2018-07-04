@@ -11,6 +11,8 @@ TagManager:
   - BuilderLocation
   - Building
   - BuilderBoundary
+  - Flotsam
+  - FlotsamNearby
   layers:
   - Default
   - TransparentFX

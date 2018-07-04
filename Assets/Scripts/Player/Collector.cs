@@ -17,7 +17,8 @@ public class Collector : MonoBehaviour
 
 	int segments = 10;
 	float segmentLength = 8f;
-	float reelOutSpeed = 8f;
+	float reelOutSpeed = 11f;
+	float reelInSpeed = 8f;
 
 	Vector3 startPosition;
 	Vector3 limitPosition;
@@ -27,26 +28,48 @@ public class Collector : MonoBehaviour
 		CreateRope();
 		startPosition = transform.localPosition;
 		limitPosition = new Vector3(0, -segmentLength, 0);
-		
-		// TODO Remove
-		State = States.ReelOut;
 	}
 	
 	void Update () 
 	{
 		if (State == States.ReelOut)
 		{
-			var segmentCount = transform.childCount;
-			var count = transform.childCount;
-			for(int i=count-1; i > 0; i--)
+			ReelOutUpdate();
+		}
+		else if (State == States.ReelIn)
+		{
+			ReelInUpdate();
+		}
+	}
+
+	void ReelOutUpdate()
+	{
+		var segmentCount = transform.childCount;
+		var count = transform.childCount;
+		for(int i=count-1; i > 0; i--)
+		{
+			var child = transform.GetChild(i);
+			var joint = child.GetComponent<HingeJoint>();
+			if (joint.connectedAnchor.y > limitPosition.y)
 			{
-				var child = transform.GetChild(i);
-				var joint = child.GetComponent<HingeJoint>();
-				if (joint.connectedAnchor.y > limitPosition.y)
-				{
-					joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, -Time.deltaTime * reelOutSpeed,0);
-					break;
-				}
+				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, -Time.deltaTime * reelOutSpeed,0);
+				break;
+			}
+		}
+	}
+
+	void ReelInUpdate()
+	{
+		var segmentCount = transform.childCount;
+		var count = transform.childCount;
+		for(int i=count-1; i > 0; i--)
+		{
+			var child = transform.GetChild(i);
+			var joint = child.GetComponent<HingeJoint>();
+			if (joint.connectedAnchor.y < 0)
+			{
+				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, Time.deltaTime * reelInSpeed,0);
+				break;
 			}
 		}
 	}
@@ -80,5 +103,10 @@ public class Collector : MonoBehaviour
 	public void ReelOut()
 	{
 		State = States.ReelOut;
+	}
+
+	public void ReelIn()
+	{
+		State = States.ReelIn;
 	}
 }
