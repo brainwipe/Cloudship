@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   ropePrefab: {fileID: 1945272916150086, guid: af335f3db63105346849db5f5486a4b4, type: 2}
-  ClawPrefab: {fileID: 0}
+  ClawPrefab: {fileID: 1245479302303518, guid: 71afe486f967177479cd271f4bd7e9cb, type: 2}
 --- !u!4 &1077779028
 Transform:
   m_ObjectHideFlags: 0

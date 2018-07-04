@@ -15,9 +15,9 @@ public class Collector : MonoBehaviour
 	public GameObject ClawPrefab;
 	GameObject Claw;
 
-	int segments = 20;
-	float segmentLength = 4f;
-	float reelOutSpeed = 4f;
+	int segments = 10;
+	float segmentLength = 8f;
+	float reelOutSpeed = 8f;
 
 	Vector3 startPosition;
 	Vector3 limitPosition;
@@ -54,12 +54,13 @@ public class Collector : MonoBehaviour
 	void CreateRope()
 	{
 		var segment = GetComponent<Rigidbody>();
-		var pos = transform.position;
 		for(int i=0; i < segments; i++)
 		{
-			segment = CreateSegment(segment, pos, i);
-			pos = segment.position;
+			segment = CreateSegment(segment, transform.position, i);
 		}
+		Claw = Instantiate(ClawPrefab, transform.position, Quaternion.identity, transform);
+		var clawHinge = Claw.GetComponent<HingeJoint>();
+		clawHinge.connectedBody = segment;
 	}
 
 	Rigidbody CreateSegment(Rigidbody previous, Vector3 position, int name)
