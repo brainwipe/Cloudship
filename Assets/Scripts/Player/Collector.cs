@@ -28,8 +28,6 @@ public class Collector : MonoBehaviour
 		CreateRope();
 		startPosition = transform.localPosition;
 		limitPosition = new Vector3(0, -segmentLength, 0);
-
-		ReelOut();
 	}
 	
 	void Update () 

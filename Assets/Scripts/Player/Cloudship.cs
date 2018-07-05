@@ -171,4 +171,20 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         Debug.Log(" load building count:" + save.Buildings.Count);
         UpdateAbilities();
     }
+
+    public void CinematicMode()
+    {
+        foreach(var canvas in GetComponentsInChildren<Canvas>())
+        {
+            canvas.enabled = false;
+        }
+    }
+
+    public void NormalMode()
+    {
+        foreach(var canvas in GetComponentsInChildren<Canvas>())
+        {
+            canvas.enabled = true;
+        }
+    }
 }

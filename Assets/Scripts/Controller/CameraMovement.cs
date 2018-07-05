@@ -41,12 +41,14 @@ public class CameraMovement : MonoBehaviour
                 mode = CameraMode.Cinematic;
                 current = cinematic;
                 Cursor.visible = false;
+                player.CinematicMode();
             }
             else
             {
                 mode = CameraMode.Game;
                 current = game;
                 Cursor.visible = true;
+                player.NormalMode();
             }
         }
     }
