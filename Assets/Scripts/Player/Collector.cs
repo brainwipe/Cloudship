@@ -28,6 +28,8 @@ public class Collector : MonoBehaviour
 		CreateRope();
 		startPosition = transform.localPosition;
 		limitPosition = new Vector3(0, -segmentLength, 0);
+
+		ReelOut();
 	}
 	
 	void Update () 
@@ -44,7 +46,6 @@ public class Collector : MonoBehaviour
 
 	void ReelOutUpdate()
 	{
-		var segmentCount = transform.childCount;
 		var count = transform.childCount;
 		for(int i=count-1; i > 0; i--)
 		{
@@ -52,6 +53,12 @@ public class Collector : MonoBehaviour
 			var joint = child.GetComponent<HingeJoint>();
 			if (joint.connectedAnchor.y > limitPosition.y)
 			{
+				var nextInChain = transform.GetChild(i - 1);
+				var renderer = nextInChain.GetComponent<Renderer>();
+				if (renderer != null)
+				{
+					renderer.enabled = true;
+				}
 				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, -Time.deltaTime * reelOutSpeed,0);
 				break;
 			}
@@ -60,9 +67,8 @@ public class Collector : MonoBehaviour
 
 	void ReelInUpdate()
 	{
-		var segmentCount = transform.childCount;
 		var count = transform.childCount;
-		for(int i=count-1; i > 0; i--)
+		for(int i=count-2; i > 0; i--)
 		{
 			var child = transform.GetChild(i);
 			var joint = child.GetComponent<HingeJoint>();
@@ -70,6 +76,14 @@ public class Collector : MonoBehaviour
 			{
 				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, Time.deltaTime * reelInSpeed,0);
 				break;
+			}
+			else
+			{
+				var renderer = child.GetComponent<Renderer>();
+				if (renderer != null)
+				{
+					renderer.enabled = false;
+				}
 			}
 		}
 	}
