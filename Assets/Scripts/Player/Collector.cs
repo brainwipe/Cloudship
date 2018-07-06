@@ -15,7 +15,7 @@ public class Collector : MonoBehaviour
 	public GameObject ClawPrefab;
 	GameObject Claw;
 
-	int segments = 10;
+	int segments = 12;
 	float segmentLength = 8f;
 	float reelOutSpeed = 11f;
 	float reelInSpeed = 8f;
@@ -45,12 +45,14 @@ public class Collector : MonoBehaviour
 	void ReelOutUpdate()
 	{
 		var count = transform.childCount;
+		var areWeReeledOut = true;
 		for(int i=count-1; i > 0; i--)
 		{
 			var child = transform.GetChild(i);
 			var joint = child.GetComponent<HingeJoint>();
 			if (joint.connectedAnchor.y > limitPosition.y)
 			{
+				areWeReeledOut = false;
 				var nextInChain = transform.GetChild(i - 1);
 				var renderer = nextInChain.GetComponent<Renderer>();
 				if (renderer != null)
@@ -61,17 +63,24 @@ public class Collector : MonoBehaviour
 				break;
 			}
 		}
+
+		if (areWeReeledOut)
+		{
+			State = States.Out;
+		}
 	}
 
 	void ReelInUpdate()
 	{
 		var count = transform.childCount;
+		var areWeReeledIn = true;
 		for(int i=count-2; i > 0; i--)
 		{
 			var child = transform.GetChild(i);
 			var joint = child.GetComponent<HingeJoint>();
 			if (joint.connectedAnchor.y < 0)
 			{
+				areWeReeledIn = false;
 				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, Time.deltaTime * reelInSpeed,0);
 				break;
 			}
@@ -83,6 +92,11 @@ public class Collector : MonoBehaviour
 					renderer.enabled = false;
 				}
 			}
+		}
+
+		if (areWeReeledIn)
+		{
+			State = States.In;
 		}
 	}
 

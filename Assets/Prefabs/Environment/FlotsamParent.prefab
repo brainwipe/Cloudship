@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4775056656370842}
   - component: {fileID: 136835757979021592}
   - component: {fileID: 114981461625788768}
+  - component: {fileID: 114028882910002608}
   m_Layer: 15
   m_Name: nearby
   m_TagString: FlotsamNearby
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4445633431227054}
+  - component: {fileID: 114805400946415954}
   m_Layer: 15
   m_Name: FlotsamParent
   m_TagString: Flotsam
@@ -57,7 +59,7 @@ GameObject:
   - component: {fileID: 135769307079804198}
   m_Layer: 15
   m_Name: flotsam
-  m_TagString: Untagged
+  m_TagString: Flotsam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,6 +167,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114028882910002608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045992228429044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930004d98aeb1b647847712c4dc7b927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114805400946415954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181007989410838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba65778201c6ad4ebf2ed296a25d884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114981461625788768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,8 +210,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 37.9
-  m_Center: {x: -1.0820875, y: -7.075561, z: 2.9261847}
+  m_Radius: 26.8
+  m_Center: {x: 0.44, y: -25.9, z: 0.66}
 --- !u!136 &136835757979021592
 CapsuleCollider:
   m_ObjectHideFlags: 1

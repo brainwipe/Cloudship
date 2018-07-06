@@ -6,9 +6,7 @@ public class FlotsamNearby : MonoBehaviour
 {
 	void OnTriggerEnter(Collider other)
 	{
-
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
-		Debug.Log("reel out");
 		if (player != null)
 		{
 			
@@ -19,7 +17,6 @@ public class FlotsamNearby : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
-		Debug.Log("reel in");
 		if (player != null)
 		{
 			

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 54809958919962836}
   - component: {fileID: 59903917507007872}
   - component: {fileID: 135068389200462534}
+  - component: {fileID: 114430584049844924}
   m_Layer: 14
   m_Name: ClawParent
   m_TagString: Untagged
@@ -109,7 +110,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1156905893306318}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -213,6 +214,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114430584049844924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1245479302303518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c457cd911d198054280d0e3cf73ff91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135068389200462534
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -223,5 +235,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5.68
-  m_Center: {x: 0, y: -3.71, z: 0}
+  m_Radius: 4
+  m_Center: {x: 0, y: -3.03, z: 0}

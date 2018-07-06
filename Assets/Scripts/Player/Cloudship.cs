@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget, IAmPersisted
 {
@@ -97,6 +98,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         collector.ReelIn();
     }
 
+    internal void Collect(float value)
+    {
+        var stores = transform.GetComponentsInChildren<IStoreFlotsam>();
+        // TODO ROLA When stores are created, perform a distribution function here.
+        var store = stores.First();
+        store.Flotsam += value;
+        Debug.Log($"Total Flotsam: {store.Flotsam}");
+    }
 
     public Vector3 Position => this.transform.position;
     
