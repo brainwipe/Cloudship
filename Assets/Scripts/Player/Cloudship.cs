@@ -51,7 +51,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     }
 
     void OnCollisionEnter(Collision collisionInfo) {
-        Debug.Log(collisionInfo.gameObject.tag);
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
             flyingPhysics.Grounded();

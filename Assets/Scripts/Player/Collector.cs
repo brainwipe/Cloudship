@@ -15,18 +15,16 @@ public class Collector : MonoBehaviour
 	public GameObject ClawPrefab;
 	GameObject Claw;
 
-	int segments = 12;
+	int segments = 13;
 	float segmentLength = 8f;
-	float reelOutSpeed = 11f;
-	float reelInSpeed = 8f;
+	float reelOutSpeed = 15f;
+	float reelInSpeed = 12f;
 
-	Vector3 startPosition;
 	Vector3 limitPosition;
 
 	void Start () 
 	{
 		CreateRope();
-		startPosition = transform.localPosition;
 		limitPosition = new Vector3(0, -segmentLength, 0);
 	}
 	
@@ -44,16 +42,16 @@ public class Collector : MonoBehaviour
 
 	void ReelOutUpdate()
 	{
-		var count = transform.childCount;
 		var areWeReeledOut = true;
-		for(int i=count-1; i > 0; i--)
-		{
-			var child = transform.GetChild(i);
-			var joint = child.GetComponent<HingeJoint>();
-			if (joint.connectedAnchor.y > limitPosition.y)
+		var children = gameObject.GetComponentsInChildren<Transform>();
+		for(int i=children.Length-1; i > 1; i--)
+		{ 
+			var child = children[i];
+			var joint = child.gameObject.GetComponent<Joint>();
+			if (joint != null && joint.connectedAnchor.y > limitPosition.y)
 			{
 				areWeReeledOut = false;
-				var nextInChain = transform.GetChild(i - 1);
+				var nextInChain = children[i-1];
 				var renderer = nextInChain.GetComponent<Renderer>();
 				if (renderer != null)
 				{
@@ -72,13 +70,14 @@ public class Collector : MonoBehaviour
 
 	void ReelInUpdate()
 	{
-		var count = transform.childCount;
+		var children = gameObject.GetComponentsInChildren<Transform>();
+		
 		var areWeReeledIn = true;
-		for(int i=count-2; i > 0; i--)
+		for(int i=0; i < children.Length-1; i++)
 		{
-			var child = transform.GetChild(i);
-			var joint = child.GetComponent<HingeJoint>();
-			if (joint.connectedAnchor.y < 0)
+			var child = children[i];
+			var joint = child.GetComponent<Joint>();
+			if (joint != null && joint.connectedAnchor.y < 0)
 			{
 				areWeReeledIn = false;
 				joint.connectedAnchor = joint.connectedAnchor + new Vector3(0, Time.deltaTime * reelInSpeed,0);
@@ -107,8 +106,8 @@ public class Collector : MonoBehaviour
 		{
 			segment = CreateSegment(segment, transform.position, i);
 		}
-		Claw = Instantiate(ClawPrefab, transform.position, Quaternion.identity, transform);
-		var clawHinge = Claw.GetComponent<HingeJoint>();
+		Claw = Instantiate(ClawPrefab, transform.position, Quaternion.identity, segment.transform);
+		var clawHinge = Claw.GetComponent<Joint>();
 		clawHinge.connectedBody = segment;
 	}
 
@@ -118,9 +117,9 @@ public class Collector : MonoBehaviour
 			ropePrefab, 
 			position, 
 			Quaternion.identity, 
-			transform);
+			previous.transform);
 		segment.name = "Rope " + name;
-		var hinge = segment.GetComponent<HingeJoint>();
+		var hinge = segment.GetComponent<Joint>();
 		hinge.connectedBody = previous;
 		
 		return segment.GetComponent<Rigidbody>();
