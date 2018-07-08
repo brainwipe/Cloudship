@@ -18,12 +18,13 @@ public class TerrainChunk : MonoBehaviour
 
     void Start()
     {
-        Mesh sandMesh = this.GetComponentsInChildren<MeshFilter>().Single(m => m.name == "sand").mesh;
+        var sandMeshFilter = GetComponentsInChildren<MeshFilter>().Single(m => m.name == "sand");
+        Mesh sandMesh = sandMeshFilter.mesh;
         sandMesh.vertices = CalculateHeight(sandMesh.vertices);
         sandMesh.RecalculateBounds();
         sandMesh.RecalculateNormals();
         RemoveOuterMostEdge(sandMesh);
-        this.gameObject.AddComponent<MeshCollider>();
+        sandMeshFilter.gameObject.AddComponent<MeshCollider>();
     }
 
     void OnDestroy()

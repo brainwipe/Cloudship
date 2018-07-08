@@ -22,7 +22,7 @@ public class FlotsamFactory : MonoBehaviour {
         var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, transform);
         chunk.flotsam = flotsam;
         
-        flotsam.transform.position += new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 33f, Random.Range(0f, chunkSize) - (chunkSize / 2));
+        flotsam.transform.position += new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 36f, Random.Range(0f, chunkSize) - (chunkSize / 2));
     }
 
     bool ShouldICreateFlotsam()
