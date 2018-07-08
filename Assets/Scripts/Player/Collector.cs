@@ -13,7 +13,7 @@ public class Collector : MonoBehaviour
 
 	public GameObject ropePrefab;
 	public GameObject ClawPrefab;
-	GameObject Claw;
+	Claw Claw;
 
 	int segments = 13;
 	float segmentLength = 8f;
@@ -106,9 +106,10 @@ public class Collector : MonoBehaviour
 		{
 			segment = CreateSegment(segment, transform.position, i);
 		}
-		Claw = Instantiate(ClawPrefab, transform.position, Quaternion.identity, segment.transform);
-		var clawHinge = Claw.GetComponent<Joint>();
+		var claw = Instantiate(ClawPrefab, transform.position, Quaternion.identity, segment.transform);
+		var clawHinge = claw.GetComponent<Joint>();
 		clawHinge.connectedBody = segment;
+		Claw = claw.GetComponent<Claw>();
 	}
 
 	Rigidbody CreateSegment(Rigidbody previous, Vector3 position, int name)
@@ -127,7 +128,10 @@ public class Collector : MonoBehaviour
 
 	public void ReelOut()
 	{
-		State = States.ReelOut;
+		if (!Claw.HasFlotsam)
+		{
+			State = States.ReelOut;
+		}
 	}
 
 	public void ReelIn()

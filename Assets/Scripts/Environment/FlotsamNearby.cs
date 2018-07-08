@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class FlotsamNearby : MonoBehaviour 
 {
-	void OnTriggerEnter(Collider other)
+	void OnTriggerStay(Collider other)
 	{
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
 		if (player != null)
 		{
-			
 			player.ReelOut();
 		}
 	}
@@ -19,7 +18,6 @@ public class FlotsamNearby : MonoBehaviour
 		var player = other.gameObject.GetComponentInParent<Cloudship>();
 		if (player != null)
 		{
-			
 			player.ReelIn();
 		}
 	}
