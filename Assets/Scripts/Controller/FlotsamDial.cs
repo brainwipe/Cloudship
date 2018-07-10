@@ -6,7 +6,7 @@ public class FlotsamDial : MonoBehaviour
 {
 	Cloudship player;
 	public Transform pointer;
-	float pointerSpeed = 0.1f;
+	float pointerSpeed = 1f;
 
 	void Start () 
 	{
