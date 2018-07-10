@@ -97,14 +97,19 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         collector.ReelIn();
     }
 
+    private IStoreFlotsam[] Stores => transform.GetComponentsInChildren<IStoreFlotsam>();
+
     internal void Collect(float value)
     {
-        var stores = transform.GetComponentsInChildren<IStoreFlotsam>();
         // TODO ROLA When stores are created, perform a distribution function here.
-        var store = stores.First();
-        store.Flotsam += value;
-        Debug.Log($"Total Flotsam: {store.Flotsam}");
+        var store = Stores.First();
+        store.TotalFlotsam += value;
+        Debug.Log($"Total Flotsam: {store.TotalFlotsam}");
     }
+
+    internal float TotalFlotsam => Stores.Sum(x => x.TotalFlotsam);
+
+    internal float MaxFlotsam => Stores.Sum(x => x.MaxFlotsam);
 
     public Vector3 Position => this.transform.position;
     

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompassPlayerDirection : MonoBehaviour {
-
-
+public class CompassPlayerDirection : MonoBehaviour 
+{
 	Camera playerCamera;
 	Rigidbody player;
 

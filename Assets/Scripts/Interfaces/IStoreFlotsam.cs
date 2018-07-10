@@ -1,5 +1,7 @@
 using System;
 public interface IStoreFlotsam
 {
-    float Flotsam { get; set; }
+    float TotalFlotsam { get; set; }
+
+    float MaxFlotsam { get; }
 }

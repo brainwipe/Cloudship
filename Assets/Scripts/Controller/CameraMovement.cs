@@ -9,7 +9,6 @@ public class CameraMovement : MonoBehaviour
         Cinematic
     }
     
-    public Transform Controller;
     public Transform CompassRose;
 
     public CameraMotion current;
@@ -72,6 +71,8 @@ public class CameraMovement : MonoBehaviour
 
         CompassRose.localRotation = Quaternion.Euler(0,transform.eulerAngles.y,0);
     } 
+
+    Controller Controller => GetComponentInChildren<Controller>();
 
     [System.Serializable]    
     public class CameraMotion

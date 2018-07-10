@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb12c6000d55f247abe0bf46c2bb7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxFlot: 300
   Abilities:
     Torque: 0
     Speed: 0
