@@ -5,11 +5,6 @@ using UnityEngine;
 public class FlotsamFactory : MonoBehaviour {
 
 	public GameObject flotsamPrefab;
-    float chunkSize;
-
-	void Start () {
-		chunkSize = TerrainChunk.Size;
-	}
 
 	public void CreateFlotsam(TerrainChunk chunk)
     {
@@ -22,7 +17,10 @@ public class FlotsamFactory : MonoBehaviour {
         var flotsam = Instantiate(flotsamPrefab, flotsamPosition, Quaternion.identity, transform);
         chunk.flotsam = flotsam;
         
-        flotsam.transform.position += new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 36f, Random.Range(0f, chunkSize) - (chunkSize / 2));
+        var chunkSize = TerrainChunk.Size;
+        var offset = new Vector3(Random.Range(0f, chunkSize) - (chunkSize / 2), 36f, Random.Range(0f, chunkSize) - (chunkSize / 2));
+        flotsam.transform.position += offset;
+
     }
 
     bool ShouldICreateFlotsam()
