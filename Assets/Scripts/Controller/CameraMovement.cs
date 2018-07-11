@@ -58,7 +58,6 @@ public class CameraMovement : MonoBehaviour
         {
             Quaternion turnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * current.Rotation, Vector3.up);
             offset = turnAngle * offset;
-
             offset = offset - new Vector3(0, Input.GetAxis("Mouse Y") * current.Vertical, 0);
         }
 

@@ -477,7 +477,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -892,7 +892,7 @@ Camera:
 GameObject:
   m_PrefabParentObject: {fileID: 100018, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
   m_PrefabInternal: {fileID: 916311664}
---- !u!114 &741739057
+--- !u!114 &741739060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1488,7 +1488,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
       propertyPath: m_Name

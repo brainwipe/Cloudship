@@ -22,15 +22,14 @@ public class TerrainFactory : MonoBehaviour
     {   
         start = Vector3.zero;
         chunkSize = TerrainChunk.Size;
-        chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize);
+        chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize) + 2;
         playerCloudship = GameManager.Instance.PlayerCloudship;
         RebuildChunks(0,0);
     }
 
     void Update()
     {
-        if (GameManager.Instance.PlayerCloudship == null ||
-            !ShouldWeUpdate(playerCloudship.transform.position, start))
+        if (GameManager.Instance.PlayerCloudship == null)
         {
             return;
         }
@@ -90,14 +89,7 @@ public class TerrainFactory : MonoBehaviour
             Destroy(removeChunk.Value.gameObject);
         }
     }
-
     
-    bool ShouldWeUpdate(Vector3 playerPosition, Vector3 start)
-    {
-        var change = playerPosition - start;
-        return Mathf.Abs(change.x) >= chunkSize || Mathf.Abs(change.y) >= chunkSize;
-    }
-
     int WorldToChunkConversion(float worldPosition)
     {
         return (int)(Mathf.Floor(worldPosition/chunkSize) * chunkSize);
