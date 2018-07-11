@@ -461,7 +461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000018626453
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -469,11 +469,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000044703487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000005960465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_RootOrder
@@ -2831,6 +2831,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fe6af46564aa624d85c0ae9c9fcd4ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1973308853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973308851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d976670735b8b64d8733f2f78413282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2002931753

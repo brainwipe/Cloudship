@@ -471,12 +471,12 @@ MonoBehaviour:
   Id: weapon-cannon
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
-  Name: Cannon
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 10
+  FlotsamCost: 120
   Abilities:
     Torque: 0
     Speed: 0

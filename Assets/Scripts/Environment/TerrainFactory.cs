@@ -11,8 +11,6 @@ public class TerrainFactory : MonoBehaviour
     int chunkRadius;
     Dictionary<Vector3, TerrainChunk> chunks = new Dictionary<Vector3, TerrainChunk>();
     
-    Vector3 start;
-
     float chunkSize;
 
     public GameObject chunkPrefab;
@@ -20,7 +18,6 @@ public class TerrainFactory : MonoBehaviour
 
     void Start()
     {   
-        start = Vector3.zero;
         chunkSize = TerrainChunk.Size;
         chunkRadius = (int)(GameManager.Instance.DrawDistance / chunkSize) + 2;
         playerCloudship = GameManager.Instance.PlayerCloudship;
@@ -62,8 +59,6 @@ public class TerrainFactory : MonoBehaviour
         }
 
         RemoveOutDatedChunks(timestampForThisUpdateLoop);
-
-        start = playerCloudship.transform.position;
     }
 
     void CreateChunk(Vector3 pos)

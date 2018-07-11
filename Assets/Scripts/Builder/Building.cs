@@ -7,25 +7,29 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public static string BuildingTag = "Building";
     public string Id;
-
     public IAmAShip owner;
-
-    public Vector3 MenuPosition;
-    public float MenuScale;
-    public string Name;
-
     Renderer[] highlightTargets;
+
+    [HideInInspector]
+    public Vector3 MenuPosition;
+    [HideInInspector]
+    public float MenuScale;
+    [HideInInspector]
     public bool InMenu = false;
-
+    [HideInInspector]
     public bool AnotherObjectCollision;
+    [HideInInspector]
     public bool BoundaryCollision;
+    [HideInInspector]
     public bool IsOverCloudship;
-
-    public float Health;
-    public Abilities Abilities;
-    
+    [HideInInspector]
     public Bounds PreCalculatedBounds;
 
+    public float Health;
+    public float FlotsamCost;
+    public Abilities Abilities;
+
+    
     void Awake()
     {
         BoundaryCollision = false;

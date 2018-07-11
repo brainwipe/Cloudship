@@ -240,12 +240,12 @@ MonoBehaviour:
   Id: house-small-one
   MenuPosition: {x: 0, y: -0.04, z: 0}
   MenuScale: 0.02
-  Name: Small House
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 10
+  FlotsamCost: 10
   Abilities:
     Torque: 0
     Speed: 0

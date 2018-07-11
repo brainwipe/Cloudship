@@ -97,7 +97,9 @@ public class BuildSurface : MonoBehaviour
 		if (selectedBuilding != null && !selectedBuilding.CanPlace)
 		{
 			selectedBuilding.Remove();
+			player.AddFlotsam(selectedBuilding.FlotsamCost);
 		}
+		player.RemoveFlotsam(selectedBuilding.FlotsamCost);
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
 		player.UpdateAbilities();
@@ -218,6 +220,7 @@ public class BuildSurface : MonoBehaviour
 			gameObject.transform.localRotation = savedBuilding.LocalRotation.ToQuaternion();
 			var building = gameObject.GetComponent<Building>();
 			building.Health = savedBuilding.Health;
+			
 		}
 	}
 }

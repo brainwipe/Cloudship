@@ -10,6 +10,7 @@ public class SaveGame
     public float[] Position { get; set; }
     public float[] Rotation { get; set; }
     public List<BuildingSave> Buildings { get; set; }
+    public float InfrastructreFlotsam { get; set; }
 
     public SaveGame()
     {
@@ -25,11 +26,18 @@ public class SaveGame
             LocalPosition = toSave.transform.localPosition.ToArray();
             LocalRotation = toSave.transform.localRotation.ToArray();
             Health = toSave.Health;
+            
+            var store = toSave as IStoreFlotsam;
+            if (store != null)
+            {
+                Flotsam = store.TotalFlotsam;
+            }
         }
 
         public string Id;
         public float[] LocalPosition { get; set; }
         public float[] LocalRotation { get; set; }
         public float Health { get; set; }
+        public float Flotsam { get; set; }
     }
 }

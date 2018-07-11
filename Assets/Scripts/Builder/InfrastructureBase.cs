@@ -14,4 +14,6 @@ public class InfrastructureBase : MonoBehaviour, IHaveAbilities, IStoreFlotsam
 
     public Abilities Skills => Abilities;
 
+    public bool IsBuilding => false;
+
 }

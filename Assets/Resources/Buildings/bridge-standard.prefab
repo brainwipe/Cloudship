@@ -251,12 +251,12 @@ MonoBehaviour:
   Id: bridge-standard
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
-  Name: Overlook Bridge
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
   Health: 30
+  FlotsamCost: 50
   Abilities:
     Torque: 0
     Speed: 0
