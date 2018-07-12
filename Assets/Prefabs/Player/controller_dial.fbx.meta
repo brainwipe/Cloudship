@@ -6,18 +6,28 @@ ModelImporter:
     100000: //RootNode
     100002: dial
     100004: pointer
+    100006: Empty_Mesh
     400000: //RootNode
     400002: dial
     400004: pointer
+    400006: Empty_Mesh
     2100000: Dial_Face
     2100002: Dial_Brass
     2100004: Dial_Needle_1
+    2100006: Dial_Measure
+    2100008: Dial_Face_1
+    2100010: Dial_Brass_1
+    2100012: Dial_Needle_2
+    2100014: Dial_Possible
     2300000: dial
     2300002: pointer
+    2300004: Empty_Mesh
     3300000: dial
     3300002: pointer
+    3300004: Empty_Mesh
     4300000: dial
     4300002: pointer
+    4300004: Empty_Mesh
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}

@@ -46,6 +46,7 @@ public class BuildSurface : MonoBehaviour
 				else
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
+					player.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 localPosition;
 					if (GetDesired(out localPosition))
 					{
@@ -99,7 +100,6 @@ public class BuildSurface : MonoBehaviour
 			selectedBuilding.Remove();
 			player.AddFlotsam(selectedBuilding.FlotsamCost);
 		}
-		player.RemoveFlotsam(selectedBuilding.FlotsamCost);
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
 		player.UpdateAbilities();
