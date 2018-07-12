@@ -103,20 +103,22 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     {
         // TODO ROLA When stores are created, perform a distribution function here.
         var store = Stores.First();
-        store.TotalFlotsam += value;
+        store.Store(value);
         Debug.Log($"Total Flotsam: {store.TotalFlotsam}");
     }
 
     internal void RemoveFlotsam(float value)
     {
         var store = Stores.First();
-        store.TotalFlotsam -= value;
+        store.Store(-value);
         Debug.Log($"Total Flotsam: {store.TotalFlotsam}");
     }
 
     internal float TotalFlotsam => Stores.Sum(x => x.TotalFlotsam);
 
     internal float MaxFlotsam => Stores.Sum(x => x.MaxFlotsam);
+
+    internal bool IsFull => Stores.All(x => x.IsFull);
 
     public Vector3 Position => this.transform.position;
     
@@ -187,7 +189,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         HealthMax = save.HealthMax;
         transform.position = save.Position.ToVector();
         transform.rotation = save.Rotation.ToQuaternion();
-        Stores.Single(x => !x.IsBuilding).TotalFlotsam = save.InfrastructreFlotsam;
+        Stores.Single(x => !x.IsBuilding).Store(save.InfrastructreFlotsam);
         builder.Load(save.Buildings);
         UpdateAbilities();
     }

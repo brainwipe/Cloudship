@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InfrastructureBase : MonoBehaviour, IHaveAbilities, IStoreFlotsam
 {
-    public float TotalFlotsam { get; set; }
+    public float TotalFlotsam { get; private set; }
 
     public float MaxFlot;
 
@@ -16,4 +16,14 @@ public class InfrastructureBase : MonoBehaviour, IHaveAbilities, IStoreFlotsam
 
     public bool IsBuilding => false;
 
+    public bool IsFull => TotalFlotsam == MaxFlotsam;
+
+    public void Store(float flotsam)
+    {
+        TotalFlotsam += flotsam;
+        if (TotalFlotsam > MaxFlotsam)
+        {
+            TotalFlotsam = MaxFlotsam;
+        }
+    }
 }

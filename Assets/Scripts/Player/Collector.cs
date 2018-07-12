@@ -15,6 +15,7 @@ public class Collector : MonoBehaviour
 	public GameObject ClawPrefab;
 	Claw Claw;
 
+	Cloudship player;
 	int segments = 13;
 	float segmentLength = 8f;
 	float reelOutSpeed = 15f;
@@ -26,6 +27,7 @@ public class Collector : MonoBehaviour
 	{
 		CreateRope();
 		limitPosition = new Vector3(0, -segmentLength, 0);
+		player = GameManager.Instance.PlayerCloudship;
 	}
 	
 	void Update () 
@@ -128,7 +130,7 @@ public class Collector : MonoBehaviour
 
 	public void ReelOut()
 	{
-		if (!Claw.HasFlotsam)
+		if (!Claw.HasFlotsam && !player.IsFull)
 		{
 			State = States.ReelOut;
 		}
