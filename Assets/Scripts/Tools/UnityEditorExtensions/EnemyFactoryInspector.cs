@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+
+/*
 using UnityEditor;
 
 [CustomEditor(typeof(EnemyFactory))]
@@ -16,3 +18,4 @@ public class EnemyFactoryInspector : Editor
         }
     }
 }
+ */

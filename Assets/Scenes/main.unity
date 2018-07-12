@@ -481,7 +481,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 58049ea72bb4c2145a44370b7b9ad55b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 0
+  AllowWind: 1
   Lift: 0
   Torque: 0
   Speed: 0
