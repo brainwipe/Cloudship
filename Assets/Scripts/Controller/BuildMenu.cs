@@ -44,6 +44,7 @@ public class BuildMenu : MonoBehaviour {
                 Input.GetButtonUp("Throttle Up"), 
                 Input.GetButtonUp("Throttle Down"));
             UpdateMenuPosition();
+            UpdateAffordability();
         }
     }
 
@@ -106,6 +107,17 @@ public class BuildMenu : MonoBehaviour {
         var target = Quaternion.Euler(menuPositions[selectionIndex].Angle, 0, 0);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, target, Time.deltaTime * wheelSpeed);
 	}
+
+    void UpdateAffordability()
+    {
+        foreach(var position in menuPositions)
+        {
+            if (position.Building != null)
+            {
+                position.Building.UpdateAffordability(player.TotalFlotsam);
+            }
+        }
+    }
 
     int WrapAround(int length, int index)
     {

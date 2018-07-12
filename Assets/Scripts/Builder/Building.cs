@@ -124,6 +124,18 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         SetShaderBool("Boolean_ED362197", false);
     }
 
+    public void UpdateAffordability(float playerTotalFlotsam)
+    {
+        if (CanAfford(playerTotalFlotsam))
+        {
+            SetShaderBool("Boolean_8F81C679", false);
+        }
+        else
+        {
+            SetShaderBool("Boolean_8F81C679", true);
+        }
+    }
+
     public void UpdateVisibility()
     {
         if (CanPlace)
@@ -169,5 +181,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public bool CanPlace => BoundaryCollision && !AnotherObjectCollision && IsOverCloudship;
     
+    public bool CanAfford(float playerTotalFlotsam) => playerTotalFlotsam >= FlotsamCost;
+
     public Abilities Skills => Abilities;
 }

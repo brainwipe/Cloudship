@@ -43,7 +43,7 @@ public class BuildSurface : MonoBehaviour
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
-				else
+				else if (buildMenu.SelectedBuilding.CanAfford(player.TotalFlotsam))
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					player.RemoveFlotsam(selectedBuilding.FlotsamCost);
@@ -95,7 +95,12 @@ public class BuildSurface : MonoBehaviour
 
 	void PlaceBuilding()
 	{
-		if (selectedBuilding != null && !selectedBuilding.CanPlace)
+		if (selectedBuilding == null)
+		{
+			return;
+		}
+
+		if (!selectedBuilding.CanPlace)
 		{
 			selectedBuilding.Remove();
 			player.AddFlotsam(selectedBuilding.FlotsamCost);
