@@ -10,9 +10,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public IAmAShip owner;
     Renderer[] highlightTargets;
 
-    [HideInInspector]
     public Vector3 MenuPosition;
-    [HideInInspector]
     public float MenuScale;
     [HideInInspector]
     public bool InMenu = false;

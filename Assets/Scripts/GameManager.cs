@@ -43,12 +43,16 @@ public class GameManager : MonoBehaviour
 		}
 
 		PlayerCloudship = FindObjectOfType<Cloudship>();
-		PlayerStart.SetupCloudship(PlayerCloudship);
 		WindMaker = new PerlinPressure();
 		DrawDistance = Camera.farClipPlane + 500;
 		Mode = new GameModes();
 
 		GameMode(MenuOutputData.isCreative);
+	}
+
+	void Start()
+	{
+		PlayerStart.SetupCloudship(PlayerCloudship);
 	}
 
     internal void GameMode(bool isCreative)

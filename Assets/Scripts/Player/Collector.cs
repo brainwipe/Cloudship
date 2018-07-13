@@ -130,7 +130,7 @@ public class Collector : MonoBehaviour
 
 	public void ReelOut()
 	{
-		if (!Claw.HasFlotsam && !player.IsFull)
+		if (!Claw.HasFlotsam && !player.Stores.IsFull)
 		{
 			State = States.ReelOut;
 		}

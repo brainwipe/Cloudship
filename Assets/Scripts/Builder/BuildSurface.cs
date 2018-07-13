@@ -43,10 +43,10 @@ public class BuildSurface : MonoBehaviour
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
-				else if (buildMenu.SelectedBuilding.CanAfford(player.TotalFlotsam))
+				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
-					player.RemoveFlotsam(selectedBuilding.FlotsamCost);
+					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 localPosition;
 					if (GetDesired(out localPosition))
 					{
@@ -103,7 +103,7 @@ public class BuildSurface : MonoBehaviour
 		if (!selectedBuilding.CanPlace)
 		{
 			selectedBuilding.Remove();
-			player.AddFlotsam(selectedBuilding.FlotsamCost);
+			player.Stores.AddFlotsam(selectedBuilding.FlotsamCost);
 		}
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;

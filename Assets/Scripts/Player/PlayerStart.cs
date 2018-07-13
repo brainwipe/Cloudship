@@ -2,7 +2,7 @@
 {
 	public static void SetupCloudship(Cloudship player)
 	{
-		player.AddFlotsam(270);
+		player.Stores.AddFlotsam(270);
 	}
 	
 }

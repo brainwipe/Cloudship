@@ -18,15 +18,18 @@ public class FlotsamDial : MonoBehaviour
 	
 	void Update () 
 	{
-		var targetZEulerAngle = Maths.Rescale(0, 300, 0, player.MaxFlotsam, player.TotalFlotsam);
+		var total = player.Stores.TotalFlotsam;
+		var max = player.Stores.MaxFlotsam;
+
+		var targetZEulerAngle = Maths.Rescale(0, 300, 0, max, total);
 		var pointerSmoothedAngle = Mathf.Lerp(pointer.localEulerAngles.z, targetZEulerAngle, Time.deltaTime * pointerSpeed);
 		pointer.localEulerAngles = new Vector3(0, 0, pointerSmoothedAngle);
 
 		var proposedMarkerLocation = targetZEulerAngle;
 		if(player.Mode == Cloudship.Modes.Build)
 		{
-			var proposedFlotsam = player.TotalFlotsam - buildMenu.SelectedBuilding.FlotsamCost;
-			proposedMarkerLocation = Maths.Rescale(0, 300, 0, player.MaxFlotsam, proposedFlotsam);
+			var proposedFlotsam = total - buildMenu.SelectedBuilding.FlotsamCost;
+			proposedMarkerLocation = Maths.Rescale(0, 300, 0, max, proposedFlotsam);
 		}
 		
 		var smoothedProposedAngle = Mathf.Lerp(proposedMarker.localEulerAngles.z, proposedMarkerLocation, Time.deltaTime * pointerSpeed);

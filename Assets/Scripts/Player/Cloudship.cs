@@ -20,12 +20,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     public bool IsAlive => Health > 0;
     private float HealthMax;
     public Image HealthBar;
+    public StoreManager Stores;
     FlyingPhysics flyingPhysics;
     BuildSurface builder;
     Collector collector;
 
     void Awake()
     {
+        Stores = new StoreManager(this.transform);
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
         collector = GetComponentInChildren<Collector>();
@@ -97,29 +99,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         collector.ReelIn();
     }
 
-    private IStoreFlotsam[] Stores => transform.GetComponentsInChildren<IStoreFlotsam>();
-
-    internal void AddFlotsam(float value)
-    {
-        // TODO ROLA When stores are created, perform a distribution function here.
-        var store = Stores.First();
-        store.Store(value);
-        Debug.Log($"Total Flotsam: {store.TotalFlotsam}");
-    }
-
-    internal void RemoveFlotsam(float value)
-    {
-        var store = Stores.First();
-        store.Store(-value);
-        Debug.Log($"Total Flotsam: {store.TotalFlotsam}");
-    }
-
-    internal float TotalFlotsam => Stores.Sum(x => x.TotalFlotsam);
-
-    internal float MaxFlotsam => Stores.Sum(x => x.MaxFlotsam);
-
-    internal bool IsFull => Stores.All(x => x.IsFull);
-
+   
     public Vector3 Position => this.transform.position;
     
     public bool CanMove => flyingPhysics.Speed > 0 && CanGiveOrders;
@@ -180,7 +160,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         save.Position = transform.position.ToArray();
         save.Rotation = transform.rotation.ToArray();
         save.Buildings = builder.Save();
-        save.InfrastructreFlotsam = Stores.Single(x => !x.IsBuilding).TotalFlotsam;
+        save.InfrastructreFlotsam = Stores.InfrastructreFlotsam;
     }
 
     public void Load(SaveGame save)
@@ -189,7 +169,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         HealthMax = save.HealthMax;
         transform.position = save.Position.ToVector();
         transform.rotation = save.Rotation.ToQuaternion();
-        Stores.Single(x => !x.IsBuilding).Store(save.InfrastructreFlotsam);
+        Stores.InfrastructreFlotsam =save.InfrastructreFlotsam;
         builder.Load(save.Buildings);
         UpdateAbilities();
     }

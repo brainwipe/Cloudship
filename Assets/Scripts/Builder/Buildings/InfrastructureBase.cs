@@ -18,12 +18,15 @@ public class InfrastructureBase : MonoBehaviour, IHaveAbilities, IStoreFlotsam
 
     public bool IsFull => TotalFlotsam == MaxFlotsam;
 
-    public void Store(float flotsam)
+    public float Store(float flotsam)
     {
         TotalFlotsam += flotsam;
+        float remainder = 0;
         if (TotalFlotsam > MaxFlotsam)
         {
+            remainder = TotalFlotsam - MaxFlotsam;
             TotalFlotsam = MaxFlotsam;
         }
+        return remainder;
     }
 }

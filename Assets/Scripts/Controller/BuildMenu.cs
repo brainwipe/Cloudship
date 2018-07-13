@@ -114,7 +114,7 @@ public class BuildMenu : MonoBehaviour {
         {
             if (position.Building != null)
             {
-                position.Building.UpdateAffordability(player.TotalFlotsam);
+                position.Building.UpdateAffordability(player.Stores.TotalFlotsam);
             }
         }
     }

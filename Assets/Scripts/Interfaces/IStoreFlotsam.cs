@@ -9,5 +9,5 @@ public interface IStoreFlotsam
 
     bool IsFull { get; }
 
-    void Store(float flotsam);
+    float Store(float flotsam);
 }

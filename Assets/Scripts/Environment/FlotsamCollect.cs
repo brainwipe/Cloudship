@@ -11,7 +11,7 @@ public class FlotsamCollect : MonoBehaviour
 		if (other.tag == "Player")
 		{
             var value = GetComponentInParent<Flotsam>().Value;
-			GameManager.Instance.PlayerCloudship.AddFlotsam(value);
+			GameManager.Instance.PlayerCloudship.Stores.AddFlotsam(value);
 			Destroy(transform.parent.gameObject);
 		}
 	}
