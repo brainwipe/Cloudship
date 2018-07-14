@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyFactory : MonoBehaviour
 {
     public Enemy[] EnemyPrefabs;
+    public bool AutoSpawn;
     Cloudship player;
 
     float lastTimeWeSawAnEnemy;
@@ -23,7 +24,11 @@ public class EnemyFactory : MonoBehaviour
 
     void Update()
     {
-        if (IsIttimeForAnEnemy())
+        if (AutoSpawn && IsIttimeForAnEnemy())
+        {
+            Spawn();
+        }
+        else if (Input.GetKeyUp(KeyCode.F4))
         {
             Spawn();
         }

@@ -796,7 +796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &654624879
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs:
   - {fileID: 114118024519024402, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
+  AutoSpawn: 0
   MinSecsSpawn: 120
   MaxSecsSpawn: 420
   WidthOfSpawnCone: 40
