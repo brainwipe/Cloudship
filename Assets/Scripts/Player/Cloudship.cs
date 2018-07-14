@@ -27,7 +27,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     void Awake()
     {
-        Stores = new StoreManager(this.transform);
+        Stores = new StoreManager();
         flyingPhysics = GetComponent<FlyingPhysics>();
         builder = GetComponentInChildren<BuildSurface>();
         collector = GetComponentInChildren<Collector>();

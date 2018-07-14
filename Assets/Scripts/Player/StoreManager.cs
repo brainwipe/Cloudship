@@ -3,15 +3,10 @@ using UnityEngine;
 
 public class StoreManager
 {
-    private IStoreFlotsam[] allStores;
+    IStoreFlotsam[] AllStores => GameManager.Instance.PlayerCloudship.transform.GetComponentsInChildren<IStoreFlotsam>();
 
-    public StoreManager(Transform cloudshipTransform)
-    {
-        allStores = cloudshipTransform.GetComponentsInChildren<IStoreFlotsam>();
-    }
-
-    IStoreFlotsam[] Buildings => allStores.Where(x => x.IsBuilding).ToArray();
-    IStoreFlotsam Infrastructure => allStores.Single(x => !x.IsBuilding);
+    IStoreFlotsam[] Buildings => AllStores.Where(x => x.IsBuilding).ToArray();
+    IStoreFlotsam Infrastructure => AllStores.Single(x => !x.IsBuilding);
 
     internal void AddFlotsam(float value)
     {
@@ -44,14 +39,13 @@ public class StoreManager
         }
 
         Infrastructure.Store(-value);
-        Debug.Log($"Total Flotsam: {TotalFlotsam}");
     }
 
-    internal float TotalFlotsam => allStores.Sum(x => x.TotalFlotsam);
+    internal float TotalFlotsam => AllStores.Sum(x => x.TotalFlotsam);
 
-    internal float MaxFlotsam => allStores.Sum(x => x.MaxFlotsam);
+    internal float MaxFlotsam => AllStores.Sum(x => x.MaxFlotsam);
 
-    internal bool IsFull => allStores.All(x => x.IsFull);
+    internal bool IsFull => AllStores.All(x => x.IsFull);
 
     public float InfrastructreFlotsam 
     {

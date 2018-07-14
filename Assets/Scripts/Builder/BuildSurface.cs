@@ -102,8 +102,10 @@ public class BuildSurface : MonoBehaviour
 
 		if (!selectedBuilding.CanPlace)
 		{
+			var cost = selectedBuilding.FlotsamCost;
 			selectedBuilding.Remove();
-			player.Stores.AddFlotsam(selectedBuilding.FlotsamCost);
+			player.Stores.AddFlotsam(cost);
+			
 		}
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
