@@ -36,6 +36,17 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         UpdateAbilities();
     }
 
+    void Start()
+    {
+        if (!GameManager.Instance.Mode.PlayerTakesDamage)
+        {
+            foreach(var canvas in GetComponentsInChildren<Canvas>())
+            {
+                canvas.enabled = false;
+            }
+        }
+    }
+
     void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
 
     public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
@@ -62,6 +73,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     public void Damage(float amount) 
     {
+        if (!GameManager.Instance.Mode.PlayerTakesDamage)
+        {
+            return;
+        }
+
         Health -= amount;
         HealthBar.fillAmount = Health/HealthMax;
 
@@ -184,6 +200,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     public void NormalMode()
     {
+        if (!GameManager.Instance.Mode.PlayerTakesDamage)
+        {
+            return;
+        }
+
         foreach(var canvas in GetComponentsInChildren<Canvas>())
         {
             canvas.enabled = true;
