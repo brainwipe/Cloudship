@@ -24,6 +24,11 @@ public class StoreManager
 
     internal void RemoveFlotsam(float value)
     {
+        if (!GameManager.Instance.Mode.BuildingsCostFlotsam)
+        {
+            return;
+        }
+
         foreach(var building in Buildings.OrderBy(x => x.TotalFlotsam))
         {
             if (value < 1)

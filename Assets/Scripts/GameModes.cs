@@ -5,6 +5,8 @@ public class GameModes
 
     public bool PlayerTakesDamage;
 
+    public bool BuildingsCostFlotsam;
+
     public GameModes()
     {
         SetSurvivalMode();
@@ -14,11 +16,13 @@ public class GameModes
     {
         Name = "Creative";
         PlayerTakesDamage = false;
+        BuildingsCostFlotsam = false;
     }
 
     public void SetSurvivalMode()
     {
         Name = "Survival";
         PlayerTakesDamage = true;
+        BuildingsCostFlotsam = true;
     }
 }
