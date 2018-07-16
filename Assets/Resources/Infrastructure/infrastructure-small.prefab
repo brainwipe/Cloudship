@@ -342,10 +342,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb12c6000d55f247abe0bf46c2bb7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxFlot: 0
   Abilities:
     Torque: 0
     Speed: 0
     GiveOrders: 0
-    Mass: 500
+    Mass: 400
     Lift: 1800000
     Health: 150
+  totalFlotsam: 0

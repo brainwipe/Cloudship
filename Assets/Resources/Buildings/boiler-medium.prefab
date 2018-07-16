@@ -244,18 +244,18 @@ MonoBehaviour:
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 50
   FlotsamCost: 100
   Abilities:
-    Torque: 500000
-    Speed: 130000
+    Torque: 530000
+    Speed: 140000
     GiveOrders: 0
     Mass: 50
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

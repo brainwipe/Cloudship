@@ -16,10 +16,14 @@ public class EnemyFactory : MonoBehaviour
     public float MinDistance = 3000f;
     public float MaxDistance = 4000f;
     public float SpawnAltitude = 180f;
+    bool startGrace;
+    float startGraceSpawnSecs = 240f;
 
     void Start()
     {
         player = GameManager.Instance.PlayerCloudship;
+        startGrace = true;
+        ResetTimer();
     }
 
     void Update()
@@ -36,8 +40,10 @@ public class EnemyFactory : MonoBehaviour
 
     public void Spawn()
     {
+        startGrace = false;
         var location = FindSpawnLocation();
         Instantiate(EnemyPrefabs[0], location, Quaternion.identity, transform);
+        ResetTimer();
     }
 
     Vector3 FindSpawnLocation()
@@ -60,15 +66,22 @@ public class EnemyFactory : MonoBehaviour
 
     bool IsIttimeForAnEnemy()
     {
-        var durationSinceLastTime = lastTimeWeSawAnEnemy - Time.time;
+        var durationSinceLastTime = Time.time - lastTimeWeSawAnEnemy;
+
+        if (startGrace && durationSinceLastTime < startGraceSpawnSecs)
+        {
+            Debug.Log($"Enemy factory - Grace {durationSinceLastTime}");
+            return false;
+        }
 
         if (durationSinceLastTime < MinSecsSpawn)
         {
+            Debug.Log($"Enemy factory - Min secs {durationSinceLastTime}");
             return false;
         }
         var probability = Maths.Rescale(0,1,MinSecsSpawn, MaxSecsSpawn, durationSinceLastTime);
         var result = Random.Range(0,1);
-        Debug.Log("Duration:" + durationSinceLastTime + " Prob:" + probability + " Result: " + result);
+        Debug.Log("Enemy Factory - Duration:" + durationSinceLastTime + " Prob:" + probability + " Result: " + result);
         return result < probability;
     }
 }
