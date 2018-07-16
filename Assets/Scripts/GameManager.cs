@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
 	public Cloudship PlayerCloudship;
 
+	public HelpWindow Help;
+
 	public IWindMaker WindMaker = null;
 
 	public Camera Camera;
@@ -22,7 +24,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
 	public Transform Cannonballs;
-
 	public LevelChanger LevelChanger;
 
 	public Switches Features;

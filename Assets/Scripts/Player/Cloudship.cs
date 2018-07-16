@@ -114,7 +114,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     {
         collector.ReelIn();
     }
-
    
     public Vector3 Position => this.transform.position;
     
