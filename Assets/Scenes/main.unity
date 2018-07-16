@@ -243,7 +243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 46305671}
   m_LocalRotation: {x: -0.1568299, y: -0.22292493, z: -0.03636305, w: 0.9614503}
-  m_LocalPosition: {x: -0.695, y: -0.27000168, z: 1.0700039}
+  m_LocalPosition: {x: -0.837534, y: -0.29872507, z: 1.199999}
   m_LocalScale: {x: 0.5, y: 0.49999997, z: 0.5}
   m_Children:
   - {fileID: 1288748076}
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 1
+  AllowWind: 0
   Lift: 0
   Torque: 0
   Speed: 0

@@ -64,8 +64,6 @@ namespace TMPro.Examples
             previousSmoothing = MovementSmoothing;
         }
 
-
-        // Use this for initialization
         void Start()
         {
             if (CameraTarget == null)
@@ -76,49 +74,43 @@ namespace TMPro.Examples
             }
         }
 
-        // Update is called once per frame
         void LateUpdate()
         {
             GetPlayerInput();
 
-
-            // Check if we still have a valid target
-            if (CameraTarget != null)
+            if (CameraTarget == null)
             {
-                if (CameraMode == CameraModes.Isometric)
-                {
-                    desiredPosition = CameraTarget.position + Quaternion.Euler(ElevationAngle, OrbitalAngle, 0f) * new Vector3(0, 0, -FollowDistance);
-                }
-                else if (CameraMode == CameraModes.Follow)
-                {
-                    desiredPosition = CameraTarget.position + CameraTarget.TransformDirection(Quaternion.Euler(ElevationAngle, OrbitalAngle, 0f) * (new Vector3(0, 0, -FollowDistance)));
-                }
-                else
-                {
-                    // Free Camera implementation
-                }
-
-                if (MovementSmoothing == true)
-                {
-                    // Using Smoothing
-                    cameraTransform.position = Vector3.SmoothDamp(cameraTransform.position, desiredPosition, ref currentVelocity, MovementSmoothingValue * Time.fixedDeltaTime);
-                    //cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, Time.deltaTime * 5.0f);
-                }
-                else
-                {
-                    // Not using Smoothing
-                    cameraTransform.position = desiredPosition;
-                }
-
-                if (RotationSmoothing == true)
-                    cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.LookRotation(CameraTarget.position - cameraTransform.position), RotationSmoothingValue * Time.deltaTime);
-                else
-                {
-                    cameraTransform.LookAt(CameraTarget);
-                }
-
+                return;
+            }
+            
+            if (CameraMode == CameraModes.Isometric)
+            {
+                desiredPosition = CameraTarget.position + Quaternion.Euler(ElevationAngle, OrbitalAngle, 0f) * new Vector3(0, 0, -FollowDistance);
+            }
+            else if (CameraMode == CameraModes.Follow)
+            {
+                desiredPosition = CameraTarget.position + CameraTarget.TransformDirection(Quaternion.Euler(ElevationAngle, OrbitalAngle, 0f) * (new Vector3(0, 0, -FollowDistance)));
+            }
+            else
+            {
+                // Free Camera implementation
             }
 
+            if (MovementSmoothing == true)
+            {
+                cameraTransform.position = Vector3.SmoothDamp(cameraTransform.position, desiredPosition, ref currentVelocity, MovementSmoothingValue * Time.fixedDeltaTime);
+            }
+            else
+            {
+                cameraTransform.position = desiredPosition;
+            }
+
+            if (RotationSmoothing == true)
+                cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.LookRotation(CameraTarget.position - cameraTransform.position), RotationSmoothingValue * Time.deltaTime);
+            else
+            {
+                cameraTransform.LookAt(CameraTarget);
+            }
         }
 
 

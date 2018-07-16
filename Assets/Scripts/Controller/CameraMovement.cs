@@ -26,8 +26,10 @@ public class CameraMovement : MonoBehaviour
     {
         player = GameManager.Instance.PlayerCloudship;
         Camera camera = GetComponentInChildren<Camera>();
-        var v3Pos = new Vector3(0.12f, 0.25f, 1.5f);
-        Controller.transform.position = camera.ViewportToWorldPoint(v3Pos);
+        
+        var proportionFromBottomLeftCorner = 0.16f;
+        var screenPosition = new Vector3(proportionFromBottomLeftCorner, proportionFromBottomLeftCorner * camera.aspect, camera.nearClipPlane + 0.9f);
+        ControllerOffset.position = camera.ViewportToWorldPoint(screenPosition);
         current = game;
     }
 
@@ -71,7 +73,7 @@ public class CameraMovement : MonoBehaviour
         CompassRose.localRotation = Quaternion.Euler(0,transform.eulerAngles.y,0);
     } 
 
-    Controller Controller => GetComponentInChildren<Controller>();
+    Transform ControllerOffset => GetComponentInChildren<Controller>().transform.parent;
 
     [System.Serializable]    
     public class CameraMotion
