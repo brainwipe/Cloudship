@@ -28,7 +28,7 @@ public class EnemyFactory : MonoBehaviour
 
     void Update()
     {
-        if (AutoSpawn && IsIttimeForAnEnemy())
+        if (AutoSpawn && !HasEnemies && IsIttimeForAnEnemy())
         {
             Spawn();
         }
@@ -64,24 +64,23 @@ public class EnemyFactory : MonoBehaviour
         lastTimeWeSawAnEnemy = Time.time;
     }
 
+    bool HasEnemies => transform.GetChildCount() > 0;
+    
     bool IsIttimeForAnEnemy()
     {
         var durationSinceLastTime = Time.time - lastTimeWeSawAnEnemy;
 
         if (startGrace && durationSinceLastTime < startGraceSpawnSecs)
         {
-            Debug.Log($"Enemy factory - Grace {durationSinceLastTime}");
             return false;
         }
 
         if (durationSinceLastTime < MinSecsSpawn)
         {
-            Debug.Log($"Enemy factory - Min secs {durationSinceLastTime}");
             return false;
         }
         var probability = Maths.Rescale(0,1,MinSecsSpawn, MaxSecsSpawn, durationSinceLastTime);
         var result = Random.Range(0,1);
-        Debug.Log("Enemy Factory - Duration:" + durationSinceLastTime + " Prob:" + probability + " Result: " + result);
         return result < probability;
     }
 }
