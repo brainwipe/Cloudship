@@ -71,8 +71,7 @@ public class CloudFactory : MonoBehaviour
                 return;
             }
             
-            clouds[i] = Instantiate(cloudPrefab, newLocation.Value, Quaternion.identity);
-            clouds[i].transform.parent = this.transform;
+            clouds[i] = Instantiate(cloudPrefab, newLocation.Value, Quaternion.identity, transform);
         }
     }
 
@@ -87,6 +86,7 @@ public class CloudFactory : MonoBehaviour
 
             if (!HasCloudNearby(tryNewLocation) && (location - tryNewLocation).magnitude > furthestFromplayer)
             {
+                tryNewLocation.y = transform.position.y;
                 return tryNewLocation;
             }
         }
