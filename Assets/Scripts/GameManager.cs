@@ -8,26 +8,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour 
 {
     private static GameManager instance;
+    public static GameManager Instance => instance;
+    public static bool ShowTutorial = true;
+	public static bool SetToLoad;
 
 	public GameModes Mode;
 
   	public float DrawDistance;
 
 	public Cloudship PlayerCloudship;
-
 	public HelpWindow Help;
-
 	public IWindMaker WindMaker = null;
-
 	public Camera Camera;
-
-    public static GameManager Instance => instance;
-
-	public Transform Cannonballs;
+    public Transform Cannonballs;
 	public LevelChanger LevelChanger;
 
 	public Switches Features;
-	public static bool SetToLoad;
 
 	public bool GameIsPaused = false;
     
@@ -49,6 +45,7 @@ public class GameManager : MonoBehaviour
 		Mode = new GameModes();
 
 		GameMode(MenuOutputData.isCreative);
+		Help.gameObject.SetActive(ShowTutorial);
 	}
 
 	void Start()

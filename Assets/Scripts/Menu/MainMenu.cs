@@ -76,4 +76,9 @@ public class MainMenu : MonoBehaviour {
 		var resolution = resolutions[resolutionIndex];
 		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 	}
+
+	public void ShowTutorial(bool show)
+	{
+		GameManager.ShowTutorial = false;
+	}
 }
