@@ -10,7 +10,7 @@ public class StoreManager
 
     internal void AddFlotsam(float value)
     {
-        value = Infrastructure.Store(value);
+        value = Infrastructure.Add(value);
 
         foreach(var building in Buildings.OrderByDescending(x => x.TotalFlotsam))
         {
@@ -18,7 +18,7 @@ public class StoreManager
             {
                 return;
             }
-            value = building.Store(value);
+            value = building.Add(value);
         }
     }
 
@@ -35,7 +35,7 @@ public class StoreManager
             {
                 return;
             }
-            value = building.Store(-value);
+            value = building.Subtract(value);
         }
 
         if (value < 1)
@@ -43,7 +43,7 @@ public class StoreManager
             return;
         }
 
-        Infrastructure.Store(-value);
+        Infrastructure.Subtract(value);
     }
 
     internal float TotalFlotsam => AllStores.Sum(x => x.TotalFlotsam);
@@ -60,7 +60,7 @@ public class StoreManager
         }
         set
         {
-            Infrastructure.Store(value);
+            Infrastructure.Add(value);
         }
     }
     

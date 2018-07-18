@@ -29,14 +29,28 @@ public class InfrastructureBase : MonoBehaviour, IHaveAbilities, IStoreFlotsam
 
     public bool IsFull => TotalFlotsam == MaxFlotsam;
 
-    public float Store(float flotsam)
+    public float Add(float flotsam)
     {
         TotalFlotsam += flotsam;
-        float remainder = 0;
+
+        var remainder = 0f;
         if (TotalFlotsam > MaxFlotsam)
         {
             remainder = TotalFlotsam - MaxFlotsam;
             TotalFlotsam = MaxFlotsam;
+        }
+        return remainder;
+    }
+
+    public float Subtract(float flotsam)
+    {
+        TotalFlotsam -= flotsam;
+
+        var remainder = 0f;
+        if (TotalFlotsam < 0)
+        {
+            remainder = Mathf.Abs(TotalFlotsam);
+            TotalFlotsam = 0;
         }
         return remainder;
     }

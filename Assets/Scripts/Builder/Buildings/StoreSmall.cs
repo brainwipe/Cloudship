@@ -28,23 +28,27 @@ public class StoreSmall : MonoBehaviour, IStoreFlotsam
     float indicatorLevelSpeed = 4f;
     public float totalFlotsam;
 
-    public float Store(float flotsam)
+    public float Add(float flotsam)
     {
-        if (TotalFlotsam < 0)
-        {
-            return flotsam;
-        }
-
         TotalFlotsam += flotsam;
-        float remainder = 0;
+
+        var remainder = 0f;
         if (TotalFlotsam > MaxFlotsam)
         {
             remainder = TotalFlotsam - MaxFlotsam;
             TotalFlotsam = MaxFlotsam;
         }
-        else if (TotalFlotsam < 0)
+        return remainder;
+    }
+
+    public float Subtract(float flotsam)
+    {
+        TotalFlotsam -= flotsam;
+
+        var remainder = 0f;
+        if (TotalFlotsam < 0)
         {
-            remainder = TotalFlotsam;
+            remainder = Mathf.Abs(TotalFlotsam);
             TotalFlotsam = 0;
         }
         return remainder;
