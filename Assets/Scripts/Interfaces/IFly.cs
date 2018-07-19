@@ -2,7 +2,9 @@ using UnityEngine;
 
 public interface IFly
 {
-    void ForceMovement(Rigidbody rigidBody, float torque, float speed);
+    Vector3 DesiredThrust();
+
+    Vector3 DesiredTorque();
 
     void Dead();
 }

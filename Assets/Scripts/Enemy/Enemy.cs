@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public Vector3 Position => transform.position;
 
-    public bool CanMove => flyingPhysics.Speed > 0 && CanGiveOrders;
+    public bool CanMove => flyingPhysics.Thrust > 0 && CanGiveOrders;
     
     public bool CanTurn => flyingPhysics.Torque > 0 && CanGiveOrders;
 
@@ -76,9 +76,11 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public bool IAmAPlayer => false;
 
-    public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
+    public Vector3 DesiredThrust()  => transform.forward * Time.deltaTime;
+    
+    public Vector3 DesiredTorque()
     {
-        float yaw = Time.deltaTime * torque;
+        float yaw = Time.deltaTime;
         var desired = Vector3.SignedAngle(transform.forward, Heading, Vector3.up);
 
         var torqueActual = Vector3.up * desired * yaw * torquedamping;
@@ -86,10 +88,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         Debug.DrawRay(transform.position, transform.forward * 100, Color.blue);
         Debug.DrawRay(transform.position, Heading * 100, Color.green);
 
-        rigidBody.AddTorque(torqueActual, ForceMode.Acceleration);
-
-        float thrust = speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * thrust);
+        return torqueActual;
     }
 
     public void Dead()
@@ -113,29 +112,17 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         CanGiveOrders = false;
 
         var buildingsWithAbility = GetComponentsInChildren<IHaveAbilities>();
-        flyingPhysics.Torque = 0;
-        flyingPhysics.Speed = 0;
-        float mass = 0f;
         HealthMax = 0;
 
         foreach(var building in buildingsWithAbility)
         {
-            flyingPhysics.Torque += building.Skills.Torque;
-            flyingPhysics.Speed += building.Skills.Speed;
-            flyingPhysics.Lift += building.Skills.Lift;
             HealthMax += building.Skills.Health;
-            mass += building.Skills.Mass;
            
             if (building.Skills.GiveOrders)
             {
                 CanGiveOrders = true;
             }
         }
-        if (!CanGiveOrders)
-        {
-            flyingPhysics.Torque = 0;
-            flyingPhysics.Speed = 0;
-        }
-        flyingPhysics.Mass = mass;
+        flyingPhysics.UpdateParameters(buildingsWithAbility, CanGiveOrders);
     }
 }

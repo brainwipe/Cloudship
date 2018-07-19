@@ -64,7 +64,7 @@ public class EnemyFactory : MonoBehaviour
         lastTimeWeSawAnEnemy = Time.time;
     }
 
-    bool HasEnemies => transform.GetChildCount() > 0;
+    bool HasEnemies => transform.childCount > 0;
     
     bool IsIttimeForAnEnemy()
     {

@@ -2080,7 +2080,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.2
-  m_AngularDrag: 0.2
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2528,6 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb12c6000d55f247abe0bf46c2bb7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxFlot: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2535,6 +2536,7 @@ MonoBehaviour:
     Mass: 500
     Lift: 1800000
     Health: 150
+  totalFlotsam: 0
 --- !u!114 &114062298598671126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2627,14 +2629,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
-  Name: Overlook Bridge
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 30
+  FlotsamCost: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2642,9 +2648,6 @@ MonoBehaviour:
     Mass: 10
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114268268744432474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2724,14 +2727,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
-  Name: Cannon
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 10
+  FlotsamCost: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2739,9 +2746,6 @@ MonoBehaviour:
     Mass: 20
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114370489344605384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2822,14 +2826,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
-  Name: Cannon
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 10
+  FlotsamCost: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2837,9 +2845,6 @@ MonoBehaviour:
     Mass: 20
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114662322837114994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2851,14 +2856,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
-  Name: Cannon
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 10
+  FlotsamCost: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2866,9 +2875,6 @@ MonoBehaviour:
     Mass: 20
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114737583926214260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2880,14 +2886,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.074, z: 0}
   MenuScale: 0.0045
-  Name: Medium Boiler
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 50
+  FlotsamCost: 0
   Abilities:
     Torque: 500000
     Speed: 130000
@@ -2895,9 +2905,6 @@ MonoBehaviour:
     Mass: 50
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114782510594628990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2955,14 +2962,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9066e2bfaed23cc45a6b501328513be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 
   MenuPosition: {x: 0, y: -0.07, z: 0}
   MenuScale: 0.018
-  Name: Cannon
   InMenu: 0
   AnotherObjectCollision: 0
   BoundaryCollision: 0
   IsOverCloudship: 0
+  PreCalculatedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   Health: 10
+  FlotsamCost: 0
   Abilities:
     Torque: 0
     Speed: 0
@@ -2970,9 +2981,6 @@ MonoBehaviour:
     Mass: 20
     Lift: 0
     Health: 0
-  PreCalculatedBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &114846899009291268
 MonoBehaviour:
   m_ObjectHideFlags: 1

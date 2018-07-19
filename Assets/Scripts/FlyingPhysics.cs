@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class FlyingPhysics : MonoBehaviour
 {
-    public static float Vne = 50f;
+    public static float Vne = 70f;
 
     public IFly Parent;
     public bool AllowMovement;
@@ -14,17 +14,23 @@ public class FlyingPhysics : MonoBehaviour
     public bool AllowWind;
     public float Lift;
     public float Torque;
-    public float Speed;
+    public float Thrust;
+    public float TopSpeed;
     public Telemetry Blackbox;
 
     Rigidbody rigidBody;
     IWindMaker windMaker;
 
     float StandardAltitude = 0;
+    Vector3 lastVelocity = Vector3.zero;
+    Vector3 acceleration = Vector3.zero;
+    Vector3 cycloneForce = Vector3.zero;
+    float rockAndRollForce = 600f;
+    float formDragCoefficient = 100f;
     float buoyancyHealth = 1f;
     bool grounded = false;
     float timeDead = 0;
-
+    
     void Awake()
     {
         Blackbox = new Telemetry();
@@ -58,22 +64,34 @@ public class FlyingPhysics : MonoBehaviour
 
         if (AllowMovement)
         {
-            Parent.ForceMovement(rigidBody, Torque, Speed);
+            rigidBody.AddForce(Parent.DesiredThrust() * Thrust);
+            rigidBody.AddTorque(Parent.DesiredTorque() * Torque);
         }
         if (AllowWind)
         {
-        ForceDueToWind();
+            ForceDueToWind();
         }
         if (AllowBuoyancy)
         {
             ForceDueToBouyancy();
         }
-        Blackbox.Set(rigidBody.velocity);
+
+        CalculateAcceleration();
+        ForceDueToFormDrag();
+        ForceDueToRockAndRoll();
+
+        Blackbox.Set(rigidBody.velocity, acceleration);
+    }
+
+    void CalculateAcceleration()
+    {
+        acceleration = (rigidBody.velocity - lastVelocity) / Time.deltaTime;
+        lastVelocity = rigidBody.velocity;
     }
 
     void ForceDueToWind()
     {
-        var cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
+        cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
         rigidBody.AddForce(cycloneForce);   
     }
 
@@ -86,6 +104,23 @@ public class FlyingPhysics : MonoBehaviour
 
         var force = -Physics.gravity * rigidBody.mass * buoyancyHealth * differenceInAltitude;
         rigidBody.AddForce(force);
+    }
+
+    void ForceDueToRockAndRoll()
+    {
+        var rockAndRollAxis = Vector3.Cross(acceleration, transform.up);
+        rigidBody.AddTorque(rockAndRollAxis * rockAndRollForce);
+    }
+
+    void ForceDueToFormDrag()
+    {
+        var magnitude = (rigidBody.velocity - cycloneForce).magnitude;
+        var amountOverTopSpeed = magnitude - TopSpeed;
+        
+        if (amountOverTopSpeed > 0)
+        {
+            rigidBody.AddForce(-rigidBody.velocity * amountOverTopSpeed * formDragCoefficient);
+        }
     }
 
     public void SinkToGround()
@@ -103,6 +138,37 @@ public class FlyingPhysics : MonoBehaviour
         grounded = true;
     }
 
+    public void UpdateParameters(IHaveAbilities[] abilities, bool canGiveOrders)
+    {
+        Torque = 0;
+        Thrust = 0;
+        Mass = 0;
+        TopSpeed = 0;
+
+        float topSpeedEfficiencyMultiplier = 1f; 
+
+        foreach(var ability in abilities)
+        {
+            Torque += ability.Skills.Torque;
+            Thrust += ability.Skills.Thrust;
+            Lift += ability.Skills.Lift;
+            Mass += ability.Skills.Mass;
+
+            if (ability.Skills.TopSpeed > 0)
+            {
+                TopSpeed += ability.Skills.TopSpeed * topSpeedEfficiencyMultiplier;
+                topSpeedEfficiencyMultiplier = topSpeedEfficiencyMultiplier * 0.85f;
+            }
+            
+        }
+
+        if (!canGiveOrders)
+        {
+            Torque = 0;
+            Thrust = 0;
+        }
+    }
+
     public float Mass 
     {
         get
@@ -118,16 +184,21 @@ public class FlyingPhysics : MonoBehaviour
     [Serializable]
     public class Telemetry
     {
+        float lastVelocity;
+
         public float Velocity;
         public float MaxVelocity;
+        public float Acceleration;
 
-        public void Set(Vector3 velocity)
+        public void Set(Vector3 velocity, Vector3 acceleration)
         {
             Velocity = velocity.magnitude;
             if (Velocity > MaxVelocity)
             {
                 MaxVelocity = Velocity;
             }
+            Acceleration = acceleration.magnitude;
+            
         }
     }
 }

@@ -50,15 +50,10 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
 
-    public void ForceMovement(Rigidbody rigidBody, float torque, float speed)
-    {
-        float yaw = Turn * torque * Time.deltaTime;
-        rigidBody.AddTorque(transform.up * yaw);
-
-        float forward = Thrust * speed * Time.deltaTime;
-        rigidBody.AddForce(transform.forward * forward);
-    }
-
+    public Vector3 DesiredThrust() => transform.forward * Thrust * Time.deltaTime;
+    
+    public Vector3 DesiredTorque() => transform.up * Turn * Time.deltaTime;
+    
     public void Dead()
     {
         GameManager.Instance.End();
@@ -118,7 +113,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
    
     public Vector3 Position => this.transform.position;
     
-    public bool CanMove => flyingPhysics.Speed > 0 && CanGiveOrders;
+    public bool CanMove => flyingPhysics.Thrust > 0 && CanGiveOrders;
     
     public bool CanTurn => flyingPhysics.Torque > 0 && CanGiveOrders;
 
@@ -139,33 +134,18 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         CanGiveOrders = false;
 
         var buildingsWithAbility = transform.GetComponentsInChildren<IHaveAbilities>();
-
-        flyingPhysics.Torque = 0;
-        flyingPhysics.Speed = 0;
-        float mass = 0f;
         HealthMax = 0;
 
         foreach(var building in buildingsWithAbility)
         {
-            flyingPhysics.Torque += building.Skills.Torque;
-            flyingPhysics.Speed += building.Skills.Speed;
-            flyingPhysics.Lift += building.Skills.Lift;
             HealthMax += building.Skills.Health;
-            mass += building.Skills.Mass;
             
             if (building.Skills.GiveOrders)
             {
                 CanGiveOrders = true;
             }
         }
-
-        if (!CanGiveOrders)
-        {
-            flyingPhysics.Torque = 0;
-            flyingPhysics.Speed = 0;
-        }
-
-        flyingPhysics.Mass = mass;
+        flyingPhysics.UpdateParameters(buildingsWithAbility, CanGiveOrders);
     }
 
     public void Save(SaveGame save)
