@@ -15,18 +15,26 @@ public class FlyingPhysics : MonoBehaviour
     public float Lift;
     public float Torque;
     public float Thrust;
+    [HideInInspector]
+    public Vector3 ThrustForce;
     public float TopSpeed;
+    [HideInInspector]
+    public Vector3 CycloneForce = Vector3.zero; 
+    public float WindSpeed = 0f;
+    public float IndicatedAirSpeed = 0f;
     public Telemetry Blackbox;
 
     Rigidbody rigidBody;
     IWindMaker windMaker;
+    
 
     float StandardAltitude = 0;
     Vector3 lastVelocity = Vector3.zero;
     Vector3 acceleration = Vector3.zero;
-    Vector3 cycloneForce = Vector3.zero;
+    Vector3 windVector = Vector3.zero;
+    Vector3 thrustVelocity = Vector3.zero;
     float rockAndRollForce = 600f;
-    float formDragCoefficient = 100f;
+    float formDragCoefficient = 70f;
     float buoyancyHealth = 1f;
     bool grounded = false;
     float timeDead = 0;
@@ -64,7 +72,8 @@ public class FlyingPhysics : MonoBehaviour
 
         if (AllowMovement)
         {
-            rigidBody.AddForce(Parent.DesiredThrust() * Thrust);
+            ThrustForce = Parent.DesiredThrust() * Thrust;
+            rigidBody.AddForce(ThrustForce);
             rigidBody.AddTorque(Parent.DesiredTorque() * Torque);
         }
         if (AllowWind)
@@ -76,23 +85,27 @@ public class FlyingPhysics : MonoBehaviour
             ForceDueToBouyancy();
         }
 
-        CalculateAcceleration();
+        CalculateDerivedValues();
         ForceDueToFormDrag();
         ForceDueToRockAndRoll();
 
         Blackbox.Set(rigidBody.velocity, acceleration);
     }
 
-    void CalculateAcceleration()
+    void CalculateDerivedValues()
     {
         acceleration = (rigidBody.velocity - lastVelocity) / Time.deltaTime;
         lastVelocity = rigidBody.velocity;
+        windVector = CycloneForce / (Mass * Time.deltaTime * 10f);
+        WindSpeed = windVector.magnitude;
+        thrustVelocity = (rigidBody.velocity - windVector);
+        IndicatedAirSpeed = thrustVelocity.magnitude;
     }
 
     void ForceDueToWind()
     {
-        cycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
-        rigidBody.AddForce(cycloneForce);   
+        CycloneForce = windMaker.GetCycloneForce(transform.position) * Time.deltaTime;
+        rigidBody.AddForce(CycloneForce);   
     }
 
     void ForceDueToBouyancy()
@@ -114,12 +127,17 @@ public class FlyingPhysics : MonoBehaviour
 
     void ForceDueToFormDrag()
     {
-        var magnitude = (rigidBody.velocity - cycloneForce).magnitude;
-        var amountOverTopSpeed = magnitude - TopSpeed;
+        if (TopSpeed < 1)
+        {
+            return;
+        }
+        var velocityDueToThrust = (rigidBody.velocity - windVector);
+        var amountOverTopSpeed = IndicatedAirSpeed - TopSpeed;
         
         if (amountOverTopSpeed > 0)
         {
-            rigidBody.AddForce(-rigidBody.velocity * amountOverTopSpeed * formDragCoefficient);
+            Debug.DrawRay(transform.position, -velocityDueToThrust * 10, Color.black, 0.1f);
+            rigidBody.AddForce(-velocityDueToThrust * formDragCoefficient);
         }
     }
 
@@ -157,7 +175,7 @@ public class FlyingPhysics : MonoBehaviour
             if (ability.Skills.TopSpeed > 0)
             {
                 TopSpeed += ability.Skills.TopSpeed * topSpeedEfficiencyMultiplier;
-                topSpeedEfficiencyMultiplier = topSpeedEfficiencyMultiplier * 0.85f;
+                topSpeedEfficiencyMultiplier = topSpeedEfficiencyMultiplier * 0.8f;
             }
             
         }
