@@ -13,16 +13,17 @@ public class EngineVent : MonoBehaviour
 		flyingPhysics = GetComponentInParent<FlyingPhysics>();
 	}
 	
-	
-	void FixedUpdate () 
+	void FixedUpdate() 
 	{
+		/*
 		var main = particles.main;
-		//main.startSpeed = Maths.Rescale(3, 7, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirspeed);
+		//main.startSpeed = Maths.Rescale(5, 8, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirSpeed);
+
 
 		var windEffect = flyingPhysics.CycloneForce * 0.001f;
 		var forceOverLifetime = particles.forceOverLifetime;
 		forceOverLifetime.x = windEffect.x;
 		forceOverLifetime.y = windEffect.y;
-		forceOverLifetime.z = windEffect.z;
+		forceOverLifetime.z = windEffect.z; */
 	}
 }
