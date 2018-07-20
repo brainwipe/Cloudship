@@ -19,10 +19,10 @@ public class EngineVent : MonoBehaviour
 		var main = particles.main;
 		//main.startSpeed = Maths.Rescale(3, 7, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirspeed);
 
+		var windEffect = flyingPhysics.CycloneForce * 0.001f;
 		var forceOverLifetime = particles.forceOverLifetime;
-		Debug.Log(flyingPhysics.CycloneForce);
-		forceOverLifetime.xMultiplier = flyingPhysics.CycloneForce.x;
-		forceOverLifetime.yMultiplier = flyingPhysics.CycloneForce.y;
-		forceOverLifetime.zMultiplier = flyingPhysics.CycloneForce.z;
+		forceOverLifetime.x = windEffect.x;
+		forceOverLifetime.y = windEffect.y;
+		forceOverLifetime.z = windEffect.z;
 	}
 }
