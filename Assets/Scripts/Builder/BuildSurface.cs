@@ -137,7 +137,8 @@ public class BuildSurface : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		int layerMask = 1 << 10;
 
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+		Debug.DrawRay(ray.origin, ray.direction * 10000, Color.black, 0.5f);
+		if (Physics.Raycast(ray, out hit))
 		{
 			if (hit.transform.tag == "Building")
 			{
