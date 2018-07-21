@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wall
   m_Shader: {fileID: 4800000, guid: 42a43b3fe659f7f4f827188eb3e5ea22, type: 3}
@@ -59,7 +59,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_1662BEBB: 0
     - Boolean_8F81C679: 0
+    - Boolean_A5D81C01: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -85,9 +87,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_293532B4: {r: 0.4117647, g: 0.27450982, b: 0.1764706, a: 1}
+    - Color_2AFEF370: {r: 0.6981132, g: 0.09549664, b: 0.09549664, a: 0}
     - Color_8C3A526: {r: 1, g: 0.9137255, b: 0.654902, a: 0}
     - Color_A3DAFA3A: {r: 0, g: 0, b: 0, a: 0}
     - Color_A4218908: {r: 0.4117647, g: 0.27450982, b: 0.1764706, a: 1}
+    - Color_B3B3B238: {r: 1, g: 0.9137255, b: 0.654902, a: 0}
     - _Color: {r: 0.4117647, g: 0.27450982, b: 0.1764706, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
