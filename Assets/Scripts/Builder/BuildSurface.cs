@@ -49,7 +49,7 @@ public class BuildSurface : MonoBehaviour
 					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 localPosition;
 					if (GetDesired(out localPosition))
-					{
+					{	
 						selectedBuilding.transform.localPosition = localPosition;
 					}
 					else{
@@ -136,10 +136,10 @@ public class BuildSurface : MonoBehaviour
 		building = null;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		int layerMask = 1 << 10;
-
-		Debug.DrawRay(ray.origin, ray.direction * 10000, Color.black, 0.5f);
-		if (Physics.Raycast(ray, out hit))
+		
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Collide))
 		{
+			Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.black, 0.5f);
 			if (hit.transform.tag == "Building")
 			{
 				building = hit.transform.GetComponentInParent<Building>();
@@ -160,12 +160,12 @@ public class BuildSurface : MonoBehaviour
 		RaycastHit hit;
 
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		 Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
+		//Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.blue, 1);
 		
 		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
 		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
 		
-		Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
+		//Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
 		
 		int layerMask = 1 << 8;
 
@@ -173,7 +173,7 @@ public class BuildSurface : MonoBehaviour
 		{
 			var toLocal = transform.InverseTransformPoint(hit.point);
 			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
-			Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
+			//Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
 			localPosition = zeroedY;
 			return true;
 		}

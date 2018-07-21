@@ -66,6 +66,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public Building Clone(Transform buildSurface)
     {
         var clone = Instantiate(gameObject, transform.position, Quaternion.identity);
+        clone.SetActive(false);
         clone.transform.localScale = Vector3.one;
         clone.tag = BuildingTag;
         var cloneBuilding = clone.GetComponent<Building>();
@@ -82,6 +83,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         
         cloneBuilding.InMenu = false;
         cloneBuilding.Selected();
+        clone.SetActive(true);
         return cloneBuilding;
     }
 
@@ -108,29 +110,25 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
     }
 
-    public void Hover() => SetShaderBool("Boolean_8EBFB74C", true);
-    
-    public void UnHover() => SetShaderBool("Boolean_8EBFB74C", false);
-    
     public void Selected()
     {
-        SetShaderBool("Boolean_ED362197", true);
+        SetShaderBool("Boolean_1662BEBB", true);
     }
 
     public void UnSelected()
     {
-        SetShaderBool("Boolean_ED362197", false);
+        SetShaderBool("Boolean_1662BEBB", false);
     }
 
     public void UpdateAffordability(float playerTotalFlotsam)
     {
         if (CanAfford(playerTotalFlotsam))
         {
-            SetShaderBool("Boolean_8F81C679", false);
+            SetShaderBool("Boolean_A5D81C01", false);
         }
         else
         {
-            SetShaderBool("Boolean_8F81C679", true);
+            SetShaderBool("Boolean_A5D81C01", true);
         }
     }
 
@@ -138,11 +136,11 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     {
         if (CanPlace)
         {
-            SetShaderBool("Boolean_8F81C679", false);
+            SetShaderBool("Boolean_A5D81C01", false);
         }
         else
         {
-            SetShaderBool("Boolean_8F81C679", true);
+            SetShaderBool("Boolean_A5D81C01", true);
         }
     }
 
