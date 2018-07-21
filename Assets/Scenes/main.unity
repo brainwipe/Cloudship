@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 138017513}
   - component: {fileID: 138017515}
   - component: {fileID: 138017514}
+  - component: {fileID: 138017516}
   m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
@@ -5067,6 +5068,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &138017516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 138017512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7428959d80b00b4595aed60c1c5860b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IAmLeft: 0
 --- !u!1001 &146844896
 Prefab:
   m_ObjectHideFlags: 0
@@ -5327,7 +5340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllowMovement: 1
   AllowBuoyancy: 1
-  AllowWind: 0
+  AllowWind: 1
   Lift: 0
   Torque: 0
   Thrust: 0
@@ -5411,6 +5424,7 @@ GameObject:
   - component: {fileID: 578984966}
   - component: {fileID: 578984968}
   - component: {fileID: 578984967}
+  - component: {fileID: 578984969}
   m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
@@ -10021,6 +10035,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &578984969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578984965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7428959d80b00b4595aed60c1c5860b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IAmLeft: 1
 --- !u!1 &634912337
 GameObject:
   m_ObjectHideFlags: 0
@@ -11363,7 +11389,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488400506}
-  - component: {fileID: 1488400507}
   m_Layer: 8
   m_Name: Vents
   m_TagString: Untagged
@@ -11386,19 +11411,6 @@ Transform:
   m_Father: {fileID: 316302004}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488400507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1488400505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899a1293ae61e27408785f9e346ef39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  left: {fileID: 578984968}
-  right: {fileID: 138017515}
 --- !u!4 &1532869391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 58049ea72bb4c2145a44370b7b9ad55b,
