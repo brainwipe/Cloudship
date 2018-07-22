@@ -76,6 +76,8 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public bool IAmAPlayer => false;
 
+    public float CommandThrust => 1;
+
     public Vector3 DesiredThrust()  => transform.forward * Time.deltaTime;
     
     public Vector3 DesiredTorque()

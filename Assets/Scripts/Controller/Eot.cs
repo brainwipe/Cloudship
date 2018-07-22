@@ -27,7 +27,7 @@ public class Eot : MonoBehaviour {
 		{
 			thrustIndex = allStopThrustIndex;
 			UpdateEotHandlePosition();
-			player.Thrust = thrustSettings[thrustIndex];
+			player.commandThrust = thrustSettings[thrustIndex];
 			return;
 		}
 
@@ -35,7 +35,7 @@ public class Eot : MonoBehaviour {
 		{
 			UpdateThrust(Input.GetButtonUp("Throttle Up"), Input.GetButtonUp("Throttle Down"));
 			UpdateEotHandlePosition();
-			player.Thrust = thrustSettings[thrustIndex];
+			player.commandThrust = thrustSettings[thrustIndex];
 		}
 	}
 

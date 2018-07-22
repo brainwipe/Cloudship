@@ -14,8 +14,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     public Modes Mode;
 
-    public float Thrust;
-    public float Turn;
+    public float commandThrust;
+    public float commandTurn;
     public float Health;
     public bool IsAlive => Health > 0;
     private float HealthMax;
@@ -50,9 +50,11 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
 
     void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
 
-    public Vector3 DesiredThrust() => transform.forward * Thrust * Time.deltaTime;
+    public Vector3 DesiredThrust() => transform.forward * commandThrust * Time.deltaTime;
     
-    public Vector3 DesiredTorque() => transform.up * Turn * Time.deltaTime;
+    public Vector3 DesiredTorque() => transform.up * commandTurn * Time.deltaTime;
+
+    public float CommandThrust => commandThrust;
     
     public void Dead()
     {

@@ -1747,15 +1747,15 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0, g: 0, b: 0, a: 1}
-        key2: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 0, g: 0, b: 0, a: 0.5647059}
+        key2: {r: 1, g: 1, b: 1, a: 0.53333336}
         key3: {r: 1, g: 1, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 21588
+        ctime1: 21613
         ctime2: 42791
         ctime3: 65535
         ctime4: 0
@@ -5242,6 +5242,21 @@ Prefab:
       propertyPath: InheritVelocityModule.m_Curve.scalar
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 198274002353700022, guid: 98ca040e34246de44b0f1b9d1f780c60,
+        type: 2}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 21613
+      objectReference: {fileID: 0}
+    - target: {fileID: 198274002353700022, guid: 98ca040e34246de44b0f1b9d1f780c60,
+        type: 2}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0.5647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 198274002353700022, guid: 98ca040e34246de44b0f1b9d1f780c60,
+        type: 2}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0.53333336
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ca040e34246de44b0f1b9d1f780c60, type: 2}
   m_IsPrefabAsset: 0
@@ -6714,15 +6729,15 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0, g: 0, b: 0, a: 1}
-        key2: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 0, g: 0, b: 0, a: 0.5647059}
+        key2: {r: 1, g: 1, b: 1, a: 0.53333336}
         key3: {r: 1, g: 1, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 21588
+        ctime1: 21613
         ctime2: 42791
         ctime3: 65535
         ctime4: 0
@@ -10182,8 +10197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mode: 0
-  Thrust: 0
-  Turn: 0
+  commandThrust: 0
+  commandTurn: 0
   Health: 2000
   HealthBar: {fileID: 634912339}
 --- !u!1 &675380053

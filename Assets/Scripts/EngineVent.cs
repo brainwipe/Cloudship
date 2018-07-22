@@ -6,6 +6,7 @@ public class EngineVent : MonoBehaviour
 {
 	ParticleSystem particles;
 	FlyingPhysics flyingPhysics;
+	IFly parent;
 
 	public bool IAmLeft;
 	
@@ -13,12 +14,25 @@ public class EngineVent : MonoBehaviour
 	{
 		particles = GetComponent<ParticleSystem>();
 		flyingPhysics = GetComponentInParent<FlyingPhysics>();
+		parent = GetComponentInParent<IFly>();
 	}
 
 	void Update () 
 	{
 		var main = particles.main;
-		main.startSpeed = Maths.Rescale(0, 8, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirSpeed);
+		var emitter = particles.emission;
+		if (flyingPhysics.IsAdrift)
+		{
+			main.startSpeed = 0;
+			emitter.rateOverTime = 0.3f;
+		}	
+		else
+		{
+			main.startSpeed = Maths.Rescale(0, 8, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirSpeed);
+			emitter.rateOverTime = Maths.Rescale(0.3f, 4, 0, 1f, parent.CommandThrust);
+		}
+
+		
 
 		var windEffect = flyingPhysics.CycloneForce * 0.001f;
 		var forceOverLifetime = particles.forceOverLifetime;

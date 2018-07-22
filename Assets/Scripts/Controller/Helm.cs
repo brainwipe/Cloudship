@@ -16,7 +16,7 @@ public class Helm : MonoBehaviour {
 	void Update () {
 		if (player.Mode == Cloudship.Modes.Drive && player.CanTurn)
 		{
-			player.Turn = Input.GetAxis("Horizontal");
+			player.commandTurn = Input.GetAxis("Horizontal");
 		}
 
 		var angles = new Vector3(

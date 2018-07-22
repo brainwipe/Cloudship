@@ -199,6 +199,8 @@ public class FlyingPhysics : MonoBehaviour
         }
     }
 
+    public bool IsAdrift => TopSpeed == 0;
+
     [Serializable]
     public class Telemetry
     {
