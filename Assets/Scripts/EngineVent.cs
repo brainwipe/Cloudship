@@ -10,21 +10,19 @@ public class EngineVent : MonoBehaviour
 
 	public bool IAmLeft;
 	
-	void Awake() 
+	void Start() 
 	{
 		particles = GetComponent<ParticleSystem>();
 		flyingPhysics = GetComponentInParent<FlyingPhysics>();
 		parent = GetComponentInParent<IFly>();
 	}
 
-	void Update () 
+	void LateUpdate() 
 	{
 		var main = particles.main;
 		var emitter = particles.emission;
 
 		var turnFactor = TurnFactor();
-		
-
 		if (flyingPhysics.IsAdrift)
 		{
 			main.startSpeed = 0;
