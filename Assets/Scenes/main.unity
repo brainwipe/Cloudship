@@ -546,7 +546,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -5257,6 +5257,11 @@ Prefab:
       propertyPath: ColorModule.gradient.maxGradient.key2.a
       value: 0.53333336
       objectReference: {fileID: 0}
+    - target: {fileID: 198274002353700022, guid: 98ca040e34246de44b0f1b9d1f780c60,
+        type: 2}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ca040e34246de44b0f1b9d1f780c60, type: 2}
   m_IsPrefabAsset: 0
@@ -5528,7 +5533,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

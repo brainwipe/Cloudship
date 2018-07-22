@@ -21,6 +21,10 @@ public class EngineVent : MonoBehaviour
 	{
 		var main = particles.main;
 		var emitter = particles.emission;
+
+		var turnFactor = TurnFactor();
+		
+
 		if (flyingPhysics.IsAdrift)
 		{
 			main.startSpeed = 0;
@@ -28,16 +32,25 @@ public class EngineVent : MonoBehaviour
 		}	
 		else
 		{
-			main.startSpeed = Maths.Rescale(0, 8, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirSpeed);
-			emitter.rateOverTime = Maths.Rescale(0.3f, 4, 0, 1f, parent.CommandThrust);
+			main.startSpeed = Maths.Rescale(0, 8, 0, flyingPhysics.TopSpeed, flyingPhysics.IndicatedAirSpeed) * turnFactor;
+			emitter.rateOverTime = Maths.Rescale(0.3f, 4, 0, 1f, parent.CommandThrust) * turnFactor;
 		}
-
-		
 
 		var windEffect = flyingPhysics.CycloneForce * 0.001f;
 		var forceOverLifetime = particles.forceOverLifetime;
 		forceOverLifetime.x = windEffect.x;
 		forceOverLifetime.y = windEffect.y;
 		forceOverLifetime.z = windEffect.z; 
+	}
+
+	float TurnFactor()
+	{
+		var commandTurnInput = parent.CommandTurn;
+		if (!IAmLeft)
+		{
+			commandTurnInput = parent.CommandTurn / -1;
+		}
+		
+		return Maths.Rescale(0.2f, 1.5f, -1f, 1f, commandTurnInput);
 	}
 }

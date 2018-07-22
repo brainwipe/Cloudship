@@ -55,6 +55,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     public Vector3 DesiredTorque() => transform.up * commandTurn * Time.deltaTime;
 
     public float CommandThrust => commandThrust;
+
+    public float CommandTurn => commandTurn;
     
     public void Dead()
     {

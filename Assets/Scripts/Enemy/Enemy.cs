@@ -78,17 +78,18 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public float CommandThrust => 1;
 
+    public float CommandTurn { get; set;}
+
     public Vector3 DesiredThrust()  => transform.forward * Time.deltaTime;
     
     public Vector3 DesiredTorque()
     {
-        float yaw = Time.deltaTime;
-        var desired = Vector3.SignedAngle(transform.forward, Heading, Vector3.up);
+        var desiredAngle = Vector3.SignedAngle(transform.forward, Heading, Vector3.up);
+        CommandTurn = Maths.Rescale(-1, 1, -180, 180, desiredAngle);
+        var torqueActual = Vector3.up * desiredAngle * torquedamping * Time.deltaTime;
 
-        var torqueActual = Vector3.up * desired * yaw * torquedamping;
-
-        Debug.DrawRay(transform.position, transform.forward * 100, Color.blue);
-        Debug.DrawRay(transform.position, Heading * 100, Color.green);
+        // Debug.DrawRay(transform.position, transform.forward * 100, Color.blue);
+        // Debug.DrawRay(transform.position, Heading * 100, Color.green);
 
         return torqueActual;
     }
