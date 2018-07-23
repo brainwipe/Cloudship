@@ -36,15 +36,18 @@ public class BuildSurface : MonoBehaviour
 		{
 			if (selectedBuilding == null)
 			{
+				Debug.Log("No selected");
 				Building building;
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
+					Debug.Log("Building under mouse");
 					selectedBuilding = building;
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
 				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
+					Debug.Log("No building, can afford");
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 localPosition;
@@ -137,7 +140,7 @@ public class BuildSurface : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		int layerMask = 1 << 10;
 		
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Collide))
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 		{
 			Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.black, 0.5f);
 			if (hit.transform.tag == "Building")
@@ -173,10 +176,12 @@ public class BuildSurface : MonoBehaviour
 		{
 			var toLocal = transform.InverseTransformPoint(hit.point);
 			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
-			//Debug.DrawLine(mouseRay.origin, zeroedY, Color.red, 1);
+			Debug.DrawLine(mouseRay.origin, transform.position + zeroedY, Color.red);
 			localPosition = zeroedY;
+			Debug.Log("Found desired, " + hit.transform.tag);
 			return true;
 		}
+		Debug.Log("Didn't find desired");
 		return false;
 	}
 

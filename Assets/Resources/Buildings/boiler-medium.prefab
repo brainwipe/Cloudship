@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4604559700272646}
-  - component: {fileID: 54238815936161448}
   - component: {fileID: 65246540853778838}
   - component: {fileID: 114071953685756778}
+  - component: {fileID: 54629812421828260}
   m_Layer: 10
   m_Name: collision
   m_TagString: Building
@@ -55,8 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4885363011667592}
   - component: {fileID: 65159459798046526}
-  - component: {fileID: 54460514887236936}
   - component: {fileID: 114854359536379790}
+  - component: {fileID: 54183433908484428}
   m_Layer: 10
   m_Name: boundary-collision
   m_TagString: Untagged
@@ -186,12 +186,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1787292943901636}
   m_Mesh: {fileID: 4300000, guid: e427a96c84c5aee4eb1986f37705fa89, type: 3}
---- !u!54 &54238815936161448
+--- !u!54 &54183433908484428
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491125857930162}
+  m_GameObject: {fileID: 1728435899273428}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -201,12 +201,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!54 &54460514887236936
+--- !u!54 &54629812421828260
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1728435899273428}
+  m_GameObject: {fileID: 1491125857930162}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

@@ -14,20 +14,19 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public float MenuScale;
     [HideInInspector]
     public bool InMenu = false;
-    [HideInInspector]
+    //[HideInInspector]
     public bool AnotherObjectCollision;
-    [HideInInspector]
+    //[HideInInspector]
     public bool BoundaryCollision;
-    [HideInInspector]
+    //[HideInInspector]
     public bool IsOverCloudship;
-    [HideInInspector]
+    //[HideInInspector]
     public Bounds PreCalculatedBounds;
 
     public float Health;
     public float FlotsamCost;
     public Abilities Abilities;
 
-    
     void Awake()
     {
         BoundaryCollision = false;
@@ -71,7 +70,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         clone.tag = BuildingTag;
         var cloneBuilding = clone.GetComponent<Building>();
         cloneBuilding.CalculateBounds();
-        clone.transform.parent = buildSurface;
+        clone.transform.SetParent(buildSurface, true);
         clone.transform.localRotation = Quaternion.identity;
         clone.transform.localPosition = Vector3.zero;
         clone.layer = 10;
