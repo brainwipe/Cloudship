@@ -23,7 +23,7 @@ public class BuildSurface : MonoBehaviour
 		}
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (GameManager.Instance.GameIsPaused)
 		{
@@ -36,28 +36,23 @@ public class BuildSurface : MonoBehaviour
 		{
 			if (selectedBuilding == null)
 			{
-				Debug.Log("No selected");
 				Building building;
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
-					Debug.Log("Building under mouse");
 					selectedBuilding = building;
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
 				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
-					Debug.Log("No building, can afford");
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
-					Vector3 localPosition;
-					if (GetDesired(out localPosition))
+					Vector3 position = Vector3.zero;
+					if (GetDesired(out position))
 					{	
-						selectedBuilding.transform.localPosition = localPosition;
+						selectedBuilding.Position = position;
 					}
-					else{
-						selectedBuilding.transform.localPosition = Vector3.zero;
-					}
+					selectedBuilding.Rotation = transform.rotation;
 					buildingToGrabPointOffset = Vector3.zero;
 					SetBoundary(selectedBuilding);
 				}
@@ -108,7 +103,6 @@ public class BuildSurface : MonoBehaviour
 			var cost = selectedBuilding.FlotsamCost;
 			selectedBuilding.Remove();
 			player.Stores.AddFlotsam(cost);
-			
 		}
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
@@ -117,13 +111,11 @@ public class BuildSurface : MonoBehaviour
 
 	void MoveSelectedBuilding()
 	{
-		Vector3 localPosition;
-		if (GetDesired(out localPosition))
+		Vector3 position;
+		if (GetDesired(out position))
 		{
-			selectedBuilding.transform.localPosition = Vector3.Lerp(
-				selectedBuilding.transform.localPosition, 
-				localPosition, 
-				Time.deltaTime * 40);
+			selectedBuilding.Position = position;
+			selectedBuilding.Rotation = transform.rotation;
 			selectedBuilding.IsOverCloudship = true;
 		}
 		else 
@@ -148,18 +140,18 @@ public class BuildSurface : MonoBehaviour
 				building = hit.transform.GetComponentInParent<Building>();
 				return true;
 			}
-			else
-			{
-				Debug.Log(hit.transform.tag + " " + hit.transform.gameObject.name);
-			}
 			return false;
+		}
+		else 
+		{
+			Debug.DrawRay(ray.origin, ray.direction * 1000, Color.white, 0.5f);
 		}
 		return false;
 	}
 
-	bool GetDesired(out Vector3 localPosition)
+	bool GetDesired(out Vector3 position)
 	{
-		localPosition = Vector3.zero;
+		position = Vector3.zero;
 		RaycastHit hit;
 
 		Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -171,17 +163,13 @@ public class BuildSurface : MonoBehaviour
 		//Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
 		
 		int layerMask = 1 << 8;
-
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			var toLocal = transform.InverseTransformPoint(hit.point);
-			var zeroedY = new Vector3(toLocal.x, 0, toLocal.z);
-			Debug.DrawLine(mouseRay.origin, transform.position + zeroedY, Color.red);
-			localPosition = zeroedY;
-			Debug.Log("Found desired, " + hit.transform.tag);
+			
+			position = hit.point;
 			return true;
+		
 		}
-		Debug.Log("Didn't find desired");
 		return false;
 	}
 

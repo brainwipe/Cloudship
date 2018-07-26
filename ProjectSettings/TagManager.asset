@@ -8,12 +8,12 @@ TagManager:
   - Enemy
   - WeatherIndicator
   - Terrain
-  - BuilderLocation
   - Building
   - BuilderBoundary
   - Flotsam
   - FlotsamNearby
   - UI
+  - BuildSurface
   layers:
   - Default
   - TransparentFX

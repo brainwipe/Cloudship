@@ -25,5 +25,5 @@ PhysicsManager:
   m_BroadphaseType: 0
   m_WorldBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 250, y: 250, z: 250}
+    m_Extent: {x: 8000, y: 8000, z: 8000}
   m_WorldSubdivisions: 8

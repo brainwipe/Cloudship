@@ -11554,6 +11554,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1249274756527878, guid: 3d7f29aaf04c6a34cb6e90f76ab41fd9, type: 2}
+      propertyPath: m_TagString
+      value: BuildSurface
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249274756527878, guid: 3d7f29aaf04c6a34cb6e90f76ab41fd9, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d7f29aaf04c6a34cb6e90f76ab41fd9, type: 2}
   m_IsPrefabAsset: 0

@@ -9,6 +9,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public string Id;
     public IAmAShip owner;
     Renderer[] highlightTargets;
+    Rigidbody rigidBody;
 
     public Vector3 MenuPosition;
     public float MenuScale;
@@ -35,6 +36,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
         highlightTargets = GetComponentsInChildren<Renderer>();
         owner = GetComponentInParent<IAmAShip>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     public void SetupForMenu(int menuLayer)
@@ -65,25 +67,33 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public Building Clone(Transform buildSurface)
     {
         var clone = Instantiate(gameObject, transform.position, Quaternion.identity);
-        clone.SetActive(false);
-        clone.transform.localScale = Vector3.one;
-        clone.tag = BuildingTag;
-        var cloneBuilding = clone.GetComponent<Building>();
-        cloneBuilding.CalculateBounds();
-        clone.transform.SetParent(buildSurface, true);
-        clone.transform.localRotation = Quaternion.identity;
-        clone.transform.localPosition = Vector3.zero;
-        clone.layer = 10;
-        
-        foreach(Transform child in clone.transform)
+        var building = clone.GetComponent<Building>();
+        building.Reset(buildSurface);
+        return building;
+    }
+
+    public void Reset(Transform buildSurface)
+    {
+        gameObject.SetActive(false);
+        gameObject.layer = 10;
+        foreach(Transform child in transform)
         {
-            child.gameObject.layer = clone.layer;      
+            child.gameObject.layer = 10;      
         }
         
-        cloneBuilding.InMenu = false;
-        cloneBuilding.Selected();
-        clone.SetActive(true);
-        return cloneBuilding;
+        tag = BuildingTag;
+        transform.localScale = Vector3.one;
+
+        CalculateBounds();
+        
+        transform.SetParent(buildSurface, true);
+        transform.localRotation = Quaternion.identity;
+        transform.localPosition = Vector3.zero;
+        rigidBody = gameObject.AddComponent<Rigidbody>();
+        rigidBody.isKinematic = true;
+        InMenu = false;
+        Selected();
+        gameObject.SetActive(true);
     }
 
     public void CalculateBounds()
@@ -106,6 +116,30 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
             {
                 owner.UpdateAbilities();
             }
+        }
+    }
+
+    public Vector3 Position 
+    {
+        get 
+        {
+            return transform.position;
+        }
+        set
+        {
+            rigidBody.MovePosition(value);
+        }
+    }
+
+    public Quaternion Rotation
+    {
+        get 
+        {
+            return transform.rotation;
+        }
+        set 
+        {
+            rigidBody.MoveRotation(value);
         }
     }
 
