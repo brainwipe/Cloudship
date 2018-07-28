@@ -34,7 +34,7 @@ public class EngineVent : MonoBehaviour
 			emitter.rateOverTime = Maths.Rescale(0.3f, 4, 0, 1f, parent.CommandThrust) * turnFactor;
 		}
 
-		var windEffect = flyingPhysics.CycloneForce * 0.001f;
+		var windEffect = flyingPhysics.CycloneForce * 0.002f;
 		var forceOverLifetime = particles.forceOverLifetime;
 		forceOverLifetime.x = windEffect.x;
 		forceOverLifetime.y = windEffect.y;
@@ -46,9 +46,9 @@ public class EngineVent : MonoBehaviour
 		var commandTurnInput = parent.CommandTurn;
 		if (!IAmLeft)
 		{
-			commandTurnInput = parent.CommandTurn / -1;
+			commandTurnInput = parent.CommandTurn * -1;
 		}
 		
-		return Maths.Rescale(0.2f, 1.5f, -1f, 1f, commandTurnInput);
+		return Maths.Rescale(0.6f, 1.5f, -1f, 1f, commandTurnInput);
 	}
 }
