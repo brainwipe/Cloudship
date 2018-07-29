@@ -45,7 +45,11 @@ public class GameManager : MonoBehaviour
 		Mode = new GameModes();
 
 		GameMode(MenuOutputData.isCreative);
-		Help.gameObject.SetActive(ShowTutorial);
+
+		if (Help.gameObject.activeSelf)
+		{
+			Help.gameObject.SetActive(ShowTutorial);
+		}
 	}
 
 	void Start()

@@ -8,6 +8,8 @@ public class Cannon : MonoBehaviour
     public Transform Swivel;
     public Transform Barrel;
     public Transform ShootingTip;
+    public ParticleSystem[] Puffs;
+
     public float TimeBetweenShotsInSeconds = 0.5f;
     public float ShotForce = 1000f;
     public float MaxFiringAngle = 90f;
@@ -34,7 +36,7 @@ public class Cannon : MonoBehaviour
         }
 
         var target = GetMyTarget();
-        SetElevation(target);
+        //SetElevation(target);
 
         if (Time.time >= lastTimeFired)
         {
@@ -65,9 +67,11 @@ public class Cannon : MonoBehaviour
 
         var forceRandomiser = Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
         var ballForce = ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser;
+        Debug.DrawRay(ShootingTip.position, ShootingTip.rotation * Vector3.up * 1000, Color.red, 1);
         cannonBall.Stats.Force = ShotForce * forceRandomiser;
         cannonBall.Stats.StartElevation = ShootingTip.parent.eulerAngles.x;
         ball.AddForce(ballForce, ForceMode.Impulse);
+        Puffs[0].Play();
 }
 
     IAmATarget GetMyTarget()
@@ -111,11 +115,11 @@ public class Cannon : MonoBehaviour
 
     void SetElevation(IAmATarget target)
     {
-        if (target == null)
+        float range  = MaxRange;
+        if (target != null)
         {
-            return;
+            range = (target.Position - ShootingTip.position).magnitude;
         }
-        var range = (target.Position - ShootingTip.position).magnitude;
         BarrelElevation = Maths.Rescale(90, 65, MinRange, MaxRange, range);
         Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
     }
