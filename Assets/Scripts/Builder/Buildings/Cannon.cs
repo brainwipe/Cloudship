@@ -10,7 +10,7 @@ public class Cannon : MonoBehaviour
     public Transform ShootingTip;
     public float TimeBetweenShotsInSeconds = 0.5f;
     public float ShotForce = 1000f;
-    public float MaxFiringAngle = 25f;
+    public float MaxFiringAngle = 90f;
     string fireButton = "Fire1";
     float lastTimeFired;
 
@@ -48,7 +48,7 @@ public class Cannon : MonoBehaviour
 
     void Shoot(IAmATarget target)
     {
-        if (target == null || 
+        if ((target == null && !shooter.FireAtWill) || 
             !AmIClearToShoot(ShootingTip.position, ShootingTip.rotation))
         {
             return;

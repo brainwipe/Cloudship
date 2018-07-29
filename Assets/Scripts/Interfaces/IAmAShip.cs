@@ -9,6 +9,8 @@ public interface IAmAShip
 
     bool ShootFullAuto { get; }
 
+    bool FireAtWill { get; }
+
     bool IAmAPlayer { get; }
 
     void UpdateAbilities();

@@ -20,7 +20,7 @@ public class Boiler : MonoBehaviour
 		emitter.enabled = !building.InMenu;
 	}
 	
-	void LateUpdate() 
+	void FixedUpdate() 
 	{
 		if (building.InMenu)
 		{

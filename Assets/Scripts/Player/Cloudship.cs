@@ -128,6 +128,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     public string MyEnemyTagIs => "Enemy";
 
     public bool ShootFullAuto => false;
+    public bool FireAtWill => true;
 
     public bool IAmAPlayer => true;
 

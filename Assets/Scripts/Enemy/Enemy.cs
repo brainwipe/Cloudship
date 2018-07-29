@@ -80,6 +80,8 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public float CommandTurn { get; set;}
 
+    public bool FireAtWill => false;
+
     public Vector3 DesiredThrust()  => transform.forward * Time.deltaTime;
     
     public Vector3 DesiredTorque()
