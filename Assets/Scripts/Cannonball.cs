@@ -10,11 +10,16 @@ public class Cannonball : MonoBehaviour
 	public IAmAShip owner;
 	public Telemetry Stats;
 
+	TrailRenderer trail;
+	float timeToStartTrail;
+	float waitBeforeTrailStartInSecs = 0.5f;
+
     void Start()
     {
 		Stats.Start(transform.position);
         Destroy(gameObject, maxLifeTime);
-		
+		trail = GetComponentInChildren<TrailRenderer>();
+		timeToStartTrail = Time.time + waitBeforeTrailStartInSecs;
     }
 
 	void Update()
@@ -22,6 +27,10 @@ public class Cannonball : MonoBehaviour
 		if(Stats.On)
 		{
 			Stats.Update(transform);
+		}
+		if (Time.time > timeToStartTrail && !trail.emitting)
+		{
+			trail.emitting = true;
 		}
 	}
 	

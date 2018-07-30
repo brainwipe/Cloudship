@@ -30,8 +30,8 @@ public class Boiler : MonoBehaviour
 		var main = particles.main;
 		var emitter = particles.emission;
 
-		main.startSpeed = Maths.Rescale(0, 3, 0, 1, Mathf.Abs(parent.CommandThrust));
-		emitter.rateOverTime = Maths.Rescale(0.3f, 4, 0, 1f, Mathf.Abs(parent.CommandThrust));
+		main.startSpeed = Maths.Rescale(6, 10, 0, 1, Mathf.Abs(parent.CommandThrust));
+		emitter.rateOverTime = Maths.Rescale(0.3f, 12, 0, 1f, Mathf.Abs(parent.CommandThrust));
 
 		var windEffect = flyingPhysics.CycloneForce * 0.002f;
 		var forceOverLifetime = particles.forceOverLifetime;
