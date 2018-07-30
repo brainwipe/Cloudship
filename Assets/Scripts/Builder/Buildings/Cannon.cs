@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
@@ -71,8 +72,12 @@ public class Cannon : MonoBehaviour
         cannonBall.Stats.Force = ShotForce * forceRandomiser;
         cannonBall.Stats.StartElevation = ShootingTip.parent.eulerAngles.x;
         ball.AddForce(ballForce, ForceMode.Impulse);
-        Puffs[0].Play();
-}
+        
+        foreach(var puff in Puffs)
+        {
+            puff.Play();
+        }
+    }
 
     IAmATarget GetMyTarget()
     {
