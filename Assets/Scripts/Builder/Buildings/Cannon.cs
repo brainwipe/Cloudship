@@ -17,15 +17,24 @@ public class Cannon : MonoBehaviour
     string fireButton = "Fire1";
     float lastTimeFired;
 
-    float BarrelElevation = 65f;
     IAmAShip shooter;
     float fuzzyShotForce = 0.005f;
     float MaxRange = 680;
-    float MinRange = 180;
+    Vector3 forecastPosition;
+
+    RangeMap[] rangeMaps = new [] 
+    {
+        new RangeMap { Time = 0, Range = 106, Elevation = 90 },
+        new RangeMap { Time = 3, Range = 250, Elevation = 85 },
+        new RangeMap { Time = 4, Range = 387, Elevation = 80 },
+        new RangeMap { Time = 5, Range = 498, Elevation = 75 },
+        new RangeMap { Time = 7, Range = 574, Elevation = 70 },
+        new RangeMap { Time = 8, Range = 620, Elevation = 65 },
+    };
 
     void Start()
     {
-        Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
+        Barrel.localRotation = Quaternion.Euler(rangeMaps.Min(x => x.Elevation), 0, 0);
         shooter = transform.GetComponentInParent<IAmAShip>();  
     }
 
@@ -37,7 +46,7 @@ public class Cannon : MonoBehaviour
         }
 
         var target = GetMyTarget();
-        //SetElevation(target);
+        SetElevation(target);
 
         if (Time.time >= lastTimeFired)
         {
@@ -120,12 +129,77 @@ public class Cannon : MonoBehaviour
 
     void SetElevation(IAmATarget target)
     {
-        float range  = MaxRange;
+        float forecastElevation = rangeMaps.Max(x => x.Elevation);
         if (target != null)
         {
-            range = (target.Position - ShootingTip.position).magnitude;
+            float currentRange = (target.Position - ShootingTip.position).magnitude;
+            var timeToCurrentRange = TimeFromRange(currentRange);
+            forecastPosition = target.Position + (target.Velocity * timeToCurrentRange);
+            forecastElevation = ElevationFromRange(forecastPosition.magnitude);
         }
-        BarrelElevation = Maths.Rescale(90, 65, MinRange, MaxRange, range);
-        Barrel.localRotation = Quaternion.Euler(BarrelElevation, 0, 0);
+         Barrel.localRotation = Quaternion.Euler(forecastElevation, 0, 0);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (shooter != null && shooter.IAmAPlayer)
+        {
+            Gizmos.color = Color.green;
+        }
+
+        if (forecastPosition != Vector3.zero)
+        {
+            Gizmos.DrawWireSphere(shooter.Position, forecastPosition.magnitude);
+            Gizmos.DrawWireSphere(forecastPosition, 5);
+        }
+    }
+
+
+    float ElevationFromRange(float range)
+    {
+        for(int i = 0; i < rangeMaps.Length; i++)
+        {
+            if (range > rangeMaps[i].Range)
+            {
+                continue;
+            }
+
+            if (i == 0)
+            {
+                return rangeMaps.Max(x => x.Elevation);
+            }
+
+            return Maths.Rescale(rangeMaps[i-1].Elevation, rangeMaps[i].Elevation, rangeMaps[i-1].Range, rangeMaps[i].Range, range);
+        }
+
+        return rangeMaps.Min(x => x.Elevation);
+    }
+
+    float TimeFromRange(float range)
+    {
+        for(int i = 0; i < rangeMaps.Length; i++)
+        {
+            if (range > rangeMaps[i].Range)
+            {
+                continue;
+            }
+
+            if (i == 0)
+            {
+                return rangeMaps[0].Time;
+            }
+
+            return Maths.Rescale(rangeMaps[i-1].Time, rangeMaps[i].Time, rangeMaps[i-1].Range, rangeMaps[i].Range, range);
+        }
+
+        return rangeMaps.Last().Time;
+    }
+
+    struct RangeMap
+    {
+        public float Range;
+        public float Time;
+        public float Elevation;
     }
 }

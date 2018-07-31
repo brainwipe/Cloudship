@@ -116,6 +116,8 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     }
    
     public Vector3 Position => this.transform.position;
+
+    public Vector3 Velocity => flyingPhysics.Velocity;
     
     public bool CanMove => flyingPhysics.Thrust > 0 && CanGiveOrders;
     

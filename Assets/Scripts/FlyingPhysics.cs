@@ -199,6 +199,8 @@ public class FlyingPhysics : MonoBehaviour
         }
     }
 
+    public Vector3 Velocity => rigidBody.velocity;
+    
     public bool IsAdrift => TopSpeed == 0;
 
     [Serializable]

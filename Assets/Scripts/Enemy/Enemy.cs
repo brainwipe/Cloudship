@@ -62,6 +62,8 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public Vector3 Position => transform.position;
 
+    public Vector3 Velocity => flyingPhysics.Velocity;
+
     public bool CanMove => flyingPhysics.Thrust > 0 && CanGiveOrders;
     
     public bool CanTurn => flyingPhysics.Torque > 0 && CanGiveOrders;
