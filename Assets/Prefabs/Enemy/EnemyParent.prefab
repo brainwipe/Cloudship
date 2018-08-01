@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 114648880119004566}
   - component: {fileID: 114685474721420192}
   m_Layer: 10
-  m_Name: weapon-cannon
+  m_Name: weapon-cannon front
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 114704973541690394}
   - component: {fileID: 114175833998821664}
   m_Layer: 10
-  m_Name: weapon-cannon
+  m_Name: weapon-cannon right
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 114752041546918556}
   - component: {fileID: 114377407635592986}
   m_Layer: 10
-  m_Name: weapon-cannon (1)
+  m_Name: weapon-cannon left
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 114434647628210186}
   - component: {fileID: 114683978509842004}
   m_Layer: 10
-  m_Name: weapon-cannon
+  m_Name: weapon-cannon rear
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

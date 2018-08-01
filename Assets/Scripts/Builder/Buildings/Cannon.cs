@@ -92,24 +92,36 @@ public class Cannon : MonoBehaviour
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(shooter.MyEnemyTagIs);
         
+        IAmATarget nearestTarget = null;
+        float nearestRange = float.MaxValue;
+
         foreach(var target in targets)
         {
             var targetDirection = target.transform.position - ShootingTip.position;
-            float angle = Vector3.Angle(targetDirection, Swivel.forward);
-            bool isInArc = Mathf.Abs(angle) < MaxFiringAngle;
-            bool isInRange = (targetDirection.magnitude < MaxRange || shooter.IAmAPlayer);
+            float range = targetDirection.magnitude;
 
-            if (isInArc && isInRange)
+            if (range > nearestRange ||
+                (range > MaxRange && !shooter.IAmAPlayer))
             {
-                var asTarget = target.GetComponentInParent<IAmATarget>();
-                if (asTarget == null || asTarget.IsDead)
-                {
-                    return null;
-                }
-                return asTarget;
+                continue;
             }
+            
+            float angle = Vector3.Angle(targetDirection, Swivel.forward);
+            if (Mathf.Abs(angle) > MaxFiringAngle)
+            {
+                continue;
+            }
+
+            var targetComponent = target.GetComponentInParent<IAmATarget>();
+            if (targetComponent == null || targetComponent.IsDead)
+            {
+                continue;
+            }
+            
+            nearestRange = range;
+            nearestTarget = targetComponent;
         }
-        return null;
+        return nearestTarget;
     }
 
     bool AmIClearToShoot(Vector3 shootingTipPosition, Quaternion shootingTipRotation)
@@ -140,7 +152,7 @@ public class Cannon : MonoBehaviour
         }
          Barrel.localRotation = Quaternion.Euler(forecastElevation, 0, 0);
     }
-
+/*
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -155,7 +167,7 @@ public class Cannon : MonoBehaviour
             Gizmos.DrawWireSphere(forecastPosition, 5);
         }
     }
-
+*/
 
     float ElevationFromRange(float range)
     {
