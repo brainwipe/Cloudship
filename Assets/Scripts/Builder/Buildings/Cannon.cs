@@ -129,13 +129,14 @@ public class Cannon : MonoBehaviour
 
     void SetElevation(IAmATarget target)
     {
-        float forecastElevation = rangeMaps.Max(x => x.Elevation);
+        float forecastElevation = rangeMaps.Min(x => x.Elevation);
         if (target != null)
         {
             float currentRange = (target.Position - ShootingTip.position).magnitude;
             var timeToCurrentRange = TimeFromRange(currentRange);
             forecastPosition = target.Position + (target.Velocity * timeToCurrentRange);
-            forecastElevation = ElevationFromRange(forecastPosition.magnitude);
+            var forecastRange = (forecastPosition - ShootingTip.position).magnitude;
+            forecastElevation = ElevationFromRange(forecastRange);
         }
          Barrel.localRotation = Quaternion.Euler(forecastElevation, 0, 0);
     }

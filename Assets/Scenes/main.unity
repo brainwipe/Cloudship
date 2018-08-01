@@ -7844,6 +7844,18 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 1745295413270664, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
+      propertyPath: m_Name
+      value: weapon-cannon rear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233340324110498, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
+      propertyPath: m_Name
+      value: weapon-cannon front
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469841419777456, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
+      propertyPath: m_Name
+      value: weapon-cannon right
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5801eaa44dca0d488e20720dbf58fb0, type: 2}
   m_IsPrefabAsset: 0
