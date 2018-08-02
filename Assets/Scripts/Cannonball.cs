@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class Cannonball : MonoBehaviour
 {
-    private float maxLifeTime = 10f;
+    private float maxLifeTime = 20f;
 	private float damage = 10;
 	public IAmAShip owner;
 	public Telemetry Stats;
+	public ParticleSystem SandPuffs;
 
 	TrailRenderer trail;
 	float timeToStartTrail;
 	float waitBeforeTrailStartInSecs = 0.5f;
+
+	ITakeDamage damageable;
 
     void Start()
     {
@@ -38,18 +41,35 @@ public class Cannonball : MonoBehaviour
 	{
 		var target = other.transform.GetComponentInParent<IAmAShip>();
 
-		if (target == null || target == owner)
+		if (target == owner)
 		{
 			return;
 		}
 
-		var damageable = other.attachedRigidbody.GetComponentInParent<ITakeDamage>();
+		damageable = other.transform.GetComponentInParent<ITakeDamage>();
 		if (damageable != null)
 		{
 			damageable.Damage(damage);
 		}
-		
+
 		Destroy(gameObject);
+	}
+
+	void OnDestroy()
+	{
+		if (damageable == null)
+		{
+			SandPuffs.gameObject.transform.parent = null;
+			SandPuffs.Play();
+			Destroy(SandPuffs.gameObject, SandPuffs.main.duration);
+		}
+		else
+		{
+			// Explosion
+		}
+
+		trail.gameObject.transform.parent = null;
+		trail.autodestruct = true;
 	}
 
 	[Serializable]
