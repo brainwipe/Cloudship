@@ -10,6 +10,7 @@ public class Cannonball : MonoBehaviour
 	public IAmAShip owner;
 	public Telemetry Stats;
 	public ParticleSystem SandPuffs;
+	public ParticleSystem Explosion;
 
 	TrailRenderer trail;
 	float timeToStartTrail;
@@ -57,16 +58,15 @@ public class Cannonball : MonoBehaviour
 
 	void OnDestroy()
 	{
+		ParticleSystem particlesToPlay = Explosion;
+
 		if (damageable == null)
 		{
-			SandPuffs.gameObject.transform.parent = null;
-			SandPuffs.Play();
-			Destroy(SandPuffs.gameObject, SandPuffs.main.duration);
+			particlesToPlay = SandPuffs;
 		}
-		else
-		{
-			// Explosion
-		}
+		particlesToPlay.gameObject.transform.parent = null;
+		particlesToPlay.Play();
+		Destroy(particlesToPlay.gameObject, particlesToPlay.main.duration);
 
 		trail.gameObject.transform.parent = null;
 		trail.autodestruct = true;
