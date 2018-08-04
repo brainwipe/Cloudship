@@ -282,13 +282,13 @@ MonoBehaviour:
   Health: 50
   FlotsamCost: 100
   Abilities:
-    Torque: 1300000
-    Thrust: 250000
+    Torque: 1000000
+    Thrust: 220000
     GiveOrders: 0
     Mass: 50
     Lift: 0
     Health: 0
-    TopSpeed: 22
+    TopSpeed: 40
 --- !u!114 &114071953685756778
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2874,8 +2874,8 @@ MonoBehaviour:
     Torque: 0
     Thrust: 0
     GiveOrders: 0
-    Mass: 500
-    Lift: 1800000
+    Mass: 400
+    Lift: 2200000
     Health: 150
     TopSpeed: 0
   totalFlotsam: 0
@@ -3130,8 +3130,8 @@ MonoBehaviour:
   WindSpeed: 0
   IndicatedAirSpeed: 0
   Blackbox:
-    Velocity: 0
-    MaxVelocity: 0
+    GroundSpeed: 0
+    MaxGroundSpeed: 0
     Acceleration: 0
 --- !u!114 &114434647628210186
 MonoBehaviour:
@@ -3411,13 +3411,13 @@ MonoBehaviour:
   Health: 50
   FlotsamCost: 100
   Abilities:
-    Torque: 1300000
-    Thrust: 250000
+    Torque: 1000000
+    Thrust: 220000
     GiveOrders: 0
     Mass: 50
     Lift: 0
     Health: 0
-    TopSpeed: 22
+    TopSpeed: 40
 --- !u!114 &114967221109168820
 MonoBehaviour:
   m_ObjectHideFlags: 1

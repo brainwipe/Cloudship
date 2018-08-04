@@ -38,6 +38,10 @@ public class FlyingPhysics : MonoBehaviour
     float buoyancyHealth = 1f;
     bool grounded = false;
     float timeDead = 0;
+
+    Dictionary<int, float> TopSpeedDiminishingReturn = new Dictionary<int, float> {
+        { 0, 1f }, { 1, 0.5f }, { 2, 0.3f }, { 3, 0.3f }, { 4, 0.3f }, { 5, 0.2f }, { 6, 0.2f }
+    };
     
     void Awake()
     {
@@ -163,7 +167,7 @@ public class FlyingPhysics : MonoBehaviour
         Mass = 0;
         TopSpeed = 0;
 
-        float topSpeedEfficiencyMultiplier = 1f; 
+        var boilerCount = 0;
 
         foreach(var ability in abilities)
         {
@@ -174,8 +178,8 @@ public class FlyingPhysics : MonoBehaviour
 
             if (ability.Skills.TopSpeed > 0)
             {
-                TopSpeed += ability.Skills.TopSpeed * topSpeedEfficiencyMultiplier;
-                topSpeedEfficiencyMultiplier = topSpeedEfficiencyMultiplier * 0.8f;
+                TopSpeed += ability.Skills.TopSpeed * TopSpeedDiminishingReturn[boilerCount];
+                boilerCount ++;
             }
             
         }
@@ -206,18 +210,16 @@ public class FlyingPhysics : MonoBehaviour
     [Serializable]
     public class Telemetry
     {
-        float lastVelocity;
-
-        public float Velocity;
-        public float MaxVelocity;
+        public float GroundSpeed;
+        public float MaxGroundSpeed;
         public float Acceleration;
 
         public void Set(Vector3 velocity, Vector3 acceleration)
         {
-            Velocity = velocity.magnitude;
-            if (Velocity > MaxVelocity)
+            GroundSpeed = velocity.magnitude;
+            if (GroundSpeed > MaxGroundSpeed)
             {
-                MaxVelocity = Velocity;
+                MaxGroundSpeed = GroundSpeed;
             }
             Acceleration = acceleration.magnitude;
             

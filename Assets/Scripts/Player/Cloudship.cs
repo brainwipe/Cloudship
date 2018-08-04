@@ -48,7 +48,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
         }
     }
 
-    void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.Velocity);
+    void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.GroundSpeed);
 
     public Vector3 DesiredThrust() => transform.forward * commandThrust * Time.deltaTime;
     
