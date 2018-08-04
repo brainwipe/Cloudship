@@ -5409,8 +5409,8 @@ MonoBehaviour:
   WindSpeed: 0
   IndicatedAirSpeed: 0
   Blackbox:
-    Velocity: 0
-    MaxVelocity: 0
+    GroundSpeed: 0
+    MaxGroundSpeed: 0
     Acceleration: 0
 --- !u!54 &316302003
 Rigidbody:
