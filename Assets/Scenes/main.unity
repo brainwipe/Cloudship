@@ -6890,8 +6890,10 @@ MonoBehaviour:
     Rotation: 3
     Vertical: 2
     Smooth: 0.03
-  MaxY: 90
-  MinY: -30
+  MaxY: 110
+  MinY: -50
+  MinDistance: 61
+  MaxDistance: 230
 --- !u!4 &1026415046
 Transform:
   m_ObjectHideFlags: 0

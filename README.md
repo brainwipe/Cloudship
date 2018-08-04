@@ -34,9 +34,9 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 - <kbd>Hold left mouse button down</kbd> Place building, let go to leave it there
 - <kbd>Click and drag left mouse button</kbd> Move building
 - <kbd>Click and hold left mouse button</kbd> and move building off the Cloudship to delete
-- <kbd>Q</kbd> and <kbd>E</kbd> to rotate.
+- <kbd>Q</kbd> and <kbd>E</kbd> to rotate building.
 
-Click right mouse button and drag rotates the view.
+Click right mouse button and drag rotates the view. Click right mouse and mousewheel to zoom in and out.
 
 ## Built With
 

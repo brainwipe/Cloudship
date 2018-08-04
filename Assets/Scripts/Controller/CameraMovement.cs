@@ -16,7 +16,9 @@ public class CameraMovement : MonoBehaviour
     public CameraMotion cinematic;
     
     public float MaxY = 80f;
-    public float MinY = -20f;
+    public float MinY = -30f;
+    public float MinDistance = 61;
+    public float MaxDistance = 230;
 
     Cloudship player;
     Vector3 offset = new Vector3(0, 67.7f, -146.2f);
@@ -56,12 +58,31 @@ public class CameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        var proposedOffset = offset;
         if (Input.GetMouseButton(1))
         {
             Quaternion turnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * current.Rotation, Vector3.up);
-            offset = turnAngle * offset;
-            offset = offset - new Vector3(0, Input.GetAxis("Mouse Y") * current.Vertical, 0);
+            proposedOffset = turnAngle * proposedOffset;
+            proposedOffset = proposedOffset - new Vector3(0, Input.GetAxis("Mouse Y") * current.Vertical, 0);
+
+            if(Input.GetAxis("Mouse ScrollWheel") < 0) // Back/Out
+            {
+                proposedOffset = proposedOffset + (10f * offset.normalized);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0) // Forward/In
+            {
+                proposedOffset = proposedOffset - (10f * offset.normalized);
+            }
+
+            var proposedMagnitude = proposedOffset.magnitude;
+            if (proposedMagnitude < MaxDistance && proposedMagnitude > MinDistance)
+            {
+                offset = proposedOffset;
+            }
+            Debug.Log(proposedMagnitude);
         }
+
+
 
         Vector3 targetPosition = player.transform.position + offset;
         float clampY = Mathf.Clamp(targetPosition.y, MinY, MaxY);
