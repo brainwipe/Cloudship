@@ -30,7 +30,7 @@ public class BuildSurface : MonoBehaviour
 			return;
 		}
 
-		MouseMove();
+		MoveSelectedBuilding();
 		
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -59,21 +59,6 @@ public class BuildSurface : MonoBehaviour
 			}
 		}
 
-		if (Input.GetMouseButton(0))
-		{
-			if (selectedBuilding != null)
-			{
-				if (Input.GetKey(KeyCode.Q))
-				{
-					selectedBuilding.RotateAntiClockwise();
-				}
-				else if (Input.GetKey(KeyCode.E))
-				{
-					selectedBuilding.RotateClockwise();
-				}
-			}
-		}
-
 		if(Input.GetMouseButtonUp(0))
 		{
 			buildingToGrabPointOffset = Vector3.zero;
@@ -81,14 +66,36 @@ public class BuildSurface : MonoBehaviour
 		}
 	}
 
-	void MouseMove()
+	void MoveSelectedBuilding()
 	{
 		if (selectedBuilding == null)
 		{
 			return;
 		}	
 
-		MoveSelectedBuilding();
+		Vector3 position;
+		if (GetDesired(out position))
+		{
+			selectedBuilding.Position = position;
+
+			var buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y, 0);
+			if (Input.GetKey(KeyCode.Q))
+			{
+				buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y - 1, 0);
+			}
+			else if (Input.GetKey(KeyCode.E))
+			{
+				buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y + 1, 0);
+			}
+
+			selectedBuilding.Rotation = transform.rotation * buildingTurning;
+			selectedBuilding.IsOverCloudship = true;
+		}
+		else 
+		{
+			selectedBuilding.IsOverCloudship = false;
+		}
+		selectedBuilding.UpdateVisibility();
 	}
 
 	void PlaceBuilding()
@@ -107,22 +114,6 @@ public class BuildSurface : MonoBehaviour
 		selectedBuilding.UnSelected();
 		selectedBuilding = null;
 		player.UpdateAbilities();
-	}
-
-	void MoveSelectedBuilding()
-	{
-		Vector3 position;
-		if (GetDesired(out position))
-		{
-			selectedBuilding.Position = position;
-			selectedBuilding.Rotation = transform.rotation;
-			selectedBuilding.IsOverCloudship = true;
-		}
-		else 
-		{
-			selectedBuilding.IsOverCloudship = false;
-		}
-		selectedBuilding.UpdateVisibility();
 	}
 
 	bool IsThereABuildingUnderMousePointer(out Building building)

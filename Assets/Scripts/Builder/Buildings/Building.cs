@@ -52,18 +52,6 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         InMenu = true;
     }
 
-    internal void RotateAntiClockwise()
-    {
-        var aimRotation = transform.localEulerAngles + new Vector3(0, -90, 0);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(aimRotation), Time.deltaTime);
-    }
-
-    internal void RotateClockwise()
-    {
-        var aimRotation = transform.localEulerAngles + new Vector3(0, 90, 0);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(aimRotation), Time.deltaTime);
-    }
-
     public Building Clone(Transform buildSurface)
     {
         var clone = Instantiate(gameObject, transform.position, Quaternion.identity);
