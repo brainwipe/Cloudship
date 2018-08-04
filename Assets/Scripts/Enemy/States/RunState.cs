@@ -14,10 +14,9 @@ public class RunState : BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var vectorBetweenEnemyAndPlayer = player.transform.position - enemy.transform.position;
-        var loopHeading = -vectorBetweenEnemyAndPlayer;
-        loopHeading.y = 0;
-        enemy.Heading = loopHeading;
+        var runHeading = windMaker.GetCycloneForce(enemy.Position);
+        runHeading.y = 0;
+        enemy.Heading = runHeading;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
