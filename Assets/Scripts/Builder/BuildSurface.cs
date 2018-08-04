@@ -61,10 +61,15 @@ public class BuildSurface : MonoBehaviour
 
 		if(Input.GetMouseButtonUp(0))
 		{
-			buildingToGrabPointOffset = Vector3.zero;
 			PlaceBuilding();
 		}
 	}
+
+	void OnDisable()
+	{
+		PlaceBuilding();
+	}
+
 
 	void MoveSelectedBuilding()
 	{
@@ -100,6 +105,7 @@ public class BuildSurface : MonoBehaviour
 
 	void PlaceBuilding()
 	{
+		buildingToGrabPointOffset = Vector3.zero;
 		if (selectedBuilding == null)
 		{
 			return;
