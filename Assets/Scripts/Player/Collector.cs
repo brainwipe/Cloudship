@@ -16,10 +16,10 @@ public class Collector : MonoBehaviour
 	Claw Claw;
 
 	Cloudship player;
-	int segments = 13;
+	int segments = 14;
 	float segmentLength = 8f;
-	float reelOutSpeed = 15f;
-	float reelInSpeed = 12f;
+	float reelOutSpeed = 16f;
+	float reelInSpeed = 13f;
 
 	Vector3 limitPosition;
 
