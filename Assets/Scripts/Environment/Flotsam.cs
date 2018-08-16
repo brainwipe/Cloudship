@@ -10,8 +10,8 @@ public class Flotsam : MonoBehaviour {
 
     internal void Attach(Claw claw)
     {
-		GetComponentsInChildren<Collider>().Single(x => x.tag == "FlotsamNearby").enabled = false;
-		transform.parent = claw.transform;
-		gameObject.layer = LayerMask.NameToLayer("Default");
+			GetComponentsInChildren<Collider>().Single(x => x.tag == "FlotsamNearby").enabled = false;
+			transform.parent = claw.transform;
+			gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

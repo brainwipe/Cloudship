@@ -89,4 +89,18 @@ public class TerrainFactory : MonoBehaviour
     {
         return (int)(Mathf.Floor(worldPosition/chunkSize) * chunkSize);
     }
+
+    TerrainChunk FindNearestChunk(Vector3 position)
+    {
+        var x = (int)(Mathf.Floor(position.x/chunkSize) * chunkSize);
+        var z = (int)(Mathf.Floor(position.x/chunkSize) * chunkSize);
+
+        return chunks[new Vector3((float)x, transform.position.y, (float)z)];
+    }
+
+    public Flotsam CreateFlotsamAt(Vector3 position)
+    {
+        var chunk = FindNearestChunk(position);
+        return flotsamFactory.CreateFlotsam(chunk, position);
+    }
 }

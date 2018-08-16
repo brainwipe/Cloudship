@@ -79,7 +79,6 @@ public class CameraMovement : MonoBehaviour
             {
                 offset = proposedOffset;
             }
-            Debug.Log(proposedMagnitude);
         }
 
 

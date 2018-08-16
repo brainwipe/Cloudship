@@ -30,7 +30,7 @@ public class Collector : MonoBehaviour
 		player = GameManager.Instance.PlayerCloudship;
 	}
 	
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (State == States.ReelOut)
 		{

@@ -5403,15 +5403,14 @@ MonoBehaviour:
   Lift: 0
   Torque: 0
   Thrust: 0
-  ThrustForce: {x: 0, y: 0, z: 0}
   TopSpeed: 0
   CycloneForce: {x: 0, y: 0, z: 0}
-  WindSpeed: 0
   IndicatedAirSpeed: 0
   Blackbox:
     GroundSpeed: 0
     MaxGroundSpeed: 0
     Acceleration: 0
+    WindSpeed: 0
 --- !u!54 &316302003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7761,6 +7760,16 @@ Prefab:
       propertyPath: Help
       value: 
       objectReference: {fileID: 675380057}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: TerrainFactory
+      value: 
+      objectReference: {fileID: 1973308853}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: Mode.BuildingsCostFlotsam
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabAsset: 0
@@ -7780,6 +7789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe6af46564aa624d85c0ae9c9fcd4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1973308853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114017790401730650, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+    type: 2}
+  m_PrefabInternal: {fileID: 1973308850}
+  m_Script: {fileID: 11500000, guid: abe5ac8c8b080244aae8cd638ff37989, type: 3}
 --- !u!1001 &1987071425
 Prefab:
   m_ObjectHideFlags: 0

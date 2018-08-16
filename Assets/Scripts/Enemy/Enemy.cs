@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,14 +9,16 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 {
     public float Health;
     public float Distance;
-
+    
     Cloudship playerCloudship;
     Animator animator;
     public Image HealthBar;
     FlyingPhysics flyingPhysics;
+    EnemyFactory enemyFactory;
     
     float HealthMax;
     float torquedamping = 0.01f;
+    float collisionDamageScale = 0.6f;
 
     [HideInInspector]
     public Vector3 Heading = new Vector3();
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     {
         animator = GetComponent<Animator>();
         flyingPhysics = GetComponent<FlyingPhysics>();
+        enemyFactory = GetComponentInParent<EnemyFactory>();
     }
 
     void Start()
@@ -34,6 +38,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         playerCloudship = GameManager.Instance.PlayerCloudship;
         UpdateAbilities();
         Health = HealthMax;
+        CommandThrust = 1;
     }
 
     void Update()
@@ -47,15 +52,22 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     void OnCollisionEnter(Collision collisionInfo) {
         if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
         {
+            CreateFlotsam();
             flyingPhysics.Grounded();
             Health = 0;
         }
         if (collisionInfo.gameObject.tag == playerCloudship.tag)
         {
-            var damageDueToCollision = collisionInfo.relativeVelocity.magnitude / 8f;
+            var damageDueToCollision = collisionInfo.relativeVelocity.magnitude * collisionDamageScale;
             Damage(damageDueToCollision);
             playerCloudship.Damage(damageDueToCollision);
         }
+    }
+
+    private void CreateFlotsam()
+    {
+        var flotsam = GameManager.Instance.TerrainFactory.CreateFlotsamAt(Position);
+        flotsam.Value = 200;
     }
 
     public bool IsDead => Health < 1;
@@ -78,13 +90,13 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public bool IAmAPlayer => false;
 
-    public float CommandThrust => 1;
+    public float CommandThrust { get; private set;}
 
-    public float CommandTurn { get; set;}
+    public float CommandTurn { get; private set;}
 
     public bool FireAtWill => false;
 
-    public Vector3 DesiredThrust()  => transform.forward * Time.deltaTime;
+    public Vector3 DesiredThrust() => transform.forward * Time.deltaTime * CommandThrust;
     
     public Vector3 DesiredTorque()
     {
@@ -100,6 +112,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public void Dead()
     {
+        enemyFactory.ResetTimer();
         Destroy(gameObject);
     }
 
@@ -109,6 +122,7 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
         HealthBar.fillAmount = Health/HealthMax;
         if (IsDead)
         {
+            CommandThrust = 0;
             flyingPhysics.SinkToGround();
             HealthBar.enabled = false;
         }

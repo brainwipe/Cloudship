@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	public Camera Camera;
     public Transform Cannonballs;
 	public LevelChanger LevelChanger;
+	public TerrainFactory TerrainFactory;
 
 	public Switches Features;
 
