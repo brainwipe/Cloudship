@@ -8,26 +8,24 @@ public class FlyingPhysics : MonoBehaviour
 {
     public static float Vne = 70f;
 
-    public IFly Parent;
     public bool AllowMovement;
     public bool AllowBuoyancy;
     public bool AllowWind;
     public float Lift;
     public float Torque;
     public float Thrust;
-    [HideInInspector]
-    public Vector3 ThrustForce;
     public float TopSpeed;
     [HideInInspector]
     public Vector3 CycloneForce = Vector3.zero; 
-    public float WindSpeed = 0f;
     public float IndicatedAirSpeed = 0f;
     public Telemetry Blackbox;
 
     Rigidbody rigidBody;
     IWindMaker windMaker;
+    IFly parent;
     
 
+    Vector3 thrustForce;
     float StandardAltitude = 0;
     Vector3 lastVelocity = Vector3.zero;
     Vector3 acceleration = Vector3.zero;
@@ -47,7 +45,7 @@ public class FlyingPhysics : MonoBehaviour
     {
         Blackbox = new Telemetry();
         rigidBody = transform.GetComponent<Rigidbody>();
-        Parent = transform.GetComponent<IFly>();
+        parent = transform.GetComponent<IFly>();
     }
 
     void Start()
@@ -69,16 +67,16 @@ public class FlyingPhysics : MonoBehaviour
             }
             if (rigidBody.transform.position.y < -200f)
             {
-                Parent.Dead();
+                parent.Dead();
             }
             return;
         }
 
         if (AllowMovement)
         {
-            ThrustForce = Parent.DesiredThrust() * Thrust;
-            rigidBody.AddForce(ThrustForce);
-            rigidBody.AddTorque(Parent.DesiredTorque() * Torque);
+            thrustForce = parent.DesiredThrust() * Thrust;
+            rigidBody.AddForce(thrustForce);
+            rigidBody.AddTorque(parent.DesiredTorque() * Torque);
         }
         if (AllowWind)
         {
@@ -93,7 +91,7 @@ public class FlyingPhysics : MonoBehaviour
         ForceDueToFormDrag();
         ForceDueToRockAndRoll();
 
-        Blackbox.Set(rigidBody.velocity, acceleration);
+        Blackbox.Set(rigidBody.velocity, acceleration, windVector);
     }
 
     void CalculateDerivedValues()
@@ -101,7 +99,6 @@ public class FlyingPhysics : MonoBehaviour
         acceleration = (rigidBody.velocity - lastVelocity) / Time.deltaTime;
         lastVelocity = rigidBody.velocity;
         windVector = CycloneForce / (Mass * Time.deltaTime * 10f);
-        WindSpeed = windVector.magnitude;
         thrustVelocity = (rigidBody.velocity - windVector);
         IndicatedAirSpeed = thrustVelocity.magnitude;
     }
@@ -213,8 +210,9 @@ public class FlyingPhysics : MonoBehaviour
         public float GroundSpeed;
         public float MaxGroundSpeed;
         public float Acceleration;
+        public float WindSpeed = 0f;
 
-        public void Set(Vector3 velocity, Vector3 acceleration)
+        public void Set(Vector3 velocity, Vector3 acceleration, Vector3 windVector)
         {
             GroundSpeed = velocity.magnitude;
             if (GroundSpeed > MaxGroundSpeed)
@@ -222,6 +220,7 @@ public class FlyingPhysics : MonoBehaviour
                 MaxGroundSpeed = GroundSpeed;
             }
             Acceleration = acceleration.magnitude;
+            WindSpeed = windVector.magnitude;
             
         }
     }
