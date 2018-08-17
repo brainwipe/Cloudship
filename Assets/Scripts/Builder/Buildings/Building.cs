@@ -15,18 +15,20 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public float MenuScale;
     [HideInInspector]
     public bool InMenu = false;
-    //[HideInInspector]
+    [HideInInspector]
     public bool AnotherObjectCollision;
-    //[HideInInspector]
+    [HideInInspector]
     public bool BoundaryCollision;
-    //[HideInInspector]
+    [HideInInspector]
     public bool IsOverCloudship;
-    //[HideInInspector]
+    [HideInInspector]
     public Bounds PreCalculatedBounds;
 
     public float Health;
     public float FlotsamCost;
     public Abilities Abilities;
+
+    float MaxHealth;
 
     void Awake()
     {
@@ -37,6 +39,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         highlightTargets = GetComponentsInChildren<Renderer>();
         owner = GetComponentInParent<IAmAShip>();
         rigidBody = GetComponent<Rigidbody>();
+        MaxHealth = Health;
     }
 
     public void SetupForMenu(int menuLayer)
@@ -182,6 +185,21 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
     }
 
+    void SetShaderFloat(string shaderPropertyId, float value)
+    {
+        foreach(var target in highlightTargets)
+        {
+            if (target == null)
+            {
+                continue;
+            }
+            foreach(var material in target.materials)
+            {
+                material.SetFloat(shaderPropertyId, value);
+            }
+        }
+    }
+
     public void Damage(float amount)
     {
         if (!GameManager.Instance.Mode.PlayerTakesDamage && owner.IAmAPlayer)
@@ -190,6 +208,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
 
         Health -= amount;
+        SetShaderFloat("Vector1_89360613", Health/MaxHealth);
         if (Health < 1)
         {
             Remove();
