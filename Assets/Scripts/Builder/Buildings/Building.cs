@@ -8,6 +8,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public static string BuildingTag = "Building";
     public string Id;
     public IAmAShip owner;
+    public ParticleSystem DeathExplosion;
     Renderer[] highlightTargets;
     Rigidbody rigidBody;
 
@@ -208,10 +209,12 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
 
         Health -= amount;
-        SetShaderFloat("Vector1_89360613", Health/MaxHealth);
         if (Health < 1)
         {
-            Remove();
+            DeathExplosion.Play();
+            DeathExplosion.gameObject.transform.parent = null;
+            Destroy(DeathExplosion.gameObject, DeathExplosion.main.duration);
+            Destroy(gameObject, DeathExplosion.main.duration / 2f);
         }
     }
 
