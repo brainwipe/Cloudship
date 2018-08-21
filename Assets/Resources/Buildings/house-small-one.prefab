@@ -237,7 +237,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 13.726265, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 5.937298, z: 0}
 --- !u!95 &95892162910594084
 Animator:
@@ -270,6 +270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: house-small-one
   DeathExplosion: {fileID: 198781166227773510}
+  highlightTargets: []
+  rigidBody: {fileID: 0}
   MenuPosition: {x: 0, y: -0.04, z: 0}
   MenuScale: 0.02
   InMenu: 0
@@ -300,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa5aec950f30c344a6331544db9514a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!114 &114564337111347096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a5f6b8df5114d468b99e11987e1bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!198 &198781166227773510
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoundaryCollision : MonoBehaviour
 {
-    Building building;
+    public Building building;
 
     void Awake()
     {

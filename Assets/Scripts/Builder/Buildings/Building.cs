@@ -9,20 +9,20 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public string Id;
     public IAmAShip owner;
     public ParticleSystem DeathExplosion;
-    Renderer[] highlightTargets;
-    Rigidbody rigidBody;
+    public Renderer[] highlightTargets;
+    public Rigidbody rigidBody;
 
     public Vector3 MenuPosition;
     public float MenuScale;
-    [HideInInspector]
+//    [HideInInspector]
     public bool InMenu = false;
-    [HideInInspector]
+//    [HideInInspector]
     public bool AnotherObjectCollision;
-    [HideInInspector]
+    //[HideInInspector]
     public bool BoundaryCollision;
-    [HideInInspector]
+    //[HideInInspector]
     public bool IsOverCloudship;
-    [HideInInspector]
+    //[HideInInspector]
     public Bounds PreCalculatedBounds;
 
     public float Health;
@@ -64,9 +64,8 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         return building;
     }
 
-    public void Reset(Transform buildSurface)
+    void Reset(Transform buildSurface)
     {
-        gameObject.SetActive(false);
         gameObject.layer = 10;
         foreach(Transform child in transform)
         {
@@ -75,9 +74,6 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         
         tag = BuildingTag;
         transform.localScale = Vector3.one;
-
-        CalculateBounds();
-        
         transform.SetParent(buildSurface, true);
         transform.localRotation = Quaternion.identity;
         transform.localPosition = Vector3.zero;
@@ -85,13 +81,13 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         rigidBody.isKinematic = true;
         InMenu = false;
         Selected();
-        gameObject.SetActive(true);
+        CalculateBounds();
     }
 
     public void CalculateBounds()
     {
-        PreCalculatedBounds = new Bounds (transform.position, Vector3.one);
-        Renderer[] renderers = GetComponentsInChildren<Renderer> ();
+        PreCalculatedBounds = new Bounds (Vector3.zero, Vector3.one);
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer> ();
         foreach (Renderer renderer in renderers)
         {
             PreCalculatedBounds.Encapsulate (renderer.bounds);

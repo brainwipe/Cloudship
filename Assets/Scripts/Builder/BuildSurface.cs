@@ -32,7 +32,7 @@ public class BuildSurface : MonoBehaviour
 
 		MoveSelectedBuilding();
 		
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButton(0))
 		{
 			if (selectedBuilding == null)
 			{
@@ -42,6 +42,7 @@ public class BuildSurface : MonoBehaviour
 					selectedBuilding = building;
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
+					SetBoundary(selectedBuilding);
 				}
 				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
@@ -69,7 +70,6 @@ public class BuildSurface : MonoBehaviour
 	{
 		PlaceBuilding();
 	}
-
 
 	void MoveSelectedBuilding()
 	{

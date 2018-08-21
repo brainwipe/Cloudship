@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BuildMenu : MonoBehaviour {
@@ -28,7 +29,7 @@ public class BuildMenu : MonoBehaviour {
         }
     }
 
-    void Start()
+    void Awake()
     {
         player = GameManager.Instance.PlayerCloudship;
         BuildingPrefabs = BuildingLoader.Load();
@@ -48,6 +49,8 @@ public class BuildMenu : MonoBehaviour {
         }
     }
 
+    public Building FindBuilding(string id) => menuPositions.Single(x => x.Building != null && x.Building.Id == id).Building;
+    
     void CreateBuildingAt(int buildingIndex, int menuIndex)
     {
         var position = menuPositions[menuIndex];

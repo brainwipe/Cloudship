@@ -55,7 +55,8 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
-		PlayerStart.SetupCloudship(PlayerCloudship);
+		var buildMenu = FindObjectOfType<BuildMenu>();
+		PlayerStart.SetupCloudship(PlayerCloudship, buildMenu);
 	}
 
     internal void GameMode(bool isCreative)

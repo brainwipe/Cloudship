@@ -37,8 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4604559700272646}
   - component: {fileID: 65246540853778838}
-  - component: {fileID: 114071953685756778}
   - component: {fileID: 54629812421828260}
+  - component: {fileID: 114071953685756778}
   m_Layer: 10
   m_Name: collision
   m_TagString: Building
@@ -72,8 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4885363011667592}
   - component: {fileID: 65159459798046526}
-  - component: {fileID: 114854359536379790}
   - component: {fileID: 54183433908484428}
+  - component: {fileID: 114854359536379790}
   m_Layer: 10
   m_Name: boundary-collision
   m_TagString: Untagged
@@ -257,7 +257,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 41.851673, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 20, z: 0}
 --- !u!65 &65246540853778838
 BoxCollider:
@@ -302,6 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: boiler-medium
   DeathExplosion: {fileID: 198125741524627888}
+  highlightTargets: []
+  rigidBody: {fileID: 0}
   MenuPosition: {x: 0, y: -0.074, z: 0}
   MenuScale: 0.0045
   InMenu: 0
@@ -332,6 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a5f6b8df5114d468b99e11987e1bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!114 &114425274272419672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa5aec950f30c344a6331544db9514a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!198 &198125741524627888
 ParticleSystem:
   m_ObjectHideFlags: 1

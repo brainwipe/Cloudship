@@ -237,7 +237,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 13.726265, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 5.937298, z: 0}
 --- !u!95 &95455686480732832
 Animator:
@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a5f6b8df5114d468b99e11987e1bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!114 &114757617169345188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,6 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: bridge-standard
   DeathExplosion: {fileID: 198670914590283512}
+  highlightTargets: []
+  rigidBody: {fileID: 0}
   MenuPosition: {x: 0, y: -0.078, z: 0}
   MenuScale: 0.015
   InMenu: 0
@@ -311,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa5aec950f30c344a6331544db9514a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!198 &198670914590283512
 ParticleSystem:
   m_ObjectHideFlags: 1
