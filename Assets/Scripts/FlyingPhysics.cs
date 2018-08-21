@@ -36,6 +36,8 @@ public class FlyingPhysics : MonoBehaviour
     float buoyancyHealth = 1f;
     bool grounded = false;
     float timeDead = 0;
+    float jinkedTorqueYawThreshold = 0.05f;
+    float jinkedTorqueMultiplier = 30f;
 
     Dictionary<int, float> TopSpeedDiminishingReturn = new Dictionary<int, float> {
         { 0, 1f }, { 1, 0.5f }, { 2, 0.3f }, { 3, 0.3f }, { 4, 0.3f }, { 5, 0.2f }, { 6, 0.2f }
@@ -121,7 +123,13 @@ public class FlyingPhysics : MonoBehaviour
         }
         else
         {
-            rigidBody.AddTorque(transform.up * parent.CommandTurn * Time.deltaTime * Torque);
+            var jinkedTorque = Torque;
+            if (Mathf.Abs(rigidBody.angularVelocity.y) < jinkedTorqueYawThreshold)
+            {
+                jinkedTorque = jinkedTorque * jinkedTorqueMultiplier;
+
+            }
+            rigidBody.AddTorque(transform.up * parent.CommandTurn * Time.deltaTime * jinkedTorque);
         }
     }
 
