@@ -59,8 +59,7 @@ public class BuildSurface : MonoBehaviour
 				}
 			}
 		}
-
-		if(Input.GetMouseButtonUp(0))
+		else
 		{
 			PlaceBuilding();
 		}
@@ -105,12 +104,12 @@ public class BuildSurface : MonoBehaviour
 
 	void PlaceBuilding()
 	{
-		buildingToGrabPointOffset = Vector3.zero;
 		if (selectedBuilding == null)
 		{
 			return;
 		}
 
+		buildingToGrabPointOffset = Vector3.zero;
 		if (!selectedBuilding.CanPlace)
 		{
 			var cost = selectedBuilding.FlotsamCost;
