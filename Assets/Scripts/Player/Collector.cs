@@ -18,7 +18,7 @@ public class Collector : MonoBehaviour
 	Cloudship player;
 	int segments = 14;
 	float segmentLength = 8f;
-	float reelOutSpeed = 16f;
+	float reelOutSpeed = 50f;
 	float reelInSpeed = 13f;
 
 	Vector3 limitPosition;
