@@ -74,8 +74,7 @@ public class FlyingPhysics : MonoBehaviour
 
         if (AllowMovement)
         {
-            thrustForce = parent.DesiredThrust() * Thrust;
-            rigidBody.AddForce(thrustForce);
+            ForceDueToCommandThrust();
             ForceDueToCommandTurn();
             
         }
@@ -102,6 +101,11 @@ public class FlyingPhysics : MonoBehaviour
         windVector = CycloneForce / (Mass * Time.deltaTime * 10f);
         thrustVelocity = (rigidBody.velocity - windVector);
         IndicatedAirSpeed = thrustVelocity.magnitude;
+    }
+
+    void ForceDueToCommandThrust()
+    {
+        rigidBody.AddForce(transform.forward * parent.CommandThrust * Thrust * Time.deltaTime);
     }
 
     void ForceDueToCommandTurn()

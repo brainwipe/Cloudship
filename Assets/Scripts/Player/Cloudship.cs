@@ -49,10 +49,14 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     }
 
     void LateUpdate() => AudioManager.Instance.SetWindFromVelocity(flyingPhysics.Blackbox.GroundSpeed);
-
-    public Vector3 DesiredThrust() => transform.forward * commandThrust * Time.deltaTime;
     
-    public Vector3 DesiredTorque() => Vector3.zero;
+    void OnCollisionEnter(Collision collisionInfo) {
+        if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
+        {
+            flyingPhysics.Grounded();
+            Health = 0;
+        }
+    }
 
     public float CommandThrust => commandThrust;
 
@@ -61,14 +65,6 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     public void Dead()
     {
         GameManager.Instance.End();
-    }
-
-    void OnCollisionEnter(Collision collisionInfo) {
-        if (collisionInfo.gameObject.tag == TerrainFactory.TerrainTag)
-        {
-            flyingPhysics.Grounded();
-            Health = 0;
-        }
     }
 
     public void Damage(float amount) 

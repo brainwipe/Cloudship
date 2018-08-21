@@ -17,14 +17,10 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
     EnemyFactory enemyFactory;
     
     float HealthMax;
-    float torquedamping = 0.01f;
     float collisionDamageScale = 0.6f;
 
     [HideInInspector]
     public Vector3 Heading = new Vector3();
-
-    [HideInInspector]
-    public bool ReadyToSpawn = true;
 
     void Awake()
     {
@@ -92,23 +88,9 @@ public class Enemy : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget
 
     public float CommandThrust { get; private set;}
 
-    public float CommandTurn { get; private set;}
+    public float CommandTurn => Maths.Rescale(-1, 1, -180, 180, Vector3.SignedAngle(transform.forward, Heading, Vector3.up));
 
     public bool FireAtWill => false;
-
-    public Vector3 DesiredThrust() => transform.forward * Time.deltaTime * CommandThrust;
-    
-    public Vector3 DesiredTorque()
-    {
-        var desiredAngle = Vector3.SignedAngle(transform.forward, Heading, Vector3.up);
-        CommandTurn = Maths.Rescale(-1, 1, -180, 180, desiredAngle);
-        var torqueActual = Vector3.up * desiredAngle * torquedamping * Time.deltaTime;
-
-        // Debug.DrawRay(transform.position, transform.forward * 100, Color.blue);
-        // Debug.DrawRay(transform.position, Heading * 100, Color.green);
-
-        return torqueActual;
-    }
 
     public void Dead()
     {
