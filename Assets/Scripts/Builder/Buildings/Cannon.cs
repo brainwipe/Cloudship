@@ -11,25 +11,25 @@ public class Cannon : MonoBehaviour
     public Transform ShootingTip;
     public ParticleSystem[] Puffs;
 
-    public float TimeBetweenShotsInSeconds = 0.5f;
-    public float ShotForce = 1000f;
-    public float MaxFiringAngle = 90f;
+    public float TimeBetweenShotsInSeconds;
+    public float ShotForce;
+    public float MaxFiringAngle;
     string fireButton = "Fire1";
     float lastTimeFired;
 
     IAmAShip shooter;
-    float fuzzyShotForce = 0.005f;
-    float MaxRange = 680;
+    float fuzzyShotForce = 0.01f;
+    float MaxRange => rangeMaps.Max(x => x.Range);
     Vector3 forecastPosition;
 
     RangeMap[] rangeMaps = new [] 
     {
-        new RangeMap { Time = 0, Range = 106, Elevation = 90 },
-        new RangeMap { Time = 3, Range = 250, Elevation = 85 },
-        new RangeMap { Time = 4, Range = 387, Elevation = 80 },
-        new RangeMap { Time = 5, Range = 498, Elevation = 75 },
-        new RangeMap { Time = 7, Range = 574, Elevation = 70 },
-        new RangeMap { Time = 8, Range = 620, Elevation = 65 },
+        new RangeMap { Time = 0, Range = 93, Elevation = 90 },
+        new RangeMap { Time = 3, Range = 221, Elevation = 85 },
+        new RangeMap { Time = 4, Range = 370, Elevation = 80 },
+        new RangeMap { Time = 5, Range = 509, Elevation = 75 },
+        new RangeMap { Time = 7, Range = 651, Elevation = 70 },
+        new RangeMap { Time = 8, Range = 780, Elevation = 65 },
     };
 
     void Start()
@@ -76,11 +76,12 @@ public class Cannon : MonoBehaviour
         cannonBall.owner = shooter;
 
         var forceRandomiser = Random.Range(1 - fuzzyShotForce, 1+fuzzyShotForce);
-        var ballForce = ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser;
-        Debug.DrawRay(ShootingTip.position, ShootingTip.rotation * Vector3.up * 1000, Color.red, 1);
+        var ballForce = (ShootingTip.rotation * Vector3.up * ShotForce * forceRandomiser) + shooter.Velocity;
+        
+        ball.AddForce(ballForce, ForceMode.Impulse);
+
         cannonBall.Stats.Force = ShotForce * forceRandomiser;
         cannonBall.Stats.StartElevation = ShootingTip.parent.eulerAngles.x;
-        ball.AddForce(ballForce, ForceMode.Impulse);
         
         foreach(var puff in Puffs)
         {
@@ -152,7 +153,7 @@ public class Cannon : MonoBehaviour
         }
          Barrel.localRotation = Quaternion.Euler(forecastElevation, 0, 0);
     }
-/*
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -163,11 +164,11 @@ public class Cannon : MonoBehaviour
 
         if (forecastPosition != Vector3.zero)
         {
-            Gizmos.DrawWireSphere(shooter.Position, forecastPosition.magnitude);
+            Gizmos.DrawWireSphere(shooter.Position, MaxRange);
             Gizmos.DrawWireSphere(forecastPosition, 5);
         }
     }
-*/
+
 
     float ElevationFromRange(float range)
     {

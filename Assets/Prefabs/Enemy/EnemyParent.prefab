@@ -3197,7 +3197,7 @@ MonoBehaviour:
   - {fileID: 198151496301390264}
   - {fileID: 198572560123968400}
   TimeBetweenShotsInSeconds: 2
-  ShotForce: 350
+  ShotForce: 300
   MaxFiringAngle: 25
 --- !u!114 &114462138237643970
 MonoBehaviour:
@@ -3231,7 +3231,7 @@ MonoBehaviour:
   - {fileID: 198925229523049434}
   - {fileID: 198339813988582206}
   TimeBetweenShotsInSeconds: 2
-  ShotForce: 350
+  ShotForce: 300
   MaxFiringAngle: 25
 --- !u!114 &114683978509842004
 MonoBehaviour:
@@ -3321,7 +3321,7 @@ MonoBehaviour:
   - {fileID: 198775630156297498}
   - {fileID: 198913882481179968}
   TimeBetweenShotsInSeconds: 2
-  ShotForce: 350
+  ShotForce: 300
   MaxFiringAngle: 25
 --- !u!114 &114752041546918556
 MonoBehaviour:
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   - {fileID: 198849213529360046}
   - {fileID: 198581391914581282}
   TimeBetweenShotsInSeconds: 2
-  ShotForce: 350
+  ShotForce: 300
   MaxFiringAngle: 25
 --- !u!114 &114782510594628990
 MonoBehaviour:

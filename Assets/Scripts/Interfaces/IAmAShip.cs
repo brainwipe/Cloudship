@@ -12,6 +12,7 @@ public interface IAmAShip
     bool FireAtWill { get; }
 
     bool IAmAPlayer { get; }
+    Vector3 Velocity { get; }
 
     void UpdateAbilities();
 }

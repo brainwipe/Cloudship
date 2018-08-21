@@ -7731,7 +7731,7 @@ Prefab:
     - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
         type: 2}
       propertyPath: Features.WindMovement
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
         type: 2}

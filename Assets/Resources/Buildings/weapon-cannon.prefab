@@ -541,7 +541,7 @@ MonoBehaviour:
   - {fileID: 198313657914413480}
   - {fileID: 198746279652439644}
   TimeBetweenShotsInSeconds: 2
-  ShotForce: 350
+  ShotForce: 300
   MaxFiringAngle: 25
 --- !u!114 &114643608483370940
 MonoBehaviour:
