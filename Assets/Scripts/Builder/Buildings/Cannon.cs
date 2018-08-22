@@ -154,6 +154,7 @@ public class Cannon : MonoBehaviour
          Barrel.localRotation = Quaternion.Euler(forecastElevation, 0, 0);
     }
 
+/*
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -168,7 +169,7 @@ public class Cannon : MonoBehaviour
             Gizmos.DrawWireSphere(forecastPosition, 5);
         }
     }
-
+*/
 
     float ElevationFromRange(float range)
     {

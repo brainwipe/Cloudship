@@ -86,7 +86,7 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
 
     public void CalculateBounds()
     {
-        PreCalculatedBounds = new Bounds (Vector3.zero, Vector3.one);
+        PreCalculatedBounds = new Bounds (transform.position, Vector3.one);
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer> ();
         foreach (Renderer renderer in renderers)
         {
