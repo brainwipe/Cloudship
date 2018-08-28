@@ -30,8 +30,6 @@ public class BuildSurface : MonoBehaviour
 			return;
 		}
 
-		MoveSelectedBuilding();
-		
 		if (Input.GetMouseButton(0))
 		{
 			if (selectedBuilding == null)
@@ -39,24 +37,29 @@ public class BuildSurface : MonoBehaviour
 				Building building;
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
+					Debug.Log("Seleted");
 					selectedBuilding = building;
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
-					SetBoundary(selectedBuilding);
 				}
 				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
+					Debug.Log("Create new");
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 position = Vector3.zero;
 					if (GetDesired(out position))
 					{	
-						selectedBuilding.Position = position;
+						selectedBuilding.transform.position = position;
 					}
-					selectedBuilding.Rotation = transform.rotation;
+					selectedBuilding.transform.rotation = transform.rotation;
 					buildingToGrabPointOffset = Vector3.zero;
-					SetBoundary(selectedBuilding);
 				}
+				SetBoundary(selectedBuilding);
+			}
+			else 
+			{
+				MoveSelectedBuilding();
 			}
 		}
 		else
@@ -80,19 +83,19 @@ public class BuildSurface : MonoBehaviour
 		Vector3 position;
 		if (GetDesired(out position))
 		{
-			selectedBuilding.Position = position;
-
-			var buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y, 0);
+			var selectedBuildingLocalRotation = selectedBuilding.transform.localRotation;
+			selectedBuilding.transform.position = Vector3.Slerp(selectedBuilding.transform.position, position, Time.deltaTime * 50) ;
+		
 			if (Input.GetKey(KeyCode.Q))
 			{
-				buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y - 1, 0);
+				selectedBuildingLocalRotation *= Quaternion.Euler(0, -1f, 0);
 			}
 			else if (Input.GetKey(KeyCode.E))
 			{
-				buildingTurning = Quaternion.Euler(0, selectedBuilding.transform.localEulerAngles.y + 1, 0);
+				selectedBuildingLocalRotation *= Quaternion.Euler(0, 1f, 0);
 			}
-
-			selectedBuilding.Rotation = transform.rotation * buildingTurning;
+			
+			selectedBuilding.transform.rotation = transform.rotation * selectedBuildingLocalRotation;
 			selectedBuilding.IsOverCloudship = true;
 		}
 		else 
@@ -155,16 +158,13 @@ public class BuildSurface : MonoBehaviour
 		
 		var distance = ((selectedBuilding.transform.position + buildingToGrabPointOffset) - mouseRay.origin).magnitude;
 		mouseRay.direction = (mouseRay.direction * distance) - buildingToGrabPointOffset;
-		
 		//Debug.DrawRay(mouseRay.origin, mouseRay.direction * 1000, Color.green, 1);
 		
 		int layerMask = 1 << 8;
 		if (Physics.Raycast(mouseRay, out hit, Mathf.Infinity, layerMask))
 		{
-			
 			position = hit.point;
 			return true;
-		
 		}
 		return false;
 	}

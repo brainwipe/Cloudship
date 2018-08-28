@@ -107,30 +107,6 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         }
     }
 
-    public Vector3 Position 
-    {
-        get 
-        {
-            return transform.position;
-        }
-        set
-        {
-            rigidBody.MovePosition(value);
-        }
-    }
-
-    public Quaternion Rotation
-    {
-        get 
-        {
-            return transform.rotation;
-        }
-        set 
-        {
-            rigidBody.MoveRotation(value);
-        }
-    }
-
     public void Selected()
     {
         SetShaderBool("Boolean_1662BEBB", true);
