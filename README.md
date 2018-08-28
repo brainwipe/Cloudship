@@ -20,7 +20,12 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 
 ## Controls
 
+### Camera Controls
+- :mouse_three_button: Right mouse button - rotates the view
+- :mouse_three_button: Mouse wheel - zoom in and out
+
 ### Flight Mode
+- <kbd>space</kbd> fire cannons
 - <kbd>w</kbd> increase EOT ahead (forward)
 - <kbd>a</kbd> turn left
 - <kbd>s</kbd> decrease EOT astern (backwards)
@@ -35,8 +40,6 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 - <kbd>Click and drag left mouse button</kbd> Move building
 - <kbd>Click and hold left mouse button</kbd> and move building off the Cloudship to delete
 - <kbd>Q</kbd> and <kbd>E</kbd> to rotate building.
-
-Click right mouse button and drag rotates the view. Click right mouse and mousewheel to zoom in and out.
 
 ## Built With
 

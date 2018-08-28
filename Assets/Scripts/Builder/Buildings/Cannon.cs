@@ -50,7 +50,7 @@ public class Cannon : MonoBehaviour
 
         if (Time.time >= lastTimeFired)
         {
-            if (Input.GetButtonUp(fireButton) || shooter.ShootFullAuto)
+            if (Input.GetKey(KeyCode.Space) || shooter.ShootFullAuto)
             {
                 Shoot(target);
                 lastTimeFired = Time.time + TimeBetweenShotsInSeconds;
