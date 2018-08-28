@@ -93,6 +93,7 @@ public class Cloudship : MonoBehaviour, ITakeDamage, IFly, IAmAShip, IAmATarget,
     {
         Mode = Modes.Build;
         builder.enabled = true;
+        commandTurn = 0f;
     }
 
     public void SetBuildModeOff()
