@@ -21,8 +21,8 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 ## Controls
 
 ### Camera Controls
-- :mouse_three_button: Right mouse button - rotates the view
-- :mouse_three_button: Mouse wheel - zoom in and out
+- 🖱️ Right mouse button - rotates the view
+- 🖱️ Mouse wheel - zoom in and out
 
 ### Flight Mode
 - <kbd>space</kbd> fire cannons
