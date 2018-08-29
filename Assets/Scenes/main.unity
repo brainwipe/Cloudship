@@ -443,6 +443,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 109085607}
   m_CullTransparentMesh: 0
+--- !u!4 &124847065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400036, guid: b67c00d8f23a42c41916353287b29fb0,
+    type: 3}
+  m_PrefabInternal: {fileID: 916311664}
 --- !u!1001 &146844896
 Prefab:
   m_ObjectHideFlags: 0
@@ -5304,6 +5309,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4309822014849288, guid: 2a71d354d756f204ba20766d702f0450,
     type: 2}
   m_PrefabInternal: {fileID: 181064701}
+--- !u!1 &265648814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100034, guid: b67c00d8f23a42c41916353287b29fb0,
+    type: 3}
+  m_PrefabInternal: {fileID: 916311664}
+--- !u!114 &265648818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 265648814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf7cc17d29652143931af7b2bc64296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &303687870
 GameObject:
   m_ObjectHideFlags: 0
@@ -5862,22 +5883,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &741739056 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100018, guid: b67c00d8f23a42c41916353287b29fb0,
-    type: 3}
-  m_PrefabInternal: {fileID: 916311664}
---- !u!114 &741739060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 741739056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f1175788055b374387d4b3aeb30d9f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &752882790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 58049ea72bb4c2145a44370b7b9ad55b,
@@ -6436,6 +6441,26 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400034, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400034, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400034, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400034, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400034, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
     - {fileID: 6400000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
@@ -6445,13 +6470,9 @@ Prefab:
     - {fileID: 6400006, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
     - {fileID: 6400008, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
     - {fileID: 6400010, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
+    - {fileID: 6400032, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b67c00d8f23a42c41916353287b29fb0, type: 3}
   m_IsPrefabAsset: 0
---- !u!4 &916311665 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400020, guid: b67c00d8f23a42c41916353287b29fb0,
-    type: 3}
-  m_PrefabInternal: {fileID: 916311664}
 --- !u!4 &916311666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: b67c00d8f23a42c41916353287b29fb0,
@@ -6876,7 +6897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71669e226c2f63d47a51d867c8f1020e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CompassRose: {fileID: 916311665}
+  CompassRose: {fileID: 124847065}
   current:
     Rotation: 0
     Vertical: 0
@@ -7770,6 +7791,11 @@ Prefab:
       propertyPath: Mode.BuildingsCostFlotsam
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114447722083175718, guid: 4422eabe9ef5e194988b0bd3917a9f11,
+        type: 2}
+      propertyPath: EnemyFactory
+      value: 
+      objectReference: {fileID: 654624880}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4422eabe9ef5e194988b0bd3917a9f11, type: 2}
   m_IsPrefabAsset: 0

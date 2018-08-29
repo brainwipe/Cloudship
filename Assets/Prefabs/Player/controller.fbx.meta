@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: b67c00d8f23a42c41916353287b29fb0
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Barrel
     100002: //RootNode
@@ -20,6 +20,8 @@ ModelImporter:
     100028: Empty_Mesh_2
     100030: Dial
     100032: Dial_Pointer
+    100034: EnemyIndicator
+    100036: Compass_Rose_2
     400000: Barrel
     400002: //RootNode
     400004: Wheel
@@ -37,6 +39,8 @@ ModelImporter:
     400028: Empty_Mesh_2
     400030: Dial
     400032: Dial_Pointer
+    400034: EnemyIndicator
+    400036: Compass_Rose_2
     2100000: Barrel_Wood
     2100002: Barrel_Metal_Band
     2100004: Wheel_Wood_1
@@ -98,6 +102,15 @@ ModelImporter:
     2100116: Compass_Brass
     2100118: Back_Barrel_Inner
     2100120: Back_Barrel_Bronze_Edge
+    2100122: Dial_Enemy_Indicator_Model
+    2100124: Compass_Rose_1
+    2100126: Builder_Selection_Wheel_3
+    2100128: EOT_Black_Face_4
+    2100130: EOT_Dark_Inset_4
+    2100132: Wheel_Wood_5
+    2100134: Wheel_Brass_5
+    2100136: EOT_Brass_6
+    2100138: EOT_Wood_6
     2300000: Barrel
     2300002: Wheel
     2300004: EOT_Disc
@@ -114,6 +127,8 @@ ModelImporter:
     2300026: Empty_Mesh_2
     2300028: Dial
     2300030: Dial_Pointer
+    2300032: EnemyIndicator
+    2300034: Compass_Rose_2
     3300000: Barrel
     3300002: Wheel
     3300004: EOT_Disc
@@ -130,6 +145,8 @@ ModelImporter:
     3300026: Empty_Mesh_2
     3300028: Dial
     3300030: Dial_Pointer
+    3300032: EnemyIndicator
+    3300034: Compass_Rose_2
     4300000: Barrel
     4300002: Wheel
     4300004: EOT_Disc
@@ -146,6 +163,8 @@ ModelImporter:
     4300026: Empty_Mesh_2
     4300028: Dial
     4300030: Dial_Pointer
+    4300032: EnemyIndicator
+    4300034: Compass_Rose_2
     6400000: Barrel
     6400002: Compass_Player_Direction_6
     6400004: Compass_Rose_5
@@ -162,6 +181,8 @@ ModelImporter:
     6400026: Empty_Mesh_2
     6400028: Dial
     6400030: Dial_Pointer
+    6400032: EnemyIndicator
+    6400034: Compass_Rose_2
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects:
@@ -179,6 +200,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Back_Barrel_Inner
+    second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Barrel_Inner_1
     second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
   - first:
       type: UnityEngine:Material
@@ -219,6 +245,16 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Builder_Selection_Wheel_1
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Builder_Selection_Wheel_2
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Builder_Selection_Wheel_3
     second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
   - first:
       type: UnityEngine:Material
@@ -268,6 +304,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Compass_Rose_1
+    second: {fileID: 2100000, guid: 8cce504f53b13184193d1c47690a0c8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Compass_Rose_4
     second: {fileID: 2100000, guid: 8cce504f53b13184193d1c47690a0c8c, type: 2}
   - first:
@@ -284,12 +325,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Dial_Brass
-    second: {fileID: 2100000, guid: bfe09fde34ce89741988b6bc03b5e669, type: 2}
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dial_Brass_1
+    second: {fileID: 2100000, guid: f73e959e45813e44f8b188b95d4e0622, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Dial_Brass_2
-    second: {fileID: 2100000, guid: bfe09fde34ce89741988b6bc03b5e669, type: 2}
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dial_Enemy_Indicator_Model
+    second: {fileID: 2100000, guid: e79917dac3179314ea8857862ef413ab, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -304,6 +355,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: EOT_Black_Face_3
+    second: {fileID: 2100000, guid: bdbc20200c5754f49a8aae89744db843, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Black_Face_4
     second: {fileID: 2100000, guid: bdbc20200c5754f49a8aae89744db843, type: 2}
   - first:
       type: UnityEngine:Material
@@ -333,6 +389,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: EOT_Brass_6
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: EOT_Dark_Inset
     second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
   - first:
@@ -344,6 +405,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: EOT_Dark_Inset_3
+    second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EOT_Dark_Inset_4
     second: {fileID: 2100000, guid: 2bf73c084c13b6a46b82d9ef643e7e10, type: 2}
   - first:
       type: UnityEngine:Material
@@ -363,6 +429,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: EOT_Wood_6
+    second: {fileID: 2100000, guid: c11420831a07b6e4fbf1c0678e49a5f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wheel_Brass_2
     second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
   - first:
@@ -378,6 +449,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Wheel_Brass_5
+    second: {fileID: 2100000, guid: c28de3ad9bc40a84a885cf1f30d1d2a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wheel_Wood_2
     second: {fileID: 2100000, guid: 46153f4be6814764ab34745c241ff5d5, type: 2}
   - first:
@@ -389,6 +465,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wheel_Wood_4
+    second: {fileID: 2100000, guid: 46153f4be6814764ab34745c241ff5d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheel_Wood_5
     second: {fileID: 2100000, guid: 46153f4be6814764ab34745c241ff5d5, type: 2}
   materials:
     importMaterials: 1
@@ -440,6 +521,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

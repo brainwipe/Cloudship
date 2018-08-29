@@ -14,7 +14,6 @@ public class Cannon : MonoBehaviour
     public float TimeBetweenShotsInSeconds;
     public float ShotForce;
     public float MaxFiringAngle;
-    string fireButton = "Fire1";
     float lastTimeFired;
 
     IAmAShip shooter;

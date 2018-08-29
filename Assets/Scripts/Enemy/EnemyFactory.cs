@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public class EnemyFactory : MonoBehaviour
     float lastTimeWeSawAnEnemy;
     public float MinSecsSpawn = 120f;
     public float MaxSecsSpawn = 420f;
+
     public float WidthOfSpawnCone = 60f;
     public float MinDistance = 3000f;
     public float MaxDistance = 4000f;
@@ -59,13 +61,8 @@ public class EnemyFactory : MonoBehaviour
         return positionWithoutY;
     }
 
-    public void ResetTimer()
-    {
-        lastTimeWeSawAnEnemy = Time.time;
-    }
-
     bool HasEnemies => transform.childCount > 0;
-    
+
     bool IsIttimeForAnEnemy()
     {
         var durationSinceLastTime = Time.time - lastTimeWeSawAnEnemy;
@@ -83,4 +80,10 @@ public class EnemyFactory : MonoBehaviour
         var result = Random.Range(0,1);
         return result < probability;
     }
+
+    public bool HasAliveEnemies  => GetComponentsInChildren<Enemy>().Any(x => !x.IsDead);
+
+    public Enemy GetNearestEnemyToPlayer() => GetComponentsInChildren<Enemy>().FirstOrDefault();
+
+    public void ResetTimer() => lastTimeWeSawAnEnemy = Time.time;
 }

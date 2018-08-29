@@ -37,14 +37,12 @@ public class BuildSurface : MonoBehaviour
 				Building building;
 				if (IsThereABuildingUnderMousePointer(out building))
 				{
-					Debug.Log("Seleted");
 					selectedBuilding = building;
 					selectedBuilding.Selected();
 					buildingToGrabPointOffset = FindGrabPoint(selectedBuilding);
 				}
 				else if (buildMenu.SelectedBuilding.CanAfford(player.Stores.TotalFlotsam))
 				{
-					Debug.Log("Create new");
 					selectedBuilding = buildMenu.SelectedBuilding.Clone(transform);
 					player.Stores.RemoveFlotsam(selectedBuilding.FlotsamCost);
 					Vector3 position = Vector3.zero;
