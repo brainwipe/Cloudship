@@ -4,34 +4,32 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public enum CameraMode {
+    public enum CameraMode
+    {
         Game,
         Cinematic
     }
-    
-    public Transform CompassRose;
 
     public CameraMotion current;
     public CameraMotion game;
     public CameraMotion cinematic;
-    
-    public float MaxY = 80f;
-    public float MinY = -30f;
-    public float MinDistance = 61;
-    public float MaxDistance = 230;
-
     Cloudship player;
     Vector3 offset = new Vector3(0, 67.7f, -146.2f);
+    float zoomDistance = 0f;
+    float minZoom = 55f;
+    float maxZoom = 300f;
+
+    float proportionFromBottomLeftCorner = 0.16f;
     CameraMode mode;
 
     void Start()
     {
         player = GameManager.Instance.PlayerCloudship;
         Camera camera = GetComponentInChildren<Camera>();
-        
-        var proportionFromBottomLeftCorner = 0.16f;
+
         var screenPosition = new Vector3(proportionFromBottomLeftCorner, proportionFromBottomLeftCorner * camera.aspect, camera.nearClipPlane + 0.9f);
         ControllerOffset.position = camera.ViewportToWorldPoint(screenPosition);
+        zoomDistance = (transform.position - player.Position).magnitude;
         current = game;
     }
 
@@ -58,44 +56,53 @@ public class CameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        var proposedOffset = offset;
+        transform.position = player.transform.position + offset;
+        var savedPosition = transform.position;
+
         if (Input.GetMouseButton(1))
         {
-            Quaternion turnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * current.Rotation, Vector3.up);
-            proposedOffset = turnAngle * proposedOffset;
-            proposedOffset = proposedOffset - new Vector3(0, Input.GetAxis("Mouse Y") * current.Vertical, 0);
+            float horizontal = Input.GetAxis("Mouse X") * current.Rotation;
+            transform.RotateAround(player.transform.position, new Vector3(0,1,0), horizontal);
 
-            if(Input.GetAxis("Mouse ScrollWheel") < 0) // Back/Out
-            {
-                proposedOffset = proposedOffset + (10f * offset.normalized);
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") > 0) // Forward/In
-            {
-                proposedOffset = proposedOffset - (10f * offset.normalized);
-            }
+            float vertical = Input.GetAxis("Mouse Y") * current.Vertical * -1;
+            transform.RotateAround(player.transform.position, transform.right, vertical);
 
-            var proposedMagnitude = proposedOffset.magnitude;
-            if (proposedMagnitude < MaxDistance && proposedMagnitude > MinDistance)
+            if (transform.rotation.eulerAngles.x > 79f && transform.rotation.eulerAngles.x < 300)
             {
-                offset = proposedOffset;
+                transform.position = savedPosition;
             }
         }
 
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            var currentZoom = (transform.position - player.transform.position).magnitude;
+            var zoomStep = 110f;
+            if (currentZoom < 140)
+            {
+                zoomStep = 80f;
+            }
+            if (currentZoom < 120)
+            {
+                zoomStep = 50f;
+            }
+            if (currentZoom < 60)
+            {
+                zoomStep = 20f;
+            }
+            zoomDistance += -Input.GetAxis("Mouse ScrollWheel") * zoomStep;
+            zoomDistance = Mathf.Clamp(zoomDistance, minZoom, maxZoom);
+        }
 
+        transform.position = player.transform.position + ((transform.position - player.transform.position).normalized * zoomDistance);
 
-        Vector3 targetPosition = player.transform.position + offset;
-        float clampY = Mathf.Clamp(targetPosition.y, MinY, MaxY);
-        targetPosition = new Vector3(targetPosition.x, clampY, targetPosition.z);
-        transform.position = Vector3.Slerp(transform.position, targetPosition, current.Smooth);
-
+        transform.position = Vector3.Slerp(savedPosition, transform.position, current.Smooth);
+        offset = transform.position - player.transform.position;
         transform.LookAt(player.transform.position);
-
-        CompassRose.localRotation = Quaternion.Euler(0,transform.eulerAngles.y,0);
-    } 
+    }
 
     Transform ControllerOffset => GetComponentInChildren<Controller>().transform.parent;
 
-    [System.Serializable]    
+    [System.Serializable]
     public class CameraMotion
     {
         public CameraMotion(float rotation, float vertical, float smooth)
@@ -104,11 +111,11 @@ public class CameraMovement : MonoBehaviour
             Vertical = vertical;
             Smooth = smooth;
         }
-        
+
         public float Rotation;
         public float Vertical;
-        [Range(0.01f, 0.8f)]
-        public float Smooth; 
+        [Range(0.001f, 0.7f)]
+        public float Smooth;
 
     }
 }

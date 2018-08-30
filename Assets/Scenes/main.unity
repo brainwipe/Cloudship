@@ -443,11 +443,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 109085607}
   m_CullTransparentMesh: 0
---- !u!4 &124847065 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400036, guid: b67c00d8f23a42c41916353287b29fb0,
-    type: 3}
-  m_PrefabInternal: {fileID: 916311664}
 --- !u!1001 &146844896
 Prefab:
   m_ObjectHideFlags: 0
@@ -6897,23 +6892,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71669e226c2f63d47a51d867c8f1020e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CompassRose: {fileID: 124847065}
   current:
     Rotation: 0
     Vertical: 0
     Smooth: 0
   game:
-    Rotation: 4
-    Vertical: 8
+    Rotation: 9
+    Vertical: 6
     Smooth: 0.6
   cinematic:
-    Rotation: 3
-    Vertical: 2
-    Smooth: 0.03
-  MaxY: 110
-  MinY: -50
-  MinDistance: 61
-  MaxDistance: 230
+    Rotation: 1
+    Vertical: 0.5
+    Smooth: 0.01
 --- !u!4 &1026415046
 Transform:
   m_ObjectHideFlags: 0
@@ -6931,6 +6921,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 19.467, y: 0, z: 0}
+--- !u!1 &1057500383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100036, guid: b67c00d8f23a42c41916353287b29fb0,
+    type: 3}
+  m_PrefabInternal: {fileID: 916311664}
+--- !u!114 &1057500387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057500383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7893e55d2a287843a49edecb1eaac4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1173164697
 GameObject:
   m_ObjectHideFlags: 0
