@@ -20,9 +20,10 @@ public class CameraMovement : MonoBehaviour
         var screenPosition = new Vector3(proportionFromBottomLeftCorner, proportionFromBottomLeftCorner * camera.aspect, camera.nearClipPlane + 0.9f);
         ControllerOffset.position = camera.ViewportToWorldPoint(screenPosition);
 
-        Modes = new[] {
+        Modes = new ICameraMode[] {
             new ThirdPerson(transform, player),
             new Cinematic(transform, player),
+            new BridgeCam(transform, player),
         };
     }
 

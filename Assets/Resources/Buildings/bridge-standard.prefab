@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 23152673258847120}
   - component: {fileID: 95455686480732832}
   - component: {fileID: 114757617169345188}
+  - component: {fileID: 114691670078710684}
   m_Layer: 10
   m_Name: bridge-standard
   m_TagString: Building
@@ -257,6 +258,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114691670078710684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233157453192596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27015d8a9135fdf48a80022fcb1e9360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CamPosition: {x: 0, y: 13, z: 2}
 --- !u!114 &114728039322726384
 MonoBehaviour:
   m_ObjectHideFlags: 1
