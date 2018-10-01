@@ -30,7 +30,7 @@ public class ThirdPerson : ICameraMode
 
     public void FixedUpdate()
     {
-        var desired = player.transform.position + offset;
+        cameraTransform.position = player.transform.position + offset;
         var savedPosition = cameraTransform.position;
 
         if (Input.GetMouseButton(1))
