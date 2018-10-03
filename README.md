@@ -31,7 +31,7 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 - <kbd>s</kbd> decrease EOT astern (backwards)
 - <kbd>d</kbd> turn right
 - <kbd>b</kbd> toggle build/flight mode (stops controls)
-- <kbd>F1</kbd> cinematic camera
+- <kbd>F1</kbd> toggle camera between third person, cinematic and bridge.
 
 ### Build Mode
 - <kbd>w</kbd> select next building
@@ -47,4 +47,4 @@ Download the latest release from the [Releases Tab](https://github.com/brainwipe
 * [Visual Studio Code](https://code.visualstudio.com/) - Code editor
 * [Moleskine](http://www.moleskine.com/gb/) - Notebook
 
-:cloud: 0.17
+:cloud: 0.24
