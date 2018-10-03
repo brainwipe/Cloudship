@@ -29,7 +29,7 @@ public class BuildMenu : MonoBehaviour {
         }
     }
 
-    void Awake()
+    void Start()
     {
         player = GameManager.Instance.PlayerCloudship;
         BuildingPrefabs = BuildingLoader.Load();

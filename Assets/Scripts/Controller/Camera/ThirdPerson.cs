@@ -11,25 +11,24 @@ public class ThirdPerson : ICameraMode
     float maxZoom = 300f;
     Vector3 offset = new Vector3(0, 67.7f, -146.2f);
 
-    Cloudship player;
     Transform cameraTransform;
 
-    public ThirdPerson(Transform cameraTransform, Cloudship player)
+    public ThirdPerson(Transform cameraTransform)
     {
         this.cameraTransform = cameraTransform;
-        this.player = player;
-        zoomDistance = (cameraTransform.position - player.Position).magnitude;
+        zoomDistance = (cameraTransform.position - GameManager.Instance.PlayerCloudship.Position).magnitude;
     }
 
     public void Selected()
     {
         Cursor.visible = true;
-        player.NormalMode();
+        GameManager.Instance.PlayerCloudship.NormalMode();
         cameraTransform.parent = null;
     }
 
     public void FixedUpdate()
     {
+        var player = GameManager.Instance.PlayerCloudship;
         cameraTransform.position = player.transform.position + offset;
         var savedPosition = cameraTransform.position;
 

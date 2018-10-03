@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class Cinematic : ThirdPerson
 {
-    public Cinematic(Transform cameraTransform, Cloudship player) : base (cameraTransform, player)
+    public Cinematic(Transform cameraTransform) : base (cameraTransform)
     {
         Rotation = 9f;
         Vertical = 6f;

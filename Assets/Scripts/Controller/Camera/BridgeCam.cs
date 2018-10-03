@@ -2,23 +2,20 @@ using UnityEngine;
 
 public class BridgeCam : ICameraMode
 {
-    Cloudship player;
-
     Transform cameraTransform;
     float Smooth = 0.6f;
     float Rotation = 9f;
 
     float Vertical = 6f;
-    Bridge bridge;
-    public BridgeCam(Transform cameraTransform, Cloudship player)
+    public BridgeCam(Transform cameraTransform)
     {
         this.cameraTransform = cameraTransform;
-        this.player = player;
-        bridge = player.GetComponentInChildren<Bridge>();
     }
 
     public void FixedUpdate()
     {
+        var bridge = GameManager.Instance.PlayerCloudship.GetComponentInChildren<Bridge>();
+        
         cameraTransform.localPosition = bridge.CamPosition;
         var savedPosition = cameraTransform.position;
 
@@ -36,6 +33,7 @@ public class BridgeCam : ICameraMode
 
     public void Selected()
     {
+        var bridge = GameManager.Instance.PlayerCloudship.GetComponentInChildren<Bridge>();
         cameraTransform.parent = bridge.gameObject.transform;
     }
 }

@@ -21,9 +21,9 @@ public class CameraMovement : MonoBehaviour
         ControllerOffset.position = camera.ViewportToWorldPoint(screenPosition);
 
         Modes = new ICameraMode[] {
-            new ThirdPerson(transform, player),
-            new Cinematic(transform, player),
-            new BridgeCam(transform, player),
+            new ThirdPerson(transform),
+            new Cinematic(transform),
+            new BridgeCam(transform),
         };
     }
 

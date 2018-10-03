@@ -29,8 +29,6 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
     public float FlotsamCost;
     public Abilities Abilities;
 
-    float MaxHealth;
-
     void Awake()
     {
         BoundaryCollision = false;
@@ -40,7 +38,6 @@ public class Building : MonoBehaviour, IAmBuilding, ITakeDamage, IHaveAbilities 
         highlightTargets = GetComponentsInChildren<Renderer>();
         owner = GetComponentInParent<IAmAShip>();
         rigidBody = GetComponent<Rigidbody>();
-        MaxHealth = Health;
     }
 
     public void SetupForMenu(int menuLayer)
